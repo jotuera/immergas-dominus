@@ -50,7 +50,7 @@ Assistant (the *Firmware* field, e.g. `0.3.0 — JoTu`).
 ### HACS (custom repository)
 
 1. HACS → *Integrations* → ⋮ → *Custom repositories*.
-2. Add `https://github.com/jotuera/immergas_dominus`, category *Integration*.
+2. Add `https://github.com/jotuera/immergas-dominus`, category *Integration*.
 3. Install **Immergas Dominus**, restart Home Assistant.
 4. *Settings → Devices & services → Add integration → Immergas Dominus*.
 

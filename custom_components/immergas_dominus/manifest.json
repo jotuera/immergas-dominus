@@ -4,10 +4,10 @@
   "codeowners": ["@jotuera"],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/jotuera/immergas_dominus",
+  "documentation": "https://github.com/jotuera/immergas-dominus",
   "integration_type": "hub",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/jotuera/immergas_dominus/issues",
+  "issue_tracker": "https://github.com/jotuera/immergas-dominus/issues",
   "requirements": [],
   "version": "0.3.0"
 }

@@ -1,0 +1,139 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Połącz z Immergas Dominus",
+        "description": "Podaj lokalne dane połączenia TCP do modułu Dominus. Integracja używa wyłącznie lokalnego TCP i nie łączy się z chmurą Immergas.",
+        "data": {
+          "host": "Host lub adres IP",
+          "port": "Port TCP",
+          "mac": "Adres MAC Dominusa",
+          "password": "Hasło Dominus"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Nie można połączyć się lub uwierzytelnić z Dominusem.",
+      "unknown": "Nieoczekiwany błąd.",
+      "invalid_mac": "Nieprawidłowy adres MAC Dominusa."
+    },
+    "abort": {
+      "already_configured": "Ten moduł Dominus jest już skonfigurowany."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "room_temperature": {
+        "name": "Strefa 1 temperatura pokojowa"
+      },
+      "outdoor_temperature": {
+        "name": "Temperatura zewnętrzna"
+      },
+      "fault_code": {
+        "name": "Kod błędu kotła"
+      },
+      "fault_description": {
+        "name": "Opis błędu kotła"
+      },
+      "dhw_tank_temperature": {
+        "name": "Temperatura zasobnika CWU"
+      },
+      "room_temperature_zone2": {
+        "name": "Strefa 2 temperatura pokojowa"
+      },
+      "room_temperature_zone3": {
+        "name": "Strefa 3 temperatura pokojowa"
+      }
+    },
+    "binary_sensor": {
+      "fault_active": {
+        "name": "Błąd kotła"
+      },
+      "reset_available": {
+        "name": "Reset dostępny"
+      }
+    },
+    "number": {
+      "heating_target": {
+        "name": "Strefa 1 zadana ogrzewania"
+      },
+      "heating_curve_offset": {
+        "name": "Strefa 1 offset krzywej grzewczej"
+      },
+      "dhw_target": {
+        "name": "Zadana CWU"
+      },
+      "comfort_heat": {
+        "name": "Strefa 1 komfort grzanie"
+      },
+      "eco_heat": {
+        "name": "Strefa 1 eco grzanie"
+      },
+      "comfort_cool": {
+        "name": "Strefa 1 komfort chłodzenie"
+      },
+      "eco_cool": {
+        "name": "Strefa 1 eco chłodzenie"
+      },
+      "humidity_target": {
+        "name": "Strefa 1 zadana wilgotności"
+      },
+      "flow_target": {
+        "name": "Strefa 1 zadana zasilania"
+      },
+      "heating_target_zone2": { "name": "Strefa 2 zadana ogrzewania" },
+      "heating_curve_offset_zone2": { "name": "Strefa 2 offset krzywej grzewczej" },
+      "comfort_heat_zone2": { "name": "Strefa 2 komfort grzanie" },
+      "eco_heat_zone2": { "name": "Strefa 2 eco grzanie" },
+      "comfort_cool_zone2": { "name": "Strefa 2 komfort chłodzenie" },
+      "eco_cool_zone2": { "name": "Strefa 2 eco chłodzenie" },
+      "humidity_target_zone2": { "name": "Strefa 2 zadana wilgotności" },
+      "flow_target_zone2": { "name": "Strefa 2 zadana zasilania" },
+      "heating_target_zone3": { "name": "Strefa 3 zadana ogrzewania" },
+      "heating_curve_offset_zone3": { "name": "Strefa 3 offset krzywej grzewczej" },
+      "comfort_heat_zone3": { "name": "Strefa 3 komfort grzanie" },
+      "eco_heat_zone3": { "name": "Strefa 3 eco grzanie" },
+      "comfort_cool_zone3": { "name": "Strefa 3 komfort chłodzenie" },
+      "eco_cool_zone3": { "name": "Strefa 3 eco chłodzenie" },
+      "humidity_target_zone3": { "name": "Strefa 3 zadana wilgotności" },
+      "flow_target_zone3": { "name": "Strefa 3 zadana zasilania" }
+    },
+    "select": {
+      "operation_mode": {
+        "name": "Tryb pracy",
+        "state": {
+          "standby": "Standby",
+          "summer": "Lato",
+          "cooling": "Chłodzenie",
+          "winter": "Zima"
+        }
+      },
+      "weekday_1_profile": { "name": "Poniedziałek — profil" },
+      "weekday_2_profile": { "name": "Wtorek — profil" },
+      "weekday_3_profile": { "name": "Środa — profil" },
+      "weekday_4_profile": { "name": "Czwartek — profil" },
+      "weekday_5_profile": { "name": "Piątek — profil" },
+      "weekday_6_profile": { "name": "Sobota — profil" },
+      "weekday_7_profile": { "name": "Niedziela — profil" },
+      "all_days_profile": { "name": "Ustaw wszystkim dniom ten sam profil" }
+    },
+    "time": {
+      "fascia_start": { "name": "Profil {profile} przedział {fascia} — początek" },
+      "fascia_end": { "name": "Profil {profile} przedział {fascia} — koniec" }
+    },
+    "climate": {
+      "heating_thermostat": {
+        "name": "Strefa 1 termostat"
+      },
+      "dhw_thermostat": {
+        "name": "Termostat CWU"
+      },
+      "heating_thermostat_zone2": {
+        "name": "Strefa 2 termostat"
+      },
+      "heating_thermostat_zone3": {
+        "name": "Strefa 3 termostat"
+      }
+    }
+  }
+}

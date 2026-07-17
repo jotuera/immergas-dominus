@@ -1,0 +1,139 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Immergas Dominus",
+        "description": "Enter local TCP connection details for your Dominus module. The integration uses local TCP only and does not connect to the Immergas cloud.",
+        "data": {
+          "host": "Host or IP address",
+          "port": "TCP port",
+          "mac": "Dominus MAC address",
+          "password": "Dominus password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect or authenticate with Dominus.",
+      "unknown": "Unexpected error.",
+      "invalid_mac": "Invalid Dominus MAC address."
+    },
+    "abort": {
+      "already_configured": "This Dominus module is already configured."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "room_temperature": {
+        "name": "Zone 1 room temperature"
+      },
+      "outdoor_temperature": {
+        "name": "Outdoor temperature"
+      },
+      "fault_code": {
+        "name": "Boiler fault code"
+      },
+      "fault_description": {
+        "name": "Boiler fault description"
+      },
+      "dhw_tank_temperature": {
+        "name": "DHW tank temperature"
+      },
+      "room_temperature_zone2": {
+        "name": "Zone 2 room temperature"
+      },
+      "room_temperature_zone3": {
+        "name": "Zone 3 room temperature"
+      }
+    },
+    "binary_sensor": {
+      "fault_active": {
+        "name": "Boiler fault"
+      },
+      "reset_available": {
+        "name": "Reset available"
+      }
+    },
+    "number": {
+      "heating_target": {
+        "name": "Zone 1 heating target"
+      },
+      "heating_curve_offset": {
+        "name": "Zone 1 heating curve offset"
+      },
+      "dhw_target": {
+        "name": "DHW target"
+      },
+      "comfort_heat": {
+        "name": "Zone 1 comfort heat"
+      },
+      "eco_heat": {
+        "name": "Zone 1 eco heat"
+      },
+      "comfort_cool": {
+        "name": "Zone 1 comfort cool"
+      },
+      "eco_cool": {
+        "name": "Zone 1 eco cool"
+      },
+      "humidity_target": {
+        "name": "Zone 1 humidity target"
+      },
+      "flow_target": {
+        "name": "Zone 1 flow target"
+      },
+      "heating_target_zone2": { "name": "Zone 2 heating target" },
+      "heating_curve_offset_zone2": { "name": "Zone 2 heating curve offset" },
+      "comfort_heat_zone2": { "name": "Zone 2 comfort heat" },
+      "eco_heat_zone2": { "name": "Zone 2 eco heat" },
+      "comfort_cool_zone2": { "name": "Zone 2 comfort cool" },
+      "eco_cool_zone2": { "name": "Zone 2 eco cool" },
+      "humidity_target_zone2": { "name": "Zone 2 humidity target" },
+      "flow_target_zone2": { "name": "Zone 2 flow target" },
+      "heating_target_zone3": { "name": "Zone 3 heating target" },
+      "heating_curve_offset_zone3": { "name": "Zone 3 heating curve offset" },
+      "comfort_heat_zone3": { "name": "Zone 3 comfort heat" },
+      "eco_heat_zone3": { "name": "Zone 3 eco heat" },
+      "comfort_cool_zone3": { "name": "Zone 3 comfort cool" },
+      "eco_cool_zone3": { "name": "Zone 3 eco cool" },
+      "humidity_target_zone3": { "name": "Zone 3 humidity target" },
+      "flow_target_zone3": { "name": "Zone 3 flow target" }
+    },
+    "select": {
+      "operation_mode": {
+        "name": "Operation mode",
+        "state": {
+          "standby": "Standby",
+          "summer": "Summer",
+          "cooling": "Cooling",
+          "winter": "Winter"
+        }
+      },
+      "weekday_1_profile": { "name": "Monday profile" },
+      "weekday_2_profile": { "name": "Tuesday profile" },
+      "weekday_3_profile": { "name": "Wednesday profile" },
+      "weekday_4_profile": { "name": "Thursday profile" },
+      "weekday_5_profile": { "name": "Friday profile" },
+      "weekday_6_profile": { "name": "Saturday profile" },
+      "weekday_7_profile": { "name": "Sunday profile" },
+      "all_days_profile": { "name": "Set the same profile for all days" }
+    },
+    "time": {
+      "fascia_start": { "name": "Profile {profile} period {fascia} start" },
+      "fascia_end": { "name": "Profile {profile} period {fascia} end" }
+    },
+    "climate": {
+      "heating_thermostat": {
+        "name": "Zone 1 thermostat"
+      },
+      "dhw_thermostat": {
+        "name": "DHW"
+      },
+      "heating_thermostat_zone2": {
+        "name": "Zone 2 thermostat"
+      },
+      "heating_thermostat_zone3": {
+        "name": "Zone 3 thermostat"
+      }
+    }
+  }
+}

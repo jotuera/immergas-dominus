@@ -2,10 +2,10 @@
   "config": {
     "step": {
       "user": {
-        "title": "P¯ipojit k Immergas Dominus",
-        "description": "Zadejte parametry sÌùovÈho p¯ipojenÌ pro v·ö modul Dominus. Integrace pouûÌv· pouze lok·lnÌ TCP a nep¯ipojuje se ke cloudu Immergas.",
+        "title": "P≈ôipojit k Immergas Dominus",
+        "description": "Zadejte parametry s√≠≈•ov√©ho p≈ôipojen√≠ pro v√°≈° modul Dominus. Integrace pou≈æ√≠v√° pouze lok√°ln√≠ TCP a nep≈ôipojuje se ke cloudu Immergas.",
         "data": {
-          "host": "N·zev nebo IP adresa",
+          "host": "N√°zev nebo IP adresa",
           "port": "TCP port",
           "mac": "Dominus MAC adresa",
           "password": "Dominus heslo"
@@ -13,36 +13,36 @@
       }
     },
     "error": {
-      "cannot_connect": "Nelze se p¯ipojit nebo p¯ihl·sit zadan˝mi ˙daji.",
-      "unknown": "NeoËek·van· chyba.",
-      "invalid_mac": "Chybn· MAC adresa Dominus."
+      "cannot_connect": "Nelze se p≈ôipojit nebo p≈ôihl√°sit zadan√Ωmi √∫daji.",
+      "unknown": "Neoƒçek√°van√° chyba.",
+      "invalid_mac": "Chybn√° MAC adresa Dominus."
     },
     "abort": {
-      "already_configured": "Tento modul Dominus byl jiû nakonfigurov·n."
+      "already_configured": "Tento modul Dominus byl ji≈æ nakonfigurov√°n."
     }
   },
   "entity": {
     "sensor": {
       "room_temperature": {
-        "name": "ZÛna 1 pokojov· teplota"
+        "name": "Z√≥na 1 pokojov√° teplota"
       },
       "outdoor_temperature": {
-        "name": "VenkovnÌ teplota"
+        "name": "Venkovn√≠ teplota"
       },
       "fault_code": {
-        "name": "KÛd chyby"
+        "name": "K√≥d chyby"
       },
       "fault_description": {
         "name": "Popis chyby"
       },
       "dhw_tank_temperature": {
-        "name": "Teplota vody v z·sobnÌku"
+        "name": "Teplota vody v z√°sobn√≠ku"
       },
       "room_temperature_zone2": {
-        "name": "ZÛna 2 pokojov· teplota"
+        "name": "Z√≥na 2 pokojov√° teplota"
       },
       "room_temperature_zone3": {
-        "name": "ZÛna 3 pokojov· teplota"
+        "name": "Z√≥na 3 pokojov√° teplota"
       }
     },
     "binary_sensor": {
@@ -50,89 +50,89 @@
         "name": "Chyba"
       },
       "reset_available": {
-        "name": "Reset je dostupn˝"
+        "name": "Reset je dostupn√Ω"
       }
     },
     "number": {
       "heating_target": {
-        "name": "ZÛna 1 cÌlov· teplota"
+        "name": "Z√≥na 1 c√≠lov√° teplota"
       },
       "heating_curve_offset": {
-        "name": "ZÛna 1 posun topnÈ k¯ivky"
+        "name": "Z√≥na 1 offset v√Ωstupn√≠ teploty"
       },
       "dhw_target": {
-        "name": "DHW target"
+        "name": "TUV c√≠lov√° teplota"
       },
       "comfort_heat": {
-        "name": "ZÛna 1 komfortnÌ topenÌ"
+        "name": "Z√≥na 1 topen√≠ komfort"
       },
       "eco_heat": {
-        "name": "ZÛna 1 eko topenÌ"
+        "name": "Z√≥na 1 topen√≠ √∫tlum"
       },
       "comfort_cool": {
-        "name": "ZÛna 1 komfortnÌ chlazenÌ"
+        "name": "Z√≥na 1 chlazen√≠ komfort"
       },
       "eco_cool": {
-        "name": "ZÛna 1 eko chlazenÌ"
+        "name": "Z√≥na 1 chlazen√≠ √∫tlum"
       },
       "humidity_target": {
-        "name": "ZÛna 1 cÌlov· vlhkost"
+        "name": "Z√≥na 1 c√≠lov√° vlhkost"
       },
       "flow_target": {
-        "name": "ZÛna 1 cÌlov˝ target"
+        "name": "Z√≥na 1 c√≠lov√° v√Ωstupn√≠ teplota"
       },
-      "heating_target_zone2": { "name": "ZÛna 2 cÌlov· teplota" },
-      "heating_curve_offset_zone2": { "name": "ZÛna 2 posun topnÈ k¯ivky" },
-      "comfort_heat_zone2": { "name": "ZÛna 2 komfortnÌ topenÌ" },
-      "eco_heat_zone2": { "name": "ZÛna 2 eko topenÌ" },
-      "comfort_cool_zone2": { "name": "ZÛna 2 komfortnÌ chlazenÌ" },
-      "eco_cool_zone2": { "name": "ZÛna 2 eko chlazenÌ" },
-      "humidity_target_zone2": { "name": "ZÛna 2 cÌlov· vlhkost" },
-      "flow_target_zone2": { "name": "ZÛna 2 cÌlov˝ target" },
-      "heating_target_zone3": { "name": "ZÛna 3 cÌlov· teplota" },
-      "heating_curve_offset_zone3": { "name": "ZÛna 3 posun topnÈ k¯ivky" },
-      "comfort_heat_zone3": { "name": "ZÛna 3 komfortnÌ topenÌ" },
-      "eco_heat_zone3": { "name": "ZÛna 3 eko topenÌ" },
-      "comfort_cool_zone3": { "name": "ZÛna 3 komfortnÌ chlazenÌ" },
-      "eco_cool_zone3": { "name": "ZÛna 3 eko chlazenÌ" },
-      "humidity_target_zone3": { "name": "ZÛna 3 cÌlov· vlhkost" },
-      "flow_target_zone3": { "name": "ZÛna 3 cÌlov˝ target" }
+      "heating_target_zone2": { "name": "Z√≥na 2 c√≠lov√° teplota" },
+      "heating_curve_offset_zone2": { "name": "Z√≥na 2 offset v√Ωstupn√≠ teploty" },
+      "comfort_heat_zone2": { "name": "Z√≥na 2 topen√≠ komfort" },
+      "eco_heat_zone2": { "name": "Z√≥na 2 topen√≠ √∫tlum" },
+      "comfort_cool_zone2": { "name": "Z√≥na 2 chlazen√≠ komfort" },
+      "eco_cool_zone2": { "name": "Z√≥na 2 chlazen√≠ √∫tlum" },
+      "humidity_target_zone2": { "name": "Z√≥na 2 c√≠lov√° vlhkost" },
+      "flow_target_zone2": { "name": "Z√≥na 2 c√≠lov√° v√Ωstupn√≠ teplota" },
+      "heating_target_zone3": { "name": "Z√≥na 3 c√≠lov√° teplota" },
+      "heating_curve_offset_zone3": { "name": "Z√≥na 3 offset v√Ωstupn√≠ teploty" },
+      "comfort_heat_zone3": { "name": "Z√≥na 3 topen√≠ komfort" },
+      "eco_heat_zone3": { "name": "Z√≥na 3 topen√≠ √∫tlum" },
+      "comfort_cool_zone3": { "name": "Z√≥na 3 chlazen√≠ komfort" },
+      "eco_cool_zone3": { "name": "Z√≥na 3 chlazen√≠ √∫tlum" },
+      "humidity_target_zone3": { "name": "Z√≥na 3 c√≠lov√° vlhkost" },
+      "flow_target_zone3": { "name": "Z√≥na 3 c√≠lov√° v√Ωstupn√≠ teplota" }
     },
     "select": {
       "operation_mode": {
-        "name": "ProvoznÌ reûim",
+        "name": "Provozn√≠ re≈æim",
         "state": {
           "standby": "Vypnuto",
-          "summer": "LÈto",
-          "cooling": "ChlazenÌ",
+          "summer": "L√©to",
+          "cooling": "Chlazen√≠",
           "winter": "Zima"
         }
       },
-      "weekday_1_profile": { "name": "PondÏlÌ" },
-      "weekday_2_profile": { "name": "⁄ter˝" },
-      "weekday_3_profile": { "name": "St¯eda" },
-      "weekday_4_profile": { "name": "»tvrtek" },
-      "weekday_5_profile": { "name": "P·tek" },
+      "weekday_1_profile": { "name": "Pondƒõl√≠" },
+      "weekday_2_profile": { "name": "√öter√Ω" },
+      "weekday_3_profile": { "name": "St≈ôeda" },
+      "weekday_4_profile": { "name": "ƒåtvrtek" },
+      "weekday_5_profile": { "name": "P√°tek" },
       "weekday_6_profile": { "name": "Sobota" },
-      "weekday_7_profile": { "name": "NedÏle" },
-      "all_days_profile": { "name": "Nastavit stejnÈ hodnoty pro vöechny dny" }
+      "weekday_7_profile": { "name": "Nedƒõle" },
+      "all_days_profile": { "name": "Nastavit stejn√© hodnoty pro v≈°echny dny" }
     },
     "time": {
-      "fascia_start": { "name": "Profil {profile} pr˘bÏh {fascia} start" },
-      "fascia_end": { "name": "Profile {profile} pr˘bÏh {fascia} konec" }
+      "fascia_start": { "name": "Profil {profile} ƒçasov√° osa {fascia} start" },
+      "fascia_end": { "name": "Profile {profile} ƒçasov√° osa {fascia} konec" }
     },
     "climate": {
       "heating_thermostat": {
-        "name": "ZÛna 1 termostat"
+        "name": "Z√≥na 1 termostat"
       },
       "dhw_thermostat": {
-        "name": "Tepl· voda"
+        "name": "Tepl√° voda"
       },
       "heating_thermostat_zone2": {
-        "name": "ZÛna 2 termostat"
+        "name": "Z√≥na 2 termostat"
       },
       "heating_thermostat_zone3": {
-        "name": "ZÛna 3 termostat"
+        "name": "Z√≥na 3 termostat"
       }
     }
   }

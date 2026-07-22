@@ -1,0 +1,139 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Připojit k Immergas Dominus",
+        "description": "Zadejte parametry síťového připojení pro váš modul Dominus. Integrace používá pouze lokální TCP a nepřipojuje se ke cloudu Immergas.",
+        "data": {
+          "host": "Název nebo IP adresa",
+          "port": "TCP port",
+          "mac": "Dominus MAC adresa",
+          "password": "Dominus heslo"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Nelze se připojit nebo přihlásit zadanými údaji.",
+      "unknown": "Neočekávaná chyba.",
+      "invalid_mac": "Chybná MAC adresa Dominus."
+    },
+    "abort": {
+      "already_configured": "Tento modul Dominus byl již nakonfigurován."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "room_temperature": {
+        "name": "Zóna 1 pokojová teplota"
+      },
+      "outdoor_temperature": {
+        "name": "Venkovní teplota"
+      },
+      "fault_code": {
+        "name": "Kód chyby"
+      },
+      "fault_description": {
+        "name": "Popis chyby"
+      },
+      "dhw_tank_temperature": {
+        "name": "Teplota vody v zásobníku"
+      },
+      "room_temperature_zone2": {
+        "name": "Zóna 2 pokojová teplota"
+      },
+      "room_temperature_zone3": {
+        "name": "Zóna 3 pokojová teplota"
+      }
+    },
+    "binary_sensor": {
+      "fault_active": {
+        "name": "Chyba"
+      },
+      "reset_available": {
+        "name": "Reset je dostupný"
+      }
+    },
+    "number": {
+      "heating_target": {
+        "name": "Zóna 1 cílová teplota"
+      },
+      "heating_curve_offset": {
+        "name": "Zóna 1 offset výstupní teploty"
+      },
+      "dhw_target": {
+        "name": "TUV cílová teplota"
+      },
+      "comfort_heat": {
+        "name": "Zóna 1 topení komfort"
+      },
+      "eco_heat": {
+        "name": "Zóna 1 topení útlum"
+      },
+      "comfort_cool": {
+        "name": "Zóna 1 chlazení komfort"
+      },
+      "eco_cool": {
+        "name": "Zóna 1 chlazení útlum"
+      },
+      "humidity_target": {
+        "name": "Zóna 1 cílová vlhkost"
+      },
+      "flow_target": {
+        "name": "Zóna 1 cílová výstupní teplota"
+      },
+      "heating_target_zone2": { "name": "Zóna 2 cílová teplota" },
+      "heating_curve_offset_zone2": { "name": "Zóna 2 offset výstupní teploty" },
+      "comfort_heat_zone2": { "name": "Zóna 2 topení komfort" },
+      "eco_heat_zone2": { "name": "Zóna 2 topení útlum" },
+      "comfort_cool_zone2": { "name": "Zóna 2 chlazení komfort" },
+      "eco_cool_zone2": { "name": "Zóna 2 chlazení útlum" },
+      "humidity_target_zone2": { "name": "Zóna 2 cílová vlhkost" },
+      "flow_target_zone2": { "name": "Zóna 2 cílová výstupní teplota" },
+      "heating_target_zone3": { "name": "Zóna 3 cílová teplota" },
+      "heating_curve_offset_zone3": { "name": "Zóna 3 offset výstupní teploty" },
+      "comfort_heat_zone3": { "name": "Zóna 3 topení komfort" },
+      "eco_heat_zone3": { "name": "Zóna 3 topení útlum" },
+      "comfort_cool_zone3": { "name": "Zóna 3 chlazení komfort" },
+      "eco_cool_zone3": { "name": "Zóna 3 chlazení útlum" },
+      "humidity_target_zone3": { "name": "Zóna 3 cílová vlhkost" },
+      "flow_target_zone3": { "name": "Zóna 3 cílová výstupní teplota" }
+    },
+    "select": {
+      "operation_mode": {
+        "name": "Provozní režim",
+        "state": {
+          "standby": "Vypnuto",
+          "summer": "Léto",
+          "cooling": "Chlazení",
+          "winter": "Zima"
+        }
+      },
+      "weekday_1_profile": { "name": "Pondělí" },
+      "weekday_2_profile": { "name": "Úterý" },
+      "weekday_3_profile": { "name": "Středa" },
+      "weekday_4_profile": { "name": "Čtvrtek" },
+      "weekday_5_profile": { "name": "Pátek" },
+      "weekday_6_profile": { "name": "Sobota" },
+      "weekday_7_profile": { "name": "Neděle" },
+      "all_days_profile": { "name": "Nastavit stejné hodnoty pro všechny dny" }
+    },
+    "time": {
+      "fascia_start": { "name": "Profil {profile} časová osa {fascia} start" },
+      "fascia_end": { "name": "Profile {profile} časová osa {fascia} konec" }
+    },
+    "climate": {
+      "heating_thermostat": {
+        "name": "Zóna 1 termostat"
+      },
+      "dhw_thermostat": {
+        "name": "Teplá voda"
+      },
+      "heating_thermostat_zone2": {
+        "name": "Zóna 2 termostat"
+      },
+      "heating_thermostat_zone3": {
+        "name": "Zóna 3 termostat"
+      }
+    }
+  }
+}

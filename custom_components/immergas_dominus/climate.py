@@ -84,7 +84,8 @@ class ImmergasDominusClimate(ImmergasDominusEntity, ClimateEntity):
     def current_temperature(self) -> float | None:
         """Return current temperature."""
         raw = self._raw(self.entity_description.current_pdu)
-        if raw is None:
+        if raw is None or raw == 32767:
+            # 32767 (0x7FFF) = no room sensor (D+/D- register map).
             return None
         return round(raw / 10, 1)
 

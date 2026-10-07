@@ -43,6 +43,12 @@
       },
       "room_temperature_zone3": {
         "name": "Zone 3 room temperature"
+      },
+      "zone_status": {
+        "name": "Zone 1 status"
+      },
+      "number_of_zones": {
+        "name": "Number of zones"
       }
     },
     "binary_sensor": {
@@ -81,22 +87,54 @@
       "flow_target": {
         "name": "Zone 1 flow target"
       },
-      "heating_target_zone2": { "name": "Zone 2 heating target" },
-      "heating_curve_offset_zone2": { "name": "Zone 2 heating curve offset" },
-      "comfort_heat_zone2": { "name": "Zone 2 comfort heat" },
-      "eco_heat_zone2": { "name": "Zone 2 eco heat" },
-      "comfort_cool_zone2": { "name": "Zone 2 comfort cool" },
-      "eco_cool_zone2": { "name": "Zone 2 eco cool" },
-      "humidity_target_zone2": { "name": "Zone 2 humidity target" },
-      "flow_target_zone2": { "name": "Zone 2 flow target" },
-      "heating_target_zone3": { "name": "Zone 3 heating target" },
-      "heating_curve_offset_zone3": { "name": "Zone 3 heating curve offset" },
-      "comfort_heat_zone3": { "name": "Zone 3 comfort heat" },
-      "eco_heat_zone3": { "name": "Zone 3 eco heat" },
-      "comfort_cool_zone3": { "name": "Zone 3 comfort cool" },
-      "eco_cool_zone3": { "name": "Zone 3 eco cool" },
-      "humidity_target_zone3": { "name": "Zone 3 humidity target" },
-      "flow_target_zone3": { "name": "Zone 3 flow target" }
+      "heating_target_zone2": {
+        "name": "Zone 2 heating target"
+      },
+      "heating_curve_offset_zone2": {
+        "name": "Zone 2 heating curve offset"
+      },
+      "comfort_heat_zone2": {
+        "name": "Zone 2 comfort heat"
+      },
+      "eco_heat_zone2": {
+        "name": "Zone 2 eco heat"
+      },
+      "comfort_cool_zone2": {
+        "name": "Zone 2 comfort cool"
+      },
+      "eco_cool_zone2": {
+        "name": "Zone 2 eco cool"
+      },
+      "humidity_target_zone2": {
+        "name": "Zone 2 humidity target"
+      },
+      "flow_target_zone2": {
+        "name": "Zone 2 flow target"
+      },
+      "heating_target_zone3": {
+        "name": "Zone 3 heating target"
+      },
+      "heating_curve_offset_zone3": {
+        "name": "Zone 3 heating curve offset"
+      },
+      "comfort_heat_zone3": {
+        "name": "Zone 3 comfort heat"
+      },
+      "eco_heat_zone3": {
+        "name": "Zone 3 eco heat"
+      },
+      "comfort_cool_zone3": {
+        "name": "Zone 3 comfort cool"
+      },
+      "eco_cool_zone3": {
+        "name": "Zone 3 eco cool"
+      },
+      "humidity_target_zone3": {
+        "name": "Zone 3 humidity target"
+      },
+      "flow_target_zone3": {
+        "name": "Zone 3 flow target"
+      }
     },
     "select": {
       "operation_mode": {
@@ -108,18 +146,38 @@
           "winter": "Winter"
         }
       },
-      "weekday_1_profile": { "name": "Monday profile" },
-      "weekday_2_profile": { "name": "Tuesday profile" },
-      "weekday_3_profile": { "name": "Wednesday profile" },
-      "weekday_4_profile": { "name": "Thursday profile" },
-      "weekday_5_profile": { "name": "Friday profile" },
-      "weekday_6_profile": { "name": "Saturday profile" },
-      "weekday_7_profile": { "name": "Sunday profile" },
-      "all_days_profile": { "name": "Set the same profile for all days" }
+      "weekday_1_profile": {
+        "name": "{target} — Monday"
+      },
+      "weekday_2_profile": {
+        "name": "{target} — Tuesday"
+      },
+      "weekday_3_profile": {
+        "name": "{target} — Wednesday"
+      },
+      "weekday_4_profile": {
+        "name": "{target} — Thursday"
+      },
+      "weekday_5_profile": {
+        "name": "{target} — Friday"
+      },
+      "weekday_6_profile": {
+        "name": "{target} — Saturday"
+      },
+      "weekday_7_profile": {
+        "name": "{target} — Sunday"
+      },
+      "all_days_profile": {
+        "name": "Zone 1 — same profile for all days"
+      }
     },
     "time": {
-      "fascia_start": { "name": "Profile {profile} period {fascia} start" },
-      "fascia_end": { "name": "Profile {profile} period {fascia} end" }
+      "fascia_start": {
+        "name": "Profile {profile} period {fascia} start"
+      },
+      "fascia_end": {
+        "name": "Profile {profile} period {fascia} end"
+      }
     },
     "climate": {
       "heating_thermostat": {

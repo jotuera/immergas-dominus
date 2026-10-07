@@ -8,7 +8,7 @@ from homeassistant.components.climate import ClimateEntityDescription
 from homeassistant.components.number import NumberDeviceClass, NumberEntityDescription, NumberMode
 from homeassistant.components.select import SelectEntityDescription
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntityDescription
-from homeassistant.const import PERCENTAGE, UnitOfTemperature
+from homeassistant.const import PERCENTAGE, EntityCategory, UnitOfTemperature
 
 DOMAIN = "immergas_dominus"
 DEFAULT_PORT = 2000
@@ -124,6 +124,7 @@ class DominusSelectEntityDescription(SelectEntityDescription):
     # Read only the low byte of the PDU (u8), e.g. the weekday->profile registers
     # (2410-2416) return the profile number in the low byte.
     mask_low_byte: bool = False
+    translation_placeholders: dict[str, str] | None = None
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -147,6 +148,8 @@ SENSOR_DESCRIPTIONS: tuple[DominusSensorEntityDescription, ...] = (
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         suggested_display_precision=1,
         value_scale=0.1,
+        # 32767 (0x7FFF) = no room sensor / none (D+/D- register map).
+        invalid_raw_values=(32767,),
     ),
     DominusSensorEntityDescription(
         key="outdoor_temperature",
@@ -169,6 +172,25 @@ SENSOR_DESCRIPTIONS: tuple[DominusSensorEntityDescription, ...] = (
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         suggested_display_precision=1,
         value_scale=0.1,
+    ),
+    # Diagnostics confirmed read over TCP by the Dominus app (D+/D- register map).
+    DominusSensorEntityDescription(
+        key="zone_status",
+        pdu=2010,
+        device_key=DEVICE_ZONE_1,
+        translation_key="zone_status",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        suggested_display_precision=0,
+        icon="mdi:information-outline",
+    ),
+    DominusSensorEntityDescription(
+        key="number_of_zones",
+        pdu=4199,
+        device_key=DEVICE_MAIN,
+        translation_key="number_of_zones",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        suggested_display_precision=0,
+        icon="mdi:home-group",
     ),
 )
 
@@ -370,7 +392,9 @@ def _zone_sensor_descriptions() -> tuple[DominusSensorEntityDescription, ...]:
                 device_class=SensorDeviceClass.TEMPERATURE,
                 native_unit_of_measurement=UnitOfTemperature.CELSIUS,
                 suggested_display_precision=1,
-                value_scale=0.1,            )
+                value_scale=0.1,
+                invalid_raw_values=(32767,),
+            )
         )
     return tuple(result)
 
@@ -470,22 +494,36 @@ def _schedule_time_descriptions() -> tuple[DominusTimeEntityDescription, ...]:
     return tuple(result)
 
 
+# Weekday -> calendar (profile) assignment, confirmed read over TCP by the Dominus
+# app: day 1..7 (Mon..Sun) = base_pdu .. base_pdu+6, low byte = profile 1-4.
+# Zone 1 = 2410, Zone 2 = 2420, Zone 3 = 2430, DHW = 2490.  Profiles 2310-2347 are
+# shared by all targets.  Zone 1 keeps its original keys; others use a key prefix.
+_WEEKDAY_TARGETS: tuple[tuple[str, str, int], ...] = (
+    ("Zone 1", "weekday", 2410),
+    ("Zone 2", "zone2_weekday", 2420),
+    ("Zone 3", "zone3_weekday", 2430),
+    ("DHW", "dhw_weekday", 2490),
+)
+
+
 def _weekday_select_descriptions() -> tuple[DominusSelectEntityDescription, ...]:
     result: list[DominusSelectEntityDescription] = []
-    for day in range(1, 8):
-        result.append(
-            DominusSelectEntityDescription(
-                key=f"weekday_{day}_profile",
-                pdu=2409 + day,
-                device_key=DEVICE_SCHEDULE,
-                translation_key=f"weekday_{day}_profile",
-                options=list(_CHRONO_PROFILE_OPTIONS),
-                option_to_raw=dict(_CHRONO_OPTION_TO_RAW),
-                raw_to_option=dict(_CHRONO_RAW_TO_OPTION),
-                mask_low_byte=True,
-                icon="mdi:calendar-clock",
+    for target, key_prefix, base_pdu in _WEEKDAY_TARGETS:
+        for day in range(1, 8):
+            result.append(
+                DominusSelectEntityDescription(
+                    key=f"{key_prefix}_{day}_profile",
+                    pdu=base_pdu + (day - 1),
+                    device_key=DEVICE_SCHEDULE,
+                    translation_key=f"weekday_{day}_profile",
+                    translation_placeholders={"target": target},
+                    options=list(_CHRONO_PROFILE_OPTIONS),
+                    option_to_raw=dict(_CHRONO_OPTION_TO_RAW),
+                    raw_to_option=dict(_CHRONO_RAW_TO_OPTION),
+                    mask_low_byte=True,
+                    icon="mdi:calendar-clock",
+                )
             )
-        )
     return tuple(result)
 
 

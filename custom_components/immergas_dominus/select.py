@@ -47,6 +47,8 @@ class ImmergasDominusSelect(ImmergasDominusEntity, SelectEntity):
     ) -> None:
         super().__init__(coordinator, description.key, description.pdu, description.device_key)
         self.entity_description = description
+        if description.translation_placeholders:
+            self._attr_translation_placeholders = description.translation_placeholders
 
     @property
     def current_option(self) -> str | None:

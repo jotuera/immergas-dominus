@@ -1,6 +1,6 @@
 # Immergas Dominus
 
-Version: `0.3.0`
+Version: `0.3.1`
 Author: **JoTu** ([github.com/jotuera](https://github.com/jotuera))
 
 Home Assistant custom integration for **local** control of an Immergas boiler through
@@ -72,6 +72,17 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 0.3.1
+
+- New discoveries from the D+/D- bus register map, confirmed readable over TCP via
+  the Dominus app config:
+  - **Zone status** (PDU `2010`) and **Number of zones** (PDU `4199`) diagnostics.
+  - Weekday→profile assignment extended to **DHW** (`2490`–`2496`) and **Zones 2/3**
+    (`2420`–`2436`), alongside Zone 1, on the schedule device.
+  - Correction: room temperature `32767` (0x7FFF) = "no sensor" → reported as
+    unknown instead of a false `3276.7 °C`.
+- Czech translation (`cs.json`), contributed by **harykx** (#1).
 
 ### 0.3.0
 

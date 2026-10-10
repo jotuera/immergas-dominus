@@ -57,6 +57,9 @@
       },
       "reset_available": {
         "name": "Reset available"
+      },
+      "dhw_request": {
+        "name": "DHW request"
       }
     },
     "number": {

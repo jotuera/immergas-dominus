@@ -12,10 +12,12 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import (
     DEVICE_MAIN,
+    DHW_REQUEST_MASK,
     DOMAIN,
     FAULT_CODE_PDU,
     FAULT_FLAGS_PDU,
     FAULT_RESET_AVAILABLE_MASK,
+    STATUS_FLAGS_PDU,
 )
 from .coordinator import ImmergasDominusCoordinator
 from .entity import ImmergasDominusEntity
@@ -32,6 +34,7 @@ async def async_setup_entry(
         [
             ImmergasDominusFaultActiveBinarySensor(coordinator),
             ImmergasDominusResetAvailableBinarySensor(coordinator),
+            ImmergasDominusDhwRequestBinarySensor(coordinator),
         ]
     )
 
@@ -72,3 +75,21 @@ class ImmergasDominusResetAvailableBinarySensor(
         if raw is None:
             return None
         return bool(int(raw) & FAULT_RESET_AVAILABLE_MASK)
+
+
+class ImmergasDominusDhwRequestBinarySensor(ImmergasDominusEntity, BinarySensorEntity):
+    """On when a DHW cycle is pending (status flags PDU 2001, low-byte bit 0)."""
+
+    _attr_translation_key = "dhw_request"
+    _attr_entity_category = EntityCategory.DIAGNOSTIC
+    _attr_icon = "mdi:water-boiler"
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "dhw_request", STATUS_FLAGS_PDU, DEVICE_MAIN)
+
+    @property
+    def is_on(self) -> bool | None:
+        raw = self.raw_value
+        if raw is None:
+            return None
+        return bool(int(raw) & DHW_REQUEST_MASK)

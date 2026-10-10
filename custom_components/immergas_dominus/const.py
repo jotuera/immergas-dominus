@@ -24,6 +24,12 @@ FAULT_CODE_PDU = 2100
 FAULT_FLAGS_PDU = 2101
 FAULT_RESET_AVAILABLE_MASK = 0x02
 
+# Boiler status flags (PDU 2001), confirmed read over TCP as the Dominus
+# `mb-water-request`.  Low-byte bit 0 = DHW request pending (set ~9 min before a
+# DHW cycle, cleared when the 3-way valve switches to DHW).
+STATUS_FLAGS_PDU = 2001
+DHW_REQUEST_MASK = 0x01
+
 PLATFORMS = ["sensor", "binary_sensor", "number", "select", "climate", "time"]
 
 DEVICE_MAIN = "dominus"

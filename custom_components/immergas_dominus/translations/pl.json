@@ -57,6 +57,9 @@
       },
       "reset_available": {
         "name": "Reset dostępny"
+      },
+      "dhw_request": {
+        "name": "Żądanie CWU"
       }
     },
     "number": {

@@ -57,6 +57,9 @@
       },
       "reset_available": {
         "name": "Reset je dostupný"
+      },
+      "dhw_request": {
+        "name": "Požadavek TUV"
       }
     },
     "number": {

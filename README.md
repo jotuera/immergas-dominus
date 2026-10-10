@@ -1,6 +1,6 @@
 # Immergas Dominus
 
-Version: `0.3.1`
+Version: `0.3.2`
 Author: **JoTu** ([github.com/jotuera](https://github.com/jotuera))
 
 Home Assistant custom integration for **local** control of an Immergas boiler through
@@ -72,6 +72,12 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 0.3.2
+
+- **DHW request** binary sensor (status flags PDU `2001`, bit 0) — on while a DHW
+  cycle is pending (set ~9 minutes before the boiler switches the 3-way valve to
+  DHW). Confirmed readable over TCP via the Dominus `mb-water-request`.
 
 ### 0.3.1
 

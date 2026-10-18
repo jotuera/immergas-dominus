@@ -1,6 +1,12 @@
 # Immergas Dominus
 
-Version: `0.3.2`
+<p align="center">
+  <a href="https://github.com/hacs/integration"><img src="https://img.shields.io/badge/HACS-Custom-41BDF5.svg" alt="HACS Custom"></a>
+  <img src="https://img.shields.io/github/v/tag/jotuera/immergas-dominus?label=version&color=blue" alt="Version">
+  <img src="https://img.shields.io/badge/HA-2024.1%2B-41BDF5.svg" alt="Home Assistant 2024.1+">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License: MIT"></a>
+</p>
+
 Author: **JoTu** ([github.com/jotuera](https://github.com/jotuera))
 
 Home Assistant custom integration for **local** control of an Immergas boiler through

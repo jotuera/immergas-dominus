@@ -7,6 +7,8 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License: MIT"></a>
 </p>
 
+**🇬🇧 English** · [🇵🇱 Polski](README.pl.md)
+
 Author: **JoTu** ([github.com/jotuera](https://github.com/jotuera))
 
 Home Assistant custom integration for **local** control of an Immergas boiler through

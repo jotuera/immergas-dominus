@@ -1,7 +1,7 @@
 """Sensor platform for Immergas Dominus."""
 from __future__ import annotations
 
-from homeassistant.components.sensor import SensorEntity
+from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant
@@ -10,9 +10,15 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from . import anomalies
 from .const import (
     DEVICE_MAIN,
+    DEVICE_ZONE_1,
     DOMAIN,
     FAULT_CODE_PDU,
+    PROGRAM_PHASE_OPTIONS,
     SENSOR_DESCRIPTIONS,
+    ZONE_PHASE_COMFORT_MASK,
+    ZONE_PHASE_ECONOMY_MASK,
+    ZONE_PHASE_MANUAL_MASK,
+    ZONE_STATUS_PDU,
     DominusSensorEntityDescription,
 )
 from .coordinator import ImmergasDominusCoordinator
@@ -32,6 +38,7 @@ async def async_setup_entry(
     ]
     entities.append(ImmergasDominusFaultCodeSensor(coordinator))
     entities.append(ImmergasDominusFaultDescriptionSensor(coordinator))
+    entities.append(ImmergasDominusProgramPhaseSensor(coordinator))
     async_add_entities(entities)
 
 
@@ -98,3 +105,33 @@ class ImmergasDominusFaultDescriptionSensor(ImmergasDominusEntity, SensorEntity)
         if raw is None:
             return None
         return anomalies.describe(int(raw))
+
+
+class ImmergasDominusProgramPhaseSensor(ImmergasDominusEntity, SensorEntity):
+    """Zone 1 time-program phase from the zone-status register (PDU 2010).
+
+    bit 2 = manual, bit 6 = comfort, bit 7 = economy (confirmed on the D+/D- bus).
+    """
+
+    _attr_translation_key = "program_phase"
+    _attr_device_class = SensorDeviceClass.ENUM
+    _attr_options = PROGRAM_PHASE_OPTIONS
+    _attr_entity_category = EntityCategory.DIAGNOSTIC
+    _attr_icon = "mdi:calendar-clock"
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "program_phase", ZONE_STATUS_PDU, DEVICE_ZONE_1)
+
+    @property
+    def native_value(self) -> str | None:
+        raw = self.raw_value
+        if raw is None:
+            return None
+        raw = int(raw)
+        if raw & ZONE_PHASE_ECONOMY_MASK:
+            return "economy"
+        if raw & ZONE_PHASE_COMFORT_MASK:
+            return "comfort"
+        if raw & ZONE_PHASE_MANUAL_MASK:
+            return "manual"
+        return None

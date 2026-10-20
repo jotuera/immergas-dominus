@@ -49,6 +49,20 @@
       },
       "number_of_zones": {
         "name": "Number of zones"
+      },
+      "program_phase": {
+        "name": "Zone 1 program phase",
+        "state": {
+          "manual": "Manual",
+          "comfort": "Comfort",
+          "economy": "Economy"
+        }
+      },
+      "zone_status_zone2": {
+        "name": "Zone 2 status"
+      },
+      "zone_status_zone3": {
+        "name": "Zone 3 status"
       }
     },
     "binary_sensor": {

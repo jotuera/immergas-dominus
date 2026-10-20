@@ -81,9 +81,14 @@ the module accepts the session.
 
 ### 0.3.3
 
+New read-only entities decoded from registers already polled over TCP (bit decode
+confirmed live on the D+/D- bus):
+
 - **Zone 1 heating demand** binary sensor (zone status PDU `2010`, bit 3) — on
-  while Zone 1 is calling for heat. Decoded from the zone-status register already
-  polled over TCP; bit decode confirmed live on the D+/D- bus.
+  while Zone 1 is calling for heat.
+- **Zone 1 program phase** sensor (PDU `2010`, bits 2/6/7) — `manual` / `comfort`
+  / `economy` of the boiler's own time program.
+- **Zone 2 / Zone 3 status** diagnostic sensors (PDU `2020` / `2030`).
 
 ### 0.3.2
 

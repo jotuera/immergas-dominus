@@ -35,6 +35,10 @@ DHW_REQUEST_MASK = 0x01
 # for heat), bit 2 = manual, bit 6 = comfort phase, bit 7 = economy phase.
 ZONE_STATUS_PDU = 2010
 ZONE_HEAT_DEMAND_MASK = 0x08
+ZONE_PHASE_MANUAL_MASK = 0x04
+ZONE_PHASE_COMFORT_MASK = 0x40
+ZONE_PHASE_ECONOMY_MASK = 0x80
+PROGRAM_PHASE_OPTIONS = ["manual", "comfort", "economy"]
 
 PLATFORMS = ["sensor", "binary_sensor", "number", "select", "climate", "time"]
 
@@ -406,6 +410,17 @@ def _zone_sensor_descriptions() -> tuple[DominusSensorEntityDescription, ...]:
                 suggested_display_precision=1,
                 value_scale=0.1,
                 invalid_raw_values=(32767,),
+            )
+        )
+        result.append(
+            DominusSensorEntityDescription(
+                key=f"zone_status_zone{zone}",
+                pdu=ZONE_STATUS_PDU + offset,
+                device_key=device_key,
+                translation_key=f"zone_status_zone{zone}",
+                entity_category=EntityCategory.DIAGNOSTIC,
+                suggested_display_precision=0,
+                icon="mdi:information-outline",
             )
         )
     return tuple(result)

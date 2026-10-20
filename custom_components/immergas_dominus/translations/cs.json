@@ -49,6 +49,20 @@
       },
       "number_of_zones": {
         "name": "Počet zón"
+      },
+      "program_phase": {
+        "name": "Zóna 1 fáze programu",
+        "state": {
+          "manual": "Ruční",
+          "comfort": "Komfort",
+          "economy": "Úsporný"
+        }
+      },
+      "zone_status_zone2": {
+        "name": "Zóna 2 stav"
+      },
+      "zone_status_zone3": {
+        "name": "Zóna 3 stav"
       }
     },
     "binary_sensor": {

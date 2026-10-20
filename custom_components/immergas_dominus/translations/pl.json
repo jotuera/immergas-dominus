@@ -49,6 +49,20 @@
       },
       "number_of_zones": {
         "name": "Liczba stref"
+      },
+      "program_phase": {
+        "name": "Strefa 1 faza programu",
+        "state": {
+          "manual": "Ręczny",
+          "comfort": "Komfort",
+          "economy": "Eko"
+        }
+      },
+      "zone_status_zone2": {
+        "name": "Strefa 2 status"
+      },
+      "zone_status_zone3": {
+        "name": "Strefa 3 status"
       }
     },
     "binary_sensor": {

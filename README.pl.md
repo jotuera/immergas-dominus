@@ -19,6 +19,13 @@ modułem Dominus po lokalnym TCP (domyślny port `2000`), używając adresu MAC 
 > MPROCOMBOV2). Inne modele Immergas z tym samym modułem Dominus mogą działać, ale nie są
 > zweryfikowane.
 
+> **Kompatybilność — tylko konfiguracja Dominus w trybie Modbus.** Integracja mówi
+> 7-bajtowym protokołem Modbus-PDU, którego moduł Dominus używa dla configów `*_MBUS_*`
+> (Magis Combo / Pro). Kotły, których config Dominus nie ma flagi `modbus` — np.
+> **VICTRIX ZEUS / AVIO**, STAR — używają innego, 6-bajtowego protokołu typu OpenTherm i
+> **nie są wspierane** (AUTH echo wraca, ale odczyty PDU timeoutują). Zob. zgłoszenie
+> [#2](https://github.com/jotuera/immergas-dominus/issues/2).
+
 Interfejs jest **domyślnie po angielsku**, z pełnym tłumaczeniem **polskim** (oraz czeskim).
 Wersja i autor integracji są też pokazane na stronie każdego urządzenia Dominus w Home
 Assistant (pole *Oprogramowanie*, np. `0.3.3 — JoTu`).

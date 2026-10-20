@@ -19,6 +19,13 @@ Dominus module over local TCP (default port `2000`) using the module MAC and pas
 > configuration). Other Immergas models that use the same Dominus module may work, but
 > are not verified.
 
+> **Compatibility — Modbus Dominus configuration only.** This integration speaks the
+> 7-byte Modbus-PDU protocol the Dominus module uses for `*_MBUS_*` boiler configs
+> (Magis Combo / Pro). Boilers whose Dominus config has no `modbus` flag — e.g.
+> **VICTRIX ZEUS / AVIO**, STAR — use a different 6-byte OpenTherm-style protocol and are
+> **not supported** (the AUTH echo works, but PDU reads time out). See issue
+> [#2](https://github.com/jotuera/immergas-dominus/issues/2).
+
 The interface is **English by default**, with a full **Polish** translation. The
 integration version and author are also shown on each Dominus device page in Home
 Assistant (the *Firmware* field, e.g. `0.3.0 — JoTu`).

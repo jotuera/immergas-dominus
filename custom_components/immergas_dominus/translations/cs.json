@@ -60,6 +60,9 @@
       },
       "dhw_request": {
         "name": "Požadavek TUV"
+      },
+      "heating_demand": {
+        "name": "Zóna 1 požadavek topení"
       }
     },
     "number": {

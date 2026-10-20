@@ -79,6 +79,12 @@ the module accepts the session.
 
 ## Changelog
 
+### 0.3.3
+
+- **Zone 1 heating demand** binary sensor (zone status PDU `2010`, bit 3) — on
+  while Zone 1 is calling for heat. Decoded from the zone-status register already
+  polled over TCP; bit decode confirmed live on the D+/D- bus.
+
 ### 0.3.2
 
 - **DHW request** binary sensor (status flags PDU `2001`, bit 0) — on while a DHW

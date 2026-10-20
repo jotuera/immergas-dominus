@@ -30,6 +30,12 @@ FAULT_RESET_AVAILABLE_MASK = 0x02
 STATUS_FLAGS_PDU = 2001
 DHW_REQUEST_MASK = 0x01
 
+# Zone 1 status/phase (PDU 2010, already polled as the zone_status sensor).
+# Bit decode confirmed live on the D+/D- bus: bit 3 = heating demand (zone calling
+# for heat), bit 2 = manual, bit 6 = comfort phase, bit 7 = economy phase.
+ZONE_STATUS_PDU = 2010
+ZONE_HEAT_DEMAND_MASK = 0x08
+
 PLATFORMS = ["sensor", "binary_sensor", "number", "select", "climate", "time"]
 
 DEVICE_MAIN = "dominus"

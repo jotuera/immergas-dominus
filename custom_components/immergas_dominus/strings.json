@@ -60,6 +60,9 @@
       },
       "dhw_request": {
         "name": "DHW request"
+      },
+      "heating_demand": {
+        "name": "Zone 1 heating demand"
       }
     },
     "number": {

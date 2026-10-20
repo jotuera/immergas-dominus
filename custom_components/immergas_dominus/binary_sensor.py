@@ -12,12 +12,15 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import (
     DEVICE_MAIN,
+    DEVICE_ZONE_1,
     DHW_REQUEST_MASK,
     DOMAIN,
     FAULT_CODE_PDU,
     FAULT_FLAGS_PDU,
     FAULT_RESET_AVAILABLE_MASK,
     STATUS_FLAGS_PDU,
+    ZONE_HEAT_DEMAND_MASK,
+    ZONE_STATUS_PDU,
 )
 from .coordinator import ImmergasDominusCoordinator
 from .entity import ImmergasDominusEntity
@@ -35,6 +38,7 @@ async def async_setup_entry(
             ImmergasDominusFaultActiveBinarySensor(coordinator),
             ImmergasDominusResetAvailableBinarySensor(coordinator),
             ImmergasDominusDhwRequestBinarySensor(coordinator),
+            ImmergasDominusHeatingDemandBinarySensor(coordinator),
         ]
     )
 
@@ -93,3 +97,23 @@ class ImmergasDominusDhwRequestBinarySensor(ImmergasDominusEntity, BinarySensorE
         if raw is None:
             return None
         return bool(int(raw) & DHW_REQUEST_MASK)
+
+
+class ImmergasDominusHeatingDemandBinarySensor(
+    ImmergasDominusEntity, BinarySensorEntity
+):
+    """On when Zone 1 is calling for heat (zone status PDU 2010, bit 3)."""
+
+    _attr_translation_key = "heating_demand"
+    _attr_device_class = BinarySensorDeviceClass.RUNNING
+    _attr_icon = "mdi:radiator"
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "heating_demand", ZONE_STATUS_PDU, DEVICE_ZONE_1)
+
+    @property
+    def is_on(self) -> bool | None:
+        raw = self.raw_value
+        if raw is None:
+            return None
+        return bool(int(raw) & ZONE_HEAT_DEMAND_MASK)

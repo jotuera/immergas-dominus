@@ -60,6 +60,9 @@
       },
       "dhw_request": {
         "name": "Żądanie CWU"
+      },
+      "heating_demand": {
+        "name": "Strefa 1 żądanie grzania"
       }
     },
     "number": {

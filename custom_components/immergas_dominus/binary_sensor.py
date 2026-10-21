@@ -11,6 +11,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import (
+    CONF_PROTOCOL,
     DEVICE_MAIN,
     DEVICE_ZONE_1,
     DHW_REQUEST_MASK,
@@ -18,9 +19,12 @@ from .const import (
     FAULT_CODE_PDU,
     FAULT_FLAGS_PDU,
     FAULT_RESET_AVAILABLE_MASK,
+    OT_BINARY_DESCRIPTIONS,
+    PROTOCOL_OPENTHERM,
     STATUS_FLAGS_PDU,
     ZONE_HEAT_DEMAND_MASK,
     ZONE_STATUS_PDU,
+    DominusOpenThermBinaryDescription,
 )
 from .coordinator import ImmergasDominusCoordinator
 from .entity import ImmergasDominusEntity
@@ -33,6 +37,12 @@ async def async_setup_entry(
 ) -> None:
     """Set up binary sensors."""
     coordinator: ImmergasDominusCoordinator = hass.data[DOMAIN][entry.entry_id]
+    if entry.data.get(CONF_PROTOCOL) == PROTOCOL_OPENTHERM:
+        async_add_entities(
+            ImmergasOpenThermBinarySensor(coordinator, description)
+            for description in OT_BINARY_DESCRIPTIONS
+        )
+        return
     async_add_entities(
         [
             ImmergasDominusFaultActiveBinarySensor(coordinator),
@@ -117,3 +127,26 @@ class ImmergasDominusHeatingDemandBinarySensor(
         if raw is None:
             return None
         return bool(int(raw) & ZONE_HEAT_DEMAND_MASK)
+
+
+class ImmergasOpenThermBinarySensor(ImmergasDominusEntity, BinarySensorEntity):
+    """Read-only OpenTherm status flag (a bit of a Data-ID byte)."""
+
+    entity_description: DominusOpenThermBinaryDescription
+
+    def __init__(
+        self,
+        coordinator: ImmergasDominusCoordinator,
+        description: DominusOpenThermBinaryDescription,
+    ) -> None:
+        super().__init__(coordinator, description.key, description.data_id, DEVICE_MAIN)
+        self.entity_description = description
+
+    @property
+    def is_on(self) -> bool | None:
+        raw = self.raw_value
+        if raw is None:
+            return None
+        raw = int(raw) & 0xFFFF
+        byte = (raw >> 8) & 0xFF if self.entity_description.byte == "hb" else raw & 0xFF
+        return bool(byte & self.entity_description.mask)

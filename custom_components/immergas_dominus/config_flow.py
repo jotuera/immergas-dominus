@@ -9,10 +9,27 @@ import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.const import CONF_HOST, CONF_PORT
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.selector import TextSelector, TextSelectorConfig, TextSelectorType
+from homeassistant.helpers.selector import (
+    SelectSelector,
+    SelectSelectorConfig,
+    SelectSelectorMode,
+    TextSelector,
+    TextSelectorConfig,
+    TextSelectorType,
+)
 
-from .const import CONF_MAC, CONF_PASSWORD, DEFAULT_PORT, DOMAIN
+from .const import (
+    CONF_MAC,
+    CONF_PASSWORD,
+    CONF_PROTOCOL,
+    DEFAULT_PORT,
+    DEFAULT_PROTOCOL,
+    DOMAIN,
+    PROTOCOL_MODBUS,
+    PROTOCOL_OPENTHERM,
+)
 from .dominus_client import DominusClient, DominusConfig, DominusError
+from .opentherm_client import DominusOpenThermClient
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -24,6 +41,13 @@ STEP_USER_DATA_SCHEMA = vol.Schema(
         vol.Required(CONF_MAC): str,
         vol.Required(CONF_PASSWORD): TextSelector(
             TextSelectorConfig(type=TextSelectorType.PASSWORD)
+        ),
+        vol.Required(CONF_PROTOCOL, default=DEFAULT_PROTOCOL): SelectSelector(
+            SelectSelectorConfig(
+                options=[PROTOCOL_MODBUS, PROTOCOL_OPENTHERM],
+                translation_key="protocol",
+                mode=SelectSelectorMode.DROPDOWN,
+            )
         ),
     }
 )
@@ -39,14 +63,16 @@ def normalize_mac_for_unique_id(mac: str) -> str | None:
 
 async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> str:
     """Try to validate the user input against the local Dominus module."""
-    client = DominusClient(
-        DominusConfig(
-            host=data[CONF_HOST],
-            port=data[CONF_PORT],
-            mac=data[CONF_MAC],
-            password=data[CONF_PASSWORD],
-        )
+    config = DominusConfig(
+        host=data[CONF_HOST],
+        port=data[CONF_PORT],
+        mac=data[CONF_MAC],
+        password=data[CONF_PASSWORD],
     )
+    if data.get(CONF_PROTOCOL) == PROTOCOL_OPENTHERM:
+        client: DominusClient | DominusOpenThermClient = DominusOpenThermClient(config)
+    else:
+        client = DominusClient(config)
     await client.async_test_connection()
     return data[CONF_HOST]
 

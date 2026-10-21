@@ -8,7 +8,8 @@
           "host": "Název nebo IP adresa",
           "port": "TCP port",
           "mac": "Dominus MAC adresa",
-          "password": "Dominus heslo"
+          "password": "Dominus heslo",
+          "protocol": "Protokol"
         }
       }
     },
@@ -63,6 +64,39 @@
       },
       "zone_status_zone3": {
         "name": "Zóna 3 stav"
+      },
+      "ot_flow_temperature": {
+        "name": "Teplota výstupu"
+      },
+      "ot_return_temperature": {
+        "name": "Teplota zpátečky"
+      },
+      "ot_dhw_temperature": {
+        "name": "Teplota TUV"
+      },
+      "ot_outside_temperature": {
+        "name": "Venkovní teplota"
+      },
+      "ot_control_setpoint": {
+        "name": "Žádaná teplota ÚT"
+      },
+      "ot_dhw_setpoint": {
+        "name": "Žádaná teplota TUV"
+      },
+      "ot_max_ch_setpoint": {
+        "name": "Max. žádaná ÚT"
+      },
+      "ot_modulation_level": {
+        "name": "Úroveň modulace"
+      },
+      "ot_ch_water_pressure": {
+        "name": "Tlak vody ÚT"
+      },
+      "ot_dhw_flow_rate": {
+        "name": "Průtok TUV"
+      },
+      "ot_fault_code": {
+        "name": "Kód poruchy"
       }
     },
     "binary_sensor": {
@@ -77,6 +111,18 @@
       },
       "heating_demand": {
         "name": "Zóna 1 požadavek topení"
+      },
+      "ot_fault": {
+        "name": "Porucha"
+      },
+      "ot_ch_active": {
+        "name": "Vytápění"
+      },
+      "ot_dhw_active": {
+        "name": "TUV"
+      },
+      "ot_flame": {
+        "name": "Plamen"
       }
     },
     "number": {
@@ -211,6 +257,14 @@
       },
       "heating_thermostat_zone3": {
         "name": "Zóna 3 termostat"
+      }
+    }
+  },
+  "selector": {
+    "protocol": {
+      "options": {
+        "modbus": "Modbus (Magis Combo / Pro)",
+        "opentherm": "OpenTherm (VICTRIX, experimentální)"
       }
     }
   }

@@ -8,7 +8,8 @@
           "host": "Host lub adres IP",
           "port": "Port TCP",
           "mac": "Adres MAC Dominusa",
-          "password": "Hasło Dominus"
+          "password": "Hasło Dominus",
+          "protocol": "Protokół"
         }
       }
     },
@@ -63,6 +64,39 @@
       },
       "zone_status_zone3": {
         "name": "Strefa 3 status"
+      },
+      "ot_flow_temperature": {
+        "name": "Temperatura zasilania"
+      },
+      "ot_return_temperature": {
+        "name": "Temperatura powrotu"
+      },
+      "ot_dhw_temperature": {
+        "name": "Temperatura CWU"
+      },
+      "ot_outside_temperature": {
+        "name": "Temperatura zewnętrzna"
+      },
+      "ot_control_setpoint": {
+        "name": "Zadana CO (sterowanie)"
+      },
+      "ot_dhw_setpoint": {
+        "name": "Zadana CWU"
+      },
+      "ot_max_ch_setpoint": {
+        "name": "Maks. zadana CO"
+      },
+      "ot_modulation_level": {
+        "name": "Poziom modulacji"
+      },
+      "ot_ch_water_pressure": {
+        "name": "Ciśnienie wody CO"
+      },
+      "ot_dhw_flow_rate": {
+        "name": "Przepływ CWU"
+      },
+      "ot_fault_code": {
+        "name": "Kod błędu"
       }
     },
     "binary_sensor": {
@@ -77,6 +111,18 @@
       },
       "heating_demand": {
         "name": "Strefa 1 żądanie grzania"
+      },
+      "ot_fault": {
+        "name": "Błąd"
+      },
+      "ot_ch_active": {
+        "name": "Ogrzewanie CO"
+      },
+      "ot_dhw_active": {
+        "name": "CWU"
+      },
+      "ot_flame": {
+        "name": "Płomień"
       }
     },
     "number": {
@@ -211,6 +257,14 @@
       },
       "heating_thermostat_zone3": {
         "name": "Strefa 3 termostat"
+      }
+    }
+  },
+  "selector": {
+    "protocol": {
+      "options": {
+        "modbus": "Modbus (Magis Combo / Pro)",
+        "opentherm": "OpenTherm (VICTRIX, eksperymentalny)"
       }
     }
   }

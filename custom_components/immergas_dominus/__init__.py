@@ -16,16 +16,27 @@ AUTHOR = "JoTu"
 from .const import (
     CONF_MAC,
     CONF_PASSWORD,
+    CONF_PROTOCOL,
     DEFAULT_DISABLED_DEVICES,
     DEVICE_INFO,
     DEVICE_MAIN,
     DOMAIN,
     LEGACY_DEVICE_KEYS,
     LOGICAL_DEVICES,
+    OPENTHERM_PLATFORMS,
     PLATFORMS,
+    PROTOCOL_OPENTHERM,
 )
 from .coordinator import ImmergasDominusCoordinator
 from .dominus_client import DominusClient, DominusConfig, DominusError
+from .opentherm_client import DominusOpenThermClient
+
+
+def _platforms_for(entry: ConfigEntry) -> list[str]:
+    """Modbus mode uses all platforms; OpenTherm mode is read-only sensors."""
+    if entry.data.get(CONF_PROTOCOL) == PROTOCOL_OPENTHERM:
+        return OPENTHERM_PLATFORMS
+    return PLATFORMS
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -85,19 +96,22 @@ def _ensure_logical_devices(
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up Immergas Dominus from a config entry."""
-    client = DominusClient(
-        DominusConfig(
-            host=entry.data[CONF_HOST],
-            port=entry.data[CONF_PORT],
-            mac=entry.data[CONF_MAC],
-            password=entry.data[CONF_PASSWORD],
-        )
+    config = DominusConfig(
+        host=entry.data[CONF_HOST],
+        port=entry.data[CONF_PORT],
+        mac=entry.data[CONF_MAC],
+        password=entry.data[CONF_PASSWORD],
     )
+    opentherm = entry.data.get(CONF_PROTOCOL) == PROTOCOL_OPENTHERM
+    client = DominusOpenThermClient(config) if opentherm else DominusClient(config)
     coordinator = ImmergasDominusCoordinator(hass, entry, client)
 
-    integration = await async_get_integration(hass, DOMAIN)
-    version = str(integration.version) if integration.version else None
-    _ensure_logical_devices(hass, entry, version)
+    if not opentherm:
+        # Modbus mode: pre-create the logical zone/schedule devices.  OpenTherm
+        # mode exposes a single device, created automatically from its entities.
+        integration = await async_get_integration(hass, DOMAIN)
+        version = str(integration.version) if integration.version else None
+        _ensure_logical_devices(hass, entry, version)
 
     # Do not block entity creation on the very first TCP poll.  Dominus local
     # TCP sessions can be temporarily rejected just after the mobile app, the
@@ -121,13 +135,15 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         )
 
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = coordinator
-    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+    await hass.config_entries.async_forward_entry_setups(entry, _platforms_for(entry))
     return True
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Unload a config entry."""
-    unload_ok = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
+    unload_ok = await hass.config_entries.async_unload_platforms(
+        entry, _platforms_for(entry)
+    )
     if unload_ok:
         hass.data[DOMAIN].pop(entry.entry_id)
     return unload_ok

@@ -9,16 +9,20 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from . import anomalies
 from .const import (
+    CONF_PROTOCOL,
     DEVICE_MAIN,
     DEVICE_ZONE_1,
     DOMAIN,
     FAULT_CODE_PDU,
+    OT_SENSOR_DESCRIPTIONS,
     PROGRAM_PHASE_OPTIONS,
+    PROTOCOL_OPENTHERM,
     SENSOR_DESCRIPTIONS,
     ZONE_PHASE_COMFORT_MASK,
     ZONE_PHASE_ECONOMY_MASK,
     ZONE_PHASE_MANUAL_MASK,
     ZONE_STATUS_PDU,
+    DominusOpenThermSensorDescription,
     DominusSensorEntityDescription,
 )
 from .coordinator import ImmergasDominusCoordinator
@@ -32,6 +36,12 @@ async def async_setup_entry(
 ) -> None:
     """Set up sensors."""
     coordinator: ImmergasDominusCoordinator = hass.data[DOMAIN][entry.entry_id]
+    if entry.data.get(CONF_PROTOCOL) == PROTOCOL_OPENTHERM:
+        async_add_entities(
+            ImmergasOpenThermSensor(coordinator, description)
+            for description in OT_SENSOR_DESCRIPTIONS
+        )
+        return
     entities: list[SensorEntity] = [
         ImmergasDominusSensor(coordinator, description)
         for description in SENSOR_DESCRIPTIONS
@@ -135,3 +145,31 @@ class ImmergasDominusProgramPhaseSensor(ImmergasDominusEntity, SensorEntity):
         if raw & ZONE_PHASE_MANUAL_MASK:
             return "manual"
         return None
+
+
+class ImmergasOpenThermSensor(ImmergasDominusEntity, SensorEntity):
+    """Read-only OpenTherm Data-ID sensor (f8.8 / u16 / low byte)."""
+
+    entity_description: DominusOpenThermSensorDescription
+
+    def __init__(
+        self,
+        coordinator: ImmergasDominusCoordinator,
+        description: DominusOpenThermSensorDescription,
+    ) -> None:
+        super().__init__(coordinator, description.key, description.data_id, DEVICE_MAIN)
+        self.entity_description = description
+
+    @property
+    def native_value(self) -> float | int | None:
+        raw = self.raw_value
+        if raw is None:
+            return None
+        raw = int(raw) & 0xFFFF
+        decode = self.entity_description.decode
+        if decode == "f88":  # OpenTherm f8.8 signed fixed-point
+            signed = raw - 0x10000 if raw & 0x8000 else raw
+            return round(signed / 256, 1)
+        if decode == "lb_u8":
+            return raw & 0xFF
+        return raw  # u16

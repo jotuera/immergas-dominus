@@ -19,11 +19,12 @@ Dominus module over local TCP (default port `2000`) using the module MAC and pas
 > configuration). Other Immergas models that use the same Dominus module may work, but
 > are not verified.
 
-> **Compatibility — Modbus Dominus configuration only.** This integration speaks the
-> 7-byte Modbus-PDU protocol the Dominus module uses for `*_MBUS_*` boiler configs
-> (Magis Combo / Pro). Boilers whose Dominus config has no `modbus` flag — e.g.
-> **VICTRIX ZEUS / AVIO**, STAR — use a different 6-byte OpenTherm-style protocol and are
-> **not supported** (the AUTH echo works, but PDU reads time out). See issue
+> **Compatibility — two protocols.** Magis Combo / Pro (`*_MBUS_*` configs) use the
+> 7-byte **Modbus** protocol — fully supported. Boilers whose Dominus config has no
+> `modbus` flag — e.g. **VICTRIX ZEUS / AVIO**, STAR — use a 6-byte **OpenTherm**
+> protocol; since 0.4.0 there is an **experimental, read-only OpenTherm mode** (pick it
+> in the config flow). It is **not verified on real hardware** yet — feedback from a
+> VICTRIX owner welcome, see issue
 > [#2](https://github.com/jotuera/immergas-dominus/issues/2).
 
 The interface is **English by default**, with a full **Polish** translation. The
@@ -87,6 +88,18 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 0.4.0
+
+- **Experimental OpenTherm mode** for non-Modbus boilers (VICTRIX ZEUS / AVIO, STAR).
+  Pick the protocol (Modbus / OpenTherm) in the config flow. The Dominus module tunnels
+  standard OpenTherm frames over the same authenticated TCP channel; this mode is
+  **read-only** and exposes standard OpenTherm Data-IDs as sensors (flow / return / DHW /
+  outside temperature, modulation, CH pressure, DHW flow, setpoints, fault code) plus
+  status binary sensors (fault, central heating, DHW, flame).
+- **Not yet verified on real hardware** — please report results on issue
+  [#2](https://github.com/jotuera/immergas-dominus/issues/2) so the Data-ID map can be
+  corrected/extended.
 
 ### 0.3.3
 

@@ -4,11 +4,21 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import StrEnum
 
+from homeassistant.components.binary_sensor import (
+    BinarySensorDeviceClass,
+    BinarySensorEntityDescription,
+)
 from homeassistant.components.climate import ClimateEntityDescription
 from homeassistant.components.number import NumberDeviceClass, NumberEntityDescription, NumberMode
 from homeassistant.components.select import SelectEntityDescription
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntityDescription
-from homeassistant.const import PERCENTAGE, EntityCategory, UnitOfTemperature
+from homeassistant.const import (
+    PERCENTAGE,
+    EntityCategory,
+    UnitOfPressure,
+    UnitOfTemperature,
+    UnitOfVolumeFlowRate,
+)
 
 DOMAIN = "immergas_dominus"
 DEFAULT_PORT = 2000
@@ -16,6 +26,12 @@ DEFAULT_SCAN_INTERVAL = 45
 
 CONF_MAC = "mac"
 CONF_PASSWORD = "password"
+
+# Protocol the Dominus module uses for this boiler.
+CONF_PROTOCOL = "protocol"
+PROTOCOL_MODBUS = "modbus"        # Magis Combo / Pro (MBUS configs)
+PROTOCOL_OPENTHERM = "opentherm"  # VICTRIX ZEUS / AVIO, STAR, … (experimental)
+DEFAULT_PROTOCOL = PROTOCOL_MODBUS
 
 # Boiler fault reporting (same registers as the D+/D- and T-/T+ tooling).
 # PDU 2100 = fault code (0 = no fault, otherwise Immergas E<code>).
@@ -41,6 +57,8 @@ ZONE_PHASE_ECONOMY_MASK = 0x80
 PROGRAM_PHASE_OPTIONS = ["manual", "comfort", "economy"]
 
 PLATFORMS = ["sensor", "binary_sensor", "number", "select", "climate", "time"]
+# OpenTherm mode is read-only: only sensor and binary_sensor platforms.
+OPENTHERM_PLATFORMS = ["sensor", "binary_sensor"]
 
 DEVICE_MAIN = "dominus"
 DEVICE_ZONE_1 = "zone_1"
@@ -562,3 +580,103 @@ CHRONO_PROFILE_OPTIONS = _CHRONO_PROFILE_OPTIONS
 CHRONO_OPTION_TO_RAW = dict(_CHRONO_OPTION_TO_RAW)
 CHRONO_RAW_TO_OPTION = dict(_CHRONO_RAW_TO_OPTION)
 WEEKDAY_PROFILE_PDUS = tuple(2409 + day for day in range(1, 8))
+
+
+# --- OpenTherm mode (experimental; VICTRIX and other non-Modbus boilers) -----
+# The Dominus module tunnels standard OpenTherm frames for boilers without the
+# `modbus` config flag.  This mode is read-only: standard OpenTherm Data-IDs are
+# exposed as sensors.  Data values are f8.8 fixed-point (signed, /256) unless the
+# decode says otherwise.  Not yet verified on real hardware — the entity set may
+# need adjusting from a VICTRIX owner's data.
+@dataclass(frozen=True, kw_only=True)
+class DominusOpenThermSensorDescription(SensorEntityDescription):
+    """Read-only OpenTherm Data-ID sensor."""
+
+    data_id: int
+    decode: str = "f88"  # "f88" | "u16" | "lb_u8"
+
+
+@dataclass(frozen=True, kw_only=True)
+class DominusOpenThermBinaryDescription(BinarySensorEntityDescription):
+    """Read-only OpenTherm status flag (a bit of a Data-ID byte)."""
+
+    data_id: int
+    byte: str = "lb"  # "lb" | "hb"
+    mask: int = 0x01
+
+
+def _ot_temp(key: str, data_id: int, **kw) -> DominusOpenThermSensorDescription:
+    return DominusOpenThermSensorDescription(
+        key=key,
+        data_id=data_id,
+        translation_key=key,
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        suggested_display_precision=1,
+        **kw,
+    )
+
+
+OT_SENSOR_DESCRIPTIONS: tuple[DominusOpenThermSensorDescription, ...] = (
+    _ot_temp("ot_flow_temperature", 25),
+    _ot_temp("ot_return_temperature", 28),
+    _ot_temp("ot_dhw_temperature", 26),
+    _ot_temp("ot_outside_temperature", 27),
+    _ot_temp("ot_control_setpoint", 1, entity_category=EntityCategory.DIAGNOSTIC),
+    _ot_temp("ot_dhw_setpoint", 56, entity_category=EntityCategory.DIAGNOSTIC),
+    _ot_temp("ot_max_ch_setpoint", 57, entity_category=EntityCategory.DIAGNOSTIC),
+    DominusOpenThermSensorDescription(
+        key="ot_modulation_level",
+        data_id=17,
+        translation_key="ot_modulation_level",
+        native_unit_of_measurement=PERCENTAGE,
+        suggested_display_precision=0,
+        icon="mdi:percent",
+    ),
+    DominusOpenThermSensorDescription(
+        key="ot_ch_water_pressure",
+        data_id=18,
+        translation_key="ot_ch_water_pressure",
+        device_class=SensorDeviceClass.PRESSURE,
+        native_unit_of_measurement=UnitOfPressure.BAR,
+        suggested_display_precision=1,
+    ),
+    DominusOpenThermSensorDescription(
+        key="ot_dhw_flow_rate",
+        data_id=19,
+        translation_key="ot_dhw_flow_rate",
+        native_unit_of_measurement=UnitOfVolumeFlowRate.LITERS_PER_MINUTE,
+        suggested_display_precision=1,
+        icon="mdi:water",
+    ),
+    DominusOpenThermSensorDescription(
+        key="ot_fault_code",
+        data_id=5,
+        decode="lb_u8",
+        translation_key="ot_fault_code",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        suggested_display_precision=0,
+        icon="mdi:alert-circle-outline",
+    ),
+)
+
+OT_BINARY_DESCRIPTIONS: tuple[DominusOpenThermBinaryDescription, ...] = (
+    DominusOpenThermBinaryDescription(
+        key="ot_fault", data_id=0, byte="lb", mask=0x01,
+        translation_key="ot_fault", device_class=BinarySensorDeviceClass.PROBLEM,
+    ),
+    DominusOpenThermBinaryDescription(
+        key="ot_ch_active", data_id=0, byte="lb", mask=0x02,
+        translation_key="ot_ch_active", device_class=BinarySensorDeviceClass.RUNNING,
+        icon="mdi:radiator",
+    ),
+    DominusOpenThermBinaryDescription(
+        key="ot_dhw_active", data_id=0, byte="lb", mask=0x04,
+        translation_key="ot_dhw_active", device_class=BinarySensorDeviceClass.RUNNING,
+        icon="mdi:water-boiler",
+    ),
+    DominusOpenThermBinaryDescription(
+        key="ot_flame", data_id=0, byte="lb", mask=0x08,
+        translation_key="ot_flame", icon="mdi:fire",
+    ),
+)

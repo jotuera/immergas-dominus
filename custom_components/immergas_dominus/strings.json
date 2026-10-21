@@ -8,7 +8,8 @@
           "host": "Host or IP address",
           "port": "TCP port",
           "mac": "Dominus MAC address",
-          "password": "Dominus password"
+          "password": "Dominus password",
+          "protocol": "Protocol"
         }
       }
     },
@@ -63,6 +64,39 @@
       },
       "zone_status_zone3": {
         "name": "Zone 3 status"
+      },
+      "ot_flow_temperature": {
+        "name": "Flow temperature"
+      },
+      "ot_return_temperature": {
+        "name": "Return temperature"
+      },
+      "ot_dhw_temperature": {
+        "name": "DHW temperature"
+      },
+      "ot_outside_temperature": {
+        "name": "Outside temperature"
+      },
+      "ot_control_setpoint": {
+        "name": "CH control setpoint"
+      },
+      "ot_dhw_setpoint": {
+        "name": "DHW setpoint"
+      },
+      "ot_max_ch_setpoint": {
+        "name": "Max CH setpoint"
+      },
+      "ot_modulation_level": {
+        "name": "Modulation level"
+      },
+      "ot_ch_water_pressure": {
+        "name": "CH water pressure"
+      },
+      "ot_dhw_flow_rate": {
+        "name": "DHW flow rate"
+      },
+      "ot_fault_code": {
+        "name": "Fault code"
       }
     },
     "binary_sensor": {
@@ -77,6 +111,18 @@
       },
       "heating_demand": {
         "name": "Zone 1 heating demand"
+      },
+      "ot_fault": {
+        "name": "Fault"
+      },
+      "ot_ch_active": {
+        "name": "Central heating"
+      },
+      "ot_dhw_active": {
+        "name": "Domestic hot water"
+      },
+      "ot_flame": {
+        "name": "Flame"
       }
     },
     "number": {
@@ -211,6 +257,14 @@
       },
       "heating_thermostat_zone3": {
         "name": "Zone 3 thermostat"
+      }
+    }
+  },
+  "selector": {
+    "protocol": {
+      "options": {
+        "modbus": "Modbus (Magis Combo / Pro)",
+        "opentherm": "OpenTherm (VICTRIX, experimental)"
       }
     }
   }

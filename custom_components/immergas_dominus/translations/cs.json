@@ -77,12 +77,6 @@
       "ot_outside_temperature": {
         "name": "Venkovní teplota"
       },
-      "ot_control_setpoint": {
-        "name": "Žádaná teplota ÚT"
-      },
-      "ot_dhw_setpoint": {
-        "name": "Žádaná teplota TUV"
-      },
       "ot_max_ch_setpoint": {
         "name": "Max. žádaná ÚT"
       },
@@ -200,6 +194,12 @@
       },
       "flow_target_zone3": {
         "name": "Zóna 3 cílová výstupní teplota"
+      },
+      "ot_ch_setpoint": {
+        "name": "Žádaná ÚT"
+      },
+      "ot_dhw_setpoint": {
+        "name": "Žádaná TUV"
       }
     },
     "select": {
@@ -235,6 +235,15 @@
       },
       "all_days_profile": {
         "name": "Zóna 1 — stejný profil pro všechny dny"
+      },
+      "ot_mode": {
+        "name": "Režim",
+        "state": {
+          "off": "Vyp.",
+          "heating": "Vytápění",
+          "water": "TUV",
+          "heating_water": "Vytápění + TUV"
+        }
       }
     },
     "time": {

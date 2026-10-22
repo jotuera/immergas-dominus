@@ -57,8 +57,8 @@ ZONE_PHASE_ECONOMY_MASK = 0x80
 PROGRAM_PHASE_OPTIONS = ["manual", "comfort", "economy"]
 
 PLATFORMS = ["sensor", "binary_sensor", "number", "select", "climate", "time"]
-# OpenTherm mode is read-only: only sensor and binary_sensor platforms.
-OPENTHERM_PLATFORMS = ["sensor", "binary_sensor"]
+# OpenTherm mode: read sensors + writable setpoints/mode (experimental).
+OPENTHERM_PLATFORMS = ["sensor", "binary_sensor", "number", "select"]
 
 DEVICE_MAIN = "dominus"
 DEVICE_ZONE_1 = "zone_1"
@@ -622,8 +622,6 @@ OT_SENSOR_DESCRIPTIONS: tuple[DominusOpenThermSensorDescription, ...] = (
     _ot_temp("ot_return_temperature", 28),
     _ot_temp("ot_dhw_temperature", 26),
     _ot_temp("ot_outside_temperature", 27),
-    _ot_temp("ot_control_setpoint", 1, entity_category=EntityCategory.DIAGNOSTIC),
-    _ot_temp("ot_dhw_setpoint", 56, entity_category=EntityCategory.DIAGNOSTIC),
     _ot_temp("ot_max_ch_setpoint", 57, entity_category=EntityCategory.DIAGNOSTIC),
     DominusOpenThermSensorDescription(
         key="ot_modulation_level",
@@ -680,3 +678,48 @@ OT_BINARY_DESCRIPTIONS: tuple[DominusOpenThermBinaryDescription, ...] = (
         translation_key="ot_flame", icon="mdi:fire",
     ),
 )
+
+
+@dataclass(frozen=True, kw_only=True)
+class DominusOpenThermNumberDescription(NumberEntityDescription):
+    """Writable OpenTherm setpoint (f8.8 fixed-point, °C)."""
+
+    data_id: int
+
+
+OT_NUMBER_DESCRIPTIONS: tuple[DominusOpenThermNumberDescription, ...] = (
+    DominusOpenThermNumberDescription(
+        key="ot_ch_setpoint",
+        data_id=1,
+        translation_key="ot_ch_setpoint",
+        device_class=NumberDeviceClass.TEMPERATURE,
+        native_min_value=10,
+        native_max_value=85,
+        native_step=1,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        mode=NumberMode.SLIDER,
+        icon="mdi:radiator",
+    ),
+    DominusOpenThermNumberDescription(
+        key="ot_dhw_setpoint",
+        data_id=56,
+        translation_key="ot_dhw_setpoint",
+        device_class=NumberDeviceClass.TEMPERATURE,
+        native_min_value=10,
+        native_max_value=60,
+        native_step=1,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        mode=NumberMode.SLIDER,
+        icon="mdi:water-thermometer",
+    ),
+)
+
+# Experimental boiler mode over OpenTherm.  The master status (Data-ID 0 high byte)
+# carries bit 0 = CH enable, bit 1 = DHW enable.  Writing Data-ID 0 as WRITE-DATA may
+# not persist through the module's own status loop — to be confirmed on real hardware.
+OT_MODE_PDU = 0
+OT_MODE_OPTIONS = ["off", "heating", "water", "heating_water"]
+OT_MODE_TO_STATUS = {"off": 0x00, "heating": 0x01, "water": 0x02, "heating_water": 0x03}
+# Slave status (Data-ID 0 low byte): bit 1 = CH active, bit 2 = DHW active.
+OT_STATUS_CH_ACTIVE_MASK = 0x02
+OT_STATUS_DHW_ACTIVE_MASK = 0x04

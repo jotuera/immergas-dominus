@@ -33,9 +33,12 @@ _LOGGER = logging.getLogger(__name__)
 
 # OpenTherm message types (bits 6-4 of byte 0).
 _OT_MSGTYPE_READ_DATA = 0b000
+_OT_MSGTYPE_WRITE_DATA = 0b001
 _OT_MSGTYPE_READ_ACK = 0b100
+_OT_MSGTYPE_WRITE_ACK = 0b101
 _OT_MSGTYPE_DATA_INVALID = 0b010
 _OT_MSGTYPE_UNKNOWN_DATAID = 0b011
+_OT_WRITE_TYPE_BIT = 0b001 << 4  # 0x10, WRITE-DATA in byte 0 bits 6-4
 
 _READ_GAP_SECONDS = 0.6
 _TEST_DATA_IDS = (0, 25, 27)  # status, boiler flow temp, outside temp
@@ -70,6 +73,10 @@ class DominusOpenThermClient:
     async def async_read_many(self, data_ids: tuple[int, ...]) -> dict[int, int]:
         """Read several OpenTherm Data-IDs; returns raw 16-bit data values."""
         return await asyncio.to_thread(self._read_many_blocking, data_ids)
+
+    async def async_write_data_id(self, data_id: int, value: int) -> int:
+        """Write a 16-bit value to an OpenTherm Data-ID; returns the ack value."""
+        return await asyncio.to_thread(self._write_data_id_blocking, data_id, value)
 
     # -- blocking implementation ------------------------------------------------
 
@@ -110,6 +117,13 @@ class DominusOpenThermClient:
             sock.sendall(frame)
             return self._recv_reply_for_id(sock, data_id)
 
+    def _write_data_id_blocking(self, data_id: int, value: int) -> int:
+        with self._lock:
+            with self._auth_connect() as sock:
+                frame = self._build_write_frame(data_id, value)
+                sock.sendall(frame)
+                return self._recv_reply_for_id(sock, data_id, expect_write=True)
+
     # -- framing ---------------------------------------------------------------
 
     @staticmethod
@@ -120,7 +134,16 @@ class DominusOpenThermClient:
         return body + bytes([(crc >> 8) & 0xFF, crc & 0xFF])
 
     @staticmethod
-    def _decode_reply(reply: bytes, expected_id: int) -> int:
+    def _build_write_frame(data_id: int, value: int) -> bytes:
+        value &= 0xFFFF
+        hb, lb = (value >> 8) & 0xFF, value & 0xFF
+        byte0 = _even_parity_byte0(_OT_WRITE_TYPE_BIT, data_id, hb, lb)  # WRITE-DATA
+        body = bytes([byte0, data_id & 0xFF, hb, lb])
+        crc = DominusClient._crc16_dominus(body)
+        return body + bytes([(crc >> 8) & 0xFF, crc & 0xFF])
+
+    @staticmethod
+    def _decode_reply(reply: bytes, expected_id: int, expect_write: bool = False) -> int:
         if len(reply) != 6:
             raise DominusProtocolError(f"OpenTherm reply must be 6 bytes, got {len(reply)}")
         crc_recv = (reply[4] << 8) | reply[5]
@@ -131,18 +154,23 @@ class DominusOpenThermClient:
         msg_type = (reply[0] >> 4) & 0x07
         if msg_type in (_OT_MSGTYPE_DATA_INVALID, _OT_MSGTYPE_UNKNOWN_DATAID):
             raise DominusOpenThermUnsupported(f"Data-ID {expected_id} unsupported")
-        if msg_type != _OT_MSGTYPE_READ_ACK:
+        ack = _OT_MSGTYPE_WRITE_ACK if expect_write else _OT_MSGTYPE_READ_ACK
+        if msg_type != ack:
             raise DominusProtocolError(f"Unexpected OpenTherm msg-type {msg_type}")
         return (reply[2] << 8) | reply[3]
 
-    def _recv_reply_for_id(self, sock: socket.socket, expected_id: int) -> int:
+    def _recv_reply_for_id(
+        self, sock: socket.socket, expected_id: int, expect_write: bool = False
+    ) -> int:
         deadline = time.monotonic() + float(sock.gettimeout() or 2.0)
         buffer = bytearray()
         last_error: Exception | None = None
         while time.monotonic() < deadline:
             for start in range(0, max(0, len(buffer) - 5)):
                 try:
-                    return self._decode_reply(bytes(buffer[start:start + 6]), expected_id)
+                    return self._decode_reply(
+                        bytes(buffer[start:start + 6]), expected_id, expect_write
+                    )
                 except DominusOpenThermUnsupported:
                     raise
                 except DominusProtocolError as err:

@@ -77,12 +77,6 @@
       "ot_outside_temperature": {
         "name": "Temperatura zewnętrzna"
       },
-      "ot_control_setpoint": {
-        "name": "Zadana CO (sterowanie)"
-      },
-      "ot_dhw_setpoint": {
-        "name": "Zadana CWU"
-      },
       "ot_max_ch_setpoint": {
         "name": "Maks. zadana CO"
       },
@@ -200,6 +194,12 @@
       },
       "flow_target_zone3": {
         "name": "Strefa 3 zadana zasilania"
+      },
+      "ot_ch_setpoint": {
+        "name": "Zadana CO"
+      },
+      "ot_dhw_setpoint": {
+        "name": "Zadana CWU"
       }
     },
     "select": {
@@ -235,6 +235,15 @@
       },
       "all_days_profile": {
         "name": "Strefa 1 — ten sam profil dla wszystkich dni"
+      },
+      "ot_mode": {
+        "name": "Tryb",
+        "state": {
+          "off": "Wył.",
+          "heating": "Ogrzewanie",
+          "water": "CWU",
+          "heating_water": "Ogrzewanie + CWU"
+        }
       }
     },
     "time": {

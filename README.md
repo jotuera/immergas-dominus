@@ -22,9 +22,9 @@ Dominus module over local TCP (default port `2000`) using the module MAC and pas
 > **Compatibility — two protocols.** Magis Combo / Pro (`*_MBUS_*` configs) use the
 > 7-byte **Modbus** protocol — fully supported. Boilers whose Dominus config has no
 > `modbus` flag — e.g. **VICTRIX ZEUS / AVIO**, STAR — use a 6-byte **OpenTherm**
-> protocol; since 0.4.0 there is an **experimental, read-only OpenTherm mode** (pick it
-> in the config flow). It is **not verified on real hardware** yet — feedback from a
-> VICTRIX owner welcome, see issue
+> protocol; since 0.4.0 there is an **experimental OpenTherm mode** (pick it in the config
+> flow). **Reading is verified on a VICTRIX ZEUS 25 ErP**; since 0.4.1 it also exposes
+> **experimental writes** (CH / DHW setpoint, mode) that still need confirmation. See issue
 > [#2](https://github.com/jotuera/immergas-dominus/issues/2).
 
 The interface is **English by default**, with a full **Polish** translation. The
@@ -88,6 +88,15 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 0.4.1
+
+- OpenTherm **read mode verified** on a VICTRIX ZEUS 25 ErP (flow / return / DHW /
+  outside temperature, DHW & max-CH setpoint, fault all correct).
+- **Experimental OpenTherm writes**: CH setpoint (Data-ID 1) and DHW setpoint
+  (Data-ID 56) as writable numbers, plus a **Mode** select (off / heating / DHW /
+  both). Writes still need confirmation on real hardware — please report on
+  [#2](https://github.com/jotuera/immergas-dominus/issues/2).
 
 ### 0.4.0
 

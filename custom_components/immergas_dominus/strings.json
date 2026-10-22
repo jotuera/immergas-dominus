@@ -77,12 +77,6 @@
       "ot_outside_temperature": {
         "name": "Outside temperature"
       },
-      "ot_control_setpoint": {
-        "name": "CH control setpoint"
-      },
-      "ot_dhw_setpoint": {
-        "name": "DHW setpoint"
-      },
       "ot_max_ch_setpoint": {
         "name": "Max CH setpoint"
       },
@@ -200,6 +194,12 @@
       },
       "flow_target_zone3": {
         "name": "Zone 3 flow target"
+      },
+      "ot_ch_setpoint": {
+        "name": "CH setpoint"
+      },
+      "ot_dhw_setpoint": {
+        "name": "DHW setpoint"
       }
     },
     "select": {
@@ -235,6 +235,15 @@
       },
       "all_days_profile": {
         "name": "Zone 1 — same profile for all days"
+      },
+      "ot_mode": {
+        "name": "Mode",
+        "state": {
+          "off": "Off",
+          "heating": "Heating",
+          "water": "DHW",
+          "heating_water": "Heating + DHW"
+        }
       }
     },
     "time": {

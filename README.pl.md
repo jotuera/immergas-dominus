@@ -19,11 +19,12 @@ modułem Dominus po lokalnym TCP (domyślny port `2000`), używając adresu MAC 
 > MPROCOMBOV2). Inne modele Immergas z tym samym modułem Dominus mogą działać, ale nie są
 > zweryfikowane.
 
-> **Kompatybilność — tylko konfiguracja Dominus w trybie Modbus.** Integracja mówi
-> 7-bajtowym protokołem Modbus-PDU, którego moduł Dominus używa dla configów `*_MBUS_*`
-> (Magis Combo / Pro). Kotły, których config Dominus nie ma flagi `modbus` — np.
-> **VICTRIX ZEUS / AVIO**, STAR — używają innego, 6-bajtowego protokołu typu OpenTherm i
-> **nie są wspierane** (AUTH echo wraca, ale odczyty PDU timeoutują). Zob. zgłoszenie
+> **Kompatybilność — dwa protokoły.** Magis Combo / Pro (configi `*_MBUS_*`) używają
+> 7-bajtowego protokołu **Modbus** — w pełni wspierane. Kotły, których config Dominus nie
+> ma flagi `modbus` — np. **VICTRIX ZEUS / AVIO**, STAR — używają 6-bajtowego protokołu
+> **OpenTherm**; od 0.4.0 jest **eksperymentalny tryb OpenTherm** (wybierany w config flow).
+> **Odczyt potwierdzony na VICTRIX ZEUS 25 ErP**; od 0.4.1 także **eksperymentalny zapis**
+> (nastawa CO / CWU, tryb) wymagający potwierdzenia. Zob. zgłoszenie
 > [#2](https://github.com/jotuera/immergas-dominus/issues/2).
 
 Interfejs jest **domyślnie po angielsku**, z pełnym tłumaczeniem **polskim** (oraz czeskim).
@@ -91,6 +92,22 @@ przyjmie sesję.
   sprawdzone krzyżowo, ale na innych modelach mogą wymagać weryfikacji przez TCP AUTH.
 
 ## Historia zmian
+
+### 0.4.1
+
+- OpenTherm **odczyt potwierdzony** na VICTRIX ZEUS 25 ErP (temp zasilania / powrotu /
+  CWU / zewn, zadana CWU i max CO, błąd — wszystko poprawne).
+- **Eksperymentalny zapis OpenTherm**: nastawa CO (Data-ID 1) i CWU (Data-ID 56) jako
+  zapisywalne `number`, plus select **Tryb** (wył. / ogrzewanie / CWU / oba). Zapis
+  wymaga potwierdzenia na sprzęcie — zgłaszaj na
+  [#2](https://github.com/jotuera/immergas-dominus/issues/2).
+
+### 0.4.0
+
+- **Eksperymentalny tryb OpenTherm** dla kotłów nie-Modbus (VICTRIX ZEUS / AVIO, STAR).
+  Wybór protokołu (Modbus / OpenTherm) w config flow; moduł Dominus tuneluje standardowe
+  ramki OpenTherm po tym samym kanale TCP/auth. Tryb **tylko do odczytu**: standardowe
+  Data-ID OpenTherm jako sensory + binarne flagi statusu (błąd, CO, CWU, płomień).
 
 ### 0.3.3
 

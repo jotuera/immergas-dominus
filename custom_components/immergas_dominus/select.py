@@ -10,8 +10,16 @@ from .const import (
     CHRONO_OPTION_TO_RAW,
     CHRONO_PROFILE_OPTIONS,
     CHRONO_RAW_TO_OPTION,
+    CONF_PROTOCOL,
+    DEVICE_MAIN,
     DEVICE_SCHEDULE,
     DOMAIN,
+    OT_MODE_OPTIONS,
+    OT_MODE_PDU,
+    OT_MODE_TO_STATUS,
+    OT_STATUS_CH_ACTIVE_MASK,
+    OT_STATUS_DHW_ACTIVE_MASK,
+    PROTOCOL_OPENTHERM,
     SELECT_DESCRIPTIONS,
     WEEKDAY_PROFILE_PDUS,
     DominusSelectEntityDescription,
@@ -27,6 +35,9 @@ async def async_setup_entry(
 ) -> None:
     """Set up selects."""
     coordinator: ImmergasDominusCoordinator = hass.data[DOMAIN][entry.entry_id]
+    if entry.data.get(CONF_PROTOCOL) == PROTOCOL_OPENTHERM:
+        async_add_entities([ImmergasOpenThermModeSelect(coordinator)])
+        return
     entities: list[SelectEntity] = [
         ImmergasDominusSelect(coordinator, description)
         for description in SELECT_DESCRIPTIONS
@@ -105,4 +116,41 @@ class ImmergasDominusAllDaysProfileSelect(ImmergasDominusEntity, SelectEntity):
         for pdu in WEEKDAY_PROFILE_PDUS:
             ack_value = await self.coordinator.client.async_write_pdu(pdu, raw_value)
             self.coordinator.set_local_value(pdu, ack_value)
+        await self.coordinator.async_request_refresh()
+
+
+class ImmergasOpenThermModeSelect(ImmergasDominusEntity, SelectEntity):
+    """Experimental boiler mode over OpenTherm (master status Data-ID 0 enable bits).
+
+    Writing Data-ID 0 as WRITE-DATA may not persist through the module's own status
+    loop; the shown state reflects the slave's current CH/DHW activity.
+    """
+
+    _attr_translation_key = "ot_mode"
+    _attr_icon = "mdi:hvac"
+    _attr_options = OT_MODE_OPTIONS
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_mode", OT_MODE_PDU, DEVICE_MAIN)
+
+    @property
+    def current_option(self) -> str | None:
+        raw = self.raw_value
+        if raw is None:
+            return None
+        lb = int(raw) & 0xFF
+        ch = bool(lb & OT_STATUS_CH_ACTIVE_MASK)
+        dhw = bool(lb & OT_STATUS_DHW_ACTIVE_MASK)
+        if ch and dhw:
+            return "heating_water"
+        if ch:
+            return "heating"
+        if dhw:
+            return "water"
+        return "off"
+
+    async def async_select_option(self, option: str) -> None:
+        status = OT_MODE_TO_STATUS[option]
+        ack = await self.coordinator.client.async_write_data_id(OT_MODE_PDU, status << 8)
+        self.coordinator.set_local_value(OT_MODE_PDU, ack)
         await self.coordinator.async_request_refresh()

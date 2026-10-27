@@ -93,6 +93,14 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 0.4.2
+
+- OpenTherm działa teraz na **trwałej sesji** — jedno uwierzytelnione połączenie z
+  tempowaną pętlą odpytywania i kolejką zapisu, jak apka Dominus. Naprawia
+  `connection reset by peer` przy **zapisie** w 0.4.1 (moduł odrzuca zapis na świeżym
+  połączeniu; wymaga żywej sesji). Zapis (nastawa CO / CWU, tryb) nadal
+  eksperymentalny, wymaga potwierdzenia na sprzęcie.
+
 ### 0.4.1
 
 - OpenTherm **odczyt potwierdzony** na VICTRIX ZEUS 25 ErP (temp zasilania / powrotu /

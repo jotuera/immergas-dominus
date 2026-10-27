@@ -141,9 +141,14 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Unload a config entry."""
+    coordinator = hass.data.get(DOMAIN, {}).get(entry.entry_id)
     unload_ok = await hass.config_entries.async_unload_platforms(
         entry, _platforms_for(entry)
     )
     if unload_ok:
-        hass.data[DOMAIN].pop(entry.entry_id)
+        hass.data[DOMAIN].pop(entry.entry_id, None)
+        # Stop the persistent OpenTherm session loop, if any.
+        client = getattr(coordinator, "client", None)
+        if entry.data.get(CONF_PROTOCOL) == PROTOCOL_OPENTHERM and hasattr(client, "stop"):
+            await hass.async_add_executor_job(client.stop)
     return unload_ok

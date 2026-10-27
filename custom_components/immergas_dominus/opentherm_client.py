@@ -10,14 +10,19 @@ The Dominus Wi-Fi module speaks two local protocols, chosen by the boiler's conf
   16-bit value) + a 2-byte Dominus CRC (CRC-16/CCITT 0x1021 / 0xFFFF, identical to
   the Modbus mode).
 
-This client is **read-only and experimental** — it issues OpenTherm READ-DATA
-requests only and has not been verified on real hardware yet.  The AUTH and CRC are
-reused from the Modbus client so the two modes stay byte-for-byte compatible.
+Unlike the Modbus mode, this client keeps **one persistent authenticated session**
+and runs a background loop that polls the registered Data-IDs continuously and sends
+writes on a priority queue inside that session.  The module resets a fresh connection
+on a WRITE-DATA frame (reads work on a fresh connection, writes do not), so the live
+session is required for writes — mirroring the official Dominus app.
+
+Experimental: verified for reads on a VICTRIX ZEUS 25; writes are still unconfirmed.
 """
 from __future__ import annotations
 
 import asyncio
 import logging
+import queue
 import socket
 import threading
 import time
@@ -32,15 +37,14 @@ from .dominus_client import (
 _LOGGER = logging.getLogger(__name__)
 
 # OpenTherm message types (bits 6-4 of byte 0).
-_OT_MSGTYPE_READ_DATA = 0b000
-_OT_MSGTYPE_WRITE_DATA = 0b001
 _OT_MSGTYPE_READ_ACK = 0b100
 _OT_MSGTYPE_WRITE_ACK = 0b101
 _OT_MSGTYPE_DATA_INVALID = 0b010
 _OT_MSGTYPE_UNKNOWN_DATAID = 0b011
 _OT_WRITE_TYPE_BIT = 0b001 << 4  # 0x10, WRITE-DATA in byte 0 bits 6-4
 
-_READ_GAP_SECONDS = 0.6
+_MESSAGE_GAP = 0.3       # seconds between messages in the session loop
+_WRITE_TIMEOUT = 12.0    # seconds to wait for a queued write to complete
 _TEST_DATA_IDS = (0, 25, 27)  # status, boiler flow temp, outside temp
 
 
@@ -59,70 +63,159 @@ def _even_parity_byte0(base0: int, data_id: int, hb: int, lb: int) -> int:
     return (base0 & 0x7F) | (0x80 if ones & 1 else 0x00)
 
 
+class _WriteRequest:
+    """A queued OpenTherm write, resolved by the session loop."""
+
+    __slots__ = ("data_id", "value", "event", "ack", "error")
+
+    def __init__(self, data_id: int, value: int) -> None:
+        self.data_id = data_id
+        self.value = value & 0xFFFF
+        self.event = threading.Event()
+        self.ack: int | None = None
+        self.error: Exception | None = None
+
+
 class DominusOpenThermClient:
-    """Async facade over the blocking OpenTherm-over-Dominus-TCP read client."""
+    """Persistent-session OpenTherm client over the Dominus TCP channel."""
 
     def __init__(self, config: DominusConfig) -> None:
         self._config = config
-        self._lock = threading.RLock()
+        self._lock = threading.RLock()          # guards _values / _poll_ids
+        self._values: dict[int, int] = {}
+        self._poll_ids: tuple[int, ...] = ()
+        self._write_queue: "queue.Queue[_WriteRequest]" = queue.Queue()
+        self._stop = threading.Event()
+        self._thread: threading.Thread | None = None
+        self._sock: socket.socket | None = None
+
+    # -- lifecycle -------------------------------------------------------------
+
+    def start(self) -> None:
+        if self._thread is not None and self._thread.is_alive():
+            return
+        self._stop.clear()
+        self._thread = threading.Thread(
+            target=self._run, name="dominus-opentherm", daemon=True
+        )
+        self._thread.start()
+
+    def stop(self) -> None:
+        self._stop.set()
+        self._close_socket()
+        thread = self._thread
+        if thread is not None:
+            thread.join(timeout=3.0)
+        self._thread = None
+        self._fail_pending_writes(DominusAuthError("OpenTherm session stopped"))
+
+    # -- coordinator / entity interface ---------------------------------------
 
     async def async_test_connection(self) -> None:
-        """Authenticate and read at least one known OpenTherm Data-ID."""
+        """One-shot connect + read to validate auth (no persistent loop)."""
         await asyncio.to_thread(self._test_connection_blocking)
 
     async def async_read_many(self, data_ids: tuple[int, ...]) -> dict[int, int]:
-        """Read several OpenTherm Data-IDs; returns raw 16-bit data values."""
-        return await asyncio.to_thread(self._read_many_blocking, data_ids)
+        """Return the current cache snapshot; the session loop does the polling."""
+        with self._lock:
+            self._poll_ids = tuple(data_ids)
+            snapshot = dict(self._values)
+        self.start()
+        # On the first cycle the cache is empty; give the freshly started session
+        # loop a few seconds to populate so entities don't stay unknown until the
+        # next coordinator interval.
+        waited = 0.0
+        while not snapshot and waited < 6.0:
+            await asyncio.sleep(0.25)
+            waited += 0.25
+            with self._lock:
+                snapshot = dict(self._values)
+        return snapshot
 
     async def async_write_data_id(self, data_id: int, value: int) -> int:
-        """Write a 16-bit value to an OpenTherm Data-ID; returns the ack value."""
-        return await asyncio.to_thread(self._write_data_id_blocking, data_id, value)
+        """Queue a write into the live session and wait for the ack."""
+        self.start()
+        request = _WriteRequest(data_id, value)
+        self._write_queue.put(request)
+        await asyncio.to_thread(request.event.wait, _WRITE_TIMEOUT)
+        if not request.event.is_set():
+            raise DominusAuthError(f"OpenTherm write to Data-ID {data_id} timed out")
+        if request.error is not None:
+            raise request.error
+        assert request.ack is not None
+        return request.ack
 
-    # -- blocking implementation ------------------------------------------------
+    # -- background session loop ----------------------------------------------
 
-    def _test_connection_blocking(self) -> None:
-        last_error: Exception | None = None
-        with self._lock:
-            for data_id in _TEST_DATA_IDS:
+    def _run(self) -> None:
+        pos = 0
+        backoff = 1.0
+        while not self._stop.is_set():
+            try:
+                if self._sock is None:
+                    self._sock = self._auth_connect()
+                    backoff = 1.0
+
+                request = self._next_write()
+                if request is not None:
+                    try:
+                        request.ack = self._exchange(
+                            self._build_write_frame(request.data_id, request.value),
+                            request.data_id,
+                            expect_write=True,
+                        )
+                        with self._lock:
+                            self._values[request.data_id] = request.ack
+                    except DominusOpenThermUnsupported as err:
+                        request.error = err
+                    finally:
+                        request.event.set()
+                    self._stop.wait(_MESSAGE_GAP)
+                    continue
+
+                with self._lock:
+                    ids = self._poll_ids
+                if not ids:
+                    self._stop.wait(0.3)
+                    continue
+                data_id = ids[pos % len(ids)]
+                pos += 1
                 try:
-                    self._read_data_id_blocking(data_id)
-                    return
-                except Exception as err:  # noqa: BLE001
-                    last_error = err
-        raise DominusAuthError(
-            "Failed to authenticate or read an OpenTherm Data-ID"
-        ) from last_error
-
-    def _read_many_blocking(self, data_ids: tuple[int, ...]) -> dict[int, int]:
-        values: dict[int, int] = {}
-        last_error: Exception | None = None
-        with self._lock:
-            for index, data_id in enumerate(data_ids):
-                try:
-                    values[data_id] = self._read_data_id_blocking(data_id)
+                    value = self._exchange(self._build_read_frame(data_id), data_id)
+                    with self._lock:
+                        self._values[data_id] = value
                 except DominusOpenThermUnsupported:
-                    _LOGGER.debug("OpenTherm Data-ID %s not supported by boiler", data_id)
-                except Exception as err:  # noqa: BLE001
-                    last_error = err
-                    _LOGGER.debug("OpenTherm read failed for Data-ID %s: %s", data_id, err)
-                if index + 1 < len(data_ids):
-                    time.sleep(_READ_GAP_SECONDS)
-        if not values:
-            raise DominusAuthError("Failed to read any OpenTherm Data-ID") from last_error
-        return values
+                    pass  # boiler doesn't support this Data-ID; keep polling others
+                self._stop.wait(_MESSAGE_GAP)
+            except (OSError, DominusProtocolError, DominusAuthError) as err:
+                _LOGGER.debug("OpenTherm session error, reconnecting: %s", err)
+                self._close_socket()
+                self._fail_pending_writes(err)
+                self._stop.wait(backoff)
+                backoff = min(backoff * 2.0, 20.0)
 
-    def _read_data_id_blocking(self, data_id: int) -> int:
-        with self._auth_connect() as sock:
-            frame = self._build_read_frame(data_id)
-            sock.sendall(frame)
-            return self._recv_reply_for_id(sock, data_id)
+    def _next_write(self) -> _WriteRequest | None:
+        try:
+            return self._write_queue.get_nowait()
+        except queue.Empty:
+            return None
 
-    def _write_data_id_blocking(self, data_id: int, value: int) -> int:
-        with self._lock:
-            with self._auth_connect() as sock:
-                frame = self._build_write_frame(data_id, value)
-                sock.sendall(frame)
-                return self._recv_reply_for_id(sock, data_id, expect_write=True)
+    def _fail_pending_writes(self, error: Exception) -> None:
+        while True:
+            try:
+                request = self._write_queue.get_nowait()
+            except queue.Empty:
+                return
+            request.error = error
+            request.event.set()
+
+    def _exchange(self, frame: bytes, expected_id: int, expect_write: bool = False) -> int:
+        """Send a frame on the live socket and return the decoded reply value."""
+        sock = self._sock
+        if sock is None:
+            raise DominusAuthError("OpenTherm socket not connected")
+        sock.sendall(frame)
+        return self._recv_reply(sock, expected_id, expect_write)
 
     # -- framing ---------------------------------------------------------------
 
@@ -159,10 +252,10 @@ class DominusOpenThermClient:
             raise DominusProtocolError(f"Unexpected OpenTherm msg-type {msg_type}")
         return (reply[2] << 8) | reply[3]
 
-    def _recv_reply_for_id(
+    def _recv_reply(
         self, sock: socket.socket, expected_id: int, expect_write: bool = False
     ) -> int:
-        deadline = time.monotonic() + float(sock.gettimeout() or 2.0)
+        deadline = time.monotonic() + float(self._config.timeout or 2.0)
         buffer = bytearray()
         last_error: Exception | None = None
         while time.monotonic() < deadline:
@@ -182,26 +275,43 @@ class DominusOpenThermClient:
                 chunk = sock.recv(256)
             except socket.timeout:
                 break
-            except OSError as err:
-                raise DominusAuthError("OpenTherm TCP RX error") from err
             finally:
                 try:
                     sock.settimeout(old_timeout)
                 except OSError:
                     pass
             if not chunk:
-                break
+                raise DominusAuthError("OpenTherm connection closed")
             buffer.extend(chunk)
             if len(buffer) > 512:
                 del buffer[:-64]
         if buffer:
             raise DominusProtocolError("No valid OpenTherm reply found") from last_error
-        raise DominusAuthError("OpenTherm TCP RX timeout")
+        raise DominusProtocolError("OpenTherm RX timeout")
 
-    # -- connection (mirrors the Modbus client's authenticated connect) --------
+    # -- connection ------------------------------------------------------------
+
+    def _test_connection_blocking(self) -> None:
+        last_error: Exception | None = None
+        sock = self._auth_connect()
+        try:
+            for data_id in _TEST_DATA_IDS:
+                try:
+                    sock.sendall(self._build_read_frame(data_id))
+                    self._recv_reply(sock, data_id)
+                    return
+                except DominusOpenThermUnsupported:
+                    return  # boiler answered (just not this Data-ID) → auth works
+                except Exception as err:  # noqa: BLE001
+                    last_error = err
+        finally:
+            try:
+                sock.close()
+            except OSError:
+                pass
+        raise DominusAuthError("Failed to authenticate or read an OpenTherm Data-ID") from last_error
 
     def _auth_connect(self) -> socket.socket:
-        # Warm-up connect/close, like the Modbus client, to wake flaky modules.
         if self._config.warmup_connect:
             try:
                 warm = socket.create_connection(
@@ -232,6 +342,14 @@ class DominusOpenThermClient:
             except OSError:
                 pass
             raise
+
+    def _close_socket(self) -> None:
+        sock, self._sock = self._sock, None
+        if sock is not None:
+            try:
+                sock.close()
+            except OSError:
+                pass
 
     @staticmethod
     def _drain_post_auth(sock: socket.socket) -> None:

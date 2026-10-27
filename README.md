@@ -89,6 +89,14 @@ the module accepts the session.
 
 ## Changelog
 
+### 0.4.2
+
+- OpenTherm now runs a **persistent session** — one authenticated connection with a
+  paced polling loop and a write queue, matching the Dominus app. Fixes the
+  `connection reset by peer` that OpenTherm **writes** hit in 0.4.1 (the module
+  rejects a write on a fresh connection; it needs the live session). Writes
+  (CH / DHW setpoint, mode) are still experimental and need confirmation on hardware.
+
 ### 0.4.1
 
 - OpenTherm **read mode verified** on a VICTRIX ZEUS 25 ErP (flow / return / DHW /

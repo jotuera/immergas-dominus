@@ -15,9 +15,13 @@ Integracja niestandardowa Home Assistant do **lokalnego** sterowania kotłem Imm
 moduł Wi-Fi **Dominus** — bez chmury, bez MQTT. Home Assistant łączy się bezpośrednio z
 modułem Dominus po lokalnym TCP (domyślny port `2000`), używając adresu MAC i hasła modułu.
 
-> **Przetestowane na Immergas Magis Combo i Magis Pro** (konfiguracja Magis PRO COMBO V2,
-> MPROCOMBOV2). Inne modele Immergas z tym samym modułem Dominus mogą działać, ale nie są
-> zweryfikowane.
+> **Przetestowane na Immergas Magis Combo, Magis Pro i Trio Hydro Hybrid 8** (konfiguracja
+> Dominus `MPROCOMBOV2`).
+>
+> **Ta sama konfiguracja → powinny działać** (identyczna mapa rejestrów, wg `CFGS` apki
+> Dominus): Magis Pro-Combo V2, Magis Hercules Pro, Magis Hercules Pro Mini, Magis Hercules
+> Mini Hydro, Trio Pack, Trio Hydro. Inne kotły Immergas używają innych configów (np.
+> TRIO `MBUS`, SUPERIOR `SCP01`, MAIOR/EXTRA `HDBC65`) i **nie** są pokryte tą mapą.
 
 > **Kompatybilność — dwa protokoły.** Magis Combo / Pro (configi `*_MBUS_*`) używają
 > 7-bajtowego protokołu **Modbus** — w pełni wspierane. Kotły, których config Dominus nie

@@ -15,9 +15,14 @@ Home Assistant custom integration for **local** control of an Immergas boiler th
 the **Dominus** Wi-Fi module — no cloud, no MQTT. Home Assistant talks directly to the
 Dominus module over local TCP (default port `2000`) using the module MAC and password.
 
-> **Tested on Immergas Magis Combo and Magis Pro** (Magis PRO COMBO V2, MPROCOMBOV2
-> configuration). Other Immergas models that use the same Dominus module may work, but
-> are not verified.
+> **Tested on Immergas Magis Combo, Magis Pro and Trio Hydro Hybrid 8** (the
+> `MPROCOMBOV2` Dominus configuration).
+>
+> **Same configuration → expected to work** (identical register map, per the Dominus app
+> `CFGS`): Magis Pro-Combo V2, Magis Hercules Pro, Magis Hercules Pro Mini, Magis Hercules
+> Mini Hydro, Trio Pack, Trio Hydro. Other Immergas boilers use different configs (e.g.
+> TRIO `MBUS`, SUPERIOR `SCP01`, MAIOR/EXTRA `HDBC65`) and are **not** covered by this
+> register map.
 
 > **Compatibility — two protocols.** Magis Combo / Pro (`*_MBUS_*` configs) use the
 > 7-byte **Modbus** protocol — fully supported. Boilers whose Dominus config has no

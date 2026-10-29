@@ -16,12 +16,7 @@ moduł Wi-Fi **Dominus** — bez chmury, bez MQTT. Home Assistant łączy się b
 modułem Dominus po lokalnym TCP (domyślny port `2000`), używając adresu MAC i hasła modułu.
 
 > **Przetestowane na Immergas Magis Combo, Magis Pro i Trio Hydro Hybrid 8** (konfiguracja
-> Dominus `MPROCOMBOV2`).
->
-> **Ta sama konfiguracja → powinny działać** (identyczna mapa rejestrów, wg `CFGS` apki
-> Dominus): Magis Pro-Combo V2, Magis Hercules Pro, Magis Hercules Pro Mini, Magis Hercules
-> Mini Hydro, Trio Pack, Trio Hydro. Inne kotły Immergas używają innych configów (np.
-> TRIO `MBUS`, SUPERIOR `SCP01`, MAIOR/EXTRA `HDBC65`) i **nie** są pokryte tą mapą.
+> Dominus `MPROCOMBOV2`). Pełna lista w sekcji [Obsługiwane modele](#obsługiwane-modele).
 
 > **Kompatybilność — dwa protokoły.** Magis Combo / Pro (configi `*_MBUS_*`) używają
 > 7-bajtowego protokołu **Modbus** — w pełni wspierane. Kotły, których config Dominus nie
@@ -68,6 +63,38 @@ Assistant (pole *Oprogramowanie*, np. `0.3.3 — JoTu`).
   `24:00` pokazywane jako `23:59`).
 - Przypisanie profilu do dnia tygodnia dla Strefy 1/2/3 oraz CWU (`2410`–`2496`), plus
   skrót **Ustaw ten sam profil dla wszystkich dni**.
+
+## Obsługiwane modele
+
+Wszystkie kotły, których moduł Dominus używa konfiguracji **`WFC01_IM_MBUS_MPROCOMBOV2`**,
+mają tę samą mapę rejestrów i działają tak samo.
+
+**Przetestowane — potwierdzone, że działają:**
+
+- Magis Combo / Magis Pro-Combo V2
+- Magis Pro
+- Trio Hydro Hybrid 8 — zgłoszone przez @FrancescoC87 ([#3](https://github.com/jotuera/immergas-dominus/issues/3))
+
+**Ta sama konfiguracja — powinny działać** (nietestowane pojedynczo; wg `CFGS` apki Dominus):
+
+- Magis Hercules Pro
+- Magis Hercules Pro Mini
+- Magis Hercules Mini Hydro
+- Trio Pack
+- Trio Hydro
+
+(Warianty `MPROCOMBOV2_8N2` = Magis Hercules i `MPROCOMBOV2_SYS` = gestore di sistema mają
+tę samą mapę z drobną różnicą transmisji/adresowania.)
+
+**Nie pokryte — inna konfiguracja Dominus / mapa rejestrów:**
+
+- **VICTRIX ZEUS / AVIO**, STAR — protokół **OpenTherm** (zob. eksperymentalny tryb
+  OpenTherm wyżej, [#2](https://github.com/jotuera/immergas-dominus/issues/2)).
+- **TRIO** (`MBUS`), **SUPERIOR** (`SCP01`), **MAIOR / EXTRA** (`HDBC65`) — inne
+  konfiguracje Modbus z własnymi mapami rejestrów.
+
+Jeśli Twój kocioł używa configu `MPROCOMBOV2`, a nie ma go na liście, prawie na pewno
+zadziała — otwórz zgłoszenie, żeby potwierdzić.
 
 ## Instalacja
 

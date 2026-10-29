@@ -15,14 +15,8 @@ Home Assistant custom integration for **local** control of an Immergas boiler th
 the **Dominus** Wi-Fi module — no cloud, no MQTT. Home Assistant talks directly to the
 Dominus module over local TCP (default port `2000`) using the module MAC and password.
 
-> **Tested on Immergas Magis Combo, Magis Pro and Trio Hydro Hybrid 8** (the
-> `MPROCOMBOV2` Dominus configuration).
->
-> **Same configuration → expected to work** (identical register map, per the Dominus app
-> `CFGS`): Magis Pro-Combo V2, Magis Hercules Pro, Magis Hercules Pro Mini, Magis Hercules
-> Mini Hydro, Trio Pack, Trio Hydro. Other Immergas boilers use different configs (e.g.
-> TRIO `MBUS`, SUPERIOR `SCP01`, MAIOR/EXTRA `HDBC65`) and are **not** covered by this
-> register map.
+> **Tested on Immergas Magis Combo, Magis Pro and Trio Hydro Hybrid 8** (the `MPROCOMBOV2`
+> Dominus configuration). See [Supported models](#supported-models) for the full list.
 
 > **Compatibility — two protocols.** Magis Combo / Pro (`*_MBUS_*` configs) use the
 > 7-byte **Modbus** protocol — fully supported. Boilers whose Dominus config has no
@@ -65,6 +59,38 @@ Assistant (the *Firmware* field, e.g. `0.3.0 — JoTu`).
   (`2310`–`2347`, high byte = hour, low byte = minute; `24:00` shown as `23:59`).
 - Weekday → profile assignment for Zone 1 (`2410`–`2416`), plus a
   **Set the same profile for all days** shortcut.
+
+## Supported models
+
+All boilers whose Dominus module uses the **`WFC01_IM_MBUS_MPROCOMBOV2`** configuration
+share the same register map and behave the same way.
+
+**Tested — confirmed working:**
+
+- Magis Combo / Magis Pro-Combo V2
+- Magis Pro
+- Trio Hydro Hybrid 8 — reported by @FrancescoC87 ([#3](https://github.com/jotuera/immergas-dominus/issues/3))
+
+**Same configuration — expected to work** (not individually tested; per the Dominus app `CFGS`):
+
+- Magis Hercules Pro
+- Magis Hercules Pro Mini
+- Magis Hercules Mini Hydro
+- Trio Pack
+- Trio Hydro
+
+(The `MPROCOMBOV2_8N2` = Magis Hercules and `MPROCOMBOV2_SYS` = system manager variants
+share the map with a serial/addressing tweak.)
+
+**Not covered — different Dominus configuration / register map:**
+
+- **VICTRIX ZEUS / AVIO**, STAR — use the **OpenTherm** protocol (see the experimental
+  OpenTherm mode above, [#2](https://github.com/jotuera/immergas-dominus/issues/2)).
+- **TRIO** (`MBUS`), **SUPERIOR** (`SCP01`), **MAIOR / EXTRA** (`HDBC65`) — other Modbus
+  configurations with their own register maps.
+
+If your boiler uses the `MPROCOMBOV2` config but isn't listed, it will very likely work —
+please open an issue to confirm it.
 
 ## Installation
 

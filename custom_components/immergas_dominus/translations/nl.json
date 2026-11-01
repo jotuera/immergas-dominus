@@ -1,0 +1,304 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Verbinden met Immergas Dominus",
+        "description": "Voer de lokale TCP-verbindingsgegevens van je Dominus-module in. De integratie gebruikt alleen lokale TCP en maakt geen verbinding met de Immergas-cloud.",
+        "data": {
+          "host": "Host of IP-adres",
+          "port": "TCP-poort",
+          "mac": "Dominus MAC-adres",
+          "password": "Dominus-wachtwoord",
+          "protocol": "Protocol"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Kan niet verbinden of authenticeren met Dominus.",
+      "unknown": "Onverwachte fout.",
+      "invalid_mac": "Ongeldig Dominus MAC-adres."
+    },
+    "abort": {
+      "already_configured": "Deze Dominus-module is al geconfigureerd."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "room_temperature": {
+        "name": "Zone 1 kamertemperatuur"
+      },
+      "outdoor_temperature": {
+        "name": "Buitentemperatuur"
+      },
+      "fault_code": {
+        "name": "Ketelstoringscode"
+      },
+      "fault_description": {
+        "name": "Ketelstoringsomschrijving"
+      },
+      "dhw_tank_temperature": {
+        "name": "SWW-boilertemperatuur"
+      },
+      "room_temperature_zone2": {
+        "name": "Zone 2 kamertemperatuur"
+      },
+      "room_temperature_zone3": {
+        "name": "Zone 3 kamertemperatuur"
+      },
+      "zone_status": {
+        "name": "Zone 1 status"
+      },
+      "number_of_zones": {
+        "name": "Aantal zones"
+      },
+      "program_phase": {
+        "name": "Zone 1 programmafase",
+        "state": {
+          "manual": "Handmatig",
+          "comfort": "Comfort",
+          "economy": "Spaarstand"
+        }
+      },
+      "zone_status_zone2": {
+        "name": "Zone 2 status"
+      },
+      "zone_status_zone3": {
+        "name": "Zone 3 status"
+      },
+      "ot_flow_temperature": {
+        "name": "Aanvoertemperatuur"
+      },
+      "ot_return_temperature": {
+        "name": "Retourtemperatuur"
+      },
+      "ot_dhw_temperature": {
+        "name": "SWW-temperatuur"
+      },
+      "ot_outside_temperature": {
+        "name": "Buitentemperatuur"
+      },
+      "ot_max_ch_setpoint": {
+        "name": "Max. CV-instelwaarde"
+      },
+      "ot_modulation_level": {
+        "name": "Modulatieniveau"
+      },
+      "ot_ch_water_pressure": {
+        "name": "CV-waterdruk"
+      },
+      "ot_dhw_flow_rate": {
+        "name": "SWW-debiet"
+      },
+      "ot_fault_code": {
+        "name": "Storingscode"
+      },
+      "dhw_phase": {
+        "name": "SWW-fase",
+        "state": {
+          "comfort": "Comfort",
+          "economy": "Spaarstand"
+        }
+      },
+      "last_successful_read": {
+        "name": "Laatste geslaagde uitlezing"
+      },
+      "failed_polls": {
+        "name": "Mislukte uitlezingen"
+      }
+    },
+    "binary_sensor": {
+      "fault_active": {
+        "name": "Ketelstoring"
+      },
+      "reset_available": {
+        "name": "Reset beschikbaar"
+      },
+      "dhw_request": {
+        "name": "SWW-verzoek"
+      },
+      "heating_demand": {
+        "name": "Zone 1 warmtevraag"
+      },
+      "ot_fault": {
+        "name": "Storing"
+      },
+      "ot_ch_active": {
+        "name": "Centrale verwarming"
+      },
+      "ot_dhw_active": {
+        "name": "Sanitair warm water"
+      },
+      "ot_flame": {
+        "name": "Vlam"
+      }
+    },
+    "number": {
+      "heating_target": {
+        "name": "Zone 1 CV-instelwaarde"
+      },
+      "heating_curve_offset": {
+        "name": "Zone 1 stooklijn-offset"
+      },
+      "dhw_target": {
+        "name": "SWW-instelwaarde"
+      },
+      "comfort_heat": {
+        "name": "Zone 1 comfort verwarmen"
+      },
+      "eco_heat": {
+        "name": "Zone 1 eco verwarmen"
+      },
+      "comfort_cool": {
+        "name": "Zone 1 comfort koelen"
+      },
+      "eco_cool": {
+        "name": "Zone 1 eco koelen"
+      },
+      "humidity_target": {
+        "name": "Zone 1 vochtigheidsinstelwaarde"
+      },
+      "flow_target": {
+        "name": "Zone 1 aanvoerinstelwaarde"
+      },
+      "heating_target_zone2": {
+        "name": "Zone 2 CV-instelwaarde"
+      },
+      "heating_curve_offset_zone2": {
+        "name": "Zone 2 stooklijn-offset"
+      },
+      "comfort_heat_zone2": {
+        "name": "Zone 2 comfort verwarmen"
+      },
+      "eco_heat_zone2": {
+        "name": "Zone 2 eco verwarmen"
+      },
+      "comfort_cool_zone2": {
+        "name": "Zone 2 comfort koelen"
+      },
+      "eco_cool_zone2": {
+        "name": "Zone 2 eco koelen"
+      },
+      "humidity_target_zone2": {
+        "name": "Zone 2 vochtigheidsinstelwaarde"
+      },
+      "flow_target_zone2": {
+        "name": "Zone 2 aanvoerinstelwaarde"
+      },
+      "heating_target_zone3": {
+        "name": "Zone 3 CV-instelwaarde"
+      },
+      "heating_curve_offset_zone3": {
+        "name": "Zone 3 stooklijn-offset"
+      },
+      "comfort_heat_zone3": {
+        "name": "Zone 3 comfort verwarmen"
+      },
+      "eco_heat_zone3": {
+        "name": "Zone 3 eco verwarmen"
+      },
+      "comfort_cool_zone3": {
+        "name": "Zone 3 comfort koelen"
+      },
+      "eco_cool_zone3": {
+        "name": "Zone 3 eco koelen"
+      },
+      "humidity_target_zone3": {
+        "name": "Zone 3 vochtigheidsinstelwaarde"
+      },
+      "flow_target_zone3": {
+        "name": "Zone 3 aanvoerinstelwaarde"
+      },
+      "ot_ch_setpoint": {
+        "name": "CV-instelwaarde"
+      },
+      "ot_dhw_setpoint": {
+        "name": "SWW-instelwaarde"
+      },
+      "dhw_comfort": {
+        "name": "SWW-instelwaarde Comfort"
+      },
+      "dhw_eco": {
+        "name": "SWW-instelwaarde Eco"
+      }
+    },
+    "select": {
+      "operation_mode": {
+        "name": "Bedrijfsmodus",
+        "state": {
+          "standby": "Stand-by",
+          "summer": "Zomer",
+          "cooling": "Koelen",
+          "winter": "Winter"
+        }
+      },
+      "weekday_1_profile": {
+        "name": "{target} — maandag"
+      },
+      "weekday_2_profile": {
+        "name": "{target} — dinsdag"
+      },
+      "weekday_3_profile": {
+        "name": "{target} — woensdag"
+      },
+      "weekday_4_profile": {
+        "name": "{target} — donderdag"
+      },
+      "weekday_5_profile": {
+        "name": "{target} — vrijdag"
+      },
+      "weekday_6_profile": {
+        "name": "{target} — zaterdag"
+      },
+      "weekday_7_profile": {
+        "name": "{target} — zondag"
+      },
+      "all_days_profile": {
+        "name": "Zone 1 — zelfde profiel voor alle dagen"
+      },
+      "ot_mode": {
+        "name": "Modus",
+        "state": {
+          "off": "Uit",
+          "heating": "Verwarming",
+          "water": "SWW",
+          "heating_water": "Verwarming + SWW"
+        }
+      }
+    },
+    "time": {
+      "fascia_start": {
+        "name": "Profiel {profile} periode {fascia} start"
+      },
+      "fascia_end": {
+        "name": "Profiel {profile} periode {fascia} einde"
+      }
+    },
+    "climate": {
+      "heating_thermostat": {
+        "name": "Zone 1 thermostaat"
+      },
+      "dhw_thermostat": {
+        "name": "SWW"
+      },
+      "heating_thermostat_zone2": {
+        "name": "Zone 2 thermostaat"
+      },
+      "heating_thermostat_zone3": {
+        "name": "Zone 3 thermostaat"
+      }
+    },
+    "switch": {
+      "dhw_comfort_eco": {
+        "name": "SWW Comfort-Eco volgens programma"
+      }
+    }
+  },
+  "selector": {
+    "protocol": {
+      "options": {
+        "modbus": "Modbus (Magis Combo / Pro)",
+        "opentherm": "OpenTherm (VICTRIX, experimenteel)"
+      }
+    }
+  }
+}

@@ -1,0 +1,304 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Połącz z Immergas Dominus",
+        "description": "Podaj lokalne dane połączenia TCP do modułu Dominus. Integracja używa wyłącznie lokalnego TCP i nie łączy się z chmurą Immergas.",
+        "data": {
+          "host": "Host lub adres IP",
+          "port": "Port TCP",
+          "mac": "Adres MAC Dominusa",
+          "password": "Hasło Dominus",
+          "protocol": "Protokół"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Nie można połączyć się lub uwierzytelnić z Dominusem.",
+      "unknown": "Nieoczekiwany błąd.",
+      "invalid_mac": "Nieprawidłowy adres MAC Dominusa."
+    },
+    "abort": {
+      "already_configured": "Ten moduł Dominus jest już skonfigurowany."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "room_temperature": {
+        "name": "Strefa 1 temperatura pokojowa"
+      },
+      "outdoor_temperature": {
+        "name": "Temperatura zewnętrzna"
+      },
+      "fault_code": {
+        "name": "Kod błędu kotła"
+      },
+      "fault_description": {
+        "name": "Opis błędu kotła"
+      },
+      "dhw_tank_temperature": {
+        "name": "Temperatura zasobnika CWU"
+      },
+      "room_temperature_zone2": {
+        "name": "Strefa 2 temperatura pokojowa"
+      },
+      "room_temperature_zone3": {
+        "name": "Strefa 3 temperatura pokojowa"
+      },
+      "zone_status": {
+        "name": "Strefa 1 status"
+      },
+      "number_of_zones": {
+        "name": "Liczba stref"
+      },
+      "program_phase": {
+        "name": "Strefa 1 faza programu",
+        "state": {
+          "manual": "Ręczny",
+          "comfort": "Komfort",
+          "economy": "Eko"
+        }
+      },
+      "zone_status_zone2": {
+        "name": "Strefa 2 status"
+      },
+      "zone_status_zone3": {
+        "name": "Strefa 3 status"
+      },
+      "ot_flow_temperature": {
+        "name": "Temperatura zasilania"
+      },
+      "ot_return_temperature": {
+        "name": "Temperatura powrotu"
+      },
+      "ot_dhw_temperature": {
+        "name": "Temperatura CWU"
+      },
+      "ot_outside_temperature": {
+        "name": "Temperatura zewnętrzna"
+      },
+      "ot_max_ch_setpoint": {
+        "name": "Maks. zadana CO"
+      },
+      "ot_modulation_level": {
+        "name": "Poziom modulacji"
+      },
+      "ot_ch_water_pressure": {
+        "name": "Ciśnienie wody CO"
+      },
+      "ot_dhw_flow_rate": {
+        "name": "Przepływ CWU"
+      },
+      "ot_fault_code": {
+        "name": "Kod błędu"
+      },
+      "dhw_phase": {
+        "name": "Faza CWU",
+        "state": {
+          "comfort": "Komfort",
+          "economy": "Eko"
+        }
+      },
+      "last_successful_read": {
+        "name": "Ostatni udany odczyt"
+      },
+      "failed_polls": {
+        "name": "Nieudane odpytania"
+      }
+    },
+    "binary_sensor": {
+      "fault_active": {
+        "name": "Błąd kotła"
+      },
+      "reset_available": {
+        "name": "Reset dostępny"
+      },
+      "dhw_request": {
+        "name": "Żądanie CWU"
+      },
+      "heating_demand": {
+        "name": "Strefa 1 żądanie grzania"
+      },
+      "ot_fault": {
+        "name": "Błąd"
+      },
+      "ot_ch_active": {
+        "name": "Ogrzewanie CO"
+      },
+      "ot_dhw_active": {
+        "name": "CWU"
+      },
+      "ot_flame": {
+        "name": "Płomień"
+      }
+    },
+    "number": {
+      "heating_target": {
+        "name": "Strefa 1 zadana ogrzewania"
+      },
+      "heating_curve_offset": {
+        "name": "Strefa 1 offset krzywej grzewczej"
+      },
+      "dhw_target": {
+        "name": "Zadana CWU"
+      },
+      "comfort_heat": {
+        "name": "Strefa 1 komfort grzanie"
+      },
+      "eco_heat": {
+        "name": "Strefa 1 eco grzanie"
+      },
+      "comfort_cool": {
+        "name": "Strefa 1 komfort chłodzenie"
+      },
+      "eco_cool": {
+        "name": "Strefa 1 eco chłodzenie"
+      },
+      "humidity_target": {
+        "name": "Strefa 1 zadana wilgotności"
+      },
+      "flow_target": {
+        "name": "Strefa 1 zadana zasilania"
+      },
+      "heating_target_zone2": {
+        "name": "Strefa 2 zadana ogrzewania"
+      },
+      "heating_curve_offset_zone2": {
+        "name": "Strefa 2 offset krzywej grzewczej"
+      },
+      "comfort_heat_zone2": {
+        "name": "Strefa 2 komfort grzanie"
+      },
+      "eco_heat_zone2": {
+        "name": "Strefa 2 eco grzanie"
+      },
+      "comfort_cool_zone2": {
+        "name": "Strefa 2 komfort chłodzenie"
+      },
+      "eco_cool_zone2": {
+        "name": "Strefa 2 eco chłodzenie"
+      },
+      "humidity_target_zone2": {
+        "name": "Strefa 2 zadana wilgotności"
+      },
+      "flow_target_zone2": {
+        "name": "Strefa 2 zadana zasilania"
+      },
+      "heating_target_zone3": {
+        "name": "Strefa 3 zadana ogrzewania"
+      },
+      "heating_curve_offset_zone3": {
+        "name": "Strefa 3 offset krzywej grzewczej"
+      },
+      "comfort_heat_zone3": {
+        "name": "Strefa 3 komfort grzanie"
+      },
+      "eco_heat_zone3": {
+        "name": "Strefa 3 eco grzanie"
+      },
+      "comfort_cool_zone3": {
+        "name": "Strefa 3 komfort chłodzenie"
+      },
+      "eco_cool_zone3": {
+        "name": "Strefa 3 eco chłodzenie"
+      },
+      "humidity_target_zone3": {
+        "name": "Strefa 3 zadana wilgotności"
+      },
+      "flow_target_zone3": {
+        "name": "Strefa 3 zadana zasilania"
+      },
+      "ot_ch_setpoint": {
+        "name": "Zadana CO"
+      },
+      "ot_dhw_setpoint": {
+        "name": "Zadana CWU"
+      },
+      "dhw_comfort": {
+        "name": "Zadana CWU Komfort"
+      },
+      "dhw_eco": {
+        "name": "Zadana CWU Eko"
+      }
+    },
+    "select": {
+      "operation_mode": {
+        "name": "Tryb pracy",
+        "state": {
+          "standby": "Standby",
+          "summer": "Lato",
+          "cooling": "Chłodzenie",
+          "winter": "Zima"
+        }
+      },
+      "weekday_1_profile": {
+        "name": "{target} — Poniedziałek"
+      },
+      "weekday_2_profile": {
+        "name": "{target} — Wtorek"
+      },
+      "weekday_3_profile": {
+        "name": "{target} — Środa"
+      },
+      "weekday_4_profile": {
+        "name": "{target} — Czwartek"
+      },
+      "weekday_5_profile": {
+        "name": "{target} — Piątek"
+      },
+      "weekday_6_profile": {
+        "name": "{target} — Sobota"
+      },
+      "weekday_7_profile": {
+        "name": "{target} — Niedziela"
+      },
+      "all_days_profile": {
+        "name": "Strefa 1 — ten sam profil dla wszystkich dni"
+      },
+      "ot_mode": {
+        "name": "Tryb",
+        "state": {
+          "off": "Wył.",
+          "heating": "Ogrzewanie",
+          "water": "CWU",
+          "heating_water": "Ogrzewanie + CWU"
+        }
+      }
+    },
+    "time": {
+      "fascia_start": {
+        "name": "Profil {profile} przedział {fascia} — początek"
+      },
+      "fascia_end": {
+        "name": "Profil {profile} przedział {fascia} — koniec"
+      }
+    },
+    "climate": {
+      "heating_thermostat": {
+        "name": "Strefa 1 termostat"
+      },
+      "dhw_thermostat": {
+        "name": "Termostat CWU"
+      },
+      "heating_thermostat_zone2": {
+        "name": "Strefa 2 termostat"
+      },
+      "heating_thermostat_zone3": {
+        "name": "Strefa 3 termostat"
+      }
+    },
+    "switch": {
+      "dhw_comfort_eco": {
+        "name": "CWU Komfort-Eko wg harmonogramu"
+      }
+    }
+  },
+  "selector": {
+    "protocol": {
+      "options": {
+        "modbus": "Modbus (Magis Combo / Pro)",
+        "opentherm": "OpenTherm (VICTRIX, eksperymentalny)"
+      }
+    }
+  }
+}

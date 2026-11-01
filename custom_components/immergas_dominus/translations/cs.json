@@ -1,0 +1,304 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Připojit k Immergas Dominus",
+        "description": "Zadejte údaje pro místní TCP připojení k vašemu modulu Dominus. Integrace používá pouze místní TCP a nepřipojuje se ke cloudu Immergas.",
+        "data": {
+          "host": "Hostitel nebo IP adresa",
+          "port": "TCP port",
+          "mac": "MAC adresa Dominusu",
+          "password": "Heslo Dominusu",
+          "protocol": "Protokol"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Nelze se připojit nebo ověřit u modulu Dominus.",
+      "unknown": "Neočekávaná chyba.",
+      "invalid_mac": "Neplatná MAC adresa Dominusu."
+    },
+    "abort": {
+      "already_configured": "Tento modul Dominus je již nakonfigurován."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "room_temperature": {
+        "name": "Pokojová teplota zóny 1"
+      },
+      "outdoor_temperature": {
+        "name": "Venkovní teplota"
+      },
+      "fault_code": {
+        "name": "Chybový kód kotle"
+      },
+      "fault_description": {
+        "name": "Popis chyby kotle"
+      },
+      "dhw_tank_temperature": {
+        "name": "Teplota zásobníku TUV"
+      },
+      "room_temperature_zone2": {
+        "name": "Pokojová teplota zóny 2"
+      },
+      "room_temperature_zone3": {
+        "name": "Pokojová teplota zóny 3"
+      },
+      "zone_status": {
+        "name": "Stav zóny 1"
+      },
+      "number_of_zones": {
+        "name": "Počet zón"
+      },
+      "program_phase": {
+        "name": "Fáze programu zóny 1",
+        "state": {
+          "manual": "Ruční",
+          "comfort": "Komfort",
+          "economy": "Útlum"
+        }
+      },
+      "zone_status_zone2": {
+        "name": "Stav zóny 2"
+      },
+      "zone_status_zone3": {
+        "name": "Stav zóny 3"
+      },
+      "ot_flow_temperature": {
+        "name": "Výstupní teplota"
+      },
+      "ot_return_temperature": {
+        "name": "Teplota zpátečky"
+      },
+      "ot_dhw_temperature": {
+        "name": "Teplota TUV"
+      },
+      "ot_outside_temperature": {
+        "name": "Venkovní teplota"
+      },
+      "ot_max_ch_setpoint": {
+        "name": "Max. teplota topení"
+      },
+      "ot_modulation_level": {
+        "name": "Úroveň modulace"
+      },
+      "ot_ch_water_pressure": {
+        "name": "Tlak vody v topení"
+      },
+      "ot_dhw_flow_rate": {
+        "name": "Průtok TUV"
+      },
+      "ot_fault_code": {
+        "name": "Chybový kód"
+      },
+      "dhw_phase": {
+        "name": "Fáze TUV",
+        "state": {
+          "comfort": "Komfort",
+          "economy": "Útlum"
+        }
+      },
+      "last_successful_read": {
+        "name": "Poslední úspěšné čtení"
+      },
+      "failed_polls": {
+        "name": "Neúspěšná dotazování"
+      }
+    },
+    "binary_sensor": {
+      "fault_active": {
+        "name": "Porucha kotle"
+      },
+      "reset_available": {
+        "name": "Reset k dispozici"
+      },
+      "dhw_request": {
+        "name": "Požadavek na TUV"
+      },
+      "heating_demand": {
+        "name": "Požadavek na topení zóny 1"
+      },
+      "ot_fault": {
+        "name": "Porucha"
+      },
+      "ot_ch_active": {
+        "name": "Ústřední topení"
+      },
+      "ot_dhw_active": {
+        "name": "Teplá užitková voda"
+      },
+      "ot_flame": {
+        "name": "Plamen"
+      }
+    },
+    "number": {
+      "heating_target": {
+        "name": "Žádaná teplota topení zóny 1"
+      },
+      "heating_curve_offset": {
+        "name": "Posun topné křivky zóny 1"
+      },
+      "dhw_target": {
+        "name": "Žádaná teplota TUV"
+      },
+      "comfort_heat": {
+        "name": "Komfortní topení zóny 1"
+      },
+      "eco_heat": {
+        "name": "Útlumové topení zóny 1"
+      },
+      "comfort_cool": {
+        "name": "Komfortní chlazení zóny 1"
+      },
+      "eco_cool": {
+        "name": "Útlumové chlazení zóny 1"
+      },
+      "humidity_target": {
+        "name": "Žádaná vlhkost zóny 1"
+      },
+      "flow_target": {
+        "name": "Žádaná teplota výstupu zóny 1"
+      },
+      "heating_target_zone2": {
+        "name": "Žádaná teplota topení zóny 2"
+      },
+      "heating_curve_offset_zone2": {
+        "name": "Posun topné křivky zóny 2"
+      },
+      "comfort_heat_zone2": {
+        "name": "Komfortní topení zóny 2"
+      },
+      "eco_heat_zone2": {
+        "name": "Útlumové topení zóny 2"
+      },
+      "comfort_cool_zone2": {
+        "name": "Komfortní chlazení zóny 2"
+      },
+      "eco_cool_zone2": {
+        "name": "Útlumové chlazení zóny 2"
+      },
+      "humidity_target_zone2": {
+        "name": "Žádaná vlhkost zóny 2"
+      },
+      "flow_target_zone2": {
+        "name": "Žádaná teplota výstupu zóny 2"
+      },
+      "heating_target_zone3": {
+        "name": "Žádaná teplota topení zóny 3"
+      },
+      "heating_curve_offset_zone3": {
+        "name": "Posun topné křivky zóny 3"
+      },
+      "comfort_heat_zone3": {
+        "name": "Komfortní topení zóny 3"
+      },
+      "eco_heat_zone3": {
+        "name": "Útlumové topení zóny 3"
+      },
+      "comfort_cool_zone3": {
+        "name": "Komfortní chlazení zóny 3"
+      },
+      "eco_cool_zone3": {
+        "name": "Útlumové chlazení zóny 3"
+      },
+      "humidity_target_zone3": {
+        "name": "Žádaná vlhkost zóny 3"
+      },
+      "flow_target_zone3": {
+        "name": "Žádaná teplota výstupu zóny 3"
+      },
+      "ot_ch_setpoint": {
+        "name": "Žádaná teplota topení"
+      },
+      "ot_dhw_setpoint": {
+        "name": "Žádaná teplota TUV"
+      },
+      "dhw_comfort": {
+        "name": "Teplota TUV Komfort"
+      },
+      "dhw_eco": {
+        "name": "Teplota TUV Útlum"
+      }
+    },
+    "select": {
+      "operation_mode": {
+        "name": "Provozní režim",
+        "state": {
+          "standby": "Pohotovost",
+          "summer": "Léto",
+          "cooling": "Chlazení",
+          "winter": "Zima"
+        }
+      },
+      "weekday_1_profile": {
+        "name": "{target} — pondělí"
+      },
+      "weekday_2_profile": {
+        "name": "{target} — úterý"
+      },
+      "weekday_3_profile": {
+        "name": "{target} — středa"
+      },
+      "weekday_4_profile": {
+        "name": "{target} — čtvrtek"
+      },
+      "weekday_5_profile": {
+        "name": "{target} — pátek"
+      },
+      "weekday_6_profile": {
+        "name": "{target} — sobota"
+      },
+      "weekday_7_profile": {
+        "name": "{target} — neděle"
+      },
+      "all_days_profile": {
+        "name": "Zóna 1 — stejný profil pro všechny dny"
+      },
+      "ot_mode": {
+        "name": "Režim",
+        "state": {
+          "off": "Vypnuto",
+          "heating": "Topení",
+          "water": "TUV",
+          "heating_water": "Topení + TUV"
+        }
+      }
+    },
+    "time": {
+      "fascia_start": {
+        "name": "Profil {profile} úsek {fascia} začátek"
+      },
+      "fascia_end": {
+        "name": "Profil {profile} úsek {fascia} konec"
+      }
+    },
+    "climate": {
+      "heating_thermostat": {
+        "name": "Termostat zóny 1"
+      },
+      "dhw_thermostat": {
+        "name": "TUV"
+      },
+      "heating_thermostat_zone2": {
+        "name": "Termostat zóny 2"
+      },
+      "heating_thermostat_zone3": {
+        "name": "Termostat zóny 3"
+      }
+    },
+    "switch": {
+      "dhw_comfort_eco": {
+        "name": "TUV Komfort-Útlum podle rozvrhu"
+      }
+    }
+  },
+  "selector": {
+    "protocol": {
+      "options": {
+        "modbus": "Modbus (Magis Combo / Pro)",
+        "opentherm": "OpenTherm (VICTRIX, experimentální)"
+      }
+    }
+  }
+}

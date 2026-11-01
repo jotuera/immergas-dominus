@@ -1,0 +1,304 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Se connecter à Immergas Dominus",
+        "description": "Saisissez les paramètres de connexion TCP locale de votre module Dominus. L'intégration utilise uniquement le TCP local et ne se connecte pas au cloud Immergas.",
+        "data": {
+          "host": "Hôte ou adresse IP",
+          "port": "Port TCP",
+          "mac": "Adresse MAC Dominus",
+          "password": "Mot de passe Dominus",
+          "protocol": "Protocole"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Impossible de se connecter ou de s'authentifier auprès de Dominus.",
+      "unknown": "Erreur inattendue.",
+      "invalid_mac": "Adresse MAC Dominus invalide."
+    },
+    "abort": {
+      "already_configured": "Ce module Dominus est déjà configuré."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "room_temperature": {
+        "name": "Zone 1 température ambiante"
+      },
+      "outdoor_temperature": {
+        "name": "Température extérieure"
+      },
+      "fault_code": {
+        "name": "Code de défaut chaudière"
+      },
+      "fault_description": {
+        "name": "Description du défaut chaudière"
+      },
+      "dhw_tank_temperature": {
+        "name": "Température ballon ECS"
+      },
+      "room_temperature_zone2": {
+        "name": "Zone 2 température ambiante"
+      },
+      "room_temperature_zone3": {
+        "name": "Zone 3 température ambiante"
+      },
+      "zone_status": {
+        "name": "Zone 1 état"
+      },
+      "number_of_zones": {
+        "name": "Nombre de zones"
+      },
+      "program_phase": {
+        "name": "Zone 1 phase du programme",
+        "state": {
+          "manual": "Manuel",
+          "comfort": "Confort",
+          "economy": "Économie"
+        }
+      },
+      "zone_status_zone2": {
+        "name": "Zone 2 état"
+      },
+      "zone_status_zone3": {
+        "name": "Zone 3 état"
+      },
+      "ot_flow_temperature": {
+        "name": "Température de départ"
+      },
+      "ot_return_temperature": {
+        "name": "Température de retour"
+      },
+      "ot_dhw_temperature": {
+        "name": "Température ECS"
+      },
+      "ot_outside_temperature": {
+        "name": "Température extérieure"
+      },
+      "ot_max_ch_setpoint": {
+        "name": "Consigne chauffage max."
+      },
+      "ot_modulation_level": {
+        "name": "Niveau de modulation"
+      },
+      "ot_ch_water_pressure": {
+        "name": "Pression d'eau chauffage"
+      },
+      "ot_dhw_flow_rate": {
+        "name": "Débit ECS"
+      },
+      "ot_fault_code": {
+        "name": "Code de défaut"
+      },
+      "dhw_phase": {
+        "name": "Phase ECS",
+        "state": {
+          "comfort": "Confort",
+          "economy": "Économie"
+        }
+      },
+      "last_successful_read": {
+        "name": "Dernière lecture réussie"
+      },
+      "failed_polls": {
+        "name": "Interrogations échouées"
+      }
+    },
+    "binary_sensor": {
+      "fault_active": {
+        "name": "Défaut chaudière"
+      },
+      "reset_available": {
+        "name": "Réinitialisation disponible"
+      },
+      "dhw_request": {
+        "name": "Demande ECS"
+      },
+      "heating_demand": {
+        "name": "Zone 1 demande de chauffage"
+      },
+      "ot_fault": {
+        "name": "Défaut"
+      },
+      "ot_ch_active": {
+        "name": "Chauffage central"
+      },
+      "ot_dhw_active": {
+        "name": "Eau chaude sanitaire"
+      },
+      "ot_flame": {
+        "name": "Flamme"
+      }
+    },
+    "number": {
+      "heating_target": {
+        "name": "Zone 1 consigne de chauffage"
+      },
+      "heating_curve_offset": {
+        "name": "Zone 1 décalage courbe de chauffe"
+      },
+      "dhw_target": {
+        "name": "Consigne ECS"
+      },
+      "comfort_heat": {
+        "name": "Zone 1 chauffage confort"
+      },
+      "eco_heat": {
+        "name": "Zone 1 chauffage éco"
+      },
+      "comfort_cool": {
+        "name": "Zone 1 rafraîchissement confort"
+      },
+      "eco_cool": {
+        "name": "Zone 1 rafraîchissement éco"
+      },
+      "humidity_target": {
+        "name": "Zone 1 consigne d'humidité"
+      },
+      "flow_target": {
+        "name": "Zone 1 consigne de départ"
+      },
+      "heating_target_zone2": {
+        "name": "Zone 2 consigne de chauffage"
+      },
+      "heating_curve_offset_zone2": {
+        "name": "Zone 2 décalage courbe de chauffe"
+      },
+      "comfort_heat_zone2": {
+        "name": "Zone 2 chauffage confort"
+      },
+      "eco_heat_zone2": {
+        "name": "Zone 2 chauffage éco"
+      },
+      "comfort_cool_zone2": {
+        "name": "Zone 2 rafraîchissement confort"
+      },
+      "eco_cool_zone2": {
+        "name": "Zone 2 rafraîchissement éco"
+      },
+      "humidity_target_zone2": {
+        "name": "Zone 2 consigne d'humidité"
+      },
+      "flow_target_zone2": {
+        "name": "Zone 2 consigne de départ"
+      },
+      "heating_target_zone3": {
+        "name": "Zone 3 consigne de chauffage"
+      },
+      "heating_curve_offset_zone3": {
+        "name": "Zone 3 décalage courbe de chauffe"
+      },
+      "comfort_heat_zone3": {
+        "name": "Zone 3 chauffage confort"
+      },
+      "eco_heat_zone3": {
+        "name": "Zone 3 chauffage éco"
+      },
+      "comfort_cool_zone3": {
+        "name": "Zone 3 rafraîchissement confort"
+      },
+      "eco_cool_zone3": {
+        "name": "Zone 3 rafraîchissement éco"
+      },
+      "humidity_target_zone3": {
+        "name": "Zone 3 consigne d'humidité"
+      },
+      "flow_target_zone3": {
+        "name": "Zone 3 consigne de départ"
+      },
+      "ot_ch_setpoint": {
+        "name": "Consigne chauffage"
+      },
+      "ot_dhw_setpoint": {
+        "name": "Consigne ECS"
+      },
+      "dhw_comfort": {
+        "name": "Consigne ECS Confort"
+      },
+      "dhw_eco": {
+        "name": "Consigne ECS Éco"
+      }
+    },
+    "select": {
+      "operation_mode": {
+        "name": "Mode de fonctionnement",
+        "state": {
+          "standby": "Veille",
+          "summer": "Été",
+          "cooling": "Refroidissement",
+          "winter": "Hiver"
+        }
+      },
+      "weekday_1_profile": {
+        "name": "{target} — lundi"
+      },
+      "weekday_2_profile": {
+        "name": "{target} — mardi"
+      },
+      "weekday_3_profile": {
+        "name": "{target} — mercredi"
+      },
+      "weekday_4_profile": {
+        "name": "{target} — jeudi"
+      },
+      "weekday_5_profile": {
+        "name": "{target} — vendredi"
+      },
+      "weekday_6_profile": {
+        "name": "{target} — samedi"
+      },
+      "weekday_7_profile": {
+        "name": "{target} — dimanche"
+      },
+      "all_days_profile": {
+        "name": "Zone 1 — même profil pour tous les jours"
+      },
+      "ot_mode": {
+        "name": "Mode",
+        "state": {
+          "off": "Arrêt",
+          "heating": "Chauffage",
+          "water": "ECS",
+          "heating_water": "Chauffage + ECS"
+        }
+      }
+    },
+    "time": {
+      "fascia_start": {
+        "name": "Profil {profile} période {fascia} début"
+      },
+      "fascia_end": {
+        "name": "Profil {profile} période {fascia} fin"
+      }
+    },
+    "climate": {
+      "heating_thermostat": {
+        "name": "Zone 1 thermostat"
+      },
+      "dhw_thermostat": {
+        "name": "ECS"
+      },
+      "heating_thermostat_zone2": {
+        "name": "Zone 2 thermostat"
+      },
+      "heating_thermostat_zone3": {
+        "name": "Zone 3 thermostat"
+      }
+    },
+    "switch": {
+      "dhw_comfort_eco": {
+        "name": "ECS Confort-Éco selon programme"
+      }
+    }
+  },
+  "selector": {
+    "protocol": {
+      "options": {
+        "modbus": "Modbus (Magis Combo / Pro)",
+        "opentherm": "OpenTherm (VICTRIX, expérimental)"
+      }
+    }
+  }
+}

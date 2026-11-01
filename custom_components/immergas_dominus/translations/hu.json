@@ -1,0 +1,304 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Csatlakozás az Immergas Dominushoz",
+        "description": "Adja meg a Dominus modul helyi TCP kapcsolati adatait. Az integráció kizárólag helyi TCP-t használ, és nem csatlakozik az Immergas felhőhöz.",
+        "data": {
+          "host": "Hoszt vagy IP-cím",
+          "port": "TCP port",
+          "mac": "Dominus MAC-cím",
+          "password": "Dominus jelszó",
+          "protocol": "Protokoll"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Nem sikerült csatlakozni vagy hitelesíteni a Dominus modulnál.",
+      "unknown": "Váratlan hiba.",
+      "invalid_mac": "Érvénytelen Dominus MAC-cím."
+    },
+    "abort": {
+      "already_configured": "Ez a Dominus modul már konfigurálva van."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "room_temperature": {
+        "name": "1. zóna szobahőmérséklet"
+      },
+      "outdoor_temperature": {
+        "name": "Külső hőmérséklet"
+      },
+      "fault_code": {
+        "name": "Kazán hibakód"
+      },
+      "fault_description": {
+        "name": "Kazán hibaleírás"
+      },
+      "dhw_tank_temperature": {
+        "name": "HMV tároló hőmérséklet"
+      },
+      "room_temperature_zone2": {
+        "name": "2. zóna szobahőmérséklet"
+      },
+      "room_temperature_zone3": {
+        "name": "3. zóna szobahőmérséklet"
+      },
+      "zone_status": {
+        "name": "1. zóna állapota"
+      },
+      "number_of_zones": {
+        "name": "Zónák száma"
+      },
+      "program_phase": {
+        "name": "1. zóna programfázis",
+        "state": {
+          "manual": "Kézi",
+          "comfort": "Komfort",
+          "economy": "Takarék"
+        }
+      },
+      "zone_status_zone2": {
+        "name": "2. zóna állapota"
+      },
+      "zone_status_zone3": {
+        "name": "3. zóna állapota"
+      },
+      "ot_flow_temperature": {
+        "name": "Előremenő hőmérséklet"
+      },
+      "ot_return_temperature": {
+        "name": "Visszatérő hőmérséklet"
+      },
+      "ot_dhw_temperature": {
+        "name": "HMV hőmérséklet"
+      },
+      "ot_outside_temperature": {
+        "name": "Külső hőmérséklet"
+      },
+      "ot_max_ch_setpoint": {
+        "name": "Max. fűtési alapjel"
+      },
+      "ot_modulation_level": {
+        "name": "Modulációs szint"
+      },
+      "ot_ch_water_pressure": {
+        "name": "Fűtővíz nyomás"
+      },
+      "ot_dhw_flow_rate": {
+        "name": "HMV átfolyás"
+      },
+      "ot_fault_code": {
+        "name": "Hibakód"
+      },
+      "dhw_phase": {
+        "name": "HMV fázis",
+        "state": {
+          "comfort": "Komfort",
+          "economy": "Takarék"
+        }
+      },
+      "last_successful_read": {
+        "name": "Utolsó sikeres olvasás"
+      },
+      "failed_polls": {
+        "name": "Sikertelen lekérdezések"
+      }
+    },
+    "binary_sensor": {
+      "fault_active": {
+        "name": "Kazánhiba"
+      },
+      "reset_available": {
+        "name": "Visszaállítás lehetséges"
+      },
+      "dhw_request": {
+        "name": "HMV igény"
+      },
+      "heating_demand": {
+        "name": "1. zóna fűtési igény"
+      },
+      "ot_fault": {
+        "name": "Hiba"
+      },
+      "ot_ch_active": {
+        "name": "Központi fűtés"
+      },
+      "ot_dhw_active": {
+        "name": "Használati melegvíz"
+      },
+      "ot_flame": {
+        "name": "Láng"
+      }
+    },
+    "number": {
+      "heating_target": {
+        "name": "1. zóna fűtési alapjel"
+      },
+      "heating_curve_offset": {
+        "name": "1. zóna fűtési görbe eltolás"
+      },
+      "dhw_target": {
+        "name": "HMV alapjel"
+      },
+      "comfort_heat": {
+        "name": "1. zóna komfort fűtés"
+      },
+      "eco_heat": {
+        "name": "1. zóna takarék fűtés"
+      },
+      "comfort_cool": {
+        "name": "1. zóna komfort hűtés"
+      },
+      "eco_cool": {
+        "name": "1. zóna takarék hűtés"
+      },
+      "humidity_target": {
+        "name": "1. zóna páratartalom alapjel"
+      },
+      "flow_target": {
+        "name": "1. zóna előremenő alapjel"
+      },
+      "heating_target_zone2": {
+        "name": "2. zóna fűtési alapjel"
+      },
+      "heating_curve_offset_zone2": {
+        "name": "2. zóna fűtési görbe eltolás"
+      },
+      "comfort_heat_zone2": {
+        "name": "2. zóna komfort fűtés"
+      },
+      "eco_heat_zone2": {
+        "name": "2. zóna takarék fűtés"
+      },
+      "comfort_cool_zone2": {
+        "name": "2. zóna komfort hűtés"
+      },
+      "eco_cool_zone2": {
+        "name": "2. zóna takarék hűtés"
+      },
+      "humidity_target_zone2": {
+        "name": "2. zóna páratartalom alapjel"
+      },
+      "flow_target_zone2": {
+        "name": "2. zóna előremenő alapjel"
+      },
+      "heating_target_zone3": {
+        "name": "3. zóna fűtési alapjel"
+      },
+      "heating_curve_offset_zone3": {
+        "name": "3. zóna fűtési görbe eltolás"
+      },
+      "comfort_heat_zone3": {
+        "name": "3. zóna komfort fűtés"
+      },
+      "eco_heat_zone3": {
+        "name": "3. zóna takarék fűtés"
+      },
+      "comfort_cool_zone3": {
+        "name": "3. zóna komfort hűtés"
+      },
+      "eco_cool_zone3": {
+        "name": "3. zóna takarék hűtés"
+      },
+      "humidity_target_zone3": {
+        "name": "3. zóna páratartalom alapjel"
+      },
+      "flow_target_zone3": {
+        "name": "3. zóna előremenő alapjel"
+      },
+      "ot_ch_setpoint": {
+        "name": "Fűtési alapjel"
+      },
+      "ot_dhw_setpoint": {
+        "name": "HMV alapjel"
+      },
+      "dhw_comfort": {
+        "name": "HMV Komfort alapjel"
+      },
+      "dhw_eco": {
+        "name": "HMV Takarék alapjel"
+      }
+    },
+    "select": {
+      "operation_mode": {
+        "name": "Üzemmód",
+        "state": {
+          "standby": "Készenlét",
+          "summer": "Nyár",
+          "cooling": "Hűtés",
+          "winter": "Tél"
+        }
+      },
+      "weekday_1_profile": {
+        "name": "{target} — hétfő"
+      },
+      "weekday_2_profile": {
+        "name": "{target} — kedd"
+      },
+      "weekday_3_profile": {
+        "name": "{target} — szerda"
+      },
+      "weekday_4_profile": {
+        "name": "{target} — csütörtök"
+      },
+      "weekday_5_profile": {
+        "name": "{target} — péntek"
+      },
+      "weekday_6_profile": {
+        "name": "{target} — szombat"
+      },
+      "weekday_7_profile": {
+        "name": "{target} — vasárnap"
+      },
+      "all_days_profile": {
+        "name": "1. zóna — ugyanaz a profil minden napra"
+      },
+      "ot_mode": {
+        "name": "Üzemmód",
+        "state": {
+          "off": "Ki",
+          "heating": "Fűtés",
+          "water": "HMV",
+          "heating_water": "Fűtés + HMV"
+        }
+      }
+    },
+    "time": {
+      "fascia_start": {
+        "name": "{profile}. profil {fascia}. időszak kezdete"
+      },
+      "fascia_end": {
+        "name": "{profile}. profil {fascia}. időszak vége"
+      }
+    },
+    "climate": {
+      "heating_thermostat": {
+        "name": "1. zóna termosztát"
+      },
+      "dhw_thermostat": {
+        "name": "HMV"
+      },
+      "heating_thermostat_zone2": {
+        "name": "2. zóna termosztát"
+      },
+      "heating_thermostat_zone3": {
+        "name": "3. zóna termosztát"
+      }
+    },
+    "switch": {
+      "dhw_comfort_eco": {
+        "name": "HMV Komfort-Takarék ütemezés szerint"
+      }
+    }
+  },
+  "selector": {
+    "protocol": {
+      "options": {
+        "modbus": "Modbus (Magis Combo / Pro)",
+        "opentherm": "OpenTherm (VICTRIX, kísérleti)"
+      }
+    }
+  }
+}

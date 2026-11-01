@@ -1,0 +1,304 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Ligar ao Immergas Dominus",
+        "description": "Introduza os dados de ligação TCP local do seu módulo Dominus. A integração usa apenas TCP local e não liga à cloud da Immergas.",
+        "data": {
+          "host": "Anfitrião ou endereço IP",
+          "port": "Porta TCP",
+          "mac": "Endereço MAC Dominus",
+          "password": "Palavra-passe Dominus",
+          "protocol": "Protocolo"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Não é possível ligar ou autenticar com o Dominus.",
+      "unknown": "Erro inesperado.",
+      "invalid_mac": "Endereço MAC Dominus inválido."
+    },
+    "abort": {
+      "already_configured": "Este módulo Dominus já está configurado."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "room_temperature": {
+        "name": "Zona 1 temperatura ambiente"
+      },
+      "outdoor_temperature": {
+        "name": "Temperatura exterior"
+      },
+      "fault_code": {
+        "name": "Código de avaria da caldeira"
+      },
+      "fault_description": {
+        "name": "Descrição da avaria da caldeira"
+      },
+      "dhw_tank_temperature": {
+        "name": "Temperatura do depósito AQS"
+      },
+      "room_temperature_zone2": {
+        "name": "Zona 2 temperatura ambiente"
+      },
+      "room_temperature_zone3": {
+        "name": "Zona 3 temperatura ambiente"
+      },
+      "zone_status": {
+        "name": "Zona 1 estado"
+      },
+      "number_of_zones": {
+        "name": "Número de zonas"
+      },
+      "program_phase": {
+        "name": "Zona 1 fase do programa",
+        "state": {
+          "manual": "Manual",
+          "comfort": "Conforto",
+          "economy": "Economia"
+        }
+      },
+      "zone_status_zone2": {
+        "name": "Zona 2 estado"
+      },
+      "zone_status_zone3": {
+        "name": "Zona 3 estado"
+      },
+      "ot_flow_temperature": {
+        "name": "Temperatura de ida"
+      },
+      "ot_return_temperature": {
+        "name": "Temperatura de retorno"
+      },
+      "ot_dhw_temperature": {
+        "name": "Temperatura AQS"
+      },
+      "ot_outside_temperature": {
+        "name": "Temperatura exterior"
+      },
+      "ot_max_ch_setpoint": {
+        "name": "Setpoint máx. aquecimento"
+      },
+      "ot_modulation_level": {
+        "name": "Nível de modulação"
+      },
+      "ot_ch_water_pressure": {
+        "name": "Pressão de água aquecimento"
+      },
+      "ot_dhw_flow_rate": {
+        "name": "Caudal AQS"
+      },
+      "ot_fault_code": {
+        "name": "Código de avaria"
+      },
+      "dhw_phase": {
+        "name": "Fase AQS",
+        "state": {
+          "comfort": "Conforto",
+          "economy": "Economia"
+        }
+      },
+      "last_successful_read": {
+        "name": "Última leitura bem-sucedida"
+      },
+      "failed_polls": {
+        "name": "Leituras falhadas"
+      }
+    },
+    "binary_sensor": {
+      "fault_active": {
+        "name": "Avaria da caldeira"
+      },
+      "reset_available": {
+        "name": "Reposição disponível"
+      },
+      "dhw_request": {
+        "name": "Pedido AQS"
+      },
+      "heating_demand": {
+        "name": "Zona 1 pedido de aquecimento"
+      },
+      "ot_fault": {
+        "name": "Avaria"
+      },
+      "ot_ch_active": {
+        "name": "Aquecimento central"
+      },
+      "ot_dhw_active": {
+        "name": "Água quente sanitária"
+      },
+      "ot_flame": {
+        "name": "Chama"
+      }
+    },
+    "number": {
+      "heating_target": {
+        "name": "Zona 1 setpoint de aquecimento"
+      },
+      "heating_curve_offset": {
+        "name": "Zona 1 desvio da curva de aquecimento"
+      },
+      "dhw_target": {
+        "name": "Setpoint AQS"
+      },
+      "comfort_heat": {
+        "name": "Zona 1 aquecimento conforto"
+      },
+      "eco_heat": {
+        "name": "Zona 1 aquecimento eco"
+      },
+      "comfort_cool": {
+        "name": "Zona 1 arrefecimento conforto"
+      },
+      "eco_cool": {
+        "name": "Zona 1 arrefecimento eco"
+      },
+      "humidity_target": {
+        "name": "Zona 1 setpoint de humidade"
+      },
+      "flow_target": {
+        "name": "Zona 1 setpoint de ida"
+      },
+      "heating_target_zone2": {
+        "name": "Zona 2 setpoint de aquecimento"
+      },
+      "heating_curve_offset_zone2": {
+        "name": "Zona 2 desvio da curva de aquecimento"
+      },
+      "comfort_heat_zone2": {
+        "name": "Zona 2 aquecimento conforto"
+      },
+      "eco_heat_zone2": {
+        "name": "Zona 2 aquecimento eco"
+      },
+      "comfort_cool_zone2": {
+        "name": "Zona 2 arrefecimento conforto"
+      },
+      "eco_cool_zone2": {
+        "name": "Zona 2 arrefecimento eco"
+      },
+      "humidity_target_zone2": {
+        "name": "Zona 2 setpoint de humidade"
+      },
+      "flow_target_zone2": {
+        "name": "Zona 2 setpoint de ida"
+      },
+      "heating_target_zone3": {
+        "name": "Zona 3 setpoint de aquecimento"
+      },
+      "heating_curve_offset_zone3": {
+        "name": "Zona 3 desvio da curva de aquecimento"
+      },
+      "comfort_heat_zone3": {
+        "name": "Zona 3 aquecimento conforto"
+      },
+      "eco_heat_zone3": {
+        "name": "Zona 3 aquecimento eco"
+      },
+      "comfort_cool_zone3": {
+        "name": "Zona 3 arrefecimento conforto"
+      },
+      "eco_cool_zone3": {
+        "name": "Zona 3 arrefecimento eco"
+      },
+      "humidity_target_zone3": {
+        "name": "Zona 3 setpoint de humidade"
+      },
+      "flow_target_zone3": {
+        "name": "Zona 3 setpoint de ida"
+      },
+      "ot_ch_setpoint": {
+        "name": "Setpoint de aquecimento"
+      },
+      "ot_dhw_setpoint": {
+        "name": "Setpoint AQS"
+      },
+      "dhw_comfort": {
+        "name": "Setpoint AQS Conforto"
+      },
+      "dhw_eco": {
+        "name": "Setpoint AQS Eco"
+      }
+    },
+    "select": {
+      "operation_mode": {
+        "name": "Modo de funcionamento",
+        "state": {
+          "standby": "Em espera",
+          "summer": "Verão",
+          "cooling": "Arrefecimento",
+          "winter": "Inverno"
+        }
+      },
+      "weekday_1_profile": {
+        "name": "{target} — segunda-feira"
+      },
+      "weekday_2_profile": {
+        "name": "{target} — terça-feira"
+      },
+      "weekday_3_profile": {
+        "name": "{target} — quarta-feira"
+      },
+      "weekday_4_profile": {
+        "name": "{target} — quinta-feira"
+      },
+      "weekday_5_profile": {
+        "name": "{target} — sexta-feira"
+      },
+      "weekday_6_profile": {
+        "name": "{target} — sábado"
+      },
+      "weekday_7_profile": {
+        "name": "{target} — domingo"
+      },
+      "all_days_profile": {
+        "name": "Zona 1 — mesmo perfil para todos os dias"
+      },
+      "ot_mode": {
+        "name": "Modo",
+        "state": {
+          "off": "Desligado",
+          "heating": "Aquecimento",
+          "water": "AQS",
+          "heating_water": "Aquecimento + AQS"
+        }
+      }
+    },
+    "time": {
+      "fascia_start": {
+        "name": "Perfil {profile} período {fascia} início"
+      },
+      "fascia_end": {
+        "name": "Perfil {profile} período {fascia} fim"
+      }
+    },
+    "climate": {
+      "heating_thermostat": {
+        "name": "Zona 1 termostato"
+      },
+      "dhw_thermostat": {
+        "name": "AQS"
+      },
+      "heating_thermostat_zone2": {
+        "name": "Zona 2 termostato"
+      },
+      "heating_thermostat_zone3": {
+        "name": "Zona 3 termostato"
+      }
+    },
+    "switch": {
+      "dhw_comfort_eco": {
+        "name": "AQS Conforto-Eco por horário"
+      }
+    }
+  },
+  "selector": {
+    "protocol": {
+      "options": {
+        "modbus": "Modbus (Magis Combo / Pro)",
+        "opentherm": "OpenTherm (VICTRIX, experimental)"
+      }
+    }
+  }
+}

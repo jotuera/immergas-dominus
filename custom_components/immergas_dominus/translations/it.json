@@ -1,0 +1,304 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connetti a Immergas Dominus",
+        "description": "Inserisci i dati di connessione TCP locale del tuo modulo Dominus. L'integrazione usa solo il TCP locale e non si collega al cloud Immergas.",
+        "data": {
+          "host": "Host o indirizzo IP",
+          "port": "Porta TCP",
+          "mac": "Indirizzo MAC Dominus",
+          "password": "Password Dominus",
+          "protocol": "Protocollo"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Impossibile connettersi o autenticarsi con Dominus.",
+      "unknown": "Errore imprevisto.",
+      "invalid_mac": "Indirizzo MAC Dominus non valido."
+    },
+    "abort": {
+      "already_configured": "Questo modulo Dominus è già configurato."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "room_temperature": {
+        "name": "Zona 1 temperatura ambiente"
+      },
+      "outdoor_temperature": {
+        "name": "Temperatura esterna"
+      },
+      "fault_code": {
+        "name": "Codice anomalia caldaia"
+      },
+      "fault_description": {
+        "name": "Descrizione anomalia caldaia"
+      },
+      "dhw_tank_temperature": {
+        "name": "Temperatura bollitore ACS"
+      },
+      "room_temperature_zone2": {
+        "name": "Zona 2 temperatura ambiente"
+      },
+      "room_temperature_zone3": {
+        "name": "Zona 3 temperatura ambiente"
+      },
+      "zone_status": {
+        "name": "Zona 1 stato"
+      },
+      "number_of_zones": {
+        "name": "Numero di zone"
+      },
+      "program_phase": {
+        "name": "Zona 1 fase programma",
+        "state": {
+          "manual": "Manuale",
+          "comfort": "Comfort",
+          "economy": "Economia"
+        }
+      },
+      "zone_status_zone2": {
+        "name": "Zona 2 stato"
+      },
+      "zone_status_zone3": {
+        "name": "Zona 3 stato"
+      },
+      "ot_flow_temperature": {
+        "name": "Temperatura di mandata"
+      },
+      "ot_return_temperature": {
+        "name": "Temperatura di ritorno"
+      },
+      "ot_dhw_temperature": {
+        "name": "Temperatura ACS"
+      },
+      "ot_outside_temperature": {
+        "name": "Temperatura esterna"
+      },
+      "ot_max_ch_setpoint": {
+        "name": "Setpoint riscaldamento max."
+      },
+      "ot_modulation_level": {
+        "name": "Livello di modulazione"
+      },
+      "ot_ch_water_pressure": {
+        "name": "Pressione acqua riscaldamento"
+      },
+      "ot_dhw_flow_rate": {
+        "name": "Portata ACS"
+      },
+      "ot_fault_code": {
+        "name": "Codice anomalia"
+      },
+      "dhw_phase": {
+        "name": "Fase ACS",
+        "state": {
+          "comfort": "Comfort",
+          "economy": "Economia"
+        }
+      },
+      "last_successful_read": {
+        "name": "Ultima lettura riuscita"
+      },
+      "failed_polls": {
+        "name": "Interrogazioni fallite"
+      }
+    },
+    "binary_sensor": {
+      "fault_active": {
+        "name": "Anomalia caldaia"
+      },
+      "reset_available": {
+        "name": "Reset disponibile"
+      },
+      "dhw_request": {
+        "name": "Richiesta ACS"
+      },
+      "heating_demand": {
+        "name": "Zona 1 richiesta riscaldamento"
+      },
+      "ot_fault": {
+        "name": "Anomalia"
+      },
+      "ot_ch_active": {
+        "name": "Riscaldamento centralizzato"
+      },
+      "ot_dhw_active": {
+        "name": "Acqua calda sanitaria"
+      },
+      "ot_flame": {
+        "name": "Fiamma"
+      }
+    },
+    "number": {
+      "heating_target": {
+        "name": "Zona 1 setpoint riscaldamento"
+      },
+      "heating_curve_offset": {
+        "name": "Zona 1 offset curva climatica"
+      },
+      "dhw_target": {
+        "name": "Setpoint ACS"
+      },
+      "comfort_heat": {
+        "name": "Zona 1 riscaldamento comfort"
+      },
+      "eco_heat": {
+        "name": "Zona 1 riscaldamento eco"
+      },
+      "comfort_cool": {
+        "name": "Zona 1 raffrescamento comfort"
+      },
+      "eco_cool": {
+        "name": "Zona 1 raffrescamento eco"
+      },
+      "humidity_target": {
+        "name": "Zona 1 setpoint umidità"
+      },
+      "flow_target": {
+        "name": "Zona 1 setpoint mandata"
+      },
+      "heating_target_zone2": {
+        "name": "Zona 2 setpoint riscaldamento"
+      },
+      "heating_curve_offset_zone2": {
+        "name": "Zona 2 offset curva climatica"
+      },
+      "comfort_heat_zone2": {
+        "name": "Zona 2 riscaldamento comfort"
+      },
+      "eco_heat_zone2": {
+        "name": "Zona 2 riscaldamento eco"
+      },
+      "comfort_cool_zone2": {
+        "name": "Zona 2 raffrescamento comfort"
+      },
+      "eco_cool_zone2": {
+        "name": "Zona 2 raffrescamento eco"
+      },
+      "humidity_target_zone2": {
+        "name": "Zona 2 setpoint umidità"
+      },
+      "flow_target_zone2": {
+        "name": "Zona 2 setpoint mandata"
+      },
+      "heating_target_zone3": {
+        "name": "Zona 3 setpoint riscaldamento"
+      },
+      "heating_curve_offset_zone3": {
+        "name": "Zona 3 offset curva climatica"
+      },
+      "comfort_heat_zone3": {
+        "name": "Zona 3 riscaldamento comfort"
+      },
+      "eco_heat_zone3": {
+        "name": "Zona 3 riscaldamento eco"
+      },
+      "comfort_cool_zone3": {
+        "name": "Zona 3 raffrescamento comfort"
+      },
+      "eco_cool_zone3": {
+        "name": "Zona 3 raffrescamento eco"
+      },
+      "humidity_target_zone3": {
+        "name": "Zona 3 setpoint umidità"
+      },
+      "flow_target_zone3": {
+        "name": "Zona 3 setpoint mandata"
+      },
+      "ot_ch_setpoint": {
+        "name": "Setpoint riscaldamento"
+      },
+      "ot_dhw_setpoint": {
+        "name": "Setpoint ACS"
+      },
+      "dhw_comfort": {
+        "name": "Setpoint ACS Comfort"
+      },
+      "dhw_eco": {
+        "name": "Setpoint ACS Economy"
+      }
+    },
+    "select": {
+      "operation_mode": {
+        "name": "Modalità di funzionamento",
+        "state": {
+          "standby": "Standby",
+          "summer": "Estate",
+          "cooling": "Raffrescamento",
+          "winter": "Inverno"
+        }
+      },
+      "weekday_1_profile": {
+        "name": "{target} — lunedì"
+      },
+      "weekday_2_profile": {
+        "name": "{target} — martedì"
+      },
+      "weekday_3_profile": {
+        "name": "{target} — mercoledì"
+      },
+      "weekday_4_profile": {
+        "name": "{target} — giovedì"
+      },
+      "weekday_5_profile": {
+        "name": "{target} — venerdì"
+      },
+      "weekday_6_profile": {
+        "name": "{target} — sabato"
+      },
+      "weekday_7_profile": {
+        "name": "{target} — domenica"
+      },
+      "all_days_profile": {
+        "name": "Zona 1 — stesso profilo per tutti i giorni"
+      },
+      "ot_mode": {
+        "name": "Modalità",
+        "state": {
+          "off": "Spento",
+          "heating": "Riscaldamento",
+          "water": "ACS",
+          "heating_water": "Riscaldamento + ACS"
+        }
+      }
+    },
+    "time": {
+      "fascia_start": {
+        "name": "Profilo {profile} fascia {fascia} inizio"
+      },
+      "fascia_end": {
+        "name": "Profilo {profile} fascia {fascia} fine"
+      }
+    },
+    "climate": {
+      "heating_thermostat": {
+        "name": "Zona 1 termostato"
+      },
+      "dhw_thermostat": {
+        "name": "ACS"
+      },
+      "heating_thermostat_zone2": {
+        "name": "Zona 2 termostato"
+      },
+      "heating_thermostat_zone3": {
+        "name": "Zona 3 termostato"
+      }
+    },
+    "switch": {
+      "dhw_comfort_eco": {
+        "name": "ACS Comfort-Economy da programma"
+      }
+    }
+  },
+  "selector": {
+    "protocol": {
+      "options": {
+        "modbus": "Modbus (Magis Combo / Pro)",
+        "opentherm": "OpenTherm (VICTRIX, sperimentale)"
+      }
+    }
+  }
+}

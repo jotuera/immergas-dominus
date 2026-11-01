@@ -1,0 +1,304 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Mit Immergas Dominus verbinden",
+        "description": "Geben Sie die lokalen TCP-Verbindungsdaten Ihres Dominus-Moduls ein. Die Integration nutzt ausschließlich lokales TCP und verbindet sich nicht mit der Immergas-Cloud.",
+        "data": {
+          "host": "Host oder IP-Adresse",
+          "port": "TCP-Port",
+          "mac": "Dominus-MAC-Adresse",
+          "password": "Dominus-Passwort",
+          "protocol": "Protokoll"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Verbindung oder Authentifizierung mit Dominus nicht möglich.",
+      "unknown": "Unerwarteter Fehler.",
+      "invalid_mac": "Ungültige Dominus-MAC-Adresse."
+    },
+    "abort": {
+      "already_configured": "Dieses Dominus-Modul ist bereits konfiguriert."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "room_temperature": {
+        "name": "Zone 1 Raumtemperatur"
+      },
+      "outdoor_temperature": {
+        "name": "Außentemperatur"
+      },
+      "fault_code": {
+        "name": "Kessel-Fehlercode"
+      },
+      "fault_description": {
+        "name": "Kessel-Fehlerbeschreibung"
+      },
+      "dhw_tank_temperature": {
+        "name": "WW-Speichertemperatur"
+      },
+      "room_temperature_zone2": {
+        "name": "Zone 2 Raumtemperatur"
+      },
+      "room_temperature_zone3": {
+        "name": "Zone 3 Raumtemperatur"
+      },
+      "zone_status": {
+        "name": "Zone 1 Status"
+      },
+      "number_of_zones": {
+        "name": "Anzahl der Zonen"
+      },
+      "program_phase": {
+        "name": "Zone 1 Programmphase",
+        "state": {
+          "manual": "Manuell",
+          "comfort": "Komfort",
+          "economy": "Sparbetrieb"
+        }
+      },
+      "zone_status_zone2": {
+        "name": "Zone 2 Status"
+      },
+      "zone_status_zone3": {
+        "name": "Zone 3 Status"
+      },
+      "ot_flow_temperature": {
+        "name": "Vorlauftemperatur"
+      },
+      "ot_return_temperature": {
+        "name": "Rücklauftemperatur"
+      },
+      "ot_dhw_temperature": {
+        "name": "WW-Temperatur"
+      },
+      "ot_outside_temperature": {
+        "name": "Außentemperatur"
+      },
+      "ot_max_ch_setpoint": {
+        "name": "Max. Heizungssollwert"
+      },
+      "ot_modulation_level": {
+        "name": "Modulationsgrad"
+      },
+      "ot_ch_water_pressure": {
+        "name": "Heizungs-Wasserdruck"
+      },
+      "ot_dhw_flow_rate": {
+        "name": "WW-Durchfluss"
+      },
+      "ot_fault_code": {
+        "name": "Fehlercode"
+      },
+      "dhw_phase": {
+        "name": "WW-Phase",
+        "state": {
+          "comfort": "Komfort",
+          "economy": "Sparbetrieb"
+        }
+      },
+      "last_successful_read": {
+        "name": "Letzter erfolgreicher Lesevorgang"
+      },
+      "failed_polls": {
+        "name": "Fehlgeschlagene Abfragen"
+      }
+    },
+    "binary_sensor": {
+      "fault_active": {
+        "name": "Kesselstörung"
+      },
+      "reset_available": {
+        "name": "Reset verfügbar"
+      },
+      "dhw_request": {
+        "name": "WW-Anforderung"
+      },
+      "heating_demand": {
+        "name": "Zone 1 Heizanforderung"
+      },
+      "ot_fault": {
+        "name": "Störung"
+      },
+      "ot_ch_active": {
+        "name": "Zentralheizung"
+      },
+      "ot_dhw_active": {
+        "name": "Warmwasser"
+      },
+      "ot_flame": {
+        "name": "Flamme"
+      }
+    },
+    "number": {
+      "heating_target": {
+        "name": "Zone 1 Heizungssollwert"
+      },
+      "heating_curve_offset": {
+        "name": "Zone 1 Heizkurven-Offset"
+      },
+      "dhw_target": {
+        "name": "WW-Sollwert"
+      },
+      "comfort_heat": {
+        "name": "Zone 1 Komfort-Heizen"
+      },
+      "eco_heat": {
+        "name": "Zone 1 Eco-Heizen"
+      },
+      "comfort_cool": {
+        "name": "Zone 1 Komfort-Kühlen"
+      },
+      "eco_cool": {
+        "name": "Zone 1 Eco-Kühlen"
+      },
+      "humidity_target": {
+        "name": "Zone 1 Feuchtesollwert"
+      },
+      "flow_target": {
+        "name": "Zone 1 Vorlaufsollwert"
+      },
+      "heating_target_zone2": {
+        "name": "Zone 2 Heizungssollwert"
+      },
+      "heating_curve_offset_zone2": {
+        "name": "Zone 2 Heizkurven-Offset"
+      },
+      "comfort_heat_zone2": {
+        "name": "Zone 2 Komfort-Heizen"
+      },
+      "eco_heat_zone2": {
+        "name": "Zone 2 Eco-Heizen"
+      },
+      "comfort_cool_zone2": {
+        "name": "Zone 2 Komfort-Kühlen"
+      },
+      "eco_cool_zone2": {
+        "name": "Zone 2 Eco-Kühlen"
+      },
+      "humidity_target_zone2": {
+        "name": "Zone 2 Feuchtesollwert"
+      },
+      "flow_target_zone2": {
+        "name": "Zone 2 Vorlaufsollwert"
+      },
+      "heating_target_zone3": {
+        "name": "Zone 3 Heizungssollwert"
+      },
+      "heating_curve_offset_zone3": {
+        "name": "Zone 3 Heizkurven-Offset"
+      },
+      "comfort_heat_zone3": {
+        "name": "Zone 3 Komfort-Heizen"
+      },
+      "eco_heat_zone3": {
+        "name": "Zone 3 Eco-Heizen"
+      },
+      "comfort_cool_zone3": {
+        "name": "Zone 3 Komfort-Kühlen"
+      },
+      "eco_cool_zone3": {
+        "name": "Zone 3 Eco-Kühlen"
+      },
+      "humidity_target_zone3": {
+        "name": "Zone 3 Feuchtesollwert"
+      },
+      "flow_target_zone3": {
+        "name": "Zone 3 Vorlaufsollwert"
+      },
+      "ot_ch_setpoint": {
+        "name": "Heizungssollwert"
+      },
+      "ot_dhw_setpoint": {
+        "name": "WW-Sollwert"
+      },
+      "dhw_comfort": {
+        "name": "WW-Sollwert Komfort"
+      },
+      "dhw_eco": {
+        "name": "WW-Sollwert Eco"
+      }
+    },
+    "select": {
+      "operation_mode": {
+        "name": "Betriebsart",
+        "state": {
+          "standby": "Standby",
+          "summer": "Sommer",
+          "cooling": "Kühlung",
+          "winter": "Winter"
+        }
+      },
+      "weekday_1_profile": {
+        "name": "{target} — Montag"
+      },
+      "weekday_2_profile": {
+        "name": "{target} — Dienstag"
+      },
+      "weekday_3_profile": {
+        "name": "{target} — Mittwoch"
+      },
+      "weekday_4_profile": {
+        "name": "{target} — Donnerstag"
+      },
+      "weekday_5_profile": {
+        "name": "{target} — Freitag"
+      },
+      "weekday_6_profile": {
+        "name": "{target} — Samstag"
+      },
+      "weekday_7_profile": {
+        "name": "{target} — Sonntag"
+      },
+      "all_days_profile": {
+        "name": "Zone 1 — gleiches Profil für alle Tage"
+      },
+      "ot_mode": {
+        "name": "Modus",
+        "state": {
+          "off": "Aus",
+          "heating": "Heizung",
+          "water": "WW",
+          "heating_water": "Heizung + WW"
+        }
+      }
+    },
+    "time": {
+      "fascia_start": {
+        "name": "Profil {profile} Zeitabschnitt {fascia} Beginn"
+      },
+      "fascia_end": {
+        "name": "Profil {profile} Zeitabschnitt {fascia} Ende"
+      }
+    },
+    "climate": {
+      "heating_thermostat": {
+        "name": "Zone 1 Thermostat"
+      },
+      "dhw_thermostat": {
+        "name": "WW"
+      },
+      "heating_thermostat_zone2": {
+        "name": "Zone 2 Thermostat"
+      },
+      "heating_thermostat_zone3": {
+        "name": "Zone 3 Thermostat"
+      }
+    },
+    "switch": {
+      "dhw_comfort_eco": {
+        "name": "WW Komfort-Eco nach Programm"
+      }
+    }
+  },
+  "selector": {
+    "protocol": {
+      "options": {
+        "modbus": "Modbus (Magis Combo / Pro)",
+        "opentherm": "OpenTherm (VICTRIX, experimentell)"
+      }
+    }
+  }
+}

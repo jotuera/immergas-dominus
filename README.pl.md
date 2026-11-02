@@ -96,6 +96,10 @@ strategy:
 | ![Tryb pracy](docs/images/card-mode.png) | ![Harmonogram](docs/images/card-schedule.png) |
 | ![Łączność](docs/images/card-links.png) | ![Ustawienia](docs/images/card-settings.png) |
 
+![Kalibracja](docs/images/card-calibration.png)
+
+![Wykresy](docs/images/card-charts.png)
+
 Danych pompy ciepła (sprężarka, COP, zasilanie / powrót pompy, energia) nie da się odczytać przez Dominusa – do tego
 służy hub.
 

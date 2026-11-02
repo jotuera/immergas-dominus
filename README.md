@@ -97,6 +97,10 @@ strategy:
 | ![Operating mode](docs/images/en/card-mode.png) | ![Schedule](docs/images/en/card-schedule.png) |
 | ![Connectivity](docs/images/en/card-links.png) | ![Settings](docs/images/en/card-settings.png) |
 
+![Calibration](docs/images/en/card-calibration.png)
+
+![Charts](docs/images/en/card-charts.png)
+
 Heat-pump data (compressor, COP, flow / return of the heat pump, energy) is not readable through Dominus – for that
 see the hub.
 

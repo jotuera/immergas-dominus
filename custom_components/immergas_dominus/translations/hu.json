@@ -279,6 +279,45 @@
       },
       "legionella_hours": {
         "name": "Legionella elleni védelem időtartama P13"
+      },
+      "curve_r02": {
+        "name": "Fűtési görbe R02 (külső hőm. max. előremenőnél)"
+      },
+      "curve_r03": {
+        "name": "Fűtési görbe R03 (külső hőm. min. előremenőnél)"
+      },
+      "curve_r04": {
+        "name": "Fűtési görbe R04 (1. zóna max. fűtési előremenő)"
+      },
+      "curve_r05": {
+        "name": "Fűtési görbe R05 (1. zóna min. fűtési előremenő)"
+      },
+      "dhw_hysteresis": {
+        "name": "HMV termosztát T02 (hiszterézis)"
+      },
+      "ch_restart_minutes": {
+        "name": "Fűtés indítási időzítő T05"
+      },
+      "integration_ch_wait": {
+        "name": "Kazán integráció I04 (max. várakozás, fűtés)"
+      },
+      "integration_activation_temp": {
+        "name": "Kazán integráció I10 (aktiválási külső hőm.)"
+      },
+      "curve_r10": {
+        "name": "Hűtési görbe R10 (külső hőm. min. előremenőnél)"
+      },
+      "curve_r11": {
+        "name": "Hűtési görbe R11 (külső hőm. max. előremenőnél)"
+      },
+      "curve_r12": {
+        "name": "Hűtési görbe R12 (1. zóna min. hűtési előremenő)"
+      },
+      "curve_r13": {
+        "name": "Hűtési görbe R13 (1. zóna max. hűtési előremenő)"
+      },
+      "outdoor_probe_correction": {
+        "name": "Külső érzékelő korrekció P07"
       }
     },
     "select": {
@@ -353,6 +392,14 @@
           "saturday": "Szombat",
           "sunday": "Vasárnap"
         }
+      },
+      "room_control_mode": {
+        "name": "Helyiségszabályozás A31",
+        "state": {
+          "rp": "RP – panel",
+          "rpt": "RPT – panel + szobatermosztát",
+          "rt": "RT – szobatermosztát"
+        }
       }
     },
     "time": {
@@ -401,6 +448,12 @@
       },
       "legionella": {
         "name": "Legionella elleni védelem P15 (beállítva a kazánon)"
+      },
+      "boiler_integration": {
+        "name": "Kazán integráció I02 (beállítva a kazánon)"
+      },
+      "dhw_integration": {
+        "name": "HMV kazán integráció I01 (beállítva a kazánon)"
       }
     },
     "datetime": {

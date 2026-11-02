@@ -124,6 +124,19 @@ room `2011`, target `2015`, outdoor `3002`, DHW cylinder `3016`, mode `2000`); n
 - **Boiler programs you declare** (not readable over TCP): *Night function U11* with start / stop (U12 / U13) and
   *Anti-legionella P15* with day, start and duration (P17 / P16 / P13). Turn the switch on when the program is set on
   the boiler; the dashboard then shows the reminder row and the timer bar. Nothing is written to the boiler.
+- **Boiler parameters you copy from the boiler menu** (also not readable over TCP), all in the Settings card:
+  - *Heating curve* R02–R05 and *cooling curve* R10–R13 – the Curve card draws them with the U03 offset and the flow
+    computed for the current outdoor temperature; Calibration shows how many °C of water +1 U03 means.
+  - *DHW thermostat T02* – the DHW cycle starts at setpoint − T02 (Now card, threshold mark on the diagram cylinder).
+  - *CH start timer T05* – "CH start lock" bar after a heating demand ends; Calibration uses it for cycling.
+  - *Boiler integration* (Magis Combo): switches I02 (CH) and I01 (DHW) plus I04 (max. wait) and I10 (activation
+    outdoor temperature) – "Boiler joining" bar during a heating demand and a hint below I10.
+  - *Room control A31* (RP / RPT / RT) – explained on the Zone 1 panel tile; *outdoor probe correction P07* – a
+    reminder on the diagram when it is not 0.
+
+  **All of them start empty** on a fresh install (a wrong default would be worse than none). Copy each value once from
+  the boiler menu: an empty one is shown greyed with "not set – enter it from the boiler" and a suggested value; the
+  first −/+ tap starts from that suggestion. Each feature (bar, curve, hint) turns on only when all its values are set.
 
 ## Knowledge base: registers over TCP
 
@@ -188,6 +201,15 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 1.5.0
+
+- **More declared boiler parameters**: heating curve R02–R05, cooling curve R10–R13, DHW thermostat T02, CH start timer
+  T05, boiler integration I01 / I02 / I04 / I10, room control A31 and outdoor probe correction P07 – the Curve card
+  (new on the dashboard), Now card bars (CH start lock, boiler joining, DHW start threshold), diagram hints and
+  Calibration texts use them.
+- **Declared values start empty** (also the 1.4.0 night function and anti-legionella values on a new install) and show
+  a suggested value until you copy the real one from the boiler. Values you already entered are kept.
 
 ### 1.4.0
 

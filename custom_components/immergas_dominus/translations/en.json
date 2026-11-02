@@ -279,6 +279,45 @@
       },
       "legionella_hours": {
         "name": "Anti-legionella duration P13"
+      },
+      "curve_r02": {
+        "name": "Heating curve R02 (outdoor at max flow)"
+      },
+      "curve_r03": {
+        "name": "Heating curve R03 (outdoor at min flow)"
+      },
+      "curve_r04": {
+        "name": "Heating curve R04 (zone 1 max CH flow)"
+      },
+      "curve_r05": {
+        "name": "Heating curve R05 (zone 1 min CH flow)"
+      },
+      "dhw_hysteresis": {
+        "name": "DHW thermostat T02 (hysteresis)"
+      },
+      "ch_restart_minutes": {
+        "name": "CH start timer T05"
+      },
+      "integration_ch_wait": {
+        "name": "Boiler integration I04 (max. wait, CH)"
+      },
+      "integration_activation_temp": {
+        "name": "Boiler integration I10 (activation outdoor temp.)"
+      },
+      "curve_r10": {
+        "name": "Cooling curve R10 (outdoor at min flow)"
+      },
+      "curve_r11": {
+        "name": "Cooling curve R11 (outdoor at max flow)"
+      },
+      "curve_r12": {
+        "name": "Cooling curve R12 (zone 1 min cooling flow)"
+      },
+      "curve_r13": {
+        "name": "Cooling curve R13 (zone 1 max cooling flow)"
+      },
+      "outdoor_probe_correction": {
+        "name": "Outdoor probe correction P07"
       }
     },
     "select": {
@@ -353,6 +392,14 @@
           "saturday": "Saturday",
           "sunday": "Sunday"
         }
+      },
+      "room_control_mode": {
+        "name": "Room control A31",
+        "state": {
+          "rp": "RP – panel",
+          "rpt": "RPT – panel + room thermostat",
+          "rt": "RT – room thermostat"
+        }
       }
     },
     "time": {
@@ -401,6 +448,12 @@
       },
       "legionella": {
         "name": "Anti-legionella P15 (set on the boiler)"
+      },
+      "boiler_integration": {
+        "name": "Boiler integration I02 (set on the boiler)"
+      },
+      "dhw_integration": {
+        "name": "DHW boiler integration I01 (set on the boiler)"
       }
     },
     "datetime": {

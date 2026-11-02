@@ -279,6 +279,45 @@
       },
       "legionella_hours": {
         "name": "Anty-legionella czas P13"
+      },
+      "curve_r02": {
+        "name": "Krzywa grzewcza R02 (temp. zewn. przy maks. zasilaniu)"
+      },
+      "curve_r03": {
+        "name": "Krzywa grzewcza R03 (temp. zewn. przy min. zasilaniu)"
+      },
+      "curve_r04": {
+        "name": "Krzywa grzewcza R04 (maks. zasilanie CO strefy 1)"
+      },
+      "curve_r05": {
+        "name": "Krzywa grzewcza R05 (min. zasilanie CO strefy 1)"
+      },
+      "dhw_hysteresis": {
+        "name": "Termostat CWU T02 (histereza)"
+      },
+      "ch_restart_minutes": {
+        "name": "Minutnik startów CO T05"
+      },
+      "integration_ch_wait": {
+        "name": "Integracja kotła I04 (maks. czas oczekiwania CO)"
+      },
+      "integration_activation_temp": {
+        "name": "Integracja kotła I10 (temp. zewn. aktywacji)"
+      },
+      "curve_r10": {
+        "name": "Krzywa chłodzenia R10 (temp. zewn. przy min. zasilaniu)"
+      },
+      "curve_r11": {
+        "name": "Krzywa chłodzenia R11 (temp. zewn. przy maks. zasilaniu)"
+      },
+      "curve_r12": {
+        "name": "Krzywa chłodzenia R12 (min. zasilanie chłodzenia strefy 1)"
+      },
+      "curve_r13": {
+        "name": "Krzywa chłodzenia R13 (maks. zasilanie chłodzenia strefy 1)"
+      },
+      "outdoor_probe_correction": {
+        "name": "Korekta sondy zewnętrznej P07"
       }
     },
     "select": {
@@ -353,6 +392,14 @@
           "saturday": "Sobota",
           "sunday": "Niedziela"
         }
+      },
+      "room_control_mode": {
+        "name": "Sterowanie pokojowe A31",
+        "state": {
+          "rp": "RP – panel",
+          "rpt": "RPT – panel + termostat pokojowy",
+          "rt": "RT – termostat pokojowy"
+        }
       }
     },
     "time": {
@@ -401,6 +448,12 @@
       },
       "legionella": {
         "name": "Anty-legionella P15 (ustawiona na piecu)"
+      },
+      "boiler_integration": {
+        "name": "Integracja kotła I02 (ustawiona na piecu)"
+      },
+      "dhw_integration": {
+        "name": "Integracja kotła CWU I01 (ustawiona na piecu)"
       }
     },
     "datetime": {

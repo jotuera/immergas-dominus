@@ -279,6 +279,45 @@
       },
       "legionella_hours": {
         "name": "Legionellenschutz Dauer P13"
+      },
+      "curve_r02": {
+        "name": "Heizkurve R02 (Außentemp. bei max. Vorlauf)"
+      },
+      "curve_r03": {
+        "name": "Heizkurve R03 (Außentemp. bei min. Vorlauf)"
+      },
+      "curve_r04": {
+        "name": "Heizkurve R04 (max. Heizvorlauf Zone 1)"
+      },
+      "curve_r05": {
+        "name": "Heizkurve R05 (min. Heizvorlauf Zone 1)"
+      },
+      "dhw_hysteresis": {
+        "name": "WW-Thermostat T02 (Hysterese)"
+      },
+      "ch_restart_minutes": {
+        "name": "Heizungs-Startsperre T05"
+      },
+      "integration_ch_wait": {
+        "name": "Kesselintegration I04 (max. Wartezeit, Heizung)"
+      },
+      "integration_activation_temp": {
+        "name": "Kesselintegration I10 (Aktivierungs-Außentemp.)"
+      },
+      "curve_r10": {
+        "name": "Kühlkurve R10 (Außentemp. bei min. Vorlauf)"
+      },
+      "curve_r11": {
+        "name": "Kühlkurve R11 (Außentemp. bei max. Vorlauf)"
+      },
+      "curve_r12": {
+        "name": "Kühlkurve R12 (min. Kühlvorlauf Zone 1)"
+      },
+      "curve_r13": {
+        "name": "Kühlkurve R13 (max. Kühlvorlauf Zone 1)"
+      },
+      "outdoor_probe_correction": {
+        "name": "Außenfühler-Korrektur P07"
       }
     },
     "select": {
@@ -353,6 +392,14 @@
           "saturday": "Samstag",
           "sunday": "Sonntag"
         }
+      },
+      "room_control_mode": {
+        "name": "Raumregelung A31",
+        "state": {
+          "rp": "RP – Bedienteil",
+          "rpt": "RPT – Bedienteil + Raumthermostat",
+          "rt": "RT – Raumthermostat"
+        }
       }
     },
     "time": {
@@ -401,6 +448,12 @@
       },
       "legionella": {
         "name": "Legionellenschutz P15 (am Kessel eingestellt)"
+      },
+      "boiler_integration": {
+        "name": "Kesselintegration I02 (am Kessel eingestellt)"
+      },
+      "dhw_integration": {
+        "name": "WW-Kesselintegration I01 (am Kessel eingestellt)"
       }
     },
     "datetime": {

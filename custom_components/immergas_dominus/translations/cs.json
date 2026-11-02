@@ -279,6 +279,45 @@
       },
       "legionella_hours": {
         "name": "Antilegionella doba P13"
+      },
+      "curve_r02": {
+        "name": "Topná křivka R02 (venkovní teplota při max. výstupu)"
+      },
+      "curve_r03": {
+        "name": "Topná křivka R03 (venkovní teplota při min. výstupu)"
+      },
+      "curve_r04": {
+        "name": "Topná křivka R04 (max. výstup ÚT zóny 1)"
+      },
+      "curve_r05": {
+        "name": "Topná křivka R05 (min. výstup ÚT zóny 1)"
+      },
+      "dhw_hysteresis": {
+        "name": "Termostat TUV T02 (hystereze)"
+      },
+      "ch_restart_minutes": {
+        "name": "Časovač startů ÚT T05"
+      },
+      "integration_ch_wait": {
+        "name": "Integrace kotle I04 (max. čekání, ÚT)"
+      },
+      "integration_activation_temp": {
+        "name": "Integrace kotle I10 (aktivační venkovní teplota)"
+      },
+      "curve_r10": {
+        "name": "Křivka chlazení R10 (venkovní teplota při min. výstupu)"
+      },
+      "curve_r11": {
+        "name": "Křivka chlazení R11 (venkovní teplota při max. výstupu)"
+      },
+      "curve_r12": {
+        "name": "Křivka chlazení R12 (min. výstup chlazení zóny 1)"
+      },
+      "curve_r13": {
+        "name": "Křivka chlazení R13 (max. výstup chlazení zóny 1)"
+      },
+      "outdoor_probe_correction": {
+        "name": "Korekce venkovního čidla P07"
       }
     },
     "select": {
@@ -353,6 +392,14 @@
           "saturday": "Sobota",
           "sunday": "Neděle"
         }
+      },
+      "room_control_mode": {
+        "name": "Prostorová regulace A31",
+        "state": {
+          "rp": "RP – panel",
+          "rpt": "RPT – panel + prostorový termostat",
+          "rt": "RT – prostorový termostat"
+        }
       }
     },
     "time": {
@@ -401,6 +448,12 @@
       },
       "legionella": {
         "name": "Antilegionella P15 (nastavená na kotli)"
+      },
+      "boiler_integration": {
+        "name": "Integrace kotle I02 (nastavená na kotli)"
+      },
+      "dhw_integration": {
+        "name": "Integrace kotle TUV I01 (nastavená na kotli)"
       }
     },
     "datetime": {

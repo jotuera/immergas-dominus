@@ -279,6 +279,45 @@
       },
       "legionella_hours": {
         "name": "Anti-legionella duur P13"
+      },
+      "curve_r02": {
+        "name": "Stooklijn R02 (buitentemp. bij max. aanvoer)"
+      },
+      "curve_r03": {
+        "name": "Stooklijn R03 (buitentemp. bij min. aanvoer)"
+      },
+      "curve_r04": {
+        "name": "Stooklijn R04 (max. CV-aanvoer zone 1)"
+      },
+      "curve_r05": {
+        "name": "Stooklijn R05 (min. CV-aanvoer zone 1)"
+      },
+      "dhw_hysteresis": {
+        "name": "SWW-thermostaat T02 (hysterese)"
+      },
+      "ch_restart_minutes": {
+        "name": "Startvertraging CV T05"
+      },
+      "integration_ch_wait": {
+        "name": "Ketelintegratie I04 (max. wachttijd, CV)"
+      },
+      "integration_activation_temp": {
+        "name": "Ketelintegratie I10 (activeringsbuitentemp.)"
+      },
+      "curve_r10": {
+        "name": "Koelcurve R10 (buitentemp. bij min. aanvoer)"
+      },
+      "curve_r11": {
+        "name": "Koelcurve R11 (buitentemp. bij max. aanvoer)"
+      },
+      "curve_r12": {
+        "name": "Koelcurve R12 (min. koelaanvoer zone 1)"
+      },
+      "curve_r13": {
+        "name": "Koelcurve R13 (max. koelaanvoer zone 1)"
+      },
+      "outdoor_probe_correction": {
+        "name": "Correctie buitenvoeler P07"
       }
     },
     "select": {
@@ -353,6 +392,14 @@
           "saturday": "Zaterdag",
           "sunday": "Zondag"
         }
+      },
+      "room_control_mode": {
+        "name": "Ruimteregeling A31",
+        "state": {
+          "rp": "RP – paneel",
+          "rpt": "RPT – paneel + kamerthermostaat",
+          "rt": "RT – kamerthermostaat"
+        }
       }
     },
     "time": {
@@ -401,6 +448,12 @@
       },
       "legionella": {
         "name": "Anti-legionella P15 (ingesteld op de ketel)"
+      },
+      "boiler_integration": {
+        "name": "Ketelintegratie I02 (ingesteld op de ketel)"
+      },
+      "dhw_integration": {
+        "name": "SWW-ketelintegratie I01 (ingesteld op de ketel)"
       }
     },
     "datetime": {

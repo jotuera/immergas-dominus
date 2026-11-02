@@ -279,6 +279,45 @@
       },
       "legionella_hours": {
         "name": "Antilegionella durata P13"
+      },
+      "curve_r02": {
+        "name": "Curva climatica R02 (temp. esterna a mandata max)"
+      },
+      "curve_r03": {
+        "name": "Curva climatica R03 (temp. esterna a mandata min)"
+      },
+      "curve_r04": {
+        "name": "Curva climatica R04 (mandata risc. max zona 1)"
+      },
+      "curve_r05": {
+        "name": "Curva climatica R05 (mandata risc. min zona 1)"
+      },
+      "dhw_hysteresis": {
+        "name": "Termostato ACS T02 (isteresi)"
+      },
+      "ch_restart_minutes": {
+        "name": "Temporizzatore avvii riscaldamento T05"
+      },
+      "integration_ch_wait": {
+        "name": "Integrazione caldaia I04 (attesa max, riscaldamento)"
+      },
+      "integration_activation_temp": {
+        "name": "Integrazione caldaia I10 (temp. esterna di attivazione)"
+      },
+      "curve_r10": {
+        "name": "Curva raffrescamento R10 (temp. esterna a mandata min)"
+      },
+      "curve_r11": {
+        "name": "Curva raffrescamento R11 (temp. esterna a mandata max)"
+      },
+      "curve_r12": {
+        "name": "Curva raffrescamento R12 (mandata raffr. min zona 1)"
+      },
+      "curve_r13": {
+        "name": "Curva raffrescamento R13 (mandata raffr. max zona 1)"
+      },
+      "outdoor_probe_correction": {
+        "name": "Correzione sonda esterna P07"
       }
     },
     "select": {
@@ -353,6 +392,14 @@
           "saturday": "Sabato",
           "sunday": "Domenica"
         }
+      },
+      "room_control_mode": {
+        "name": "Controllo ambiente A31",
+        "state": {
+          "rp": "RP – pannello",
+          "rpt": "RPT – pannello + termostato ambiente",
+          "rt": "RT – termostato ambiente"
+        }
       }
     },
     "time": {
@@ -401,6 +448,12 @@
       },
       "legionella": {
         "name": "Antilegionella P15 (impostata sulla caldaia)"
+      },
+      "boiler_integration": {
+        "name": "Integrazione caldaia I02 (impostata sulla caldaia)"
+      },
+      "dhw_integration": {
+        "name": "Integrazione caldaia ACS I01 (impostata sulla caldaia)"
       }
     },
     "datetime": {

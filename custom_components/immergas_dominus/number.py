@@ -20,7 +20,7 @@ from .const import (
 from .coordinator import ImmergasDominusCoordinator
 from .dhw_schedule import DEFAULT_COMFORT, DEFAULT_ECO, DHW_TARGET_PDU
 from .entity import ImmergasDominusEntity
-from .programs import ImmergasLegionellaHours
+from .programs import declared_numbers
 from .stats_entities import SETTING_SPECS, ImmergasStatsSetting
 
 
@@ -48,7 +48,7 @@ async def async_setup_entry(
         ]
     if coordinator.stats is not None:
         entities += [ImmergasStatsSetting(coordinator, spec) for spec in SETTING_SPECS]
-        entities.append(ImmergasLegionellaHours(coordinator))
+        entities += declared_numbers(coordinator)
     async_add_entities(entities)
 
 

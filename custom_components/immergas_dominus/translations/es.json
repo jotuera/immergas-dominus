@@ -279,6 +279,45 @@
       },
       "legionella_hours": {
         "name": "Antilegionela duración P13"
+      },
+      "curve_r02": {
+        "name": "Curva de calefacción R02 (temp. exterior a impulsión máx.)"
+      },
+      "curve_r03": {
+        "name": "Curva de calefacción R03 (temp. exterior a impulsión mín.)"
+      },
+      "curve_r04": {
+        "name": "Curva de calefacción R04 (impulsión calef. máx. zona 1)"
+      },
+      "curve_r05": {
+        "name": "Curva de calefacción R05 (impulsión calef. mín. zona 1)"
+      },
+      "dhw_hysteresis": {
+        "name": "Termostato ACS T02 (histéresis)"
+      },
+      "ch_restart_minutes": {
+        "name": "Temporizador de arranques calefacción T05"
+      },
+      "integration_ch_wait": {
+        "name": "Integración caldera I04 (espera máx., calefacción)"
+      },
+      "integration_activation_temp": {
+        "name": "Integración caldera I10 (temp. exterior de activación)"
+      },
+      "curve_r10": {
+        "name": "Curva de refrigeración R10 (temp. exterior a impulsión mín.)"
+      },
+      "curve_r11": {
+        "name": "Curva de refrigeración R11 (temp. exterior a impulsión máx.)"
+      },
+      "curve_r12": {
+        "name": "Curva de refrigeración R12 (impulsión refrig. mín. zona 1)"
+      },
+      "curve_r13": {
+        "name": "Curva de refrigeración R13 (impulsión refrig. máx. zona 1)"
+      },
+      "outdoor_probe_correction": {
+        "name": "Corrección de la sonda exterior P07"
       }
     },
     "select": {
@@ -353,6 +392,14 @@
           "saturday": "Sábado",
           "sunday": "Domingo"
         }
+      },
+      "room_control_mode": {
+        "name": "Control de ambiente A31",
+        "state": {
+          "rp": "RP – panel",
+          "rpt": "RPT – panel + termostato ambiente",
+          "rt": "RT – termostato ambiente"
+        }
       }
     },
     "time": {
@@ -401,6 +448,12 @@
       },
       "legionella": {
         "name": "Antilegionela P15 (ajustada en la caldera)"
+      },
+      "boiler_integration": {
+        "name": "Integración caldera I02 (ajustada en la caldera)"
+      },
+      "dhw_integration": {
+        "name": "Integración caldera ACS I01 (ajustada en la caldera)"
       }
     },
     "datetime": {

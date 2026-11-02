@@ -124,6 +124,21 @@ pokój `2011`, zadana `2015`, zewnętrzna `3002`, zasobnik CWU `3016`, tryb `200
 - **Programy kotła deklarowane przez ciebie** (niedostępne po TCP): *Funkcja nocna U11* ze startem i stopem (U12 / U13)
   oraz *Anty-legionella P15* z dniem, startem i czasem (P17 / P16 / P13). Włącz przełącznik, gdy program jest ustawiony
   na piecu; dashboard pokaże wtedy wiersz-przypomnienie i pasek czasu. Nic nie jest zapisywane do kotła.
+- **Parametry przepisywane z menu pieca** (też niedostępne po TCP), wszystkie w karcie Ustawienia:
+  - *Krzywa grzewcza* R02–R05 i *krzywa chłodzenia* R10–R13 – karta Krzywa rysuje je z offsetem U03 i zasilaniem
+    wyliczonym dla bieżącej temperatury zewnętrznej; Kalibracja pokazuje, ile °C wody daje +1 U03.
+  - *Termostat CWU T02* – cykl CWU startuje przy nastawie − T02 (karta Teraz, znacznik progu na zasobniku w diagramie).
+  - *Minutnik startów CO T05* – pasek „Blokada startu CO” po zakończeniu żądania grzania; Kalibracja liczy z nim
+    taktowanie.
+  - *Integracja kotła* (Magis Combo): przełączniki I02 (CO) i I01 (CWU) oraz I04 (maks. czas oczekiwania) i I10
+    (temperatura zewnętrzna aktywacji) – pasek „Dołączenie kotła” w czasie żądania grzania i podpowiedź poniżej I10.
+  - *Sterowanie pokojowe A31* (RP / RPT / RT) – wyjaśnione na kafelku Panel Strefy 1; *korekta sondy zewnętrznej P07*
+    – przypomnienie na diagramie, gdy jest różna od 0.
+
+  **Wszystkie startują puste** po świeżej instalacji (zła wartość domyślna byłaby gorsza niż żadna). Przepisz każdą
+  raz z menu pieca: pusta jest wyszarzona z napisem „nie ustawione – wpisz z pieca” i sugerowaną wartością; pierwsze
+  dotknięcie −/+ zaczyna od tej sugestii. Każda funkcja (pasek, krzywa, podpowiedź) włącza się dopiero, gdy wszystkie
+  jej wartości są ustawione.
 
 ## Baza wiedzy: rejestry po TCP
 
@@ -188,6 +203,15 @@ przyjmie sesję.
   sprawdzone krzyżowo, ale na innych modelach mogą wymagać weryfikacji przez TCP AUTH.
 
 ## Historia zmian
+
+### 1.5.0
+
+- **Więcej deklarowanych parametrów pieca**: krzywa grzewcza R02–R05, krzywa chłodzenia R10–R13, termostat CWU T02,
+  minutnik startów CO T05, integracja kotła I01 / I02 / I04 / I10, sterowanie pokojowe A31 i korekta sondy P07 –
+  korzystają z nich karta Krzywa (nowa na dashboardzie), paski karty Teraz (blokada startu CO, dołączenie kotła, próg
+  startu CWU), podpowiedzi na diagramie i teksty Kalibracji.
+- **Deklarowane wartości startują puste** (także wartości funkcji nocnej i anty-legionelli z 1.4.0 przy nowej
+  instalacji) i pokazują sugestię, dopóki nie przepiszesz prawdziwej z pieca. Wpisane już wartości zostają.
 
 ### 1.4.0
 

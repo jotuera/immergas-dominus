@@ -279,6 +279,45 @@
       },
       "legionella_hours": {
         "name": "Antilegionela trvanie P13"
+      },
+      "curve_r02": {
+        "name": "Vykurovacia krivka R02 (vonkajšia teplota pri max. výstupe)"
+      },
+      "curve_r03": {
+        "name": "Vykurovacia krivka R03 (vonkajšia teplota pri min. výstupe)"
+      },
+      "curve_r04": {
+        "name": "Vykurovacia krivka R04 (max. výstup ÚK zóny 1)"
+      },
+      "curve_r05": {
+        "name": "Vykurovacia krivka R05 (min. výstup ÚK zóny 1)"
+      },
+      "dhw_hysteresis": {
+        "name": "Termostat TÚV T02 (hysterézia)"
+      },
+      "ch_restart_minutes": {
+        "name": "Časovač štartov ÚK T05"
+      },
+      "integration_ch_wait": {
+        "name": "Integrácia kotla I04 (max. čakanie, ÚK)"
+      },
+      "integration_activation_temp": {
+        "name": "Integrácia kotla I10 (aktivačná vonkajšia teplota)"
+      },
+      "curve_r10": {
+        "name": "Krivka chladenia R10 (vonkajšia teplota pri min. výstupe)"
+      },
+      "curve_r11": {
+        "name": "Krivka chladenia R11 (vonkajšia teplota pri max. výstupe)"
+      },
+      "curve_r12": {
+        "name": "Krivka chladenia R12 (min. výstup chladenia zóny 1)"
+      },
+      "curve_r13": {
+        "name": "Krivka chladenia R13 (max. výstup chladenia zóny 1)"
+      },
+      "outdoor_probe_correction": {
+        "name": "Korekcia vonkajšieho čidla P07"
       }
     },
     "select": {
@@ -353,6 +392,14 @@
           "saturday": "Sobota",
           "sunday": "Nedeľa"
         }
+      },
+      "room_control_mode": {
+        "name": "Priestorová regulácia A31",
+        "state": {
+          "rp": "RP – panel",
+          "rpt": "RPT – panel + priestorový termostat",
+          "rt": "RT – priestorový termostat"
+        }
       }
     },
     "time": {
@@ -401,6 +448,12 @@
       },
       "legionella": {
         "name": "Antilegionela P15 (nastavená na kotle)"
+      },
+      "boiler_integration": {
+        "name": "Integrácia kotla I02 (nastavená na kotle)"
+      },
+      "dhw_integration": {
+        "name": "Integrácia kotla TÚV I01 (nastavená na kotle)"
       }
     },
     "datetime": {

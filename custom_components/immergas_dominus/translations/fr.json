@@ -279,6 +279,45 @@
       },
       "legionella_hours": {
         "name": "Anti-légionelle durée P13"
+      },
+      "curve_r02": {
+        "name": "Courbe de chauffe R02 (temp. ext. au départ max.)"
+      },
+      "curve_r03": {
+        "name": "Courbe de chauffe R03 (temp. ext. au départ min.)"
+      },
+      "curve_r04": {
+        "name": "Courbe de chauffe R04 (départ chauffage max. zone 1)"
+      },
+      "curve_r05": {
+        "name": "Courbe de chauffe R05 (départ chauffage min. zone 1)"
+      },
+      "dhw_hysteresis": {
+        "name": "Thermostat ECS T02 (hystérésis)"
+      },
+      "ch_restart_minutes": {
+        "name": "Temporisation démarrage chauffage T05"
+      },
+      "integration_ch_wait": {
+        "name": "Intégration chaudière I04 (attente max., chauffage)"
+      },
+      "integration_activation_temp": {
+        "name": "Intégration chaudière I10 (temp. ext. d'activation)"
+      },
+      "curve_r10": {
+        "name": "Courbe de rafraîchissement R10 (temp. ext. au départ min.)"
+      },
+      "curve_r11": {
+        "name": "Courbe de rafraîchissement R11 (temp. ext. au départ max.)"
+      },
+      "curve_r12": {
+        "name": "Courbe de rafraîchissement R12 (départ rafraîch. min. zone 1)"
+      },
+      "curve_r13": {
+        "name": "Courbe de rafraîchissement R13 (départ rafraîch. max. zone 1)"
+      },
+      "outdoor_probe_correction": {
+        "name": "Correction de la sonde extérieure P07"
       }
     },
     "select": {
@@ -353,6 +392,14 @@
           "saturday": "Samedi",
           "sunday": "Dimanche"
         }
+      },
+      "room_control_mode": {
+        "name": "Régulation d'ambiance A31",
+        "state": {
+          "rp": "RP – panneau",
+          "rpt": "RPT – panneau + thermostat d'ambiance",
+          "rt": "RT – thermostat d'ambiance"
+        }
       }
     },
     "time": {
@@ -401,6 +448,12 @@
       },
       "legionella": {
         "name": "Anti-légionelle P15 (réglée sur la chaudière)"
+      },
+      "boiler_integration": {
+        "name": "Intégration chaudière I02 (réglée sur la chaudière)"
+      },
+      "dhw_integration": {
+        "name": "Intégration chaudière ECS I01 (réglée sur la chaudière)"
       }
     },
     "datetime": {

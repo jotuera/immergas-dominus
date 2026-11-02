@@ -279,6 +279,45 @@
       },
       "legionella_hours": {
         "name": "Antilegionela duração P13"
+      },
+      "curve_r02": {
+        "name": "Curva de aquecimento R02 (temp. exterior na ida máx.)"
+      },
+      "curve_r03": {
+        "name": "Curva de aquecimento R03 (temp. exterior na ida mín.)"
+      },
+      "curve_r04": {
+        "name": "Curva de aquecimento R04 (ida aquecimento máx. zona 1)"
+      },
+      "curve_r05": {
+        "name": "Curva de aquecimento R05 (ida aquecimento mín. zona 1)"
+      },
+      "dhw_hysteresis": {
+        "name": "Termóstato AQS T02 (histerese)"
+      },
+      "ch_restart_minutes": {
+        "name": "Temporizador de arranques aquecimento T05"
+      },
+      "integration_ch_wait": {
+        "name": "Integração caldeira I04 (espera máx., aquecimento)"
+      },
+      "integration_activation_temp": {
+        "name": "Integração caldeira I10 (temp. exterior de ativação)"
+      },
+      "curve_r10": {
+        "name": "Curva de arrefecimento R10 (temp. exterior na ida mín.)"
+      },
+      "curve_r11": {
+        "name": "Curva de arrefecimento R11 (temp. exterior na ida máx.)"
+      },
+      "curve_r12": {
+        "name": "Curva de arrefecimento R12 (ida arrefecimento mín. zona 1)"
+      },
+      "curve_r13": {
+        "name": "Curva de arrefecimento R13 (ida arrefecimento máx. zona 1)"
+      },
+      "outdoor_probe_correction": {
+        "name": "Correção da sonda exterior P07"
       }
     },
     "select": {
@@ -353,6 +392,14 @@
           "saturday": "Sábado",
           "sunday": "Domingo"
         }
+      },
+      "room_control_mode": {
+        "name": "Controlo ambiente A31",
+        "state": {
+          "rp": "RP – painel",
+          "rpt": "RPT – painel + termóstato ambiente",
+          "rt": "RT – termóstato ambiente"
+        }
       }
     },
     "time": {
@@ -401,6 +448,12 @@
       },
       "legionella": {
         "name": "Antilegionela P15 (definida na caldeira)"
+      },
+      "boiler_integration": {
+        "name": "Integração caldeira I02 (definida na caldeira)"
+      },
+      "dhw_integration": {
+        "name": "Integração caldeira AQS I01 (definida na caldeira)"
       }
     },
     "datetime": {

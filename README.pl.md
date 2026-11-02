@@ -204,6 +204,11 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.5.1
+
+- Kalibracja: rekomendacje z parametrów przepisanych z pieca – T02, T05, U11, P15 / P13, I04, I10, A31 i P07;
+  Ustawienia podzielone na online i offline; zadana zasilania i wilgotności Strefy 1 w ustawieniach online.
+
 ### 1.5.0
 
 - **Więcej deklarowanych parametrów pieca**: krzywa grzewcza R02–R05, krzywa chłodzenia R10–R13, termostat CWU T02,

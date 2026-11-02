@@ -202,6 +202,11 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.5.1
+
+- Calibration: recommendations from the boiler parameters copied by hand – T02, T05, U11, P15 / P13, I04, I10,
+  A31 and P07; Settings split into online and offline; zone 1 flow and humidity setpoints in the online settings.
+
 ### 1.5.0
 
 - **More declared boiler parameters**: heating curve R02–R05, cooling curve R10–R13, DHW thermostat T02, CH start timer

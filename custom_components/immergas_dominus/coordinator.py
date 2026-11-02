@@ -52,6 +52,8 @@ class ImmergasDominusCoordinator(DataUpdateCoordinator[dict[int, int]]):
         self.last_success: datetime | None = None
         self.failed_polls = 0
         self.missing_last_poll = 0
+        # language of the fault description: "auto" = the Home Assistant language (select "Fault language")
+        self.fault_language = "auto"
         super().__init__(
             hass,
             _LOGGER,

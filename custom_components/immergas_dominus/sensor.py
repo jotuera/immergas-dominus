@@ -121,7 +121,8 @@ class ImmergasDominusFaultDescriptionSensor(ImmergasDominusEntity, SensorEntity)
         raw = self.raw_value
         if raw is None:
             return None
-        return anomalies.describe(int(raw), self.hass.config.language)
+        lang = self.coordinator.fault_language
+        return anomalies.describe(int(raw), self.hass.config.language if lang == "auto" else lang)
 
 
 class ImmergasDominusProgramPhaseSensor(ImmergasDominusEntity, SensorEntity):

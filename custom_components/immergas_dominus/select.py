@@ -3,8 +3,12 @@ from __future__ import annotations
 
 from homeassistant.components.select import SelectEntity
 from homeassistant.config_entries import ConfigEntry
+from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.helpers.restore_state import RestoreEntity
+
+from . import anomalies
 
 from .const import (
     CHRONO_OPTION_TO_RAW,
@@ -43,7 +47,42 @@ async def async_setup_entry(
         for description in SELECT_DESCRIPTIONS
     ]
     entities.append(ImmergasDominusAllDaysProfileSelect(coordinator))
+    entities.append(ImmergasFaultLanguageSelect(coordinator))
     async_add_entities(entities)
+
+
+class ImmergasFaultLanguageSelect(ImmergasDominusEntity, SelectEntity, RestoreEntity):
+    """Language of the boiler fault description; "auto" follows the Home Assistant language."""
+
+    _attr_translation_key = "fault_language"
+    _attr_entity_category = EntityCategory.CONFIG
+    _attr_icon = "mdi:translate"
+    _attr_options = ["auto", *anomalies.ANOMALIES]
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "fault_language", 0, DEVICE_MAIN)
+
+    def _poll_pdus(self) -> tuple[int, ...]:
+        return ()
+
+    @property
+    def available(self) -> bool:
+        return True
+
+    @property
+    def current_option(self) -> str:
+        return self.coordinator.fault_language
+
+    async def async_added_to_hass(self) -> None:
+        await super().async_added_to_hass()
+        last = await self.async_get_last_state()
+        if last is not None and last.state in self.options:
+            self.coordinator.fault_language = last.state
+
+    async def async_select_option(self, option: str) -> None:
+        self.coordinator.fault_language = option
+        # the fault description sensor re-renders in the new language
+        self.coordinator.async_update_listeners()
 
 
 class ImmergasDominusSelect(ImmergasDominusEntity, SelectEntity):

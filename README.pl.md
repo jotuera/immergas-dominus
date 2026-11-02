@@ -79,10 +79,18 @@ strategy:
 - **Teraz** – czego kocioł potrzebuje (ogrzewanie / ciepła woda), tryb, faza programu, nastawy CO i CWU, temperatura
   zewnętrzna, Strefy 1 i zasobnika CWU, aktywny błąd.
 - **Nastawy** – Strefa 1 i CWU z −/+ oraz profilami Komfort / Eko.
-- **Tryb pracy** – Standby / Lato / Zima / Chłodzenie (dotknij 2×), faza programu Strefy 1, offset krzywej (U03),
-  CWU Komfort / Eko wg harmonogramu.
-- **Harmonogram** – cztery kalendarze i dni tygodnia dla CO i CWU (najpierw włącz urządzenie *Heating schedule*).
+- **Tryb pracy** – Standby / Lato / Zima / Chłodzenie (dotknij 2×), faza programu Strefy 1, nastawy Strefy 1 (offset
+  krzywej U03, para Komfort / Eko drugiego trybu, zadana zasilania i wilgotności), CWU Komfort / Eko wg harmonogramu.
+- **Harmonogram** – cztery kalendarze i dni tygodnia dla CO i CWU. Godziny kalendarzy wymagają urządzenia
+  *Heating schedule* (domyślnie wyłączone); karta podpowiada to, gdy jest wyłączone.
 - **Łączność** – moduł Dominus (ostatni udany odczyt, nieudane odpytania) i kocioł za nim.
+- **Ustawienia** – język opisów błędów (automatycznie = język Home Assistanta albo jeden z 11).
+
+| | |
+|---|---|
+| ![Teraz](docs/images/card-now.png) | ![Nastawy](docs/images/card-setpoints.png) |
+| ![Tryb pracy](docs/images/card-mode.png) | ![Harmonogram](docs/images/card-schedule.png) |
+| ![Łączność](docs/images/card-links.png) | ![Ustawienia](docs/images/card-settings.png) |
 
 Danych pompy ciepła (sprężarka, COP, zasilanie / powrót pompy, energia) nie da się odczytać przez Dominusa – do tego
 służy hub.
@@ -145,6 +153,14 @@ przyjmie sesję.
   sprawdzone krzyżowo, ale na innych modelach mogą wymagać weryfikacji przez TCP AUTH.
 
 ## Historia zmian
+
+### 1.2.0
+
+- Wybór **Język opisów błędów** (konfiguracja): opis błędu w języku Home Assistanta (domyślnie) albo w jednym
+  z 11 języków, niezależnie od języka Home Assistanta.
+- Dashboard: karta **Ustawienia** z językiem błędów, nastawy Strefy 1 w karcie Tryb pracy (Komfort / Eko chłodzenia
+  lub grzania, zadana zasilania i wilgotności), karta Harmonogram zawsze widoczna (z podpowiedzią, gdy godziny
+  kalendarzy są wyłączone).
 
 ### 1.1.0
 

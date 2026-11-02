@@ -263,6 +263,23 @@
           "water": "AQS",
           "heating_water": "Aquecimento + AQS"
         }
+      },
+      "fault_language": {
+        "name": "Idioma das descrições de avaria",
+        "state": {
+          "auto": "Automático (idioma do Home Assistant)",
+          "en": "English",
+          "it": "Italiano",
+          "pl": "Polski",
+          "cs": "Čeština",
+          "hu": "Magyar",
+          "de": "Deutsch",
+          "fr": "Français",
+          "es": "Español",
+          "nl": "Nederlands",
+          "pt": "Português",
+          "sk": "Slovenčina"
+        }
       }
     },
     "time": {

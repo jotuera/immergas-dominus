@@ -79,10 +79,19 @@ strategy:
 - **Now** – what the boiler is asked for (heating / hot water), mode, program phase, CH and DHW setpoints, outdoor,
   zone 1 and DHW cylinder temperatures, active fault.
 - **Setpoints** – zone 1 and DHW with −/+ and the Comfort / Eco profiles.
-- **Operating mode** – Standby / Summer / Winter / Cooling (tap twice), zone 1 program phase, heating curve offset (U03),
-  DHW Comfort / Eco by the schedule.
-- **Schedule** – the four calendars and the weekdays for CH and DHW (enable the *Heating schedule* device first).
+- **Operating mode** – Standby / Summer / Winter / Cooling (tap twice), zone 1 program phase, zone 1 settings
+  (curve offset U03, the Comfort / Eco pair of the other mode, flow and humidity setpoints), DHW Comfort / Eco by the
+  schedule.
+- **Schedule** – the four calendars and the weekdays for CH and DHW. The calendar hours need the *Heating schedule*
+  device (disabled by default); the card says so when it is off.
 - **Connectivity** – the Dominus module (last successful read, failed polls) and the boiler behind it.
+- **Settings** – the language of the fault description (automatic = the Home Assistant language, or one of 11).
+
+| | |
+|---|---|
+| ![Now](docs/images/en/card-now.png) | ![Setpoints](docs/images/en/card-setpoints.png) |
+| ![Operating mode](docs/images/en/card-mode.png) | ![Schedule](docs/images/en/card-schedule.png) |
+| ![Connectivity](docs/images/en/card-links.png) | ![Settings](docs/images/en/card-settings.png) |
 
 Heat-pump data (compressor, COP, flow / return of the heat pump, energy) is not readable through Dominus – for that
 see the hub.
@@ -145,6 +154,14 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 1.2.0
+
+- **Fault language** select (configuration): the fault description in the Home Assistant language (default) or in one
+  of the 11 languages, whatever language Home Assistant uses.
+- Dashboard: **Settings** card with the fault language, zone 1 settings in the Operating mode card (cooling / heating
+  Comfort / Eco, flow and humidity setpoints), the Schedule card always shown (with a hint when the calendar hours are
+  disabled).
 
 ### 1.1.0
 

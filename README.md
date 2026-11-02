@@ -92,11 +92,14 @@ strategy:
 - **Charts** – day: zone 1 room / target / outdoor with the program phases and heating demand, DHW cylinder with the
   DHW requests; week / month: hours of CH and DHW demand per day and the mean outdoor temperature.
 
+![Diagram](docs/images/en/card-diagram.png)
+
 | | |
 |---|---|
 | ![Now](docs/images/en/card-now.png) | ![Setpoints](docs/images/en/card-setpoints.png) |
 | ![Operating mode](docs/images/en/card-mode.png) | ![Schedule](docs/images/en/card-schedule.png) |
-| ![Connectivity](docs/images/en/card-links.png) | ![Settings](docs/images/en/card-settings.png) |
+| ![Connectivity](docs/images/en/card-links.png) | ![Heating curve](docs/images/en/card-curve.png) |
+| ![Online settings](docs/images/en/card-settings-online.png) | ![Boiler parameters (offline)](docs/images/en/card-settings-offline.png) |
 
 ![Calibration](docs/images/en/card-calibration.png)
 

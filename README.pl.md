@@ -91,11 +91,14 @@ strategy:
 - **Wykresy** – doba: pokój / zadana / zewnętrzna Strefy 1 z fazami programu i żądaniami grzania, zasobnik CWU z żądaniami
   CWU; tydzień / miesiąc: godziny żądań CO i CWU na dzień i średnia temperatura zewnętrzna.
 
+![Diagram](docs/images/card-diagram.png)
+
 | | |
 |---|---|
 | ![Teraz](docs/images/card-now.png) | ![Nastawy](docs/images/card-setpoints.png) |
 | ![Tryb pracy](docs/images/card-mode.png) | ![Harmonogram](docs/images/card-schedule.png) |
-| ![Łączność](docs/images/card-links.png) | ![Ustawienia](docs/images/card-settings.png) |
+| ![Łączność](docs/images/card-links.png) | ![Krzywa grzewcza](docs/images/card-curve.png) |
+| ![Ustawienia online](docs/images/card-settings-online.png) | ![Parametry pieca (offline)](docs/images/card-settings-offline.png) |
 
 ![Kalibracja](docs/images/card-calibration.png)
 

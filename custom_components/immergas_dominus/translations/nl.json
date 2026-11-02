@@ -276,6 +276,9 @@
       },
       "offline_minutes": {
         "name": "Offline na"
+      },
+      "legionella_hours": {
+        "name": "Anti-legionella duur P13"
       }
     },
     "select": {
@@ -337,6 +340,19 @@
           "pt": "Português",
           "sk": "Slovenčina"
         }
+      },
+      "legionella_day": {
+        "name": "Anti-legionella dag P17",
+        "state": {
+          "daily": "Elke dag",
+          "monday": "Maandag",
+          "tuesday": "Dinsdag",
+          "wednesday": "Woensdag",
+          "thursday": "Donderdag",
+          "friday": "Vrijdag",
+          "saturday": "Zaterdag",
+          "sunday": "Zondag"
+        }
       }
     },
     "time": {
@@ -345,6 +361,15 @@
       },
       "fascia_end": {
         "name": "Profiel {profile} periode {fascia} einde"
+      },
+      "night_start": {
+        "name": "Nachtfunctie start U12"
+      },
+      "night_stop": {
+        "name": "Nachtfunctie einde U13"
+      },
+      "legionella_start": {
+        "name": "Anti-legionella start P16"
       }
     },
     "climate": {
@@ -370,6 +395,12 @@
       },
       "auto_season": {
         "name": "Automatisch zomer / winter"
+      },
+      "night_mode": {
+        "name": "Nachtfunctie U11 (ingesteld op de ketel)"
+      },
+      "legionella": {
+        "name": "Anti-legionella P15 (ingesteld op de ketel)"
       }
     },
     "datetime": {

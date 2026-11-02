@@ -276,6 +276,9 @@
       },
       "offline_minutes": {
         "name": "Offline nach"
+      },
+      "legionella_hours": {
+        "name": "Legionellenschutz Dauer P13"
       }
     },
     "select": {
@@ -337,6 +340,19 @@
           "pt": "Português",
           "sk": "Slovenčina"
         }
+      },
+      "legionella_day": {
+        "name": "Legionellenschutz Tag P17",
+        "state": {
+          "daily": "Täglich",
+          "monday": "Montag",
+          "tuesday": "Dienstag",
+          "wednesday": "Mittwoch",
+          "thursday": "Donnerstag",
+          "friday": "Freitag",
+          "saturday": "Samstag",
+          "sunday": "Sonntag"
+        }
       }
     },
     "time": {
@@ -345,6 +361,15 @@
       },
       "fascia_end": {
         "name": "Profil {profile} Zeitabschnitt {fascia} Ende"
+      },
+      "night_start": {
+        "name": "Nachtfunktion Start U12"
+      },
+      "night_stop": {
+        "name": "Nachtfunktion Ende U13"
+      },
+      "legionella_start": {
+        "name": "Legionellenschutz Start P16"
       }
     },
     "climate": {
@@ -370,6 +395,12 @@
       },
       "auto_season": {
         "name": "Automatisch Sommer / Winter"
+      },
+      "night_mode": {
+        "name": "Nachtfunktion U11 (am Kessel eingestellt)"
+      },
+      "legionella": {
+        "name": "Legionellenschutz P15 (am Kessel eingestellt)"
       }
     },
     "datetime": {

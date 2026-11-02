@@ -276,6 +276,9 @@
       },
       "offline_minutes": {
         "name": "Hors ligne après"
+      },
+      "legionella_hours": {
+        "name": "Anti-légionelle durée P13"
       }
     },
     "select": {
@@ -337,6 +340,19 @@
           "pt": "Português",
           "sk": "Slovenčina"
         }
+      },
+      "legionella_day": {
+        "name": "Anti-légionelle jour P17",
+        "state": {
+          "daily": "Tous les jours",
+          "monday": "Lundi",
+          "tuesday": "Mardi",
+          "wednesday": "Mercredi",
+          "thursday": "Jeudi",
+          "friday": "Vendredi",
+          "saturday": "Samedi",
+          "sunday": "Dimanche"
+        }
       }
     },
     "time": {
@@ -345,6 +361,15 @@
       },
       "fascia_end": {
         "name": "Profil {profile} période {fascia} fin"
+      },
+      "night_start": {
+        "name": "Fonction nuit début U12"
+      },
+      "night_stop": {
+        "name": "Fonction nuit fin U13"
+      },
+      "legionella_start": {
+        "name": "Anti-légionelle début P16"
       }
     },
     "climate": {
@@ -370,6 +395,12 @@
       },
       "auto_season": {
         "name": "Été / hiver automatique"
+      },
+      "night_mode": {
+        "name": "Fonction nuit U11 (réglée sur la chaudière)"
+      },
+      "legionella": {
+        "name": "Anti-légionelle P15 (réglée sur la chaudière)"
       }
     },
     "datetime": {

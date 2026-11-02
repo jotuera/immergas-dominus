@@ -276,6 +276,9 @@
       },
       "offline_minutes": {
         "name": "Offline após"
+      },
+      "legionella_hours": {
+        "name": "Antilegionela duração P13"
       }
     },
     "select": {
@@ -337,6 +340,19 @@
           "pt": "Português",
           "sk": "Slovenčina"
         }
+      },
+      "legionella_day": {
+        "name": "Antilegionela dia P17",
+        "state": {
+          "daily": "Todos os dias",
+          "monday": "Segunda-feira",
+          "tuesday": "Terça-feira",
+          "wednesday": "Quarta-feira",
+          "thursday": "Quinta-feira",
+          "friday": "Sexta-feira",
+          "saturday": "Sábado",
+          "sunday": "Domingo"
+        }
       }
     },
     "time": {
@@ -345,6 +361,15 @@
       },
       "fascia_end": {
         "name": "Perfil {profile} período {fascia} fim"
+      },
+      "night_start": {
+        "name": "Função noturna início U12"
+      },
+      "night_stop": {
+        "name": "Função noturna fim U13"
+      },
+      "legionella_start": {
+        "name": "Antilegionela início P16"
       }
     },
     "climate": {
@@ -370,6 +395,12 @@
       },
       "auto_season": {
         "name": "Verão / inverno automático"
+      },
+      "night_mode": {
+        "name": "Função noturna U11 (definida na caldeira)"
+      },
+      "legionella": {
+        "name": "Antilegionela P15 (definida na caldeira)"
       }
     },
     "datetime": {

@@ -276,6 +276,9 @@
       },
       "offline_minutes": {
         "name": "Offline po"
+      },
+      "legionella_hours": {
+        "name": "Anty-legionella czas P13"
       }
     },
     "select": {
@@ -337,6 +340,19 @@
           "pt": "Português",
           "sk": "Slovenčina"
         }
+      },
+      "legionella_day": {
+        "name": "Anty-legionella dzień P17",
+        "state": {
+          "daily": "Codziennie",
+          "monday": "Poniedziałek",
+          "tuesday": "Wtorek",
+          "wednesday": "Środa",
+          "thursday": "Czwartek",
+          "friday": "Piątek",
+          "saturday": "Sobota",
+          "sunday": "Niedziela"
+        }
       }
     },
     "time": {
@@ -345,6 +361,15 @@
       },
       "fascia_end": {
         "name": "Profil {profile} przedział {fascia} — koniec"
+      },
+      "night_start": {
+        "name": "Funkcja nocna start U12"
+      },
+      "night_stop": {
+        "name": "Funkcja nocna stop U13"
+      },
+      "legionella_start": {
+        "name": "Anty-legionella start P16"
       }
     },
     "climate": {
@@ -370,6 +395,12 @@
       },
       "auto_season": {
         "name": "Automatyczne Lato / Zima"
+      },
+      "night_mode": {
+        "name": "Funkcja nocna U11 (ustawiona na piecu)"
+      },
+      "legionella": {
+        "name": "Anty-legionella P15 (ustawiona na piecu)"
       }
     },
     "datetime": {

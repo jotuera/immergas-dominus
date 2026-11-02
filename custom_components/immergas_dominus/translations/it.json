@@ -276,6 +276,9 @@
       },
       "offline_minutes": {
         "name": "Offline dopo"
+      },
+      "legionella_hours": {
+        "name": "Antilegionella durata P13"
       }
     },
     "select": {
@@ -337,6 +340,19 @@
           "pt": "Português",
           "sk": "Slovenčina"
         }
+      },
+      "legionella_day": {
+        "name": "Antilegionella giorno P17",
+        "state": {
+          "daily": "Ogni giorno",
+          "monday": "Lunedì",
+          "tuesday": "Martedì",
+          "wednesday": "Mercoledì",
+          "thursday": "Giovedì",
+          "friday": "Venerdì",
+          "saturday": "Sabato",
+          "sunday": "Domenica"
+        }
       }
     },
     "time": {
@@ -345,6 +361,15 @@
       },
       "fascia_end": {
         "name": "Profilo {profile} fascia {fascia} fine"
+      },
+      "night_start": {
+        "name": "Funzione notturna inizio U12"
+      },
+      "night_stop": {
+        "name": "Funzione notturna fine U13"
+      },
+      "legionella_start": {
+        "name": "Antilegionella inizio P16"
       }
     },
     "climate": {
@@ -370,6 +395,12 @@
       },
       "auto_season": {
         "name": "Estate / inverno automatico"
+      },
+      "night_mode": {
+        "name": "Funzione notturna U11 (impostata sulla caldaia)"
+      },
+      "legionella": {
+        "name": "Antilegionella P15 (impostata sulla caldaia)"
       }
     },
     "datetime": {

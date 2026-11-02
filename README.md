@@ -121,6 +121,9 @@ room `2011`, target `2015`, outdoor `3002`, DHW cylinder `3016`, mode `2000`); n
   Summer above *Summer above* (18 °C); needs 12 h of data, at most one change per hour, never touches Standby or Cooling.
 - **Alerts**: *Frost risk* (room below *Frost threshold*, 8 °C) and *Dominus module offline* (no reading for *Offline
   after*, 15 min).
+- **Boiler programs you declare** (not readable over TCP): *Night function U11* with start / stop (U12 / U13) and
+  *Anti-legionella P15* with day, start and duration (P17 / P16 / P13). Turn the switch on when the program is set on
+  the boiler; the dashboard then shows the reminder row and the timer bar. Nothing is written to the boiler.
 
 ## Knowledge base: registers over TCP
 
@@ -185,6 +188,12 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 1.4.0
+
+- **Declared boiler programs**: night function U11 (start / stop) and anti-legionella P15 (day, start, duration) as
+  switches and settings kept in Home Assistant – the Operating mode card shows them like the hub, and the Now card
+  shows their timer bars while the switch is on. Nothing is written to the boiler.
 
 ### 1.3.0
 

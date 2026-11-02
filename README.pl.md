@@ -121,6 +121,9 @@ pokój `2011`, zadana `2015`, zewnętrzna `3002`, zasobnik CWU `3016`, tryb `200
   nie rusza trybów Standby i Chłodzenie.
 - **Alerty**: *Ryzyko zamarznięcia* (pokój poniżej *Progu zamarzania*, 8 °C) i *Moduł Dominus offline* (brak odczytu
   przez *Offline po*, 15 min).
+- **Programy kotła deklarowane przez ciebie** (niedostępne po TCP): *Funkcja nocna U11* ze startem i stopem (U12 / U13)
+  oraz *Anty-legionella P15* z dniem, startem i czasem (P17 / P16 / P13). Włącz przełącznik, gdy program jest ustawiony
+  na piecu; dashboard pokaże wtedy wiersz-przypomnienie i pasek czasu. Nic nie jest zapisywane do kotła.
 
 ## Baza wiedzy: rejestry po TCP
 
@@ -185,6 +188,12 @@ przyjmie sesję.
   sprawdzone krzyżowo, ale na innych modelach mogą wymagać weryfikacji przez TCP AUTH.
 
 ## Historia zmian
+
+### 1.4.0
+
+- **Deklarowane programy kotła**: funkcja nocna U11 (start / stop) i anty-legionella P15 (dzień, start, czas) jako
+  przełączniki i ustawienia trzymane w Home Assistancie – karta Tryb pracy pokazuje je jak w hubie, a karta Teraz
+  pokazuje ich paski czasu, gdy przełącznik jest włączony. Nic nie jest zapisywane do kotła.
 
 ### 1.3.0
 

@@ -276,6 +276,9 @@
       },
       "offline_minutes": {
         "name": "Offline ennyi után"
+      },
+      "legionella_hours": {
+        "name": "Legionella elleni védelem időtartama P13"
       }
     },
     "select": {
@@ -337,6 +340,19 @@
           "pt": "Português",
           "sk": "Slovenčina"
         }
+      },
+      "legionella_day": {
+        "name": "Legionella elleni védelem napja P17",
+        "state": {
+          "daily": "Minden nap",
+          "monday": "Hétfő",
+          "tuesday": "Kedd",
+          "wednesday": "Szerda",
+          "thursday": "Csütörtök",
+          "friday": "Péntek",
+          "saturday": "Szombat",
+          "sunday": "Vasárnap"
+        }
       }
     },
     "time": {
@@ -345,6 +361,15 @@
       },
       "fascia_end": {
         "name": "{profile}. profil {fascia}. időszak vége"
+      },
+      "night_start": {
+        "name": "Éjszakai funkció kezdete U12"
+      },
+      "night_stop": {
+        "name": "Éjszakai funkció vége U13"
+      },
+      "legionella_start": {
+        "name": "Legionella elleni védelem kezdete P16"
       }
     },
     "climate": {
@@ -370,6 +395,12 @@
       },
       "auto_season": {
         "name": "Automatikus nyár / tél"
+      },
+      "night_mode": {
+        "name": "Éjszakai funkció U11 (beállítva a kazánon)"
+      },
+      "legionella": {
+        "name": "Legionella elleni védelem P15 (beállítva a kazánon)"
       }
     },
     "datetime": {

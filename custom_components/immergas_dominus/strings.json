@@ -276,6 +276,9 @@
       },
       "offline_minutes": {
         "name": "Offline after"
+      },
+      "legionella_hours": {
+        "name": "Anti-legionella duration P13"
       }
     },
     "select": {
@@ -337,6 +340,19 @@
           "pt": "Português",
           "sk": "Slovenčina"
         }
+      },
+      "legionella_day": {
+        "name": "Anti-legionella day P17",
+        "state": {
+          "daily": "Every day",
+          "monday": "Monday",
+          "tuesday": "Tuesday",
+          "wednesday": "Wednesday",
+          "thursday": "Thursday",
+          "friday": "Friday",
+          "saturday": "Saturday",
+          "sunday": "Sunday"
+        }
       }
     },
     "time": {
@@ -345,6 +361,15 @@
       },
       "fascia_end": {
         "name": "Profile {profile} period {fascia} end"
+      },
+      "night_start": {
+        "name": "Night function start U12"
+      },
+      "night_stop": {
+        "name": "Night function stop U13"
+      },
+      "legionella_start": {
+        "name": "Anti-legionella start P16"
       }
     },
     "climate": {
@@ -370,6 +395,12 @@
       },
       "auto_season": {
         "name": "Automatic Summer / Winter"
+      },
+      "night_mode": {
+        "name": "Night function U11 (set on the boiler)"
+      },
+      "legionella": {
+        "name": "Anti-legionella P15 (set on the boiler)"
       }
     },
     "datetime": {

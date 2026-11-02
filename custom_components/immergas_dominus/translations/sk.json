@@ -276,6 +276,9 @@
       },
       "offline_minutes": {
         "name": "Offline po"
+      },
+      "legionella_hours": {
+        "name": "Antilegionela trvanie P13"
       }
     },
     "select": {
@@ -337,6 +340,19 @@
           "pt": "Português",
           "sk": "Slovenčina"
         }
+      },
+      "legionella_day": {
+        "name": "Antilegionela deň P17",
+        "state": {
+          "daily": "Každý deň",
+          "monday": "Pondelok",
+          "tuesday": "Utorok",
+          "wednesday": "Streda",
+          "thursday": "Štvrtok",
+          "friday": "Piatok",
+          "saturday": "Sobota",
+          "sunday": "Nedeľa"
+        }
       }
     },
     "time": {
@@ -345,6 +361,15 @@
       },
       "fascia_end": {
         "name": "Profil {profile} úsek {fascia} koniec"
+      },
+      "night_start": {
+        "name": "Nočná funkcia štart U12"
+      },
+      "night_stop": {
+        "name": "Nočná funkcia koniec U13"
+      },
+      "legionella_start": {
+        "name": "Antilegionela štart P16"
       }
     },
     "climate": {
@@ -370,6 +395,12 @@
       },
       "auto_season": {
         "name": "Automatické leto / zima"
+      },
+      "night_mode": {
+        "name": "Nočná funkcia U11 (nastavená na kotle)"
+      },
+      "legionella": {
+        "name": "Antilegionela P15 (nastavená na kotle)"
       }
     },
     "datetime": {

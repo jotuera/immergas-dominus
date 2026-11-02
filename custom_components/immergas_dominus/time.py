@@ -11,6 +11,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from .const import DOMAIN, SCHEDULE_TIME_DESCRIPTIONS, DominusTimeEntityDescription
 from .coordinator import ImmergasDominusCoordinator
 from .entity import ImmergasDominusEntity
+from .programs import declared_times
 
 
 async def async_setup_entry(
@@ -24,6 +25,8 @@ async def async_setup_entry(
         ImmergasDominusScheduleTime(coordinator, description)
         for description in SCHEDULE_TIME_DESCRIPTIONS
     )
+    if coordinator.stats is not None:
+        async_add_entities(declared_times(coordinator))
 
 
 class ImmergasDominusScheduleTime(ImmergasDominusEntity, TimeEntity):

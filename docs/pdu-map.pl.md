@@ -30,7 +30,7 @@ znakiem. Odczyt i zapis mają różne kody `typ`; zapis wraca z wartością przy
 | PDU (strefa 1) | Znaczenie | Dostęp | Wartość |
 |---|---|---|---|
 | 2010 | Status strefy | odczyt | bit 2 ręczny, bit 3 żądanie grzania, bit 6 faza Komfort, bit 7 faza Eko |
-| 2011 | Temperatura pokoju | odczyt | °C × 10; 32767 = brak czujnika |
+| 2011 | Temperatura pokoju | odczyt | °C × 10; 32767 = brak czujnika. Moduł jej nie mierzy: pochodzi z panelu strefy na D+/D- (fizycznego albo emulowanego przez hub). Po TCP nie ma rejestru wersji panelu, więc panel fizyczny i emulowany wyglądają tak samo. Termostat pokojowy on/off daje tylko żądanie grzania (nie testowane). |
 | 2015 | Zadana pokoju | odczyt / zapis | °C × 10 |
 | 2017 | Offset krzywej (U03) | odczyt / zapis | °C × 10 (strefy 2/3 wyprowadzone ze wzoru +10) |
 | 2210 / 2211 | Komfort / Eko grzanie | odczyt / zapis | °C × 10 |

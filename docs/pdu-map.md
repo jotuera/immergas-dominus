@@ -30,7 +30,7 @@ writes use different `type` codes; a write is answered with the value the boiler
 | PDU (zone 1) | Meaning | Access | Value |
 |---|---|---|---|
 | 2010 | Zone status | read | bit 2 manual, bit 3 heating demand, bit 6 Comfort phase, bit 7 Eco phase |
-| 2011 | Room temperature | read | °C × 10; 32767 = no room sensor |
+| 2011 | Room temperature | read | °C × 10; 32767 = no room sensor. The module does not measure it: it comes from a zone panel on D+/D- (physical, or emulated by the hub). There is no panel firmware register over TCP, so a physical and an emulated panel look the same. An on/off room thermostat gives only the heating demand (not tested). |
 | 2015 | Room setpoint (target) | read / write | °C × 10 |
 | 2017 | Heating curve offset (U03) | read / write | °C × 10 (zones 2/3 inferred from the +10 pattern) |
 | 2210 / 2211 | Comfort / Eco heating | read / write | °C × 10 |

@@ -3,11 +3,11 @@
   "name": "Immergas Dominus",
   "codeowners": ["@jotuera"],
   "config_flow": true,
-  "dependencies": [],
+  "dependencies": ["frontend", "http"],
   "documentation": "https://github.com/jotuera/immergas-dominus",
   "integration_type": "hub",
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/jotuera/immergas-dominus/issues",
   "requirements": [],
-  "version": "1.0.0"
+  "version": "1.1.0"
 }

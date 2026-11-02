@@ -2,7 +2,9 @@
 from __future__ import annotations
 
 import logging
+from pathlib import Path
 
+from homeassistant.components import frontend
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.const import CONF_HOST, CONF_PORT
@@ -40,6 +42,26 @@ def _platforms_for(entry: ConfigEntry) -> list[str]:
     return PLATFORMS
 
 _LOGGER = logging.getLogger(__name__)
+
+# Dashboard cards (built from the IMMERGAS Modbus BMS NASA Hub cards) served by the integration itself, so the
+# reduced dashboard `strategy: {type: custom:immergas-dominus}` works without installing anything else.
+CARDS_URL = f"/{DOMAIN}/immergas-hub-cards.js"
+CARDS_FILE = Path(__file__).parent / "frontend" / "immergas-hub-cards.js"
+
+
+async def _async_register_cards(hass: HomeAssistant, version: str | None) -> None:
+    """Serve the cards bundle and load it in every dashboard, once per Home Assistant run."""
+    if hass.data.get(f"{DOMAIN}_cards") or not CARDS_FILE.is_file():
+        return
+    hass.data[f"{DOMAIN}_cards"] = True
+    try:
+        from homeassistant.components.http import StaticPathConfig
+
+        await hass.http.async_register_static_paths([StaticPathConfig(CARDS_URL, str(CARDS_FILE), False)])
+    except ImportError:  # Home Assistant before 2024.7
+        hass.http.register_static_path(CARDS_URL, str(CARDS_FILE), False)
+    # the bundle guards every element, so loading it next to the hub cards resource is harmless
+    frontend.add_extra_js_url(hass, f"{CARDS_URL}?v={version or '0'}")
 
 
 def _ensure_logical_devices(
@@ -109,11 +131,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # DHW Comfort / Eco by the DHW schedule (Modbus mode; entities in number / switch / sensor)
     coordinator.dhw = None if opentherm else DhwComfortEco(hass, coordinator)
 
+    integration = await async_get_integration(hass, DOMAIN)
+    version = str(integration.version) if integration.version else None
+    await _async_register_cards(hass, version)
+
     if not opentherm:
         # Modbus mode: pre-create the logical zone/schedule devices.  OpenTherm
         # mode exposes a single device, created automatically from its entities.
-        integration = await async_get_integration(hass, DOMAIN)
-        version = str(integration.version) if integration.version else None
         _ensure_logical_devices(hass, entry, version)
 
     # Do not block entity creation on the very first TCP poll.  Dominus local

@@ -64,6 +64,29 @@ Assistant (the *Firmware* field, e.g. `0.3.0 — JoTu`).
 - Weekday → profile assignment for Zone 1 (`2410`–`2416`), plus a
   **Set the same profile for all days** shortcut.
 
+## Dashboard
+
+The integration brings its own dashboard cards (the same cards as the
+[IMMERGAS Modbus BMS NASA Hub](https://github.com/jotuera/immergas-modbus-bms-nasa-hub), in a reduced view). Nothing
+else to install: create a new dashboard (*Settings → Dashboards → Add dashboard*), open it, *⋮ → Edit dashboard →
+⋮ → Raw configuration editor* and enter
+
+```yaml
+strategy:
+  type: custom:immergas-dominus
+```
+
+- **Now** – what the boiler is asked for (heating / hot water), mode, program phase, CH and DHW setpoints, outdoor,
+  zone 1 and DHW cylinder temperatures, active fault.
+- **Setpoints** – zone 1 and DHW with −/+ and the Comfort / Eco profiles.
+- **Operating mode** – Standby / Summer / Winter / Cooling (tap twice), zone 1 program phase, heating curve offset (U03),
+  DHW Comfort / Eco by the schedule.
+- **Schedule** – the four calendars and the weekdays for CH and DHW (enable the *Heating schedule* device first).
+- **Connectivity** – the Dominus module (last successful read, failed polls) and the boiler behind it.
+
+Heat-pump data (compressor, COP, flow / return of the heat pump, energy) is not readable through Dominus – for that
+see the hub.
+
 ## Supported models
 
 All boilers whose Dominus module uses the **`WFC01_IM_MBUS_MPROCOMBOV2`** configuration
@@ -122,6 +145,11 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 1.1.0
+
+- **Dashboard**: the integration serves the Immergas Hub cards and loads them in Home Assistant; a new dashboard with
+  `strategy: {type: custom:immergas-dominus}` shows Now, Setpoints, Operating mode, Schedule and Connectivity.
 
 ### 1.0.0
 

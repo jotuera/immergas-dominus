@@ -64,6 +64,29 @@ Assistant (pole *Oprogramowanie*, np. `0.3.3 — JoTu`).
 - Przypisanie profilu do dnia tygodnia dla Strefy 1/2/3 oraz CWU (`2410`–`2496`), plus
   skrót **Ustaw ten sam profil dla wszystkich dni**.
 
+## Dashboard
+
+Integracja ma własne karty dashboardu (te same co w
+[IMMERGAS Modbus BMS NASA Hub](https://github.com/jotuera/immergas-modbus-bms-nasa-hub), w okrojonym widoku). Nic więcej
+nie trzeba instalować: utwórz nowy dashboard (*Ustawienia → Dashboardy → Dodaj dashboard*), otwórz go, *⋮ → Edytuj
+dashboard → ⋮ → Edytor konfiguracji* i wpisz
+
+```yaml
+strategy:
+  type: custom:immergas-dominus
+```
+
+- **Teraz** – czego kocioł potrzebuje (ogrzewanie / ciepła woda), tryb, faza programu, nastawy CO i CWU, temperatura
+  zewnętrzna, Strefy 1 i zasobnika CWU, aktywny błąd.
+- **Nastawy** – Strefa 1 i CWU z −/+ oraz profilami Komfort / Eko.
+- **Tryb pracy** – Standby / Lato / Zima / Chłodzenie (dotknij 2×), faza programu Strefy 1, offset krzywej (U03),
+  CWU Komfort / Eko wg harmonogramu.
+- **Harmonogram** – cztery kalendarze i dni tygodnia dla CO i CWU (najpierw włącz urządzenie *Heating schedule*).
+- **Łączność** – moduł Dominus (ostatni udany odczyt, nieudane odpytania) i kocioł za nim.
+
+Danych pompy ciepła (sprężarka, COP, zasilanie / powrót pompy, energia) nie da się odczytać przez Dominusa – do tego
+służy hub.
+
 ## Obsługiwane modele
 
 Wszystkie kotły, których moduł Dominus używa konfiguracji **`WFC01_IM_MBUS_MPROCOMBOV2`**,
@@ -122,6 +145,11 @@ przyjmie sesję.
   sprawdzone krzyżowo, ale na innych modelach mogą wymagać weryfikacji przez TCP AUTH.
 
 ## Historia zmian
+
+### 1.1.0
+
+- **Dashboard**: integracja udostępnia karty Immergas Hub i ładuje je w Home Assistancie; nowy dashboard ze
+  `strategy: {type: custom:immergas-dominus}` pokazuje karty Teraz, Nastawy, Tryb pracy, Harmonogram i Łączność.
 
 ### 1.0.0
 

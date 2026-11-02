@@ -48,21 +48,30 @@ _LOGGER = logging.getLogger(__name__)
 # reduced dashboard `strategy: {type: custom:immergas-dominus}` works without installing anything else.
 CARDS_URL = f"/{DOMAIN}/immergas-hub-cards.js"
 CARDS_FILE = Path(__file__).parent / "frontend" / "immergas-hub-cards.js"
+LOADER_URL = f"/{DOMAIN}/immergas-dominus-loader.js"
+LOADER_FILE = Path(__file__).parent / "frontend" / "immergas-dominus-loader.js"
 
 
 async def _async_register_cards(hass: HomeAssistant, version: str | None) -> None:
-    """Serve the cards bundle and load it in every dashboard, once per Home Assistant run."""
-    if hass.data.get(f"{DOMAIN}_cards") or not CARDS_FILE.is_file():
+    """Serve the cards bundle and a small loader, once per Home Assistant run.
+
+    The loader imports the bundle only when the hub cards are not installed as a Lovelace resource, so a newer
+    hub resource is never shadowed by the copy bundled here.
+    """
+    if hass.data.get(f"{DOMAIN}_cards") or not CARDS_FILE.is_file() or not LOADER_FILE.is_file():
         return
     hass.data[f"{DOMAIN}_cards"] = True
     try:
         from homeassistant.components.http import StaticPathConfig
 
-        await hass.http.async_register_static_paths([StaticPathConfig(CARDS_URL, str(CARDS_FILE), False)])
+        await hass.http.async_register_static_paths([
+            StaticPathConfig(CARDS_URL, str(CARDS_FILE), False),
+            StaticPathConfig(LOADER_URL, str(LOADER_FILE), False),
+        ])
     except ImportError:  # Home Assistant before 2024.7
         hass.http.register_static_path(CARDS_URL, str(CARDS_FILE), False)
-    # the bundle guards every element, so loading it next to the hub cards resource is harmless
-    frontend.add_extra_js_url(hass, f"{CARDS_URL}?v={version or '0'}")
+        hass.http.register_static_path(LOADER_URL, str(LOADER_FILE), False)
+    frontend.add_extra_js_url(hass, f"{LOADER_URL}?v={version or '0'}")
 
 
 def _ensure_logical_devices(

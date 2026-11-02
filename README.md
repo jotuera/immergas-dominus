@@ -202,6 +202,12 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.5.2
+
+- Cards 0.47.0: all dashboard texts in all 11 languages.
+- The cards are loaded only once: when the IMMERGAS Modbus BMS NASA Hub cards are installed as a Lovelace resource,
+  the integration uses them instead of its own (possibly older) copy.
+
 ### 1.5.1
 
 - Calibration: recommendations from the boiler parameters copied by hand – T02, T05, U11, P15 / P13, I04, I10,

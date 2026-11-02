@@ -204,6 +204,12 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.5.2
+
+- Karty 0.47.0: wszystkie teksty dashboardu w 11 językach.
+- Karty ładują się tylko raz: gdy karty IMMERGAS Modbus BMS NASA Hub są zainstalowane jako zasób Lovelace,
+  integracja używa ich zamiast własnej (być może starszej) kopii.
+
 ### 1.5.1
 
 - Kalibracja: rekomendacje z parametrów przepisanych z pieca – T02, T05, U11, P15 / P13, I04, I10, A31 i P07;

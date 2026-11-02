@@ -5,6 +5,7 @@
   <img src="https://img.shields.io/github/v/tag/jotuera/immergas-dominus?label=version&color=blue" alt="Wersja">
   <img src="https://img.shields.io/badge/HA-2024.1%2B-41BDF5.svg" alt="Home Assistant 2024.1+">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-PolyForm%20Noncommercial-blue.svg" alt="Licencja: PolyForm Noncommercial 1.0.0"></a>
+  <a href="https://buymeacoffee.com/jotuera"><img src="https://img.shields.io/badge/Buy%20me%20a%20coffee-jotuera-FFDD00?logo=buymeacoffee&logoColor=black" alt="Buy Me a Coffee"></a>
 </p>
 
 [🇬🇧 English](README.md) · **🇵🇱 Polski**
@@ -217,6 +218,12 @@ przyjmie sesję.
 - **Diagnostyka połączenia**: `Ostatni udany odczyt` i `Nieudane odpytania` (atrybut `missing_in_last_poll`).
 - Wcześniejsze wersje rozwojowe (0.2–0.6) zbudowały wszystko z rozdziału *Funkcje*: tryb pracy, strefy 1–3,
   harmonogramy CO i CWU, CWU Komfort / Eko, raportowanie błędów, eksperymentalny tryb OpenTherm, 11 języków.
+
+## Wsparcie
+
+Jeśli integracja ci się przydaje, rozważ wsparcie – postaw mi kawę. Dziękuję!
+
+<a href="https://buymeacoffee.com/jotuera"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-orange.png" alt="Buy Me a Coffee" width="260"></a>
 
 ## Zasoby graficzne
 

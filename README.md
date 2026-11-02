@@ -5,6 +5,7 @@
   <img src="https://img.shields.io/github/v/tag/jotuera/immergas-dominus?label=version&color=blue" alt="Version">
   <img src="https://img.shields.io/badge/HA-2024.1%2B-41BDF5.svg" alt="Home Assistant 2024.1+">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-PolyForm%20Noncommercial-blue.svg" alt="License: PolyForm Noncommercial 1.0.0"></a>
+  <a href="https://buymeacoffee.com/jotuera"><img src="https://img.shields.io/badge/Buy%20me%20a%20coffee-jotuera-FFDD00?logo=buymeacoffee&logoColor=black" alt="Buy Me a Coffee"></a>
 </p>
 
 **🇬🇧 English** · [🇵🇱 Polski](README.pl.md)
@@ -217,6 +218,12 @@ the module accepts the session.
 - **Connection diagnostics**: `Last successful read` and `Failed polls` (attribute `missing_in_last_poll`).
 - Earlier development versions (0.2–0.6) built everything listed under *Features*: operation mode, zones 1–3,
   heating and DHW schedules, DHW Comfort / Eco, fault reporting, experimental OpenTherm mode, 11 UI languages.
+
+## Support
+
+If you find this integration useful, please consider supporting me by buying me a coffee. Thank you!
+
+<a href="https://buymeacoffee.com/jotuera"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-orange.png" alt="Buy Me a Coffee" width="260"></a>
 
 ## Brand assets
 

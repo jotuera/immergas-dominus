@@ -104,6 +104,42 @@
       },
       "failed_polls": {
         "name": "Nieudane odpytania"
+      },
+      "ch_heating_time_today": {
+        "name": "Czas grzania CO dziś"
+      },
+      "ch_heating_share_24h": {
+        "name": "Udział grzania CO (24 h)"
+      },
+      "dhw_cycles_today": {
+        "name": "Cykle CWU dziś"
+      },
+      "last_dhw_cycle_duration": {
+        "name": "Czas ostatniego cyklu CWU"
+      },
+      "last_dhw_cycle_rise": {
+        "name": "Przyrost zasobnika w ostatnim cyklu CWU"
+      },
+      "ch_starts_per_hour": {
+        "name": "Starty grzania CO na godzinę"
+      },
+      "ch_starts_today": {
+        "name": "Starty grzania CO dziś"
+      },
+      "room_deviation": {
+        "name": "Odchyłka pokoju od zadanej (1 h)"
+      },
+      "time_to_target": {
+        "name": "Czas dojścia do zadanej"
+      },
+      "degree_days_today": {
+        "name": "Stopniodni dziś"
+      },
+      "degree_days_month": {
+        "name": "Stopniodni w tym miesiącu"
+      },
+      "heating_hours_per_degree_day": {
+        "name": "Godziny grzania na stopniodzień"
       }
     },
     "binary_sensor": {
@@ -130,6 +166,12 @@
       },
       "ot_flame": {
         "name": "Płomień"
+      },
+      "frost_risk": {
+        "name": "Ryzyko zamarznięcia"
+      },
+      "module_offline": {
+        "name": "Moduł Dominus offline"
       }
     },
     "number": {
@@ -219,6 +261,21 @@
       },
       "dhw_eco": {
         "name": "Zadana CWU Eko"
+      },
+      "vacation_temperature": {
+        "name": "Temperatura na wyjazd"
+      },
+      "season_winter_below": {
+        "name": "Zima poniżej (średnia 24 h)"
+      },
+      "season_summer_above": {
+        "name": "Lato powyżej (średnia 24 h)"
+      },
+      "frost_threshold": {
+        "name": "Próg zamarzania"
+      },
+      "offline_minutes": {
+        "name": "Offline po"
       }
     },
     "select": {
@@ -307,6 +364,17 @@
     "switch": {
       "dhw_comfort_eco": {
         "name": "CWU Komfort-Eko wg harmonogramu"
+      },
+      "vacation_mode": {
+        "name": "Tryb wyjazdowy"
+      },
+      "auto_season": {
+        "name": "Automatyczne Lato / Zima"
+      }
+    },
+    "datetime": {
+      "vacation_until": {
+        "name": "Wyjazd do"
       }
     }
   },

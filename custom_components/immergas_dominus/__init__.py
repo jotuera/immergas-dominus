@@ -31,6 +31,7 @@ from .const import (
 )
 from .coordinator import ImmergasDominusCoordinator
 from .dhw_schedule import DhwComfortEco
+from .stats import DominusStats
 from .dominus_client import DominusClient, DominusConfig, DominusError
 from .opentherm_client import DominusOpenThermClient
 
@@ -130,6 +131,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     coordinator = ImmergasDominusCoordinator(hass, entry, client)
     # DHW Comfort / Eco by the DHW schedule (Modbus mode; entities in number / switch / sensor)
     coordinator.dhw = None if opentherm else DhwComfortEco(hass, coordinator)
+    # statistics and optional automations computed in Home Assistant (Modbus mode; entities in stats_entities.py)
+    coordinator.stats = None if opentherm else DominusStats(hass, coordinator)
+    if coordinator.stats is not None:
+        coordinator.stats.start()
+        entry.async_on_unload(coordinator.stats.stop)
 
     integration = await async_get_integration(hass, DOMAIN)
     version = str(integration.version) if integration.version else None

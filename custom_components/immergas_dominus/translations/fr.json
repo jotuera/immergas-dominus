@@ -104,6 +104,42 @@
       },
       "failed_polls": {
         "name": "Interrogations échouées"
+      },
+      "ch_heating_time_today": {
+        "name": "Temps de chauffage aujourd'hui"
+      },
+      "ch_heating_share_24h": {
+        "name": "Part de chauffage (24 h)"
+      },
+      "dhw_cycles_today": {
+        "name": "Cycles ECS aujourd'hui"
+      },
+      "last_dhw_cycle_duration": {
+        "name": "Durée du dernier cycle ECS"
+      },
+      "last_dhw_cycle_rise": {
+        "name": "Hausse du ballon au dernier cycle ECS"
+      },
+      "ch_starts_per_hour": {
+        "name": "Démarrages chauffage par heure"
+      },
+      "ch_starts_today": {
+        "name": "Démarrages chauffage aujourd'hui"
+      },
+      "room_deviation": {
+        "name": "Écart pièce / consigne (1 h)"
+      },
+      "time_to_target": {
+        "name": "Temps pour atteindre la consigne"
+      },
+      "degree_days_today": {
+        "name": "Degrés-jours aujourd'hui"
+      },
+      "degree_days_month": {
+        "name": "Degrés-jours ce mois"
+      },
+      "heating_hours_per_degree_day": {
+        "name": "Heures de chauffage par degré-jour"
       }
     },
     "binary_sensor": {
@@ -130,6 +166,12 @@
       },
       "ot_flame": {
         "name": "Flamme"
+      },
+      "frost_risk": {
+        "name": "Risque de gel"
+      },
+      "module_offline": {
+        "name": "Module Dominus hors ligne"
       }
     },
     "number": {
@@ -219,6 +261,21 @@
       },
       "dhw_eco": {
         "name": "Consigne ECS Éco"
+      },
+      "vacation_temperature": {
+        "name": "Température vacances"
+      },
+      "season_winter_below": {
+        "name": "Hiver en dessous de (moyenne 24 h)"
+      },
+      "season_summer_above": {
+        "name": "Été au-dessus de (moyenne 24 h)"
+      },
+      "frost_threshold": {
+        "name": "Seuil de gel"
+      },
+      "offline_minutes": {
+        "name": "Hors ligne après"
       }
     },
     "select": {
@@ -307,6 +364,17 @@
     "switch": {
       "dhw_comfort_eco": {
         "name": "ECS Confort-Éco selon programme"
+      },
+      "vacation_mode": {
+        "name": "Mode vacances"
+      },
+      "auto_season": {
+        "name": "Été / hiver automatique"
+      }
+    },
+    "datetime": {
+      "vacation_until": {
+        "name": "Vacances jusqu'au"
       }
     }
   },

@@ -84,7 +84,11 @@ strategy:
 - **Harmonogram** – cztery kalendarze i dni tygodnia dla CO i CWU. Godziny kalendarzy wymagają urządzenia
   *Heating schedule* (domyślnie wyłączone); karta podpowiada to, gdy jest wyłączone.
 - **Łączność** – moduł Dominus (ostatni udany odczyt, nieudane odpytania) i kocioł za nim.
-- **Ustawienia** – język opisów błędów (automatycznie = język Home Assistanta albo jeden z 11).
+- **Ustawienia** – tryb wyjazdowy, automatyczne Lato / Zima, progi alarmów i język opisów błędów.
+- **Kalibracja** – offset krzywej grzewczej (U03) z rekomendacją z odchyłki pokoju od zadanej i przyciskiem **Ustaw**,
+  taktowanie, cykle CWU na dobę, różnica Komfort–Eko i godziny grzania na stopniodzień.
+- **Wykresy** – doba: pokój / zadana / zewnętrzna Strefy 1 z fazami programu i żądaniami grzania, zasobnik CWU z żądaniami
+  CWU; tydzień / miesiąc: godziny żądań CO i CWU na dzień i średnia temperatura zewnętrzna.
 
 | | |
 |---|---|
@@ -94,6 +98,29 @@ strategy:
 
 Danych pompy ciepła (sprężarka, COP, zasilanie / powrót pompy, energia) nie da się odczytać przez Dominusa – do tego
 służy hub.
+
+## Statystyki i automatyki
+
+Liczone w Home Assistancie z rejestrów, które integracja i tak czyta (status strefy `2010`, flagi stanu `2001`,
+pokój `2011`, zadana `2015`, zewnętrzna `3002`, zasobnik CWU `3016`, tryb `2000`); niczego nie trzeba ustawiać.
+
+- **Statystyki** (sensory): *Czas grzania CO dziś* i *Udział grzania CO (24 h)* (żądanie grzania Strefy 1), *Cykle CWU
+  dziś*, *Czas ostatniego cyklu CWU* i *Przyrost zasobnika* (żądanie CWU), *Starty grzania CO na godzinę / dziś*,
+  *Odchyłka pokoju od zadanej (1 h)* i *Czas dojścia do zadanej* (po podniesieniu zadanej albo Eko → Komfort),
+  *Stopniodni dziś / w tym miesiącu* (baza 18 °C) i *Godziny grzania na stopniodzień* (w tym miesiącu). Liczniki dzienne
+  i miesięczne przetrwają restart; okna 24 h i 60 min liczą się od nowa po restarcie.
+- **Tryb wyjazdowy** (domyślnie wyłączony): *Tryb wyjazdowy* ustawia zadaną Strefy 1 na *Temperaturę na wyjazd*
+  (16 °C) i przywraca poprzednią po wyłączeniu albo o czasie *Wyjazd do*.
+- **Automatyczne Lato / Zima** (domyślnie wyłączone): Zima, gdy średnia zewnętrzna z 24 h spadnie poniżej *Zima
+  poniżej* (15 °C), Lato powyżej *Lato powyżej* (18 °C); potrzebuje 12 h danych, najwyżej jedna zmiana na godzinę, nigdy
+  nie rusza trybów Standby i Chłodzenie.
+- **Alerty**: *Ryzyko zamarznięcia* (pokój poniżej *Progu zamarzania*, 8 °C) i *Moduł Dominus offline* (brak odczytu
+  przez *Offline po*, 15 min).
+
+## Baza wiedzy: rejestry po TCP
+
+Które rejestry kotła (PDU) moduł Dominus udostępnia po lokalnym TCP – ramka, wartości, strefy, programy czasowe,
+czego nie da się odczytać, Data-ID OpenTherm: [docs/pdu-map.pl.md](docs/pdu-map.pl.md).
 
 ## Obsługiwane modele
 
@@ -153,6 +180,12 @@ przyjmie sesję.
   sprawdzone krzyżowo, ale na innych modelach mogą wymagać weryfikacji przez TCP AUTH.
 
 ## Historia zmian
+
+### 1.3.0
+
+- **Statystyki i automatyki** liczone w Home Assistancie: czas i udział grzania CO, cykle CWU, starty grzania, odchyłka
+  pokoju i czas dojścia do zadanej, stopniodni i godziny grzania na stopniodzień; tryb wyjazdowy, automatyczne Lato /
+  Zima (oba domyślnie wyłączone), alerty zamarzania i braku łączności z modułem. Nazwy w 11 językach.
 
 ### 1.2.0
 

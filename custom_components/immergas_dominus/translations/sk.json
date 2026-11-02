@@ -104,6 +104,42 @@
       },
       "failed_polls": {
         "name": "Neúspešné dotazovania"
+      },
+      "ch_heating_time_today": {
+        "name": "Čas vykurovania ÚK dnes"
+      },
+      "ch_heating_share_24h": {
+        "name": "Podiel vykurovania ÚK (24 h)"
+      },
+      "dhw_cycles_today": {
+        "name": "Cykly TÚV dnes"
+      },
+      "last_dhw_cycle_duration": {
+        "name": "Dĺžka posledného cyklu TÚV"
+      },
+      "last_dhw_cycle_rise": {
+        "name": "Nárast zásobníka v poslednom cykle TÚV"
+      },
+      "ch_starts_per_hour": {
+        "name": "Štarty vykurovania ÚK za hodinu"
+      },
+      "ch_starts_today": {
+        "name": "Štarty vykurovania ÚK dnes"
+      },
+      "room_deviation": {
+        "name": "Odchýlka miestnosti od žiadanej (1 h)"
+      },
+      "time_to_target": {
+        "name": "Čas dosiahnutia žiadanej"
+      },
+      "degree_days_today": {
+        "name": "Dennostupne dnes"
+      },
+      "degree_days_month": {
+        "name": "Dennostupne tento mesiac"
+      },
+      "heating_hours_per_degree_day": {
+        "name": "Hodiny vykurovania na dennostupeň"
       }
     },
     "binary_sensor": {
@@ -130,6 +166,12 @@
       },
       "ot_flame": {
         "name": "Plameň"
+      },
+      "frost_risk": {
+        "name": "Riziko zamrznutia"
+      },
+      "module_offline": {
+        "name": "Modul Dominus offline"
       }
     },
     "number": {
@@ -219,6 +261,21 @@
       },
       "dhw_eco": {
         "name": "Teplota TÚV Úsporný"
+      },
+      "vacation_temperature": {
+        "name": "Teplota počas dovolenky"
+      },
+      "season_winter_below": {
+        "name": "Zima pod (priemer 24 h)"
+      },
+      "season_summer_above": {
+        "name": "Leto nad (priemer 24 h)"
+      },
+      "frost_threshold": {
+        "name": "Prah zamrznutia"
+      },
+      "offline_minutes": {
+        "name": "Offline po"
       }
     },
     "select": {
@@ -307,6 +364,17 @@
     "switch": {
       "dhw_comfort_eco": {
         "name": "TÚV Komfort-Úsporný podľa rozvrhu"
+      },
+      "vacation_mode": {
+        "name": "Režim dovolenka"
+      },
+      "auto_season": {
+        "name": "Automatické leto / zima"
+      }
+    },
+    "datetime": {
+      "vacation_until": {
+        "name": "Dovolenka do"
       }
     }
   },

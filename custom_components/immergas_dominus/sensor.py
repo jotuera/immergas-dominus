@@ -30,6 +30,7 @@ from .const import (
 from .coordinator import ImmergasDominusCoordinator
 from .dhw_schedule import DHW_TARGET_PDU
 from .entity import ImmergasDominusEntity
+from .stats_entities import STAT_SPECS, ImmergasStatSensor
 
 
 async def async_setup_entry(
@@ -54,6 +55,7 @@ async def async_setup_entry(
     entities.append(ImmergasDominusProgramPhaseSensor(coordinator))
     entities.append(ImmergasLastReadSensor(coordinator))
     entities.append(ImmergasFailedPollsSensor(coordinator))
+    entities += [ImmergasStatSensor(coordinator, spec) for spec in STAT_SPECS]
     if coordinator.dhw is not None:
         entities.append(ImmergasDhwPhaseSensor(coordinator))
     async_add_entities(entities)

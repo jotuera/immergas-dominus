@@ -104,6 +104,42 @@
       },
       "failed_polls": {
         "name": "Sikertelen lekérdezések"
+      },
+      "ch_heating_time_today": {
+        "name": "Fűtési idő ma"
+      },
+      "ch_heating_share_24h": {
+        "name": "Fűtés aránya (24 h)"
+      },
+      "dhw_cycles_today": {
+        "name": "HMV ciklusok ma"
+      },
+      "last_dhw_cycle_duration": {
+        "name": "Utolsó HMV ciklus hossza"
+      },
+      "last_dhw_cycle_rise": {
+        "name": "Tároló emelkedése az utolsó HMV ciklusban"
+      },
+      "ch_starts_per_hour": {
+        "name": "Fűtésindítások óránként"
+      },
+      "ch_starts_today": {
+        "name": "Fűtésindítások ma"
+      },
+      "room_deviation": {
+        "name": "Helyiség eltérése az alapjeltől (1 h)"
+      },
+      "time_to_target": {
+        "name": "Alapjel elérési ideje"
+      },
+      "degree_days_today": {
+        "name": "Hőfoknapok ma"
+      },
+      "degree_days_month": {
+        "name": "Hőfoknapok ebben a hónapban"
+      },
+      "heating_hours_per_degree_day": {
+        "name": "Fűtési órák hőfoknaponként"
       }
     },
     "binary_sensor": {
@@ -130,6 +166,12 @@
       },
       "ot_flame": {
         "name": "Láng"
+      },
+      "frost_risk": {
+        "name": "Fagyveszély"
+      },
+      "module_offline": {
+        "name": "Dominus modul offline"
       }
     },
     "number": {
@@ -219,6 +261,21 @@
       },
       "dhw_eco": {
         "name": "HMV Takarék alapjel"
+      },
+      "vacation_temperature": {
+        "name": "Szabadság hőmérséklet"
+      },
+      "season_winter_below": {
+        "name": "Tél ez alatt (24 h átlag)"
+      },
+      "season_summer_above": {
+        "name": "Nyár e fölött (24 h átlag)"
+      },
+      "frost_threshold": {
+        "name": "Fagyküszöb"
+      },
+      "offline_minutes": {
+        "name": "Offline ennyi után"
       }
     },
     "select": {
@@ -307,6 +364,17 @@
     "switch": {
       "dhw_comfort_eco": {
         "name": "HMV Komfort-Takarék ütemezés szerint"
+      },
+      "vacation_mode": {
+        "name": "Szabadság mód"
+      },
+      "auto_season": {
+        "name": "Automatikus nyár / tél"
+      }
+    },
+    "datetime": {
+      "vacation_until": {
+        "name": "Szabadság vége"
       }
     }
   },

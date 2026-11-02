@@ -85,7 +85,11 @@ strategy:
 - **Schedule** – the four calendars and the weekdays for CH and DHW. The calendar hours need the *Heating schedule*
   device (disabled by default); the card says so when it is off.
 - **Connectivity** – the Dominus module (last successful read, failed polls) and the boiler behind it.
-- **Settings** – the language of the fault description (automatic = the Home Assistant language, or one of 11).
+- **Settings** – vacation mode, automatic Summer / Winter, alert thresholds and the language of the fault description.
+- **Calibration** – the heating curve offset (U03) with a recommendation from the room deviation and a **Set** button,
+  cycling, DHW cycles per day, the Comfort–Eco gap and heating hours per degree day.
+- **Charts** – day: zone 1 room / target / outdoor with the program phases and heating demand, DHW cylinder with the
+  DHW requests; week / month: hours of CH and DHW demand per day and the mean outdoor temperature.
 
 | | |
 |---|---|
@@ -95,6 +99,28 @@ strategy:
 
 Heat-pump data (compressor, COP, flow / return of the heat pump, energy) is not readable through Dominus – for that
 see the hub.
+
+## Statistics and automations
+
+Computed in Home Assistant from the registers the integration already reads (zone status `2010`, status flags `2001`,
+room `2011`, target `2015`, outdoor `3002`, DHW cylinder `3016`, mode `2000`); nothing else to set up.
+
+- **Statistics** (sensors): *CH heating time today* and *CH heating share (24 h)* (zone 1 heating demand), *DHW cycles
+  today*, *Last DHW cycle duration* and *cylinder rise* (DHW request), *CH starts per hour / today*, *Room deviation from
+  target (1 h)* and *Time to reach target* (after the target goes up or Eco → Comfort), *Degree days today / this
+  month* (base 18 °C) and *Heating hours per degree day* (this month). Daily and monthly counters survive a restart; the
+  24 h and 60 min windows start again after a restart.
+- **Vacation mode** (off by default): *Vacation mode* sets the zone 1 target to *Vacation temperature* (16 °C) and
+  restores the previous target when switched off or at *Vacation until*.
+- **Automatic Summer / Winter** (off by default): Winter when the 24 h outdoor mean drops below *Winter below* (15 °C),
+  Summer above *Summer above* (18 °C); needs 12 h of data, at most one change per hour, never touches Standby or Cooling.
+- **Alerts**: *Frost risk* (room below *Frost threshold*, 8 °C) and *Dominus module offline* (no reading for *Offline
+  after*, 15 min).
+
+## Knowledge base: registers over TCP
+
+Which boiler registers (PDUs) the Dominus module answers over local TCP – frame, values, zones, time programs, what
+is not readable, OpenTherm Data-IDs: [docs/pdu-map.md](docs/pdu-map.md).
 
 ## Supported models
 
@@ -154,6 +180,12 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 1.3.0
+
+- **Statistics and automations** computed in Home Assistant: CH heating time and share, DHW cycles, CH starts, room
+  deviation and time to target, degree days and heating hours per degree day; vacation mode, automatic Summer / Winter
+  (both off by default), frost and module-offline alerts. Names in all 11 languages.
 
 ### 1.2.0
 

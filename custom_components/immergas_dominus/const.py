@@ -56,7 +56,7 @@ ZONE_PHASE_COMFORT_MASK = 0x40
 ZONE_PHASE_ECONOMY_MASK = 0x80
 PROGRAM_PHASE_OPTIONS = ["manual", "comfort", "economy"]
 
-PLATFORMS = ["sensor", "binary_sensor", "number", "select", "climate", "time", "switch"]
+PLATFORMS = ["sensor", "binary_sensor", "number", "select", "climate", "time", "switch", "datetime"]
 # OpenTherm mode: read sensors + writable setpoints/mode (experimental).
 OPENTHERM_PLATFORMS = ["sensor", "binary_sensor", "number", "select"]
 

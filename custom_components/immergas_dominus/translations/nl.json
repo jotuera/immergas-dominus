@@ -104,6 +104,42 @@
       },
       "failed_polls": {
         "name": "Mislukte uitlezingen"
+      },
+      "ch_heating_time_today": {
+        "name": "Verwarmingstijd vandaag"
+      },
+      "ch_heating_share_24h": {
+        "name": "Aandeel verwarming (24 h)"
+      },
+      "dhw_cycles_today": {
+        "name": "SWW-cycli vandaag"
+      },
+      "last_dhw_cycle_duration": {
+        "name": "Duur laatste SWW-cyclus"
+      },
+      "last_dhw_cycle_rise": {
+        "name": "Stijging boiler in laatste SWW-cyclus"
+      },
+      "ch_starts_per_hour": {
+        "name": "Verwarmingsstarts per uur"
+      },
+      "ch_starts_today": {
+        "name": "Verwarmingsstarts vandaag"
+      },
+      "room_deviation": {
+        "name": "Afwijking ruimte van instelwaarde (1 h)"
+      },
+      "time_to_target": {
+        "name": "Tijd tot instelwaarde"
+      },
+      "degree_days_today": {
+        "name": "Graaddagen vandaag"
+      },
+      "degree_days_month": {
+        "name": "Graaddagen deze maand"
+      },
+      "heating_hours_per_degree_day": {
+        "name": "Verwarmingsuren per graaddag"
       }
     },
     "binary_sensor": {
@@ -130,6 +166,12 @@
       },
       "ot_flame": {
         "name": "Vlam"
+      },
+      "frost_risk": {
+        "name": "Vorstrisico"
+      },
+      "module_offline": {
+        "name": "Dominus-module offline"
       }
     },
     "number": {
@@ -219,6 +261,21 @@
       },
       "dhw_eco": {
         "name": "SWW-instelwaarde Eco"
+      },
+      "vacation_temperature": {
+        "name": "Vakantietemperatuur"
+      },
+      "season_winter_below": {
+        "name": "Winter onder (24-uursgemiddelde)"
+      },
+      "season_summer_above": {
+        "name": "Zomer boven (24-uursgemiddelde)"
+      },
+      "frost_threshold": {
+        "name": "Vorstdrempel"
+      },
+      "offline_minutes": {
+        "name": "Offline na"
       }
     },
     "select": {
@@ -307,6 +364,17 @@
     "switch": {
       "dhw_comfort_eco": {
         "name": "SWW Comfort-Eco volgens programma"
+      },
+      "vacation_mode": {
+        "name": "Vakantiemodus"
+      },
+      "auto_season": {
+        "name": "Automatisch zomer / winter"
+      }
+    },
+    "datetime": {
+      "vacation_until": {
+        "name": "Vakantie tot"
       }
     }
   },

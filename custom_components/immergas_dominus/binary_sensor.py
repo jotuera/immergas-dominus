@@ -28,6 +28,7 @@ from .const import (
 )
 from .coordinator import ImmergasDominusCoordinator
 from .entity import ImmergasDominusEntity
+from .stats_entities import ImmergasFrostRiskBinarySensor, ImmergasModuleOfflineBinarySensor
 
 
 async def async_setup_entry(
@@ -49,6 +50,8 @@ async def async_setup_entry(
             ImmergasDominusResetAvailableBinarySensor(coordinator),
             ImmergasDominusDhwRequestBinarySensor(coordinator),
             ImmergasDominusHeatingDemandBinarySensor(coordinator),
+            ImmergasFrostRiskBinarySensor(coordinator),
+            ImmergasModuleOfflineBinarySensor(coordinator),
         ]
     )
 

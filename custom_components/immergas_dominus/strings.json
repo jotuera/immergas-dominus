@@ -104,6 +104,42 @@
       },
       "failed_polls": {
         "name": "Failed polls"
+      },
+      "ch_heating_time_today": {
+        "name": "CH heating time today"
+      },
+      "ch_heating_share_24h": {
+        "name": "CH heating share (24 h)"
+      },
+      "dhw_cycles_today": {
+        "name": "DHW cycles today"
+      },
+      "last_dhw_cycle_duration": {
+        "name": "Last DHW cycle duration"
+      },
+      "last_dhw_cycle_rise": {
+        "name": "Last DHW cycle cylinder rise"
+      },
+      "ch_starts_per_hour": {
+        "name": "CH starts per hour"
+      },
+      "ch_starts_today": {
+        "name": "CH starts today"
+      },
+      "room_deviation": {
+        "name": "Room deviation from target (1 h)"
+      },
+      "time_to_target": {
+        "name": "Time to reach target"
+      },
+      "degree_days_today": {
+        "name": "Degree days today"
+      },
+      "degree_days_month": {
+        "name": "Degree days this month"
+      },
+      "heating_hours_per_degree_day": {
+        "name": "Heating hours per degree day"
       }
     },
     "binary_sensor": {
@@ -130,6 +166,12 @@
       },
       "ot_flame": {
         "name": "Flame"
+      },
+      "frost_risk": {
+        "name": "Frost risk"
+      },
+      "module_offline": {
+        "name": "Dominus module offline"
       }
     },
     "number": {
@@ -219,6 +261,21 @@
       },
       "dhw_eco": {
         "name": "DHW Eco target"
+      },
+      "vacation_temperature": {
+        "name": "Vacation temperature"
+      },
+      "season_winter_below": {
+        "name": "Winter below (24 h mean)"
+      },
+      "season_summer_above": {
+        "name": "Summer above (24 h mean)"
+      },
+      "frost_threshold": {
+        "name": "Frost threshold"
+      },
+      "offline_minutes": {
+        "name": "Offline after"
       }
     },
     "select": {
@@ -307,6 +364,17 @@
     "switch": {
       "dhw_comfort_eco": {
         "name": "DHW Comfort-Eco by schedule"
+      },
+      "vacation_mode": {
+        "name": "Vacation mode"
+      },
+      "auto_season": {
+        "name": "Automatic Summer / Winter"
+      }
+    },
+    "datetime": {
+      "vacation_until": {
+        "name": "Vacation until"
       }
     }
   },

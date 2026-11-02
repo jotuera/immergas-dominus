@@ -104,6 +104,42 @@
       },
       "failed_polls": {
         "name": "Leituras falhadas"
+      },
+      "ch_heating_time_today": {
+        "name": "Tempo de aquecimento hoje"
+      },
+      "ch_heating_share_24h": {
+        "name": "Percentagem de aquecimento (24 h)"
+      },
+      "dhw_cycles_today": {
+        "name": "Ciclos AQS hoje"
+      },
+      "last_dhw_cycle_duration": {
+        "name": "Duração do último ciclo AQS"
+      },
+      "last_dhw_cycle_rise": {
+        "name": "Subida do depósito no último ciclo AQS"
+      },
+      "ch_starts_per_hour": {
+        "name": "Arranques de aquecimento por hora"
+      },
+      "ch_starts_today": {
+        "name": "Arranques de aquecimento hoje"
+      },
+      "room_deviation": {
+        "name": "Desvio da divisão face ao setpoint (1 h)"
+      },
+      "time_to_target": {
+        "name": "Tempo até atingir o setpoint"
+      },
+      "degree_days_today": {
+        "name": "Graus-dia hoje"
+      },
+      "degree_days_month": {
+        "name": "Graus-dia este mês"
+      },
+      "heating_hours_per_degree_day": {
+        "name": "Horas de aquecimento por grau-dia"
       }
     },
     "binary_sensor": {
@@ -130,6 +166,12 @@
       },
       "ot_flame": {
         "name": "Chama"
+      },
+      "frost_risk": {
+        "name": "Risco de congelação"
+      },
+      "module_offline": {
+        "name": "Módulo Dominus offline"
       }
     },
     "number": {
@@ -219,6 +261,21 @@
       },
       "dhw_eco": {
         "name": "Setpoint AQS Eco"
+      },
+      "vacation_temperature": {
+        "name": "Temperatura de férias"
+      },
+      "season_winter_below": {
+        "name": "Inverno abaixo de (média 24 h)"
+      },
+      "season_summer_above": {
+        "name": "Verão acima de (média 24 h)"
+      },
+      "frost_threshold": {
+        "name": "Limiar de congelação"
+      },
+      "offline_minutes": {
+        "name": "Offline após"
       }
     },
     "select": {
@@ -307,6 +364,17 @@
     "switch": {
       "dhw_comfort_eco": {
         "name": "AQS Conforto-Eco por horário"
+      },
+      "vacation_mode": {
+        "name": "Modo férias"
+      },
+      "auto_season": {
+        "name": "Verão / inverno automático"
+      }
+    },
+    "datetime": {
+      "vacation_until": {
+        "name": "Férias até"
       }
     }
   },

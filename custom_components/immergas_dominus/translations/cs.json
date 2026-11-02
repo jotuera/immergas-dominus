@@ -104,6 +104,42 @@
       },
       "failed_polls": {
         "name": "Neúspěšná dotazování"
+      },
+      "ch_heating_time_today": {
+        "name": "Doba topení ÚT dnes"
+      },
+      "ch_heating_share_24h": {
+        "name": "Podíl topení ÚT (24 h)"
+      },
+      "dhw_cycles_today": {
+        "name": "Cykly TUV dnes"
+      },
+      "last_dhw_cycle_duration": {
+        "name": "Délka posledního cyklu TUV"
+      },
+      "last_dhw_cycle_rise": {
+        "name": "Nárůst zásobníku v posledním cyklu TUV"
+      },
+      "ch_starts_per_hour": {
+        "name": "Starty topení ÚT za hodinu"
+      },
+      "ch_starts_today": {
+        "name": "Starty topení ÚT dnes"
+      },
+      "room_deviation": {
+        "name": "Odchylka místnosti od žádané (1 h)"
+      },
+      "time_to_target": {
+        "name": "Doba dosažení žádané"
+      },
+      "degree_days_today": {
+        "name": "Denostupně dnes"
+      },
+      "degree_days_month": {
+        "name": "Denostupně tento měsíc"
+      },
+      "heating_hours_per_degree_day": {
+        "name": "Hodiny topení na denostupeň"
       }
     },
     "binary_sensor": {
@@ -130,6 +166,12 @@
       },
       "ot_flame": {
         "name": "Plamen"
+      },
+      "frost_risk": {
+        "name": "Riziko zamrznutí"
+      },
+      "module_offline": {
+        "name": "Modul Dominus offline"
       }
     },
     "number": {
@@ -219,6 +261,21 @@
       },
       "dhw_eco": {
         "name": "Teplota TUV Útlum"
+      },
+      "vacation_temperature": {
+        "name": "Teplota při dovolené"
+      },
+      "season_winter_below": {
+        "name": "Zima pod (průměr 24 h)"
+      },
+      "season_summer_above": {
+        "name": "Léto nad (průměr 24 h)"
+      },
+      "frost_threshold": {
+        "name": "Práh zamrznutí"
+      },
+      "offline_minutes": {
+        "name": "Offline po"
       }
     },
     "select": {
@@ -307,6 +364,17 @@
     "switch": {
       "dhw_comfort_eco": {
         "name": "TUV Komfort-Útlum podle rozvrhu"
+      },
+      "vacation_mode": {
+        "name": "Režim dovolená"
+      },
+      "auto_season": {
+        "name": "Automatické léto / zima"
+      }
+    },
+    "datetime": {
+      "vacation_until": {
+        "name": "Dovolená do"
       }
     }
   },

@@ -104,6 +104,42 @@
       },
       "failed_polls": {
         "name": "Interrogazioni fallite"
+      },
+      "ch_heating_time_today": {
+        "name": "Tempo di riscaldamento oggi"
+      },
+      "ch_heating_share_24h": {
+        "name": "Quota di riscaldamento (24 h)"
+      },
+      "dhw_cycles_today": {
+        "name": "Cicli ACS oggi"
+      },
+      "last_dhw_cycle_duration": {
+        "name": "Durata ultimo ciclo ACS"
+      },
+      "last_dhw_cycle_rise": {
+        "name": "Aumento bollitore nell'ultimo ciclo ACS"
+      },
+      "ch_starts_per_hour": {
+        "name": "Avvii riscaldamento all'ora"
+      },
+      "ch_starts_today": {
+        "name": "Avvii riscaldamento oggi"
+      },
+      "room_deviation": {
+        "name": "Scostamento ambiente dal setpoint (1 h)"
+      },
+      "time_to_target": {
+        "name": "Tempo per raggiungere il setpoint"
+      },
+      "degree_days_today": {
+        "name": "Gradi giorno oggi"
+      },
+      "degree_days_month": {
+        "name": "Gradi giorno questo mese"
+      },
+      "heating_hours_per_degree_day": {
+        "name": "Ore di riscaldamento per grado giorno"
       }
     },
     "binary_sensor": {
@@ -130,6 +166,12 @@
       },
       "ot_flame": {
         "name": "Fiamma"
+      },
+      "frost_risk": {
+        "name": "Rischio gelo"
+      },
+      "module_offline": {
+        "name": "Modulo Dominus offline"
       }
     },
     "number": {
@@ -219,6 +261,21 @@
       },
       "dhw_eco": {
         "name": "Setpoint ACS Economy"
+      },
+      "vacation_temperature": {
+        "name": "Temperatura vacanza"
+      },
+      "season_winter_below": {
+        "name": "Inverno sotto (media 24 h)"
+      },
+      "season_summer_above": {
+        "name": "Estate sopra (media 24 h)"
+      },
+      "frost_threshold": {
+        "name": "Soglia gelo"
+      },
+      "offline_minutes": {
+        "name": "Offline dopo"
       }
     },
     "select": {
@@ -307,6 +364,17 @@
     "switch": {
       "dhw_comfort_eco": {
         "name": "ACS Comfort-Economy da programma"
+      },
+      "vacation_mode": {
+        "name": "Modalità vacanza"
+      },
+      "auto_season": {
+        "name": "Estate / inverno automatico"
+      }
+    },
+    "datetime": {
+      "vacation_until": {
+        "name": "Vacanza fino al"
       }
     }
   },

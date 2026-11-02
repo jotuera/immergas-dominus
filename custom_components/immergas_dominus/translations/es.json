@@ -104,6 +104,42 @@
       },
       "failed_polls": {
         "name": "Consultas fallidas"
+      },
+      "ch_heating_time_today": {
+        "name": "Tiempo de calefacción hoy"
+      },
+      "ch_heating_share_24h": {
+        "name": "Proporción de calefacción (24 h)"
+      },
+      "dhw_cycles_today": {
+        "name": "Ciclos ACS hoy"
+      },
+      "last_dhw_cycle_duration": {
+        "name": "Duración del último ciclo ACS"
+      },
+      "last_dhw_cycle_rise": {
+        "name": "Subida del acumulador en el último ciclo ACS"
+      },
+      "ch_starts_per_hour": {
+        "name": "Arranques de calefacción por hora"
+      },
+      "ch_starts_today": {
+        "name": "Arranques de calefacción hoy"
+      },
+      "room_deviation": {
+        "name": "Desviación de la estancia respecto a la consigna (1 h)"
+      },
+      "time_to_target": {
+        "name": "Tiempo hasta alcanzar la consigna"
+      },
+      "degree_days_today": {
+        "name": "Grados-día hoy"
+      },
+      "degree_days_month": {
+        "name": "Grados-día este mes"
+      },
+      "heating_hours_per_degree_day": {
+        "name": "Horas de calefacción por grado-día"
       }
     },
     "binary_sensor": {
@@ -130,6 +166,12 @@
       },
       "ot_flame": {
         "name": "Llama"
+      },
+      "frost_risk": {
+        "name": "Riesgo de helada"
+      },
+      "module_offline": {
+        "name": "Módulo Dominus sin conexión"
       }
     },
     "number": {
@@ -219,6 +261,21 @@
       },
       "dhw_eco": {
         "name": "Consigna ACS Eco"
+      },
+      "vacation_temperature": {
+        "name": "Temperatura de vacaciones"
+      },
+      "season_winter_below": {
+        "name": "Invierno por debajo de (media 24 h)"
+      },
+      "season_summer_above": {
+        "name": "Verano por encima de (media 24 h)"
+      },
+      "frost_threshold": {
+        "name": "Umbral de helada"
+      },
+      "offline_minutes": {
+        "name": "Sin conexión tras"
       }
     },
     "select": {
@@ -307,6 +364,17 @@
     "switch": {
       "dhw_comfort_eco": {
         "name": "ACS Confort-Eco según horario"
+      },
+      "vacation_mode": {
+        "name": "Modo vacaciones"
+      },
+      "auto_season": {
+        "name": "Verano / invierno automático"
+      }
+    },
+    "datetime": {
+      "vacation_until": {
+        "name": "Vacaciones hasta"
       }
     }
   },

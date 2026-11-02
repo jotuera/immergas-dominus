@@ -1,4 +1,4 @@
-"""Switch platform for Immergas Dominus: DHW Comfort / Eco by the DHW schedule."""
+"""Switch platform for Immergas Dominus: DHW Comfort / Eco by the DHW schedule, vacation mode, auto Summer / Winter."""
 from __future__ import annotations
 
 from typing import Any
@@ -13,6 +13,7 @@ from .const import DOMAIN
 from .coordinator import ImmergasDominusCoordinator
 from .dhw_schedule import DHW_TARGET_PDU
 from .entity import ImmergasDominusEntity
+from .stats_entities import ImmergasAutoSeasonSwitch, ImmergasVacationSwitch
 
 
 async def async_setup_entry(
@@ -24,6 +25,8 @@ async def async_setup_entry(
     coordinator: ImmergasDominusCoordinator = hass.data[DOMAIN][entry.entry_id]
     if coordinator.dhw is not None:
         async_add_entities([ImmergasDhwScheduleSwitch(coordinator)])
+    if coordinator.stats is not None:
+        async_add_entities([ImmergasVacationSwitch(coordinator), ImmergasAutoSeasonSwitch(coordinator)])
 
 
 class ImmergasDhwScheduleSwitch(ImmergasDominusEntity, SwitchEntity, RestoreEntity):

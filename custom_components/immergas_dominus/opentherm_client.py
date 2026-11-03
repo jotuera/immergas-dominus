@@ -10,11 +10,10 @@ The Dominus Wi-Fi module speaks two local protocols, chosen by the boiler's conf
   16-bit value) + a 2-byte Dominus CRC (CRC-16/CCITT 0x1021 / 0xFFFF, identical to
   the Modbus mode).
 
-Unlike the Modbus mode, this client keeps **one persistent authenticated session**
-and runs a background loop that polls the registered Data-IDs continuously and sends
-writes on a priority queue inside that session.  The module resets a fresh connection
-on a WRITE-DATA frame (reads work on a fresh connection, writes do not), so the live
-session is required for writes — mirroring the official Dominus app.
+Unlike the Modbus mode, this client runs a background loop that polls the registered
+Data-IDs in an authenticated session and sends writes on a priority queue inside that
+session.  The module accepts only one TCP client, so after every full polling cycle the
+session is closed for ``_IDLE_BETWEEN_CYCLES`` seconds, leaving room for the official app.
 
 Experimental: verified for reads on a VICTRIX ZEUS 25; writes are still unconfirmed.
 """
@@ -46,6 +45,9 @@ _OT_WRITE_TYPE_BIT = 0b001 << 4  # 0x10, WRITE-DATA in byte 0 bits 6-4
 _MESSAGE_GAP = 0.3       # seconds between messages in the session loop
 _WRITE_TIMEOUT = 12.0    # seconds to wait for a queued write to complete
 _TEST_DATA_IDS = (0, 25, 27)  # status, boiler flow temp, outside temp
+# The module serves a single TCP client: after each full polling cycle the session is
+# released for this long so the official Dominus app can connect in between.
+_IDLE_BETWEEN_CYCLES = 20.0
 
 
 class DominusOpenThermUnsupported(DominusProtocolError):
@@ -142,7 +144,8 @@ class DominusOpenThermClient:
             raise DominusAuthError(f"OpenTherm write to Data-ID {data_id} timed out")
         if request.error is not None:
             raise request.error
-        assert request.ack is not None
+        if request.ack is None:
+            raise DominusProtocolError(f"OpenTherm write to Data-ID {data_id} got no acknowledgement")
         return request.ack
 
     # -- background session loop ----------------------------------------------
@@ -168,6 +171,9 @@ class DominusOpenThermClient:
                             self._values[request.data_id] = request.ack
                     except DominusOpenThermUnsupported as err:
                         request.error = err
+                    except Exception as err:  # noqa: BLE001 - hand the cause to the waiting caller
+                        request.error = err
+                        raise
                     finally:
                         request.event.set()
                     self._stop.wait(_MESSAGE_GAP)
@@ -186,6 +192,14 @@ class DominusOpenThermClient:
                         self._values[data_id] = value
                 except DominusOpenThermUnsupported:
                     pass  # boiler doesn't support this Data-ID; keep polling others
+                if pos % len(ids) == 0 and self._write_queue.empty():
+                    # full cycle done: free the module for the official app until the next one
+                    self._close_socket()
+                    idle_until = time.monotonic() + _IDLE_BETWEEN_CYCLES
+                    while time.monotonic() < idle_until and self._write_queue.empty():
+                        if self._stop.wait(0.25):
+                            break
+                    continue
                 self._stop.wait(_MESSAGE_GAP)
             except (OSError, DominusProtocolError, DominusAuthError) as err:
                 _LOGGER.debug("OpenTherm session error, reconnecting: %s", err)

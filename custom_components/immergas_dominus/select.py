@@ -1,6 +1,8 @@
 """Select platform for Immergas Dominus."""
 from __future__ import annotations
 
+import asyncio
+
 from homeassistant.components.select import SelectEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import EntityCategory
@@ -288,7 +290,15 @@ class ImmergasZone1ProgramSelect(ImmergasDominusEntity, SelectEntity, RestoreEnt
         return {"auto_days": self._auto_days}
 
     async def _write(self, pdu: int, value: int) -> None:
-        ack = await self.coordinator.client.async_write_pdu(pdu, value)
+        # the module drops a frame now and then (one TCP client at a time): retry, so a switch never stops half-way
+        for attempt in range(3):
+            try:
+                ack = await self.coordinator.client.async_write_pdu(pdu, value)
+                break
+            except Exception:  # noqa: BLE001
+                if attempt == 2:
+                    raise
+                await asyncio.sleep(1.5)
         self.coordinator.set_local_value(pdu, ack)
 
     async def async_select_option(self, option: str) -> None:

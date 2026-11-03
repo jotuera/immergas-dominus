@@ -465,6 +465,9 @@
       },
       "dhw_integration": {
         "name": "DHW boiler integration I01 (set on the boiler)"
+      },
+      "alert_notifications": {
+        "name": "Alert notifications"
       }
     },
     "datetime": {

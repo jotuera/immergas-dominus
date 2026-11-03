@@ -465,6 +465,9 @@
       },
       "dhw_integration": {
         "name": "Integracja kotła CWU I01 (ustawiona na piecu)"
+      },
+      "alert_notifications": {
+        "name": "Powiadomienia o alarmach"
       }
     },
     "datetime": {

@@ -465,6 +465,9 @@
       },
       "dhw_integration": {
         "name": "Integrazione caldaia ACS I01 (impostata sulla caldaia)"
+      },
+      "alert_notifications": {
+        "name": "Notifiche di allarme"
       }
     },
     "datetime": {

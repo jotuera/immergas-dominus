@@ -465,6 +465,9 @@
       },
       "dhw_integration": {
         "name": "Intégration chaudière ECS I01 (réglée sur la chaudière)"
+      },
+      "alert_notifications": {
+        "name": "Notifications d'alerte"
       }
     },
     "datetime": {

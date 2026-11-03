@@ -465,6 +465,9 @@
       },
       "dhw_integration": {
         "name": "HMV kazán integráció I01 (beállítva a kazánon)"
+      },
+      "alert_notifications": {
+        "name": "Riasztási értesítések"
       }
     },
     "datetime": {

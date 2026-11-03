@@ -465,6 +465,9 @@
       },
       "dhw_integration": {
         "name": "WW-Kesselintegration I01 (am Kessel eingestellt)"
+      },
+      "alert_notifications": {
+        "name": "Alarm-Benachrichtigungen"
       }
     },
     "datetime": {

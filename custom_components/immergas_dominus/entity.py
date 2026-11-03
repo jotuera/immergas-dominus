@@ -65,7 +65,7 @@ def _device_info(
         model=info["model"],
     )
 
-    if device_key != DEVICE_MAIN:
-        device_info["via_device"] = (DOMAIN, coordinator.config_entry.entry_id)
+    # the sub-device's parent link is set once when the devices are registered (__init__): a `via_device` here makes
+    # HA 2026.11 refuse to add the entity
 
     return device_info

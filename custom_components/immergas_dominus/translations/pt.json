@@ -465,6 +465,9 @@
       },
       "dhw_integration": {
         "name": "Integração caldeira AQS I01 (definida na caldeira)"
+      },
+      "alert_notifications": {
+        "name": "Notificações de alarme"
       }
     },
     "datetime": {

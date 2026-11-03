@@ -465,6 +465,9 @@
       },
       "dhw_integration": {
         "name": "Integrace kotle TUV I01 (nastavená na kotli)"
+      },
+      "alert_notifications": {
+        "name": "Upozornění na alarmy"
       }
     },
     "datetime": {

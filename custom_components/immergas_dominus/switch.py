@@ -14,7 +14,7 @@ from .coordinator import ImmergasDominusCoordinator
 from .dhw_schedule import DHW_TARGET_PDU
 from .entity import ImmergasDominusEntity
 from .programs import declared_switches
-from .stats_entities import ImmergasAutoSeasonSwitch, ImmergasVacationSwitch
+from .stats_entities import ImmergasAlertNotificationsSwitch, ImmergasAutoSeasonSwitch, ImmergasVacationSwitch
 
 
 async def async_setup_entry(
@@ -27,7 +27,8 @@ async def async_setup_entry(
     if coordinator.dhw is not None:
         async_add_entities([ImmergasDhwScheduleSwitch(coordinator)])
     if coordinator.stats is not None:
-        async_add_entities([ImmergasVacationSwitch(coordinator), ImmergasAutoSeasonSwitch(coordinator)])
+        async_add_entities([ImmergasVacationSwitch(coordinator), ImmergasAutoSeasonSwitch(coordinator),
+                            ImmergasAlertNotificationsSwitch(coordinator)])
         # boiler programs declared by the user (not readable over TCP)
         async_add_entities(declared_switches(coordinator))
 

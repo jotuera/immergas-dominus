@@ -465,6 +465,9 @@
       },
       "dhw_integration": {
         "name": "SWW-ketelintegratie I01 (ingesteld op de ketel)"
+      },
+      "alert_notifications": {
+        "name": "Alarmmeldingen"
       }
     },
     "datetime": {

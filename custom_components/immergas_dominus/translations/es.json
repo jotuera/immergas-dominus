@@ -465,6 +465,9 @@
       },
       "dhw_integration": {
         "name": "Integración caldera ACS I01 (ajustada en la caldera)"
+      },
+      "alert_notifications": {
+        "name": "Notificaciones de alarmas"
       }
     },
     "datetime": {

@@ -11,7 +11,8 @@ from homeassistant.components.binary_sensor import (
 from homeassistant.components.climate import ClimateEntityDescription
 from homeassistant.components.number import NumberDeviceClass, NumberEntityDescription, NumberMode
 from homeassistant.components.select import SelectEntityDescription
-from homeassistant.components.sensor import SensorDeviceClass, SensorEntityDescription
+from homeassistant.helpers.entity import EntityDescription
+from homeassistant.components.sensor import SensorDeviceClass, SensorEntityDescription, SensorStateClass
 from homeassistant.const import (
     PERCENTAGE,
     EntityCategory,
@@ -162,13 +163,10 @@ class DominusSelectEntityDescription(SelectEntityDescription):
 
 
 @dataclass(frozen=True, kw_only=True)
-class DominusTimeEntityDescription:
+class DominusTimeEntityDescription(EntityDescription):
     """Description of a writable Dominus schedule time-of-day (PDU high=hour, low=minute)."""
 
-    key: str
     pdu: int
-    translation_key: str
-    translation_placeholders: dict[str, str] | None = None
     device_key: str = DEVICE_SCHEDULE
 
 
@@ -179,6 +177,7 @@ SENSOR_DESCRIPTIONS: tuple[DominusSensorEntityDescription, ...] = (
         device_key=DEVICE_ZONE_1,
         translation_key="room_temperature",
         device_class=SensorDeviceClass.TEMPERATURE,
+        state_class=SensorStateClass.MEASUREMENT,
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         suggested_display_precision=1,
         value_scale=0.1,
@@ -191,6 +190,7 @@ SENSOR_DESCRIPTIONS: tuple[DominusSensorEntityDescription, ...] = (
         device_key=DEVICE_MAIN,
         translation_key="outdoor_temperature",
         device_class=SensorDeviceClass.TEMPERATURE,
+        state_class=SensorStateClass.MEASUREMENT,
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         suggested_display_precision=1,
         value_scale=0.1,
@@ -203,6 +203,7 @@ SENSOR_DESCRIPTIONS: tuple[DominusSensorEntityDescription, ...] = (
         device_key=DEVICE_MAIN,
         translation_key="dhw_tank_temperature",
         device_class=SensorDeviceClass.TEMPERATURE,
+        state_class=SensorStateClass.MEASUREMENT,
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         suggested_display_precision=1,
         value_scale=0.1,

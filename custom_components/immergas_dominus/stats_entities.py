@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Any
 
+from homeassistant.components import persistent_notification
 from homeassistant.components.binary_sensor import BinarySensorDeviceClass, BinarySensorEntity
 from homeassistant.components.datetime import DateTimeEntity
 from homeassistant.components.number import NumberDeviceClass, NumberMode, RestoreNumber
@@ -23,7 +24,8 @@ from homeassistant.const import PERCENTAGE, EntityCategory, UnitOfTemperature, U
 from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.util import dt as dt_util
 
-from .const import DEVICE_MAIN
+from .anomalies import describe
+from .const import DEVICE_MAIN, FAULT_CODE_PDU
 from .coordinator import ImmergasDominusCoordinator
 from .entity import ImmergasDominusEntity
 from .stats import DominusStats
@@ -283,6 +285,65 @@ class ImmergasAutoSeasonSwitch(_StatsEntity, SwitchEntity, RestoreEntity):
 
     async def async_turn_off(self, **kwargs: Any) -> None:
         self.stats.auto_season = False
+        self.async_write_ha_state()
+
+
+class ImmergasAlertNotificationsSwitch(_StatsEntity, SwitchEntity, RestoreEntity):
+    """On: frost risk, module offline and a boiler fault each raise a Home Assistant notification while active
+    (dismissed when the alert clears)."""
+
+    _attr_icon = "mdi:bell-ring-outline"
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "alert_notifications")
+        self._on = True
+        self._shown: set[str] = set()
+
+    async def async_added_to_hass(self) -> None:
+        await super().async_added_to_hass()
+        last = await self.async_get_last_state()
+        self._on = last is None or last.state != "off"
+        self.async_on_remove(self.stats.add_listener(self._check))
+        self._check()
+
+    @property
+    def is_on(self) -> bool:
+        return self._on
+
+    def _texts(self) -> dict[str, tuple[str, str] | None]:
+        pl = (self.hass.config.language or "").startswith("pl")
+        raw = self.coordinator.data.get(FAULT_CODE_PDU) if self.coordinator.data else None
+        lang = self.hass.config.language
+        return {
+            "frost": (("Ryzyko zamarznięcia", f"Temperatura w strefie 1 spadła poniżej {self.stats.settings['frost_threshold']} °C.")
+                      if pl else ("Frost risk", f"The zone 1 temperature is below {self.stats.settings['frost_threshold']} °C."))
+            if self.stats.frost_risk else None,
+            "offline": (("Moduł Dominus offline", f"Moduł nie odpowiada dłużej niż {int(self.stats.settings['offline_minutes'])} min.")
+                        if pl else ("Dominus module offline", f"The module has not answered for over {int(self.stats.settings['offline_minutes'])} min."))
+            if self.stats.module_offline else None,
+            "fault": ((f"Błąd kotła E{raw}" if pl else f"Boiler fault E{raw}"), describe(int(raw), lang)) if raw else None,
+        }
+
+    def _check(self) -> None:
+        if self.hass is None:
+            return
+        for key, text in self._texts().items():
+            nid = f"immergas_dominus_{self.coordinator.config_entry.entry_id}_{key}"
+            if self._on and text is not None and key not in self._shown:
+                persistent_notification.async_create(self.hass, text[1], title=text[0], notification_id=nid)
+                self._shown.add(key)
+            elif (text is None or not self._on) and key in self._shown:
+                persistent_notification.async_dismiss(self.hass, nid)
+                self._shown.discard(key)
+
+    async def async_turn_on(self, **kwargs: Any) -> None:
+        self._on = True
+        self._check()
+        self.async_write_ha_state()
+
+    async def async_turn_off(self, **kwargs: Any) -> None:
+        self._on = False
+        self._check()
         self.async_write_ha_state()
 
 

@@ -1,6 +1,8 @@
 """Immergas Dominus integration."""
 from __future__ import annotations
 
+import inspect
+
 import logging
 from pathlib import Path
 
@@ -115,7 +117,12 @@ def _ensure_logical_devices(
             "sw_version": sw_version,
         }
         if device_key != DEVICE_MAIN:
-            kwargs["via_device"] = main_identifier
+            # HA 2026.11 rejects the old `via_device` identifier tuple; newer cores take the parent device id
+            main_device = registry.async_get_device(identifiers={main_identifier})
+            if main_device is not None and "via_device_id" in inspect.signature(registry.async_get_or_create).parameters:
+                kwargs["via_device_id"] = main_device.id
+            elif main_device is not None:
+                kwargs["via_device"] = main_identifier
         device = registry.async_get_or_create(**kwargs)
 
         # Disable Zone 2/3 devices only the first time they are created, so a

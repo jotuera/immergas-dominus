@@ -203,6 +203,8 @@ def declared_numbers(coordinator: ImmergasDominusCoordinator) -> list[RestoreNum
         ImmergasDeclaredNumber(coordinator, "curve_r13", "mdi:snowflake", 20, 5, 25, c),
         # P07: outdoor probe correction (the temperature read over TCP already includes it)
         ImmergasDeclaredNumber(coordinator, "outdoor_probe_correction", "mdi:thermometer-plus", 0, -9, 9, c),
+        # heated floor area of the house (m2): the dashboard shows the heat loss per m2
+        ImmergasDeclaredNumber(coordinator, "heated_area", "mdi:floor-plan", 150, 20, 2000, "m²"),
     ]
 
 

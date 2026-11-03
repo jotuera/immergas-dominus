@@ -318,6 +318,9 @@
       },
       "outdoor_probe_correction": {
         "name": "Außenfühler-Korrektur P07"
+      },
+      "heated_area": {
+        "name": "Beheizte Wohnfläche"
       }
     },
     "select": {

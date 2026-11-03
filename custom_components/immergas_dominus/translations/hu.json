@@ -318,6 +318,9 @@
       },
       "outdoor_probe_correction": {
         "name": "Külső érzékelő korrekció P07"
+      },
+      "heated_area": {
+        "name": "Fűtött alapterület"
       }
     },
     "select": {

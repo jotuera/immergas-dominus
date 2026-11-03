@@ -318,6 +318,9 @@
       },
       "outdoor_probe_correction": {
         "name": "Korekce venkovního čidla P07"
+      },
+      "heated_area": {
+        "name": "Vytápěná plocha"
       }
     },
     "select": {

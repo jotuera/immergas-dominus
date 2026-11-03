@@ -318,6 +318,9 @@
       },
       "outdoor_probe_correction": {
         "name": "Korekta sondy zewnętrznej P07"
+      },
+      "heated_area": {
+        "name": "Powierzchnia ogrzewana"
       }
     },
     "select": {

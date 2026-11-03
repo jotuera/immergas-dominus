@@ -318,6 +318,9 @@
       },
       "outdoor_probe_correction": {
         "name": "Correctie buitenvoeler P07"
+      },
+      "heated_area": {
+        "name": "Verwarmde oppervlakte"
       }
     },
     "select": {

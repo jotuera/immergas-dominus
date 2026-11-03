@@ -318,6 +318,9 @@
       },
       "outdoor_probe_correction": {
         "name": "Correzione sonda esterna P07"
+      },
+      "heated_area": {
+        "name": "Superficie riscaldata"
       }
     },
     "select": {

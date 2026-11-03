@@ -318,6 +318,9 @@
       },
       "outdoor_probe_correction": {
         "name": "Outdoor probe correction P07"
+      },
+      "heated_area": {
+        "name": "Heated floor area"
       }
     },
     "select": {

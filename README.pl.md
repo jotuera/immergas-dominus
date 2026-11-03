@@ -224,6 +224,18 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.5.4
+
+- **Home Assistant 2026.11:** encje podurządzeń (strefy, harmonogram) znowu się dodają – urządzenie nadrzędne jest
+  wskazane przez id, a godziny harmonogramu mają poprawny opis encji.
+- Przełącznik **Powiadomienia o alarmach**: ryzyko zamarznięcia, moduł offline albo błąd kotła tworzą powiadomienie
+  w Home Assistant, usuwane po ustaniu alarmu (domyślnie włączony).
+- Temperatury zewnętrzna, pokoju i zasobnika CWU mają statystyki długoterminowe.
+- Karty 0.51.0: karta **Automatyzacje** dla wbudowanych automatyk i alarmów (Lato / Zima, wyjazd, harmonogram CWU,
+  powiadomienia, zamarznięcie, moduł offline, błąd kotła) oraz **skuteczność optymalizacji** w Kalibracji (godziny
+  grzania na stopniodzień, starty, odchyłka pokoju; opcjonalnie `energy_entity` / `gas_entity`); rodzaj posadzki
+  i powierzchnia ogrzewana w ustawieniach online.
+
 ### 1.5.3
 
 - **OpenTherm (VICTRIX i inne kotły bez Modbusa):** sesja jest zwalniana po każdym cyklu odczytów, więc oficjalna

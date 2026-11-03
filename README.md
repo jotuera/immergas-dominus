@@ -222,6 +222,18 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.5.4
+
+- **Home Assistant 2026.11:** sub-device entities (zones, schedule) are added again – the parent device is linked by id
+  and the schedule time entities use a proper entity description.
+- **Alert notifications** switch: frost risk, module offline or a boiler fault raise a Home Assistant notification,
+  cleared when the alert ends (on by default).
+- Outdoor, room and DHW cylinder temperatures keep long-term statistics.
+- Cards 0.51.0: **Automations** card for the built-in automations and alerts (summer / winter, vacation, DHW schedule,
+  notifications, frost, module offline, boiler fault) and **optimisation effectiveness** in Calibration (heating hours
+  per degree day, starts, room deviation; optional `energy_entity` / `gas_entity`); floor screed type and heated area
+  in the online settings.
+
 ### 1.5.3
 
 - **OpenTherm (VICTRIX and other non-Modbus boilers):** the session is released after every polling cycle, so the

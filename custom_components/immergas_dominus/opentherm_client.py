@@ -50,6 +50,19 @@ _TEST_DATA_IDS = (0, 25, 27)  # status, boiler flow temp, outside temp
 _IDLE_BETWEEN_CYCLES = 20.0
 
 
+def ot_param_key(data_id: int, index: int) -> int:
+    """Poll / write key of an indexed module parameter (e.g. Data-ID 89, HB = parameter index).
+
+    Plain keys (< 0x10000) are standard Data-IDs; an indexed key sends ``index`` in the request HB and keeps only the
+    reply LB (the parameter value) - how the official app reads and writes the module parameters (89/17 = CH setpoint).
+    """
+    return 0x10000 | ((data_id & 0xFF) << 8) | (index & 0xFF)
+
+
+def _split_key(key: int) -> tuple[int, int | None]:
+    return ((key >> 8) & 0xFF, key & 0xFF) if key >= 0x10000 else (key, None)
+
+
 class DominusOpenThermUnsupported(DominusProtocolError):
     """The boiler answered DATA-INVALID / UNKNOWN-DATAID for this Data-ID."""
 
@@ -162,11 +175,7 @@ class DominusOpenThermClient:
                 request = self._next_write()
                 if request is not None:
                     try:
-                        request.ack = self._exchange(
-                            self._build_write_frame(request.data_id, request.value),
-                            request.data_id,
-                            expect_write=True,
-                        )
+                        request.ack = self._exchange_key(request.data_id, request.value, write=True)
                         with self._lock:
                             self._values[request.data_id] = request.ack
                     except DominusOpenThermUnsupported as err:
@@ -187,7 +196,7 @@ class DominusOpenThermClient:
                 data_id = ids[pos % len(ids)]
                 pos += 1
                 try:
-                    value = self._exchange(self._build_read_frame(data_id), data_id)
+                    value = self._exchange_key(data_id)
                     with self._lock:
                         self._values[data_id] = value
                 except DominusOpenThermUnsupported:
@@ -223,6 +232,16 @@ class DominusOpenThermClient:
             request.error = error
             request.event.set()
 
+    def _exchange_key(self, key: int, value: int = 0, write: bool = False) -> int:
+        """Read or write a plain Data-ID or an indexed parameter (see :func:`ot_param_key`)."""
+        data_id, index = _split_key(key)
+        if index is None:
+            frame = self._build_write_frame(data_id, value) if write else self._build_read_frame(data_id)
+            return self._exchange(frame, data_id, expect_write=write)
+        # indexed parameter: HB = index, LB = value (u8); the reply LB is the parameter value
+        frame = self._build_write_frame(data_id, (index << 8) | (value & 0xFF)) if write else self._build_read_frame(data_id, index << 8)
+        return self._exchange(frame, data_id, expect_write=write) & 0xFF
+
     def _exchange(self, frame: bytes, expected_id: int, expect_write: bool = False) -> int:
         """Send a frame on the live socket and return the decoded reply value."""
         sock = self._sock
@@ -239,9 +258,10 @@ class DominusOpenThermClient:
     # -- framing ---------------------------------------------------------------
 
     @staticmethod
-    def _build_read_frame(data_id: int) -> bytes:
-        byte0 = _even_parity_byte0(0x00, data_id, 0x00, 0x00)  # READ-DATA, value 0
-        body = bytes([byte0, data_id & 0xFF, 0x00, 0x00])
+    def _build_read_frame(data_id: int, value: int = 0) -> bytes:
+        hb, lb = (value >> 8) & 0xFF, value & 0xFF
+        byte0 = _even_parity_byte0(0x00, data_id, hb, lb)  # READ-DATA (value 0, or HB = parameter index)
+        body = bytes([byte0, data_id & 0xFF, hb, lb])
         crc = DominusClient._crc16_dominus(body)
         return body + bytes([(crc >> 8) & 0xFF, crc & 0xFF])
 

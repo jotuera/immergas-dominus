@@ -224,6 +224,11 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.5.6
+
+- OpenTherm (VICTRIX): **nastawa CO** jest odczytywana i zapisywana jako parametr modułu 17 (Data-ID 89, HB = 17,
+  LB = °C), dokładnie jak w oficjalnej aplikacji; **nastawa CWU** jest zapisywana w pełnych stopniach (HB = °C, LB = 0) (#2).
+
 ### 1.5.5
 
 - OpenTherm (VICTRIX): surowe bajty każdego zapisu i odpowiedzi, której nie da się odczytać, trafiają do logu debug –

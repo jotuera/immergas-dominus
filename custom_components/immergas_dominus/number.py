@@ -20,6 +20,7 @@ from .const import (
 from .coordinator import ImmergasDominusCoordinator
 from .dhw_schedule import DEFAULT_COMFORT, DEFAULT_ECO, DHW_TARGET_PDU
 from .entity import ImmergasDominusEntity
+from .opentherm_client import ot_param_key
 from .programs import declared_numbers
 from .stats_entities import SETTING_SPECS, ImmergasStatsSetting
 
@@ -89,7 +90,8 @@ class ImmergasOpenThermNumber(ImmergasDominusEntity, NumberEntity):
         coordinator: ImmergasDominusCoordinator,
         description: DominusOpenThermNumberDescription,
     ) -> None:
-        super().__init__(coordinator, description.key, description.data_id, DEVICE_MAIN)
+        key = description.data_id if description.param is None else ot_param_key(description.data_id, description.param)
+        super().__init__(coordinator, description.key, key, DEVICE_MAIN)
         self.entity_description = description
 
     @property
@@ -97,12 +99,16 @@ class ImmergasOpenThermNumber(ImmergasDominusEntity, NumberEntity):
         raw = self.raw_value
         if raw is None:
             return None
+        if self.entity_description.param is not None:
+            return float(int(raw) & 0xFF)  # module parameter: whole °C in the reply LB
         raw = int(raw) & 0xFFFF
         signed = raw - 0x10000 if raw & 0x8000 else raw
         return round(signed / 256, 1)
 
     async def async_set_native_value(self, value: float) -> None:
-        raw_value = round(float(value) * 256) & 0xFFFF
+        # whole degrees, as the official app sends them (f8.8 with LB = 0, or the parameter value)
+        whole = int(round(float(value)))
+        raw_value = whole & 0xFF if self.entity_description.param is not None else (whole << 8) & 0xFFFF
         ack_value = await self.coordinator.client.async_write_data_id(self._pdu, raw_value)
         self.coordinator.set_local_value(self._pdu, ack_value)
         await self.coordinator.async_request_refresh()

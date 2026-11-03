@@ -683,15 +683,19 @@ OT_BINARY_DESCRIPTIONS: tuple[DominusOpenThermBinaryDescription, ...] = (
 
 @dataclass(frozen=True, kw_only=True)
 class DominusOpenThermNumberDescription(NumberEntityDescription):
-    """Writable OpenTherm setpoint (f8.8 fixed-point, °C)."""
+    """Writable OpenTherm setpoint: f8.8 fixed-point Data-ID, or a module parameter (``param`` = HB index, u8 °C)."""
 
     data_id: int
+    param: int | None = None
 
 
 OT_NUMBER_DESCRIPTIONS: tuple[DominusOpenThermNumberDescription, ...] = (
     DominusOpenThermNumberDescription(
         key="ot_ch_setpoint",
-        data_id=1,
+        # the official app sets the CH temperature as module parameter 17 (Data-ID 89, HB = 17, LB = °C); Data-ID 1 is
+        # the control setpoint the module itself recalculates, so a write there does not stick
+        data_id=89,
+        param=17,
         translation_key="ot_ch_setpoint",
         device_class=NumberDeviceClass.TEMPERATURE,
         native_min_value=10,

@@ -222,6 +222,11 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.5.6
+
+- OpenTherm (VICTRIX): the **CH setpoint** is now read and written as module parameter 17 (Data-ID 89, HB = 17,
+  LB = °C), exactly as the official app does; the **DHW setpoint** is written in whole degrees (HB = °C, LB = 0) (#2).
+
 ### 1.5.5
 
 - OpenTherm (VICTRIX): the raw bytes of every write and of a reply that cannot be decoded are logged at debug level,

@@ -411,6 +411,13 @@
           "anhydrite": "Anhydritový poter",
           "dry": "Suchý systém"
         }
+      },
+      "zone1_time_program": {
+        "name": "Časový program ÚK zóny 1",
+        "state": {
+          "manual": "Ručne – pevná teplota 24 h",
+          "auto": "Auto – podľa kalendárov"
+        }
       }
     },
     "time": {

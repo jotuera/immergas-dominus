@@ -411,6 +411,13 @@
           "anhydrite": "Anhydrytowa",
           "dry": "System suchy"
         }
+      },
+      "zone1_time_program": {
+        "name": "Program czasowy CO Strefy 1",
+        "state": {
+          "manual": "Ręczny – stała nastawa 24 h",
+          "auto": "Auto – wg kalendarzy"
+        }
       }
     },
     "time": {

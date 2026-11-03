@@ -411,6 +411,13 @@
           "anhydrite": "Anhydritestrich",
           "dry": "Trockensystem"
         }
+      },
+      "zone1_time_program": {
+        "name": "Zeitprogramm Heizung Zone 1",
+        "state": {
+          "manual": "Manuell – fester Sollwert 24 h",
+          "auto": "Auto – nach Kalendern"
+        }
       }
     },
     "time": {

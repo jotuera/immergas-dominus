@@ -411,6 +411,13 @@
           "anhydrite": "Chape anhydrite",
           "dry": "Système sec"
         }
+      },
+      "zone1_time_program": {
+        "name": "Programme horaire chauffage zone 1",
+        "state": {
+          "manual": "Manuel – consigne fixe 24 h",
+          "auto": "Auto – selon les calendriers"
+        }
       }
     },
     "time": {

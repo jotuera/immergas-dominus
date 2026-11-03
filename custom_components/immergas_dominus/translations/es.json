@@ -411,6 +411,13 @@
           "anhydrite": "Mortero de anhidrita",
           "dry": "Sistema seco"
         }
+      },
+      "zone1_time_program": {
+        "name": "Programa horario calefacción zona 1",
+        "state": {
+          "manual": "Manual – consigna fija 24 h",
+          "auto": "Auto – según calendarios"
+        }
       }
     },
     "time": {

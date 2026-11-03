@@ -411,6 +411,13 @@
           "anhydrite": "Anhidritesztrich",
           "dry": "Száraz rendszer"
         }
+      },
+      "zone1_time_program": {
+        "name": "1. zóna fűtési időprogram",
+        "state": {
+          "manual": "Kézi – állandó alapjel 24 h",
+          "auto": "Auto – naptárak szerint"
+        }
       }
     },
     "time": {

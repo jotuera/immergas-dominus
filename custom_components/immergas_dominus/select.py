@@ -18,6 +18,7 @@ from .const import (
     CONF_PROTOCOL,
     DEVICE_MAIN,
     DEVICE_SCHEDULE,
+    DEVICE_ZONE_1,
     DOMAIN,
     OT_MODE_OPTIONS,
     OT_MODE_PDU,
@@ -48,6 +49,7 @@ async def async_setup_entry(
         for description in SELECT_DESCRIPTIONS
     ]
     entities.append(ImmergasDominusAllDaysProfileSelect(coordinator))
+    entities.append(ImmergasZone1ProgramSelect(coordinator))
     entities.append(ImmergasFaultLanguageSelect(coordinator))
     if coordinator.stats is not None:
         entities.append(ImmergasLegionellaDay(coordinator))
@@ -197,4 +199,118 @@ class ImmergasOpenThermModeSelect(ImmergasDominusEntity, SelectEntity):
         status = OT_MODE_TO_STATUS[option]
         ack = await self.coordinator.client.async_write_data_id(OT_MODE_PDU, status << 8)
         self.coordinator.set_local_value(OT_MODE_PDU, ack)
+        await self.coordinator.async_request_refresh()
+
+
+# Zone 1 CH time program AUTO / MANUAL.  The boiler keeps "time programs active" in the zone panel (0x29 2294), which
+# the Dominus module does not expose over TCP, so the integration emulates it on the registers the app itself writes:
+# MANUAL = every weekday on a calendar that covers the whole day (calendar 4 is set to 00:00-24:00 when none does) -
+# a fixed setpoint 24 h; AUTO = the day assignment from before MANUAL, never on a whole-day calendar.  The state is read
+# back from the boiler (all days on one whole-day calendar = MANUAL), so a change made in the app shows up here too.
+_PROGRAM_OPTIONS = ["manual", "auto"]
+_DAY_END = 24 * 60
+_MANUAL_PROFILE = 4
+
+
+def _profile_pdus(profile: int) -> list[tuple[int, int]]:
+    base = 2300 + profile * 10
+    return [(base + (f - 1) * 2, base + (f - 1) * 2 + 1) for f in range(1, 5)]
+
+
+def _minutes(raw: int | None) -> int | None:
+    if raw is None:
+        return None
+    hour, minute = (int(raw) >> 8) & 0xFF, int(raw) & 0xFF
+    return _DAY_END if hour >= 24 or (hour == 23 and minute >= 59) else hour * 60 + min(minute, 59)
+
+
+class ImmergasZone1ProgramSelect(ImmergasDominusEntity, SelectEntity, RestoreEntity):
+    """Zone 1 CH time program: AUTO (by the calendars) / MANUAL (fixed setpoint 24 h), emulated on the calendars."""
+
+    _attr_translation_key = "zone1_time_program"
+    _attr_icon = "mdi:calendar-clock"
+    _attr_options = _PROGRAM_OPTIONS
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "zone1_time_program", WEEKDAY_PROFILE_PDUS[0], DEVICE_ZONE_1)
+        self._auto_days: list[int] | None = None
+
+    def _poll_pdus(self) -> tuple[int, ...]:
+        cal = tuple(pdu for p in range(1, 5) for pair in _profile_pdus(p) for pdu in pair)
+        return WEEKDAY_PROFILE_PDUS + cal
+
+    async def async_added_to_hass(self) -> None:
+        await super().async_added_to_hass()
+        last = await self.async_get_last_state()
+        days = last.attributes.get("auto_days") if last is not None else None
+        if isinstance(days, list) and len(days) == 7:
+            self._auto_days = [int(d) for d in days]
+
+    def _days(self) -> list[int] | None:
+        data = self.coordinator.data or {}
+        raws = [data.get(pdu) for pdu in WEEKDAY_PROFILE_PDUS]
+        return None if any(r is None for r in raws) else [int(r) & 0xFF for r in raws]
+
+    def _whole_day(self, profile: int) -> bool | None:
+        """True when the calendar's ranges together cover 00:00-24:00."""
+        if profile not in (1, 2, 3, 4):
+            return False
+        data = self.coordinator.data or {}
+        spans = []
+        for start_pdu, end_pdu in _profile_pdus(profile):
+            start, end = _minutes(data.get(start_pdu)), _minutes(data.get(end_pdu))
+            if start is None or end is None:
+                return None
+            if end > start:
+                spans.append((start, end))
+        reach = 0
+        for start, end in sorted(spans):
+            if start > reach:
+                break
+            reach = max(reach, end)
+        return reach >= _DAY_END
+
+    @property
+    def current_option(self) -> str | None:
+        days = self._days()
+        if days is None:
+            return None
+        if len(set(days)) == 1:
+            whole = self._whole_day(days[0])
+            if whole is None:
+                return None
+            if whole:
+                return "manual"
+        return "auto"
+
+    @property
+    def extra_state_attributes(self) -> dict:
+        return {"auto_days": self._auto_days}
+
+    async def _write(self, pdu: int, value: int) -> None:
+        ack = await self.coordinator.client.async_write_pdu(pdu, value)
+        self.coordinator.set_local_value(pdu, ack)
+
+    async def async_select_option(self, option: str) -> None:
+        days = self._days()
+        if days is None:
+            return
+        if option == "manual":
+            if self.current_option == "auto":
+                self._auto_days = days
+            whole = next((p for p in (1, 2, 3, 4) if self._whole_day(p)), None)
+            if whole is None:
+                whole = _MANUAL_PROFILE
+                for i, (start_pdu, end_pdu) in enumerate(_profile_pdus(whole)):
+                    await self._write(start_pdu, 0x0000)
+                    await self._write(end_pdu, 0x1800 if i == 0 else 0x0000)
+            for pdu in WEEKDAY_PROFILE_PDUS:
+                await self._write(pdu, whole)
+        else:
+            # back to the days from before MANUAL, but never on a whole-day calendar (AUTO must follow a real schedule)
+            fallback = next((p for p in (1, 2, 3, 4) if self._whole_day(p) is False), 1)
+            target = [d if d in (1, 2, 3, 4) and self._whole_day(d) is False else fallback for d in (self._auto_days or days)]
+            for pdu, profile in zip(WEEKDAY_PROFILE_PDUS, target):
+                await self._write(pdu, profile)
+        self.async_write_ha_state()
         await self.coordinator.async_request_refresh()

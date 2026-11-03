@@ -411,6 +411,13 @@
           "anhydrite": "Anhydrietdekvloer",
           "dry": "Droog systeem"
         }
+      },
+      "zone1_time_program": {
+        "name": "Tijdprogramma CV zone 1",
+        "state": {
+          "manual": "Handmatig – vaste setpoint 24 h",
+          "auto": "Auto – volgens de kalenders"
+        }
       }
     },
     "time": {

@@ -411,6 +411,13 @@
           "anhydrite": "Anhydrite screed",
           "dry": "Dry system"
         }
+      },
+      "zone1_time_program": {
+        "name": "Zone 1 CH time program",
+        "state": {
+          "manual": "Manual – fixed setpoint 24 h",
+          "auto": "Auto – by the calendars"
+        }
       }
     },
     "time": {

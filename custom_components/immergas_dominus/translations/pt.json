@@ -411,6 +411,13 @@
           "anhydrite": "Betonilha de anidrite",
           "dry": "Sistema seco"
         }
+      },
+      "zone1_time_program": {
+        "name": "Programa horário aquecimento zona 1",
+        "state": {
+          "manual": "Manual – setpoint fixo 24 h",
+          "auto": "Auto – pelos calendários"
+        }
       }
     },
     "time": {

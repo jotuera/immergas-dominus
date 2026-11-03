@@ -411,6 +411,13 @@
           "anhydrite": "Massetto anidritico",
           "dry": "Sistema a secco"
         }
+      },
+      "zone1_time_program": {
+        "name": "Programma orario riscaldamento zona 1",
+        "state": {
+          "manual": "Manuale – setpoint fisso 24 h",
+          "auto": "Auto – secondo i calendari"
+        }
       }
     },
     "time": {

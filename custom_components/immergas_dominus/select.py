@@ -21,6 +21,8 @@ from .const import (
     DEVICE_MAIN,
     DEVICE_SCHEDULE,
     DEVICE_ZONE_1,
+    ZONE_PHASE_MANUAL_MASK,
+    ZONE_STATUS_PDU,
     DOMAIN,
     OT_MODE_OPTIONS,
     OT_MODE_PDU,
@@ -239,7 +241,12 @@ class ImmergasZone1ProgramSelect(ImmergasDominusEntity, SelectEntity, RestoreEnt
 
     def _poll_pdus(self) -> tuple[int, ...]:
         cal = tuple(pdu for p in range(1, 5) for pair in _profile_pdus(p) for pdu in pair)
-        return WEEKDAY_PROFILE_PDUS + cal
+        return WEEKDAY_PROFILE_PDUS + cal + (ZONE_STATUS_PDU,)
+
+    def _panel_manual(self) -> bool:
+        """The zone panel (or the hub emulating it) has its time programs off: the boiler flags the zone MANUAL."""
+        raw = (self.coordinator.data or {}).get(ZONE_STATUS_PDU)
+        return raw is not None and bool(int(raw) & ZONE_PHASE_MANUAL_MASK)
 
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
@@ -277,6 +284,8 @@ class ImmergasZone1ProgramSelect(ImmergasDominusEntity, SelectEntity, RestoreEnt
         days = self._days()
         if days is None:
             return None
+        if self._panel_manual():
+            return "manual"
         if len(set(days)) == 1:
             whole = self._whole_day(days[0])
             if whole is None:
@@ -287,7 +296,8 @@ class ImmergasZone1ProgramSelect(ImmergasDominusEntity, SelectEntity, RestoreEnt
 
     @property
     def extra_state_attributes(self) -> dict:
-        return {"auto_days": self._auto_days}
+        # panel_manual: MANUAL set on the zone panel / hub - AUTO from here cannot override it (the module has no access)
+        return {"auto_days": self._auto_days, "panel_manual": self._panel_manual()}
 
     async def _write(self, pdu: int, value: int) -> None:
         # the module drops a frame now and then (one TCP client at a time): retry, so a switch never stops half-way

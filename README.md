@@ -205,6 +205,16 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.5.3
+
+- **OpenTherm (VICTRIX and other non-Modbus boilers):** the session is released after every polling cycle, so the
+  official Dominus app can connect in between (the module serves one TCP client at a time). A failed write now reports
+  its real cause instead of an AssertionError.
+- New boiler parameters to enter once: **floor screed type** (cement / anhydrite / dry system) and **heated floor area**.
+- Cards 0.50.1: Calibration uses the screed type (floor limit, setbacks, CH schedule, I04), shows the building heat
+  loss (W/K and W/m², once enough heating days are collected), the curve card ignores the flow while DHW heats, cycle
+  statistics skip reboot gaps, the cycling rows get a Set button (R05 / T05).
+
 ### 1.5.2
 
 - Cards 0.47.0: all dashboard texts in all 11 languages.

@@ -207,6 +207,16 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.5.3
+
+- **OpenTherm (VICTRIX i inne kotły bez Modbusa):** sesja jest zwalniana po każdym cyklu odczytów, więc oficjalna
+  aplikacja Dominus może się w tym czasie połączyć (moduł obsługuje jednego klienta TCP naraz). Nieudany zapis zgłasza
+  teraz prawdziwą przyczynę zamiast AssertionError.
+- Nowe parametry do wpisania raz: **rodzaj posadzki** (cementowa / anhydrytowa / system suchy) i **powierzchnia ogrzewana**.
+- Karty 0.50.1: Kalibracja uwzględnia rodzaj posadzki (limit podłogi, obniżki, harmonogram CO, I04), pokazuje straty
+  ciepła budynku (W/K i W/m², gdy zbierze się dość dni grzania), karta krzywej pomija zasilanie podczas grzania CWU,
+  statystyki cykli pomijają przerwy po restarcie, wiersze taktowania mają przycisk Ustaw (R05 / T05).
+
 ### 1.5.2
 
 - Karty 0.47.0: wszystkie teksty dashboardu w 11 językach.

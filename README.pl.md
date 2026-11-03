@@ -27,6 +27,23 @@ modułem Dominus po lokalnym TCP (domyślny port `2000`), używając adresu MAC 
 > (nastawa CO / CWU, tryb) wymagający potwierdzenia. Zob. zgłoszenie
 > [#2](https://github.com/jotuera/immergas-dominus/issues/2).
 
+> [!IMPORTANT]
+> ### ⚠️ Tylko jedno połączenie naraz
+> **Moduł Dominus przyjmuje tylko JEDNO połączenie lokalne naraz.** Home Assistant, oficjalna **aplikacja
+> Dominus** na telefonie i każde inne narzędzie łączące się z portem `2000` dzielą to **jedno miejsce** —
+> kto je zajmuje, blokuje pozostałych.
+>
+> - **Tryb Modbus** (Magis Combo / Pro): Home Assistant otwiera krótkie połączenie na każdy cykl odczytu
+>   (co 45 s) i od razu je zamyka. Aplikacja może się połączyć pomiędzy, ale **gdy aplikacja jest otwarta
+>   i połączona, odczyty Home Assistant mogą się nie udawać**, a encje na chwilę stają się *niedostępne*.
+> - **Tryb OpenTherm** (VICTRIX i inne): od 1.5.3 Home Assistant zwalnia sesję na ~20 s po każdym cyklu
+>   odczytów, żeby aplikacja mogła się połączyć.
+> - **Zmiana ustawień z Home Assistant:** najpierw zamknij aplikację Dominus na telefonie — **wymuś
+>   zamknięcie, nie zostawiaj jej w tle**. Otwarta aplikacja walczy o to samo miejsce, a moduł zrywa drugie
+>   połączenie (`Connection reset by peer`).
+> - **Nigdy nie podłączaj dwóch integracji ani dwóch instancji Home Assistant do tego samego modułu**
+>   (np. tej integracji i dodatku Dominus Gateway) — będą się nawzajem wyrzucać.
+
 Interfejs jest **domyślnie po angielsku**, z pełnym tłumaczeniem **polskim** (oraz czeskim).
 Wersja i autor integracji są też pokazane na stronie każdego urządzenia Dominus w Home
 Assistant (pole *Oprogramowanie*, np. `0.3.3 — JoTu`).

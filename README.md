@@ -27,6 +27,23 @@ Dominus module over local TCP (default port `2000`) using the module MAC and pas
 > **experimental writes** (CH / DHW setpoint, mode) that still need confirmation. See issue
 > [#2](https://github.com/jotuera/immergas-dominus/issues/2).
 
+> [!IMPORTANT]
+> ### ⚠️ One connection at a time
+> **The Dominus module accepts only ONE local connection at a time.** Home Assistant, the official
+> **Dominus app** on your phone and any other tool talking to port `2000` all share this **single slot** —
+> whoever holds it, blocks the others.
+>
+> - **Modbus mode** (Magis Combo / Pro): Home Assistant opens a short connection for each read cycle
+>   (every 45 s) and closes it right away. The app can connect in between, but **while the app is open
+>   and connected, Home Assistant reads can time out** and entities may go *unavailable* for a moment.
+> - **OpenTherm mode** (VICTRIX and others): since 1.5.3 Home Assistant releases the session for ~20 s after
+>   every polling cycle so the app can get in.
+> - **Changing settings from Home Assistant:** close the Dominus app on the phone first — **force-close it,
+>   do not just send it to the background**. An open app competes for the slot and the module drops the
+>   other connection (`Connection reset by peer`).
+> - **Never point two integrations or Home Assistant instances at the same module** (e.g. this integration
+>   and a Dominus gateway add-on) — they will keep kicking each other off.
+
 The interface is **English by default**, with a full **Polish** translation. The
 integration version and author are also shown on each Dominus device page in Home
 Assistant (the *Firmware* field, e.g. `0.3.0 — JoTu`).

@@ -228,8 +228,13 @@ class DominusOpenThermClient:
         sock = self._sock
         if sock is None:
             raise DominusAuthError("OpenTherm socket not connected")
+        if expect_write:
+            _LOGGER.debug("OpenTherm write TX Data-ID %s: %s", expected_id, frame.hex(" "))
         sock.sendall(frame)
-        return self._recv_reply(sock, expected_id, expect_write)
+        value = self._recv_reply(sock, expected_id, expect_write)
+        if expect_write:
+            _LOGGER.debug("OpenTherm write Data-ID %s acknowledged with %s", expected_id, value)
+        return value
 
     # -- framing ---------------------------------------------------------------
 
@@ -300,6 +305,9 @@ class DominusOpenThermClient:
             if len(buffer) > 512:
                 del buffer[:-64]
         if buffer:
+            # the raw bytes tell what the module answered instead (another msg-type, Data-ID or frame shape)
+            _LOGGER.debug("OpenTherm Data-ID %s (%s): no valid reply, RX %s (%s)", expected_id,
+                          "write" if expect_write else "read", bytes(buffer).hex(" "), last_error)
             raise DominusProtocolError("No valid OpenTherm reply found") from last_error
         raise DominusProtocolError("OpenTherm RX timeout")
 

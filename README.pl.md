@@ -224,6 +224,11 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.5.5
+
+- OpenTherm (VICTRIX): surowe bajty każdego zapisu i odpowiedzi, której nie da się odczytać, trafiają do logu debug –
+  żeby ustalić, czego moduł oczekuje przy zapisie nastaw (#2).
+
 ### 1.5.4
 
 - **Home Assistant 2026.11:** encje podurządzeń (strefy, harmonogram) znowu się dodają – urządzenie nadrzędne jest

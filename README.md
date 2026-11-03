@@ -222,6 +222,11 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.5.5
+
+- OpenTherm (VICTRIX): the raw bytes of every write and of a reply that cannot be decoded are logged at debug level,
+  to find out what the module expects for setpoint writes (#2).
+
 ### 1.5.4
 
 - **Home Assistant 2026.11:** sub-device entities (zones, schedule) are added again – the parent device is linked by id

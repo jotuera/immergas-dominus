@@ -315,6 +315,13 @@ przyjmie sesję.
 - Wcześniejsze wersje rozwojowe (0.2–0.6) zbudowały wszystko z rozdziału *Funkcje*: tryb pracy, strefy 1–3,
   harmonogramy CO i CWU, CWU Komfort / Eko, raportowanie błędów, eksperymentalny tryb OpenTherm, 11 języków.
 
+## Projekt siostrzany
+
+**Chcesz pełny obraz pompy ciepła?** [**IMMERGAS Modbus BMS NASA Hub**](https://github.com/jotuera/immergas-modbus-bms-nasa-hub)
+to jedno urządzenie ESPHome (M5Stack AtomS3) na wszystkich trzech magistralach Magis Pro / Magis Combo V2 –
+D+/D- Modbus, T-/T+ BMS i F1/F2 Samsung NASA. Dokłada to, czego moduł Dominus nie niesie: pompę ciepła i sprężarkę,
+COP, gaz, CWU z pompy i pełną kalibrację. Karty dashboardu tej integracji pochodzą z huba.
+
 ## Wsparcie
 
 Jeśli integracja ci się przydaje, rozważ wsparcie – postaw mi kawę. Dziękuję!

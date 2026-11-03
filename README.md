@@ -313,6 +313,13 @@ the module accepts the session.
 - Earlier development versions (0.2–0.6) built everything listed under *Features*: operation mode, zones 1–3,
   heating and DHW schedules, DHW Comfort / Eco, fault reporting, experimental OpenTherm mode, 11 UI languages.
 
+## Related project
+
+**Want the full heat-pump picture?** The [**IMMERGAS Modbus BMS NASA Hub**](https://github.com/jotuera/immergas-modbus-bms-nasa-hub)
+is one ESPHome device (M5Stack AtomS3) on all three buses of a Magis Pro / Magis Combo V2 – D+/D- Modbus, T-/T+ BMS
+and F1/F2 Samsung NASA. It adds what the Dominus module does not carry: the heat pump and compressor, COP, gas, DHW by
+the heat pump and the full calibration. The dashboard cards this integration uses come from the hub.
+
 ## Support
 
 If you find this integration useful, please consider supporting me by buying me a coffee. Thank you!

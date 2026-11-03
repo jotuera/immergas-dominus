@@ -400,6 +400,14 @@
           "rpt": "RPT – paneel + kamerthermostaat",
           "rt": "RT – kamerthermostaat"
         }
+      },
+      "floor_type": {
+        "name": "Type dekvloer",
+        "state": {
+          "cement": "Cementdekvloer",
+          "anhydrite": "Anhydrietdekvloer",
+          "dry": "Droog systeem"
+        }
       }
     },
     "time": {

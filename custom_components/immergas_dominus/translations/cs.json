@@ -400,6 +400,14 @@
           "rpt": "RPT – panel + prostorový termostat",
           "rt": "RT – prostorový termostat"
         }
+      },
+      "floor_type": {
+        "name": "Typ podlahového potěru",
+        "state": {
+          "cement": "Cementový potěr",
+          "anhydrite": "Anhydritový potěr",
+          "dry": "Suchý systém"
+        }
       }
     },
     "time": {

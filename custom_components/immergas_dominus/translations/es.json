@@ -400,6 +400,14 @@
           "rpt": "RPT – panel + termostato ambiente",
           "rt": "RT – termostato ambiente"
         }
+      },
+      "floor_type": {
+        "name": "Tipo de solera",
+        "state": {
+          "cement": "Mortero de cemento",
+          "anhydrite": "Mortero de anhidrita",
+          "dry": "Sistema seco"
+        }
       }
     },
     "time": {

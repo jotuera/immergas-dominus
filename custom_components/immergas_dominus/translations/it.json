@@ -400,6 +400,14 @@
           "rpt": "RPT – pannello + termostato ambiente",
           "rt": "RT – termostato ambiente"
         }
+      },
+      "floor_type": {
+        "name": "Tipo di massetto",
+        "state": {
+          "cement": "Massetto cementizio",
+          "anhydrite": "Massetto anidritico",
+          "dry": "Sistema a secco"
+        }
       }
     },
     "time": {

@@ -1,6 +1,6 @@
 """Boiler settings declared by the user: night function U11, anti-legionella P15, heating curve R02-R05, DHW
 thermostat T02, CH start timer T05, the gas boiler integration (I01, I02, I04, I10), cooling curve R10-R13, room
-control A31 and the outdoor probe correction P07.
+control A31, the outdoor probe correction P07 and the underfloor screed type.
 
 These settings live in the boiler menu and are not readable over TCP, so the user declares them here: a switch says
 "set on the boiler" and the values are copied from the boiler menu once.  They start empty (unknown) on a fresh
@@ -213,6 +213,27 @@ class ImmergasRoomControlMode(_Declared, SelectEntity, RestoreEntity):
 
     def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
         super().__init__(coordinator, "room_control_mode", "mdi:home-thermometer-outline", "rpt")
+        self._attr_current_option = None
+
+    async def async_added_to_hass(self) -> None:
+        await super().async_added_to_hass()
+        last = await self.async_get_last_state()
+        if last is not None and last.state in self.options:
+            self._attr_current_option = last.state
+
+    async def async_select_option(self, option: str) -> None:
+        self._attr_current_option = option
+        self.async_write_ha_state()
+
+
+class ImmergasFloorType(_Declared, SelectEntity, RestoreEntity):
+    """Underfloor screed type (same option order as the hub's select): how fast the floor takes and gives back heat -
+    the dashboard uses it for the floor limit, setbacks, the CH schedule and I04."""
+
+    _attr_options = ["cement", "anhydrite", "dry"]
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "floor_type", "mdi:layers-triple-outline", "cement")
         self._attr_current_option = None
 
     async def async_added_to_hass(self) -> None:

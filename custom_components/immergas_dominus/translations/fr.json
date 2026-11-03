@@ -400,6 +400,14 @@
           "rpt": "RPT – panneau + thermostat d'ambiance",
           "rt": "RT – thermostat d'ambiance"
         }
+      },
+      "floor_type": {
+        "name": "Type de chape",
+        "state": {
+          "cement": "Chape ciment",
+          "anhydrite": "Chape anhydrite",
+          "dry": "Système sec"
+        }
       }
     },
     "time": {

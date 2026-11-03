@@ -400,6 +400,14 @@
           "rpt": "RPT – panel + szobatermosztát",
           "rt": "RT – szobatermosztát"
         }
+      },
+      "floor_type": {
+        "name": "Esztrich típusa",
+        "state": {
+          "cement": "Cementesztrich",
+          "anhydrite": "Anhidritesztrich",
+          "dry": "Száraz rendszer"
+        }
       }
     },
     "time": {

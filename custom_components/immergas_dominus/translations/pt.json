@@ -400,6 +400,14 @@
           "rpt": "RPT – painel + termóstato ambiente",
           "rt": "RT – termóstato ambiente"
         }
+      },
+      "floor_type": {
+        "name": "Tipo de betonilha",
+        "state": {
+          "cement": "Betonilha de cimento",
+          "anhydrite": "Betonilha de anidrite",
+          "dry": "Sistema seco"
+        }
       }
     },
     "time": {

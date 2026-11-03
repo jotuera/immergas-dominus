@@ -400,6 +400,14 @@
           "rpt": "RPT – panel + room thermostat",
           "rt": "RT – room thermostat"
         }
+      },
+      "floor_type": {
+        "name": "Floor screed type",
+        "state": {
+          "cement": "Cement screed",
+          "anhydrite": "Anhydrite screed",
+          "dry": "Dry system"
+        }
       }
     },
     "time": {

@@ -400,6 +400,14 @@
           "rpt": "RPT – panel + termostat pokojowy",
           "rt": "RT – termostat pokojowy"
         }
+      },
+      "floor_type": {
+        "name": "Rodzaj posadzki",
+        "state": {
+          "cement": "Cementowa",
+          "anhydrite": "Anhydrytowa",
+          "dry": "System suchy"
+        }
       }
     },
     "time": {

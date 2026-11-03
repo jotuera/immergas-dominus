@@ -9,7 +9,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.restore_state import RestoreEntity
 
 from . import anomalies
-from .programs import ImmergasLegionellaDay, ImmergasRoomControlMode
+from .programs import ImmergasFloorType, ImmergasLegionellaDay, ImmergasRoomControlMode
 
 from .const import (
     CHRONO_OPTION_TO_RAW,
@@ -52,6 +52,7 @@ async def async_setup_entry(
     if coordinator.stats is not None:
         entities.append(ImmergasLegionellaDay(coordinator))
         entities.append(ImmergasRoomControlMode(coordinator))
+        entities.append(ImmergasFloorType(coordinator))
     async_add_entities(entities)
 
 

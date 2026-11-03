@@ -400,6 +400,14 @@
           "rpt": "RPT – Bedienteil + Raumthermostat",
           "rt": "RT – Raumthermostat"
         }
+      },
+      "floor_type": {
+        "name": "Estrichart Fußboden",
+        "state": {
+          "cement": "Zementestrich",
+          "anhydrite": "Anhydritestrich",
+          "dry": "Trockensystem"
+        }
       }
     },
     "time": {

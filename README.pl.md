@@ -24,8 +24,15 @@ modułem Dominus po lokalnym TCP (domyślny port `2000`), używając adresu MAC 
 > ma flagi `modbus` — np. **VICTRIX ZEUS / AVIO**, STAR — używają 6-bajtowego protokołu
 > **OpenTherm**; od 0.4.0 jest **eksperymentalny tryb OpenTherm** (wybierany w config flow).
 > **Odczyt potwierdzony na VICTRIX ZEUS 25 ErP**; od 0.4.1 także **eksperymentalny zapis**
-> (nastawa CO / CWU, tryb) wymagający potwierdzenia. Zob. zgłoszenie
-> [#2](https://github.com/jotuera/immergas-dominus/issues/2).
+> (nastawa CO / CWU, tryb). **Zapis nastawy CO jest potwierdzony** na VICTRIX ZEUS 25 ErP od 1.5.6.
+> Zob. zgłoszenie [#2](https://github.com/jotuera/immergas-dominus/issues/2).
+>
+> **Gdy do kotła jest podłączony pilot CAR V2 (Amico V2)**, to on steruje: jego pokrętło ustala
+> **nastawę CWU** (Home Assistant ją pokazuje, ale nie zmieni — oficjalna aplikacja też nie), a pilot
+> ustala krzywą grzewczą i harmonogram tygodniowy. **Maksymalną nastawę CO** nadal można zapisać.
+> Po odłączeniu CAR V2 kocioł zgłasza **E031** (utrata komunikacji z CARV2) i ignoruje polecenia, dopóki
+> błąd nie zostanie skasowany. Dominus nie ma tygodniowego harmonogramu CO dla kotłów OpenTherm — bez
+> CAR V2 harmonogram trzeba prowadzić w Home Assistant.
 
 > [!IMPORTANT]
 > ### ⚠️ Tylko jedno połączenie naraz

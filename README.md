@@ -24,8 +24,15 @@ Dominus module over local TCP (default port `2000`) using the module MAC and pas
 > `modbus` flag — e.g. **VICTRIX ZEUS / AVIO**, STAR — use a 6-byte **OpenTherm**
 > protocol; since 0.4.0 there is an **experimental OpenTherm mode** (pick it in the config
 > flow). **Reading is verified on a VICTRIX ZEUS 25 ErP**; since 0.4.1 it also exposes
-> **experimental writes** (CH / DHW setpoint, mode) that still need confirmation. See issue
-> [#2](https://github.com/jotuera/immergas-dominus/issues/2).
+> **experimental writes** (CH / DHW setpoint, mode). The **CH setpoint write is confirmed** on a
+> VICTRIX ZEUS 25 ErP since 1.5.6. See issue [#2](https://github.com/jotuera/immergas-dominus/issues/2).
+>
+> **With a CAR V2 (Amico V2) remote connected to the boiler**, the remote is in charge: its dial owns the
+> **DHW setpoint** (Home Assistant shows it but cannot change it — neither can the official app) and it
+> sets the heating curve and weekly schedule. The **max CH setpoint** can still be written. Disconnecting
+> the CAR V2 makes the boiler report **E031** (lost communication with the CARV2) and ignore commands
+> until that fault is cleared. The Dominus has no weekly heating schedule for OpenTherm boilers — without a
+> CAR V2 the schedule has to live in Home Assistant.
 
 > [!IMPORTANT]
 > ### ⚠️ One connection at a time

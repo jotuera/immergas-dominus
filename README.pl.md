@@ -146,7 +146,7 @@ prowadzi w Home Assistant programy z CAR V2, bo moduł nie ma zegara:
 
 Z podłączonym CAR V2 steruje pilot – te programy zostaw wyłączone.
 
-**Diagnostyka OpenTherm (niewydane).** Żeby sprawdzić, co kocioł naprawdę obsługuje: **Skanuj Data-ID** (przycisk;
+**Diagnostyka OpenTherm (1.6.1, pre-release).** Żeby sprawdzić, co kocioł naprawdę obsługuje: **Skanuj Data-ID** (przycisk;
 odczytuje raz każdy standardowy Data-ID, ok. minuty, odpytywanie stoi w tym czasie) → czujnik **Obsługiwane Data-ID**
 pokazuje, co odpowiedziało, co jest nieobsługiwane i surowe wartości; **Ostatni zapis** odczytuje każdą zapisaną wartość
 z powrotem – *Przyjęty* albo *Potwierdzony, nieprzyjęty*, gdy kocioł potwierdza zapis, ale zostawia swoją wartość;
@@ -263,6 +263,12 @@ przyjmie sesję.
   sprawdzone krzyżowo, ale na innych modelach mogą wymagać weryfikacji przez TCP AUTH.
 
 ## Historia zmian
+
+### 1.6.1 (pre-release)
+
+- **Diagnostyka OpenTherm:** skaner Data-ID (przycisk + czujnik z listą obsługiwanych / nieobsługiwanych), odczyt
+  zwrotny każdego zapisu (*Przyjęty* / *Potwierdzony, nieprzyjęty*), opcjonalny bajt 0xCA w ramkach Data-ID 0
+  („poprawka Immergas” innych bramek OpenTherm, eksperymentalne), nieobsługiwane Data-ID pomijane przez godzinę (#2).
 
 ### 1.6.0 (pre-release, funkcje OpenTherm do przetestowania)
 

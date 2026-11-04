@@ -147,7 +147,7 @@ the Dominus regulator and runs the CAR V2 programs in Home Assistant, because th
 
 With a CAR V2 connected the remote stays in charge – leave these programs off.
 
-**OpenTherm diagnostics (unreleased).** To find out what a boiler really supports:
+**OpenTherm diagnostics (1.6.1, pre-release).** To find out what a boiler really supports:
 **Scan Data-IDs** (button; reads every standard Data-ID once, about a minute, polling pauses meanwhile) → the
 **Supported Data-IDs** sensor lists what answered, what is unsupported and the raw values; **Last write** reads every
 written value back – *Taken*, or *Acknowledged, not taken* when the boiler acknowledges a write but keeps its own value;
@@ -261,6 +261,12 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 1.6.1 (pre-release)
+
+- **OpenTherm diagnostics:** Data-ID scan (button + sensor with the supported / unsupported lists), read-back of every
+  write (*Taken* / *Acknowledged, not taken*), optional 0xCA low byte in the Data-ID 0 frames (the "Immergas fix" of
+  other OpenTherm gateways, experimental), unsupported Data-IDs skipped for an hour (#2).
 
 ### 1.6.0 (pre-release, OpenTherm features need testing)
 

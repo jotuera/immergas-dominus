@@ -130,10 +130,10 @@ strategy:
 ![Charts](docs/images/en/card-charts.png)
 
 **OpenTherm boilers (VICTRIX ZEUS / AVIO, STAR …).** In the OpenTherm mode the same `custom:immergas-dominus`
-strategy builds a **reduced dashboard** automatically, because only the OpenTherm values are available (no schedules,
-curve or statistics): **Now** (flow / return / DHW / outdoor temperature, modulation, pressure, DHW flow rate, flame,
-CH / DHW active, fault), **Control** (mode, CH and DHW setpoint with −/+, max CH setpoint) and **History** (temperatures
-and burner for 24 h, pressure for 72 h). Add `opentherm: true` or `opentherm: false` under `strategy:` to force one
+strategy shows the **same cards** without those that have no OpenTherm data (schedules, heating curve, calibration /
+statistics, settings, automations, connectivity): **Diagram**, **Now** (flow / return, DHW, outdoor, modulation, pressure,
+DHW flow rate, flame, fault), **Setpoints** (CH flow setpoint and DHW with −/+), **Operating mode** (Standby / Summer /
+Winter / CH only) and **Charts** (flow / return / CH setpoint / outdoor with the flame, DHW). Add `opentherm: true` or `opentherm: false` under `strategy:` to force one
 view or the other.
 
 Heat-pump data (compressor, COP, flow / return of the heat pump, energy) is not readable through Dominus – for that

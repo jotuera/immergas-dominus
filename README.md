@@ -129,7 +129,7 @@ strategy:
 
 ![Charts](docs/images/en/card-charts.png)
 
-**OpenTherm without the CAR V2 remote – the Dominus as the controller (unreleased).** When the Dominus is the only
+**OpenTherm without the CAR V2 remote – the Dominus as the controller (1.6.0, pre-release).** When the Dominus is the only
 controller of an OpenTherm boiler (CAR V2 removed, the room probe of the Dominus kit connected), the integration exposes
 the Dominus regulator and runs the CAR V2 programs in Home Assistant, because the module has no clock:
 
@@ -253,6 +253,18 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 1.6.0 (pre-release, OpenTherm features need testing)
+
+- **OpenTherm – the Dominus regulator** (Data-ID 89 module parameters as in the official app): heating curve, CH offset,
+  min. CH temperature, building inertia, room hysteresis, modulation, room / outdoor sensor, probe use, frost protection;
+  room setpoint (Data-ID 16), room temperature (Data-ID 24), boiler reset button (#2).
+- **OpenTherm – programs kept in Home Assistant** for a Dominus without the CAR V2 remote: CH program AUTO / MANUAL with
+  4 calendars and a calendar per weekday, Eco phase setpoint or heating off, DHW Comfort / Eco by the DHW calendar,
+  vacation, automatic Summer / Winter, anti-legionella. All off by default.
+- **OpenTherm – operating mode** shows the selected mode (master status enable bits) instead of the current activity, with
+  the app's names Standby / Summer / Winter (+ CH only).
+- **OpenTherm dashboard** on the Dominus cards (diagram, now, setpoints, mode, settings, schedule, charts); cards 0.52.0.
 
 ### 1.5.8
 

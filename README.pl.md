@@ -128,7 +128,7 @@ strategy:
 
 ![Wykresy](docs/images/card-charts.png)
 
-**OpenTherm bez pilota CAR V2 – Dominus jako regulator (niewydane).** Gdy Dominus jest jedynym sterownikiem kotła
+**OpenTherm bez pilota CAR V2 – Dominus jako regulator (1.6.0, pre-release).** Gdy Dominus jest jedynym sterownikiem kotła
 OpenTherm (CAR V2 odłączony, podłączona sonda pokojowa z kompletu Dominusa), integracja wystawia regulator Dominusa i
 prowadzi w Home Assistant programy z CAR V2, bo moduł nie ma zegara:
 
@@ -255,6 +255,18 @@ przyjmie sesję.
   sprawdzone krzyżowo, ale na innych modelach mogą wymagać weryfikacji przez TCP AUTH.
 
 ## Historia zmian
+
+### 1.6.0 (pre-release, funkcje OpenTherm do przetestowania)
+
+- **OpenTherm – regulator Dominusa** (parametry modułu Data-ID 89 jak w oficjalnej aplikacji): krzywa grzewcza, offset CO,
+  min. temperatura CO, bezwładność budynku, histereza pokojowa, modulacja, czujnik pokojowy / zewnętrzny, rola sondy,
+  ochrona przed zamarzaniem; zadana pokoju (Data-ID 16), temperatura pokoju (Data-ID 24), przycisk resetu kotła (#2).
+- **OpenTherm – programy w Home Assistant** dla Dominusa bez pilota CAR V2: program CO AUTO / MANUAL z 4 kalendarzami i
+  kalendarzem na każdy dzień, w fazie Eko zadana albo wyłączenie CO, CWU Komfort / Eko wg kalendarza CWU, wyjazd,
+  automatyczne Lato / Zima, anty-legionella. Wszystko domyślnie wyłączone.
+- **OpenTherm – tryb pracy** pokazuje wybrany tryb (bity zezwoleń), a nie bieżącą pracę, z nazwami z aplikacji
+  Standby / Lato / Zima (+ Tylko CO).
+- **Dashboard OpenTherm** na kartach Dominusa (schemat, teraz, nastawy, tryb, ustawienia, harmonogram, wykresy); karty 0.52.0.
 
 ### 1.5.8
 

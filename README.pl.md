@@ -231,6 +231,15 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.5.7
+
+- **Program czasowy CO strefy 1 AUTO / MANUAL** (nowy select, jak w oficjalnej aplikacji): MANUAL ustawia wszystkie dni na
+  kalendarz całodobowy (stała nastawa 24 h), AUTO przywraca wcześniejsze przypisanie dni i nigdy nie zostawia dnia na
+  kalendarzu całodobowym. Panel ustawiony na MANUAL (bit statusu strefy) też jest pokazywany jako MANUAL.
+- Przerwany zapis harmonogramu jest ponawiany, więc przełączenie AUTO / MANUAL nie zatrzymuje się w połowie.
+- Karty dashboardu 0.51.4 (rekomendacja I09 zachowana przy CWU z kotła, wiersz trybu harmonogramu).
+- README: zachowanie pilota CAR V2 (Amico V2) z kotłami OpenTherm; zapis nastawy CO potwierdzony na VICTRIX ZEUS 25 ErP (#2).
+
 ### 1.5.6
 
 - OpenTherm (VICTRIX): **nastawa CO** jest odczytywana i zapisywana jako parametr modułu 17 (Data-ID 89, HB = 17,

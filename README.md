@@ -229,6 +229,15 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.5.7
+
+- **Zone 1 CH time program AUTO / MANUAL** (new select, like the official app): MANUAL puts every day on a whole-day
+  calendar (fixed setpoint 24 h), AUTO restores the previous day assignment and never leaves a day on a whole-day calendar.
+  A panel set to MANUAL (zone status bit) is shown as MANUAL too.
+- A dropped schedule write is retried, so the AUTO / MANUAL switch never stops half-way.
+- Dashboard cards 0.51.4 (I09 recommendation kept when DHW is heated by the boiler, schedule mode row).
+- README: CAR V2 (Amico V2) behaviour with OpenTherm boilers; CH setpoint write confirmed on a VICTRIX ZEUS 25 ErP (#2).
+
 ### 1.5.6
 
 - OpenTherm (VICTRIX): the **CH setpoint** is now read and written as module parameter 17 (Data-ID 89, HB = 17,

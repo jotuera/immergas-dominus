@@ -21,6 +21,10 @@ async def async_setup_entry(
 ) -> None:
     """Set up the CO schedule time entities."""
     coordinator: ImmergasDominusCoordinator = hass.data[DOMAIN][entry.entry_id]
+    if getattr(coordinator, "ot_programs", None) is not None:
+        from .ot_programs import ot_times
+        async_add_entities(ot_times(coordinator))
+        return
     async_add_entities(
         ImmergasDominusScheduleTime(coordinator, description)
         for description in SCHEDULE_TIME_DESCRIPTIONS

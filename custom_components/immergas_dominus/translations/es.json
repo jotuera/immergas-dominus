@@ -140,6 +140,9 @@
       },
       "heating_hours_per_degree_day": {
         "name": "Horas de calefacción por grado-día"
+      },
+      "ot_room_temperature": {
+        "name": "Temperatura ambiente"
       }
     },
     "binary_sensor": {
@@ -321,6 +324,30 @@
       },
       "heated_area": {
         "name": "Superficie calefactada"
+      },
+      "ot_room_setpoint": {
+        "name": "Consigna ambiente"
+      },
+      "ot_otc_curve": {
+        "name": "Curva de calefacción"
+      },
+      "ot_ch_offset": {
+        "name": "Offset temperatura calefacción"
+      },
+      "ot_hysteresis": {
+        "name": "Histéresis ambiente"
+      },
+      "ot_building_inertia": {
+        "name": "Inercia del edificio"
+      },
+      "ot_frost_temperature": {
+        "name": "Temperatura antihielo"
+      },
+      "ot_ch_min": {
+        "name": "Temperatura mínima calefacción"
+      },
+      "ot_legionella_temp": {
+        "name": "Temperatura antilegionela"
       }
     },
     "select": {
@@ -360,10 +387,10 @@
       "ot_mode": {
         "name": "Modo",
         "state": {
-          "off": "Apagado",
-          "heating": "Calefacción",
-          "water": "ACS",
-          "heating_water": "Calefacción + ACS"
+          "off": "Standby",
+          "heating": "Solo calefacción",
+          "water": "Verano",
+          "heating_water": "Invierno"
         }
       },
       "fault_language": {
@@ -417,6 +444,28 @@
         "state": {
           "manual": "Manual – consigna fija 24 h",
           "auto": "Auto – según calendarios"
+        }
+      },
+      "ot_ntc_use": {
+        "name": "Uso de la sonda Dominus",
+        "state": {
+          "room": "Ambiente",
+          "outdoor": "Exterior"
+        }
+      },
+      "ot_eco_action": {
+        "name": "Acción en fase Eco",
+        "state": {
+          "setpoint": "Consigna Eco",
+          "ch_off": "Calefacción apagada"
+        }
+      },
+      "ot_legionella": {
+        "name": "Antilegionela",
+        "state": {
+          "off": "Apagado",
+          "daily": "Diario a las 02:00",
+          "weekly": "Lunes a las 02:00"
         }
       }
     },
@@ -475,11 +524,28 @@
       },
       "alert_notifications": {
         "name": "Notificaciones de alarmas"
+      },
+      "ot_outdoor_sensor": {
+        "name": "Sonda exterior"
+      },
+      "ot_modulation": {
+        "name": "Modulación"
+      },
+      "ot_room_sensor": {
+        "name": "Sensor ambiente"
+      },
+      "ot_frost_protection": {
+        "name": "Protección antihielo"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Vacaciones hasta"
+      }
+    },
+    "button": {
+      "ot_reset": {
+        "name": "Reset caldera"
       }
     }
   },

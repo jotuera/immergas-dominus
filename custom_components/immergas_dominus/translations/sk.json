@@ -140,6 +140,9 @@
       },
       "heating_hours_per_degree_day": {
         "name": "Hodiny vykurovania na dennostupeň"
+      },
+      "ot_room_temperature": {
+        "name": "Teplota miestnosti"
       }
     },
     "binary_sensor": {
@@ -321,6 +324,30 @@
       },
       "heated_area": {
         "name": "Vykurovaná plocha"
+      },
+      "ot_room_setpoint": {
+        "name": "Požadovaná teplota miestnosti"
+      },
+      "ot_otc_curve": {
+        "name": "Ekvitermická krivka"
+      },
+      "ot_ch_offset": {
+        "name": "Posun teploty ÚK"
+      },
+      "ot_hysteresis": {
+        "name": "Hysterézia miestnosti"
+      },
+      "ot_building_inertia": {
+        "name": "Zotrvačnosť budovy"
+      },
+      "ot_frost_temperature": {
+        "name": "Teplota protimrazovej ochrany"
+      },
+      "ot_ch_min": {
+        "name": "Minimálna teplota ÚK"
+      },
+      "ot_legionella_temp": {
+        "name": "Teplota proti legionele"
       }
     },
     "select": {
@@ -360,10 +387,10 @@
       "ot_mode": {
         "name": "Režim",
         "state": {
-          "off": "Vypnuté",
-          "heating": "Vykurovanie",
-          "water": "TÚV",
-          "heating_water": "Vykurovanie + TÚV"
+          "off": "Pohotovosť",
+          "heating": "Len ÚK",
+          "water": "Leto",
+          "heating_water": "Zima"
         }
       },
       "fault_language": {
@@ -417,6 +444,28 @@
         "state": {
           "manual": "Ručne – pevná teplota 24 h",
           "auto": "Auto – podľa kalendárov"
+        }
+      },
+      "ot_ntc_use": {
+        "name": "Použitie čidla Dominus",
+        "state": {
+          "room": "Miestnosť",
+          "outdoor": "Vonku"
+        }
+      },
+      "ot_eco_action": {
+        "name": "Akcia vo fáze Eko",
+        "state": {
+          "setpoint": "Teplota Eko",
+          "ch_off": "Vypnúť kúrenie"
+        }
+      },
+      "ot_legionella": {
+        "name": "Ochrana proti legionele",
+        "state": {
+          "off": "Vypnuté",
+          "daily": "Denne o 02:00",
+          "weekly": "V pondelok o 02:00"
         }
       }
     },
@@ -475,11 +524,28 @@
       },
       "alert_notifications": {
         "name": "Upozornenia na alarmy"
+      },
+      "ot_outdoor_sensor": {
+        "name": "Vonkajšie čidlo"
+      },
+      "ot_modulation": {
+        "name": "Modulácia"
+      },
+      "ot_room_sensor": {
+        "name": "Priestorové čidlo"
+      },
+      "ot_frost_protection": {
+        "name": "Protimrazová ochrana"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Dovolenka do"
+      }
+    },
+    "button": {
+      "ot_reset": {
+        "name": "Reset kotla"
       }
     }
   },

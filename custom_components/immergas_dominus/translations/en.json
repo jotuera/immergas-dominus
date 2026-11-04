@@ -140,6 +140,9 @@
       },
       "heating_hours_per_degree_day": {
         "name": "Heating hours per degree day"
+      },
+      "ot_room_temperature": {
+        "name": "Room temperature"
       }
     },
     "binary_sensor": {
@@ -321,6 +324,30 @@
       },
       "heated_area": {
         "name": "Heated floor area"
+      },
+      "ot_room_setpoint": {
+        "name": "Room setpoint"
+      },
+      "ot_otc_curve": {
+        "name": "Heating curve"
+      },
+      "ot_ch_offset": {
+        "name": "CH temperature offset"
+      },
+      "ot_hysteresis": {
+        "name": "Room hysteresis"
+      },
+      "ot_building_inertia": {
+        "name": "Building inertia"
+      },
+      "ot_frost_temperature": {
+        "name": "Frost protection temperature"
+      },
+      "ot_ch_min": {
+        "name": "Minimum CH temperature"
+      },
+      "ot_legionella_temp": {
+        "name": "Anti-legionella temperature"
       }
     },
     "select": {
@@ -360,10 +387,10 @@
       "ot_mode": {
         "name": "Mode",
         "state": {
-          "off": "Off",
-          "heating": "Heating",
-          "water": "DHW",
-          "heating_water": "Heating + DHW"
+          "off": "Standby",
+          "heating": "CH only",
+          "water": "Summer",
+          "heating_water": "Winter"
         }
       },
       "fault_language": {
@@ -417,6 +444,28 @@
         "state": {
           "manual": "Manual – fixed setpoint 24 h",
           "auto": "Auto – by the calendars"
+        }
+      },
+      "ot_ntc_use": {
+        "name": "Dominus probe use",
+        "state": {
+          "room": "Room",
+          "outdoor": "Outdoor"
+        }
+      },
+      "ot_eco_action": {
+        "name": "Eco phase action",
+        "state": {
+          "setpoint": "Eco room setpoint",
+          "ch_off": "Heating off"
+        }
+      },
+      "ot_legionella": {
+        "name": "Anti-legionella",
+        "state": {
+          "off": "Off",
+          "daily": "Daily at 02:00",
+          "weekly": "Monday at 02:00"
         }
       }
     },
@@ -475,11 +524,28 @@
       },
       "alert_notifications": {
         "name": "Alert notifications"
+      },
+      "ot_outdoor_sensor": {
+        "name": "Outdoor sensor"
+      },
+      "ot_modulation": {
+        "name": "Modulation"
+      },
+      "ot_room_sensor": {
+        "name": "Room sensor"
+      },
+      "ot_frost_protection": {
+        "name": "Frost protection"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Vacation until"
+      }
+    },
+    "button": {
+      "ot_reset": {
+        "name": "Boiler reset"
       }
     }
   },

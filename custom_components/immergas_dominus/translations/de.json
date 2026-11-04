@@ -140,6 +140,9 @@
       },
       "heating_hours_per_degree_day": {
         "name": "Heizstunden pro Gradtag"
+      },
+      "ot_room_temperature": {
+        "name": "Raumtemperatur"
       }
     },
     "binary_sensor": {
@@ -321,6 +324,30 @@
       },
       "heated_area": {
         "name": "Beheizte Wohnfläche"
+      },
+      "ot_room_setpoint": {
+        "name": "Raum-Sollwert"
+      },
+      "ot_otc_curve": {
+        "name": "Heizkurve"
+      },
+      "ot_ch_offset": {
+        "name": "Heizungs-Offset"
+      },
+      "ot_hysteresis": {
+        "name": "Raum-Hysterese"
+      },
+      "ot_building_inertia": {
+        "name": "Gebäudeträgheit"
+      },
+      "ot_frost_temperature": {
+        "name": "Frostschutztemperatur"
+      },
+      "ot_ch_min": {
+        "name": "Minimale Heizungstemperatur"
+      },
+      "ot_legionella_temp": {
+        "name": "Legionellenschutz-Temperatur"
       }
     },
     "select": {
@@ -360,10 +387,10 @@
       "ot_mode": {
         "name": "Modus",
         "state": {
-          "off": "Aus",
-          "heating": "Heizung",
-          "water": "WW",
-          "heating_water": "Heizung + WW"
+          "off": "Standby",
+          "heating": "Nur Heizung",
+          "water": "Sommer",
+          "heating_water": "Winter"
         }
       },
       "fault_language": {
@@ -417,6 +444,28 @@
         "state": {
           "manual": "Manuell – fester Sollwert 24 h",
           "auto": "Auto – nach Kalendern"
+        }
+      },
+      "ot_ntc_use": {
+        "name": "Verwendung Dominus-Fühler",
+        "state": {
+          "room": "Raum",
+          "outdoor": "Außen"
+        }
+      },
+      "ot_eco_action": {
+        "name": "Eco-Phase",
+        "state": {
+          "setpoint": "Eco-Sollwert",
+          "ch_off": "Heizung aus"
+        }
+      },
+      "ot_legionella": {
+        "name": "Legionellenschutz",
+        "state": {
+          "off": "Aus",
+          "daily": "Täglich um 02:00",
+          "weekly": "Montags um 02:00"
         }
       }
     },
@@ -475,11 +524,28 @@
       },
       "alert_notifications": {
         "name": "Alarm-Benachrichtigungen"
+      },
+      "ot_outdoor_sensor": {
+        "name": "Außenfühler"
+      },
+      "ot_modulation": {
+        "name": "Modulation"
+      },
+      "ot_room_sensor": {
+        "name": "Raumfühler"
+      },
+      "ot_frost_protection": {
+        "name": "Frostschutz"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Urlaub bis"
+      }
+    },
+    "button": {
+      "ot_reset": {
+        "name": "Kessel-Reset"
       }
     }
   },

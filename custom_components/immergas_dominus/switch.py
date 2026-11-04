@@ -9,7 +9,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.restore_state import RestoreEntity
 
-from .const import DOMAIN
+from .const import DEVICE_MAIN, DOMAIN, OT_PARAM_SWITCH_DESCRIPTIONS, DominusOpenThermParamSwitchDescription
 from .coordinator import ImmergasDominusCoordinator
 from .dhw_schedule import DHW_TARGET_PDU
 from .entity import ImmergasDominusEntity
@@ -24,6 +24,11 @@ async def async_setup_entry(
 ) -> None:
     """Set up switches."""
     coordinator: ImmergasDominusCoordinator = hass.data[DOMAIN][entry.entry_id]
+    if getattr(coordinator, "ot_programs", None) is not None:
+        from .ot_programs import ot_switches
+        async_add_entities([ImmergasOpenThermParamSwitch(coordinator, d) for d in OT_PARAM_SWITCH_DESCRIPTIONS])
+        async_add_entities(ot_switches(coordinator))
+        return
     if coordinator.dhw is not None:
         async_add_entities([ImmergasDhwScheduleSwitch(coordinator)])
     if coordinator.stats is not None:
@@ -66,3 +71,30 @@ class ImmergasDhwScheduleSwitch(ImmergasDominusEntity, SwitchEntity, RestoreEnti
     async def async_turn_off(self, **kwargs: Any) -> None:
         self.coordinator.dhw.set_enabled(False)
         self.async_write_ha_state()
+
+
+class ImmergasOpenThermParamSwitch(ImmergasDominusEntity, SwitchEntity):
+    """On / off parameter of the Dominus regulator (OpenTherm mode, Data-ID 89, HB = index, LB = 0 / 1)."""
+
+    entity_description: DominusOpenThermParamSwitchDescription
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator, description: DominusOpenThermParamSwitchDescription) -> None:
+        from .opentherm_client import ot_param_key
+        super().__init__(coordinator, description.key, ot_param_key(89, description.index), DEVICE_MAIN)
+        self.entity_description = description
+
+    @property
+    def is_on(self) -> bool | None:
+        raw = self.raw_value
+        return None if raw is None else bool(int(raw) & 0xFF)
+
+    async def _async_write(self, on: bool) -> None:
+        ack = await self.coordinator.client.async_write_data_id(self._pdu, 1 if on else 0)
+        self.coordinator.set_local_value(self._pdu, ack)
+        await self.coordinator.async_request_refresh()
+
+    async def async_turn_on(self, **kwargs: Any) -> None:
+        await self._async_write(True)
+
+    async def async_turn_off(self, **kwargs: Any) -> None:
+        await self._async_write(False)

@@ -59,7 +59,7 @@ PROGRAM_PHASE_OPTIONS = ["manual", "comfort", "economy"]
 
 PLATFORMS = ["sensor", "binary_sensor", "number", "select", "climate", "time", "switch", "datetime"]
 # OpenTherm mode: read sensors + writable setpoints/mode (experimental).
-OPENTHERM_PLATFORMS = ["sensor", "binary_sensor", "number", "select"]
+OPENTHERM_PLATFORMS = ["sensor", "binary_sensor", "number", "select", "switch", "button", "time", "datetime"]
 
 DEVICE_MAIN = "dominus"
 DEVICE_ZONE_1 = "zone_1"
@@ -623,6 +623,8 @@ OT_SENSOR_DESCRIPTIONS: tuple[DominusOpenThermSensorDescription, ...] = (
     _ot_temp("ot_return_temperature", 28),
     _ot_temp("ot_dhw_temperature", 26),
     _ot_temp("ot_outside_temperature", 27),
+    # room temperature measured by the Dominus probe (when it is used as the room probe, module parameter 11)
+    _ot_temp("ot_room_temperature", 24),
     _ot_temp("ot_max_ch_setpoint", 57, entity_category=EntityCategory.DIAGNOSTIC),
     DominusOpenThermSensorDescription(
         key="ot_modulation_level",
@@ -687,6 +689,11 @@ class DominusOpenThermNumberDescription(NumberEntityDescription):
 
     data_id: int
     param: int | None = None
+    # module parameter encoding (official app config): value = LB / divisor, s8 = signed LB
+    divisor: int = 1
+    signed: bool = False
+    # f8.8 Data-ID: True = whole degrees (LB = 0, as the app sends the DHW setpoint), False = 1/256 resolution
+    whole: bool = True
 
 
 OT_NUMBER_DESCRIPTIONS: tuple[DominusOpenThermNumberDescription, ...] = (
@@ -717,7 +724,61 @@ OT_NUMBER_DESCRIPTIONS: tuple[DominusOpenThermNumberDescription, ...] = (
         mode=NumberMode.SLIDER,
         icon="mdi:water-thermometer",
     ),
+    # room setpoint of the Dominus regulator (Data-ID 16, f8.8; the app allows 10-35 °C with one decimal)
+    DominusOpenThermNumberDescription(
+        key="ot_room_setpoint",
+        data_id=16,
+        whole=False,
+        translation_key="ot_room_setpoint",
+        device_class=NumberDeviceClass.TEMPERATURE,
+        native_min_value=10,
+        native_max_value=35,
+        native_step=0.5,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        mode=NumberMode.BOX,
+        icon="mdi:home-thermometer",
+    ),
+) + tuple(
+    # Dominus regulator parameters (Data-ID 89, HB = index) - the settings the CAR V2 remote has in its menu
+    DominusOpenThermNumberDescription(
+        key=key, data_id=89, param=index, divisor=div, signed=signed, translation_key=key,
+        native_min_value=lo, native_max_value=hi, native_step=step, native_unit_of_measurement=unit,
+        device_class=NumberDeviceClass.TEMPERATURE if unit else None, mode=NumberMode.BOX, icon=icon,
+        entity_category=EntityCategory.CONFIG,
+    )
+    for key, index, lo, hi, step, div, signed, unit, icon in (
+        ("ot_otc_curve", 4, 1, 9, 0.1, 10, False, None, "mdi:chart-bell-curve-cumulative"),
+        ("ot_ch_offset", 5, -15, 15, 1, 1, True, UnitOfTemperature.CELSIUS, "mdi:plus-minus-variant"),
+        ("ot_hysteresis", 8, 0.1, 1, 0.1, 10, False, UnitOfTemperature.CELSIUS, "mdi:arrow-expand-vertical"),
+        ("ot_building_inertia", 10, 1, 20, 1, 1, False, None, "mdi:home-clock-outline"),
+        ("ot_frost_temperature", 15, 0.5, 10, 0.1, 10, False, UnitOfTemperature.CELSIUS, "mdi:snowflake-thermometer"),
+        ("ot_ch_min", 16, 10, 85, 1, 1, False, UnitOfTemperature.CELSIUS, "mdi:thermometer-low"),
+    )
 )
+
+
+@dataclass(frozen=True, kw_only=True)
+class DominusOpenThermParamSwitchDescription(EntityDescription):
+    """On / off Dominus regulator parameter (Data-ID 89, HB = index, LB = 0 / 1)."""
+
+    index: int
+
+
+OT_PARAM_SWITCH_DESCRIPTIONS: tuple[DominusOpenThermParamSwitchDescription, ...] = tuple(
+    DominusOpenThermParamSwitchDescription(key=key, index=index, translation_key=key, icon=icon, entity_category=EntityCategory.CONFIG)
+    for key, index, icon in (
+        ("ot_outdoor_sensor", 6, "mdi:thermometer"),
+        ("ot_modulation", 7, "mdi:fire-circle"),
+        ("ot_room_sensor", 9, "mdi:home-thermometer-outline"),
+        ("ot_frost_protection", 14, "mdi:snowflake-alert"),
+    )
+)
+# module parameter 11: the probe of the Dominus kit measures the room (0) or the outdoor temperature (1)
+OT_NTC_USE_INDEX = 11
+OT_NTC_USE_OPTIONS = ["room", "outdoor"]
+# boiler reset as the official app sends it (Data-ID 4 = command, HB 1 / LB 127)
+OT_RESET_DATA_ID = 4
+OT_RESET_VALUE = 0x017F
 
 # Experimental boiler mode over OpenTherm.  The master status (Data-ID 0 high byte)
 # carries bit 0 = CH enable, bit 1 = DHW enable.  Writing Data-ID 0 as WRITE-DATA may
@@ -725,6 +786,10 @@ OT_NUMBER_DESCRIPTIONS: tuple[DominusOpenThermNumberDescription, ...] = (
 OT_MODE_PDU = 0
 OT_MODE_OPTIONS = ["off", "heating", "water", "heating_water"]
 OT_MODE_TO_STATUS = {"off": 0x00, "heating": 0x01, "water": 0x02, "heating_water": 0x03}
+# The selected mode is the master status (Data-ID 0 high byte: bit 0 CH enable, bit 1 DHW enable), as the official app
+# reads it; the slave status (low byte) only tells what the boiler is doing right now.
+OT_MASTER_CH_ENABLE = 0x01
+OT_MASTER_DHW_ENABLE = 0x02
 # Slave status (Data-ID 0 low byte): bit 1 = CH active, bit 2 = DHW active.
 OT_STATUS_CH_ACTIVE_MASK = 0x02
 OT_STATUS_DHW_ACTIVE_MASK = 0x04

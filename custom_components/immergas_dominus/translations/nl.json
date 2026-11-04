@@ -140,6 +140,9 @@
       },
       "heating_hours_per_degree_day": {
         "name": "Verwarmingsuren per graaddag"
+      },
+      "ot_room_temperature": {
+        "name": "Ruimtetemperatuur"
       }
     },
     "binary_sensor": {
@@ -321,6 +324,30 @@
       },
       "heated_area": {
         "name": "Verwarmde oppervlakte"
+      },
+      "ot_room_setpoint": {
+        "name": "Ruimte-setpoint"
+      },
+      "ot_otc_curve": {
+        "name": "Stooklijn"
+      },
+      "ot_ch_offset": {
+        "name": "CV-temperatuur offset"
+      },
+      "ot_hysteresis": {
+        "name": "Ruimte-hysterese"
+      },
+      "ot_building_inertia": {
+        "name": "Gebouwtraagheid"
+      },
+      "ot_frost_temperature": {
+        "name": "Vorstbeveiligingstemperatuur"
+      },
+      "ot_ch_min": {
+        "name": "Minimale CV-temperatuur"
+      },
+      "ot_legionella_temp": {
+        "name": "Anti-legionella-temperatuur"
       }
     },
     "select": {
@@ -360,10 +387,10 @@
       "ot_mode": {
         "name": "Modus",
         "state": {
-          "off": "Uit",
-          "heating": "Verwarming",
-          "water": "SWW",
-          "heating_water": "Verwarming + SWW"
+          "off": "Stand-by",
+          "heating": "Alleen CV",
+          "water": "Zomer",
+          "heating_water": "Winter"
         }
       },
       "fault_language": {
@@ -417,6 +444,28 @@
         "state": {
           "manual": "Handmatig – vaste setpoint 24 h",
           "auto": "Auto – volgens de kalenders"
+        }
+      },
+      "ot_ntc_use": {
+        "name": "Gebruik Dominus-voeler",
+        "state": {
+          "room": "Ruimte",
+          "outdoor": "Buiten"
+        }
+      },
+      "ot_eco_action": {
+        "name": "Actie in Eco-fase",
+        "state": {
+          "setpoint": "Eco-setpoint",
+          "ch_off": "Verwarming uit"
+        }
+      },
+      "ot_legionella": {
+        "name": "Anti-legionella",
+        "state": {
+          "off": "Uit",
+          "daily": "Dagelijks om 02:00",
+          "weekly": "Maandag om 02:00"
         }
       }
     },
@@ -475,11 +524,28 @@
       },
       "alert_notifications": {
         "name": "Alarmmeldingen"
+      },
+      "ot_outdoor_sensor": {
+        "name": "Buitenvoeler"
+      },
+      "ot_modulation": {
+        "name": "Modulatie"
+      },
+      "ot_room_sensor": {
+        "name": "Ruimtevoeler"
+      },
+      "ot_frost_protection": {
+        "name": "Vorstbeveiliging"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Vakantie tot"
+      }
+    },
+    "button": {
+      "ot_reset": {
+        "name": "Ketel resetten"
       }
     }
   },

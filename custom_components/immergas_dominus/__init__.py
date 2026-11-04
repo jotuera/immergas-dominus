@@ -149,6 +149,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     coordinator.dhw = None if opentherm else DhwComfortEco(hass, coordinator)
     # statistics and optional automations computed in Home Assistant (Modbus mode; entities in stats_entities.py)
     coordinator.stats = None if opentherm else DominusStats(hass, coordinator)
+    # OpenTherm: the CAR V2 programs kept in Home Assistant (CH / DHW calendars, vacation, auto season, anti-legionella)
+    coordinator.ot_programs = None
+    if opentherm:
+        from .ot_programs import OtPrograms
+        coordinator.ot_programs = OtPrograms(hass, coordinator)
+        coordinator.ot_programs.start()
+        entry.async_on_unload(coordinator.ot_programs.stop)
     if coordinator.stats is not None:
         coordinator.stats.start()
         entry.async_on_unload(coordinator.stats.stop)

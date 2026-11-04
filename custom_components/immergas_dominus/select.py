@@ -27,8 +27,10 @@ from .const import (
     OT_MODE_OPTIONS,
     OT_MODE_PDU,
     OT_MODE_TO_STATUS,
-    OT_STATUS_CH_ACTIVE_MASK,
-    OT_STATUS_DHW_ACTIVE_MASK,
+    OT_MASTER_CH_ENABLE,
+    OT_MASTER_DHW_ENABLE,
+    OT_NTC_USE_INDEX,
+    OT_NTC_USE_OPTIONS,
     PROTOCOL_OPENTHERM,
     SELECT_DESCRIPTIONS,
     WEEKDAY_PROFILE_PDUS,
@@ -46,7 +48,8 @@ async def async_setup_entry(
     """Set up selects."""
     coordinator: ImmergasDominusCoordinator = hass.data[DOMAIN][entry.entry_id]
     if entry.data.get(CONF_PROTOCOL) == PROTOCOL_OPENTHERM:
-        async_add_entities([ImmergasOpenThermModeSelect(coordinator)])
+        from .ot_programs import ot_selects
+        async_add_entities([ImmergasOpenThermModeSelect(coordinator), ImmergasOpenThermNtcUseSelect(coordinator), *ot_selects(coordinator)])
         return
     entities: list[SelectEntity] = [
         ImmergasDominusSelect(coordinator, description)
@@ -188,9 +191,10 @@ class ImmergasOpenThermModeSelect(ImmergasDominusEntity, SelectEntity):
         raw = self.raw_value
         if raw is None:
             return None
-        lb = int(raw) & 0xFF
-        ch = bool(lb & OT_STATUS_CH_ACTIVE_MASK)
-        dhw = bool(lb & OT_STATUS_DHW_ACTIVE_MASK)
+        # the selected mode = master status enable bits (reply HB), as the app reads it - not the current activity (LB)
+        hb = (int(raw) >> 8) & 0xFF
+        ch = bool(hb & OT_MASTER_CH_ENABLE)
+        dhw = bool(hb & OT_MASTER_DHW_ENABLE)
         if ch and dhw:
             return "heating_water"
         if ch:
@@ -203,6 +207,32 @@ class ImmergasOpenThermModeSelect(ImmergasDominusEntity, SelectEntity):
         status = OT_MODE_TO_STATUS[option]
         ack = await self.coordinator.client.async_write_data_id(OT_MODE_PDU, status << 8)
         self.coordinator.set_local_value(OT_MODE_PDU, ack)
+        await self.coordinator.async_request_refresh()
+
+
+class ImmergasOpenThermNtcUseSelect(ImmergasDominusEntity, SelectEntity):
+    """What the probe of the Dominus kit measures: the room or the outdoor temperature (module parameter 11)."""
+
+    _attr_translation_key = "ot_ntc_use"
+    _attr_icon = "mdi:thermometer-probe"
+    _attr_options = OT_NTC_USE_OPTIONS
+    _attr_entity_category = EntityCategory.CONFIG
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        from .opentherm_client import ot_param_key
+        super().__init__(coordinator, "ot_ntc_use", ot_param_key(89, OT_NTC_USE_INDEX), DEVICE_MAIN)
+
+    @property
+    def current_option(self) -> str | None:
+        raw = self.raw_value
+        if raw is None:
+            return None
+        lb = int(raw) & 0xFF
+        return OT_NTC_USE_OPTIONS[lb] if lb < len(OT_NTC_USE_OPTIONS) else None
+
+    async def async_select_option(self, option: str) -> None:
+        ack = await self.coordinator.client.async_write_data_id(self._pdu, OT_NTC_USE_OPTIONS.index(option))
+        self.coordinator.set_local_value(self._pdu, ack)
         await self.coordinator.async_request_refresh()
 
 

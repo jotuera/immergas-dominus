@@ -17,5 +17,8 @@ async def async_setup_entry(
 ) -> None:
     """Set up the datetime entities."""
     coordinator: ImmergasDominusCoordinator = hass.data[DOMAIN][entry.entry_id]
+    if getattr(coordinator, "ot_programs", None) is not None:
+        from .ot_programs import ot_datetimes
+        async_add_entities(ot_datetimes(coordinator))
     if coordinator.stats is not None:
         async_add_entities([ImmergasVacationUntil(coordinator)])

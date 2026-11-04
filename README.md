@@ -129,6 +129,24 @@ strategy:
 
 ![Charts](docs/images/en/card-charts.png)
 
+**OpenTherm without the CAR V2 remote – the Dominus as the controller (unreleased).** When the Dominus is the only
+controller of an OpenTherm boiler (CAR V2 removed, the room probe of the Dominus kit connected), the integration exposes
+the Dominus regulator and runs the CAR V2 programs in Home Assistant, because the module has no clock:
+
+- **Regulator** (module parameters, Data-ID 89, as in the official app): heating curve 1–9, CH offset ±15 °C, min. CH
+  temperature, building inertia 1–20, room hysteresis, modulation, room sensor, outdoor sensor, what the probe measures
+  (room / outdoor), frost protection and its temperature; **room setpoint** (Data-ID 16), **room temperature** (Data-ID 24)
+  and a **boiler reset** button.
+- **Programs kept in Home Assistant** (restored after a restart): **CH program AUTO / MANUAL** with 4 calendars × 4 Comfort
+  ranges and a calendar per weekday (CAR V2 factory program by default) – AUTO writes the Comfort / Eco room setpoint when
+  the phase changes, so a manual change holds until the next change; in the Eco phase optionally **heating off**;
+  **DHW Comfort / Eco** by the DHW calendar; **vacation** (heating off until a date); **automatic Summer / Winter** by the
+  24 h outdoor mean; **anti-legionella** daily or on Monday at 02:00.
+- The **operating mode** now shows the selected mode (enable bits) instead of what the boiler is doing right now, with the
+  app's names Standby / Summer / Winter (+ CH only).
+
+With a CAR V2 connected the remote stays in charge – leave these programs off.
+
 **OpenTherm boilers (VICTRIX ZEUS / AVIO, STAR …).** In the OpenTherm mode the same `custom:immergas-dominus`
 strategy shows the **same cards** without those that have no OpenTherm data (schedules, heating curve, calibration /
 statistics, settings, automations, connectivity): **Diagram**, **Now** (flow / return, DHW, outdoor, modulation, pressure,

@@ -140,6 +140,9 @@
       },
       "heating_hours_per_degree_day": {
         "name": "Fűtési órák hőfoknaponként"
+      },
+      "ot_room_temperature": {
+        "name": "Szobahőmérséklet"
       }
     },
     "binary_sensor": {
@@ -321,6 +324,30 @@
       },
       "heated_area": {
         "name": "Fűtött alapterület"
+      },
+      "ot_room_setpoint": {
+        "name": "Szoba alapjel"
+      },
+      "ot_otc_curve": {
+        "name": "Fűtési görbe"
+      },
+      "ot_ch_offset": {
+        "name": "Fűtési hőmérséklet eltolás"
+      },
+      "ot_hysteresis": {
+        "name": "Szoba hiszterézis"
+      },
+      "ot_building_inertia": {
+        "name": "Épület tehetetlenség"
+      },
+      "ot_frost_temperature": {
+        "name": "Fagyvédelmi hőmérséklet"
+      },
+      "ot_ch_min": {
+        "name": "Minimális fűtési hőmérséklet"
+      },
+      "ot_legionella_temp": {
+        "name": "Legionella elleni hőmérséklet"
       }
     },
     "select": {
@@ -360,10 +387,10 @@
       "ot_mode": {
         "name": "Üzemmód",
         "state": {
-          "off": "Ki",
-          "heating": "Fűtés",
-          "water": "HMV",
-          "heating_water": "Fűtés + HMV"
+          "off": "Készenlét",
+          "heating": "Csak fűtés",
+          "water": "Nyár",
+          "heating_water": "Tél"
         }
       },
       "fault_language": {
@@ -417,6 +444,28 @@
         "state": {
           "manual": "Kézi – állandó alapjel 24 h",
           "auto": "Auto – naptárak szerint"
+        }
+      },
+      "ot_ntc_use": {
+        "name": "Dominus érzékelő használata",
+        "state": {
+          "room": "Szoba",
+          "outdoor": "Kültér"
+        }
+      },
+      "ot_eco_action": {
+        "name": "Eco fázis művelet",
+        "state": {
+          "setpoint": "Eco alapjel",
+          "ch_off": "Fűtés ki"
+        }
+      },
+      "ot_legionella": {
+        "name": "Legionella elleni védelem",
+        "state": {
+          "off": "Ki",
+          "daily": "Naponta 02:00-kor",
+          "weekly": "Hétfőn 02:00-kor"
         }
       }
     },
@@ -475,11 +524,28 @@
       },
       "alert_notifications": {
         "name": "Riasztási értesítések"
+      },
+      "ot_outdoor_sensor": {
+        "name": "Külső érzékelő"
+      },
+      "ot_modulation": {
+        "name": "Moduláció"
+      },
+      "ot_room_sensor": {
+        "name": "Szobaérzékelő"
+      },
+      "ot_frost_protection": {
+        "name": "Fagyvédelem"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Szabadság vége"
+      }
+    },
+    "button": {
+      "ot_reset": {
+        "name": "Kazán reset"
       }
     }
   },

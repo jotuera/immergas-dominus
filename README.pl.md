@@ -128,6 +128,24 @@ strategy:
 
 ![Wykresy](docs/images/card-charts.png)
 
+**OpenTherm bez pilota CAR V2 – Dominus jako regulator (niewydane).** Gdy Dominus jest jedynym sterownikiem kotła
+OpenTherm (CAR V2 odłączony, podłączona sonda pokojowa z kompletu Dominusa), integracja wystawia regulator Dominusa i
+prowadzi w Home Assistant programy z CAR V2, bo moduł nie ma zegara:
+
+- **Regulator** (parametry modułu, Data-ID 89, jak w oficjalnej aplikacji): krzywa grzewcza 1–9, offset CO ±15 °C,
+  min. temperatura CO, bezwładność budynku 1–20, histereza pokojowa, modulacja, czujnik pokojowy, sonda zewnętrzna, co
+  mierzy sonda (pokój / zewnątrz), ochrona przed zamarzaniem i jej temperatura; **zadana pokoju** (Data-ID 16),
+  **temperatura pokoju** (Data-ID 24) i przycisk **resetu kotła**.
+- **Programy w Home Assistant** (przywracane po restarcie): **program CO AUTO / MANUAL** – 4 kalendarze × 4 przedziały
+  Komfort i kalendarz na każdy dzień (domyślnie program fabryczny CAR V2); AUTO zapisuje zadaną Komfort / Eko przy zmianie
+  fazy, więc ręczna zmiana trzyma do następnej zmiany; w fazie Eko opcjonalnie **wyłączenie ogrzewania**; **CWU Komfort /
+  Eko** wg kalendarza CWU; **wyjazd** (ogrzewanie wyłączone do daty); **automatyczne Lato / Zima** wg średniej 24 h;
+  **anty-legionella** codziennie albo w poniedziałek o 02:00.
+- **Tryb pracy** pokazuje teraz wybrany tryb (bity zezwoleń), a nie to, co kocioł akurat robi, z nazwami z aplikacji
+  Standby / Lato / Zima (+ Tylko CO).
+
+Z podłączonym CAR V2 steruje pilot – te programy zostaw wyłączone.
+
 **Kotły OpenTherm (VICTRIX ZEUS / AVIO, STAR …).** W trybie OpenTherm ta sama strategia `custom:immergas-dominus`
 pokazuje **te same karty** bez tych, dla których OpenTherm nie ma danych (harmonogramy, krzywa grzewcza, kalibracja /
 statystyki, ustawienia, automatyzacje, łączność): **Schemat**, **Teraz** (zasilanie / powrót, CWU, zewnętrzna, modulacja,

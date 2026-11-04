@@ -140,6 +140,9 @@
       },
       "heating_hours_per_degree_day": {
         "name": "Ore di riscaldamento per grado giorno"
+      },
+      "ot_room_temperature": {
+        "name": "Temperatura ambiente"
       }
     },
     "binary_sensor": {
@@ -321,6 +324,30 @@
       },
       "heated_area": {
         "name": "Superficie riscaldata"
+      },
+      "ot_room_setpoint": {
+        "name": "Set ambiente"
+      },
+      "ot_otc_curve": {
+        "name": "Curva climatica"
+      },
+      "ot_ch_offset": {
+        "name": "Offset temperatura riscaldamento"
+      },
+      "ot_hysteresis": {
+        "name": "Isteresi ambiente"
+      },
+      "ot_building_inertia": {
+        "name": "Inerzia edificio"
+      },
+      "ot_frost_temperature": {
+        "name": "Temperatura antigelo"
+      },
+      "ot_ch_min": {
+        "name": "Temperatura minima riscaldamento"
+      },
+      "ot_legionella_temp": {
+        "name": "Temperatura antilegionella"
       }
     },
     "select": {
@@ -360,10 +387,10 @@
       "ot_mode": {
         "name": "Modalità",
         "state": {
-          "off": "Spento",
-          "heating": "Riscaldamento",
-          "water": "ACS",
-          "heating_water": "Riscaldamento + ACS"
+          "off": "Standby",
+          "heating": "Solo riscaldamento",
+          "water": "Estate",
+          "heating_water": "Inverno"
         }
       },
       "fault_language": {
@@ -417,6 +444,28 @@
         "state": {
           "manual": "Manuale – setpoint fisso 24 h",
           "auto": "Auto – secondo i calendari"
+        }
+      },
+      "ot_ntc_use": {
+        "name": "Uso sonda Dominus",
+        "state": {
+          "room": "Ambiente",
+          "outdoor": "Esterno"
+        }
+      },
+      "ot_eco_action": {
+        "name": "Azione in fase Eco",
+        "state": {
+          "setpoint": "Set Eco",
+          "ch_off": "Riscaldamento spento"
+        }
+      },
+      "ot_legionella": {
+        "name": "Antilegionella",
+        "state": {
+          "off": "Spento",
+          "daily": "Ogni giorno alle 02:00",
+          "weekly": "Lunedì alle 02:00"
         }
       }
     },
@@ -475,11 +524,28 @@
       },
       "alert_notifications": {
         "name": "Notifiche di allarme"
+      },
+      "ot_outdoor_sensor": {
+        "name": "Sonda esterna"
+      },
+      "ot_modulation": {
+        "name": "Modulazione"
+      },
+      "ot_room_sensor": {
+        "name": "Sensore ambiente"
+      },
+      "ot_frost_protection": {
+        "name": "Protezione antigelo"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Vacanza fino al"
+      }
+    },
+    "button": {
+      "ot_reset": {
+        "name": "Reset caldaia"
       }
     }
   },

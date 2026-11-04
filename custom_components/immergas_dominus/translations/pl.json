@@ -140,6 +140,9 @@
       },
       "heating_hours_per_degree_day": {
         "name": "Godziny grzania na stopniodzień"
+      },
+      "ot_room_temperature": {
+        "name": "Temperatura pokoju"
       }
     },
     "binary_sensor": {
@@ -321,6 +324,30 @@
       },
       "heated_area": {
         "name": "Powierzchnia ogrzewana"
+      },
+      "ot_room_setpoint": {
+        "name": "Zadana temperatura pokoju"
+      },
+      "ot_otc_curve": {
+        "name": "Krzywa grzewcza"
+      },
+      "ot_ch_offset": {
+        "name": "Offset temperatury CO"
+      },
+      "ot_hysteresis": {
+        "name": "Histereza pokojowa"
+      },
+      "ot_building_inertia": {
+        "name": "Bezwładność budynku"
+      },
+      "ot_frost_temperature": {
+        "name": "Temperatura ochrony przed zamarzaniem"
+      },
+      "ot_ch_min": {
+        "name": "Minimalna temperatura CO"
+      },
+      "ot_legionella_temp": {
+        "name": "Temperatura anty-legionella"
       }
     },
     "select": {
@@ -360,10 +387,10 @@
       "ot_mode": {
         "name": "Tryb",
         "state": {
-          "off": "Wył.",
-          "heating": "Ogrzewanie",
-          "water": "CWU",
-          "heating_water": "Ogrzewanie + CWU"
+          "off": "Standby",
+          "heating": "Tylko CO",
+          "water": "Lato",
+          "heating_water": "Zima"
         }
       },
       "fault_language": {
@@ -417,6 +444,28 @@
         "state": {
           "manual": "Ręczny – stała nastawa 24 h",
           "auto": "Auto – wg kalendarzy"
+        }
+      },
+      "ot_ntc_use": {
+        "name": "Sonda Dominusa mierzy",
+        "state": {
+          "room": "Pokój",
+          "outdoor": "Na zewnątrz"
+        }
+      },
+      "ot_eco_action": {
+        "name": "Faza Eko",
+        "state": {
+          "setpoint": "Zadana Eko",
+          "ch_off": "Wyłącz ogrzewanie"
+        }
+      },
+      "ot_legionella": {
+        "name": "Anty-legionella",
+        "state": {
+          "off": "Wyłączona",
+          "daily": "Codziennie o 02:00",
+          "weekly": "W poniedziałek o 02:00"
         }
       }
     },
@@ -475,11 +524,28 @@
       },
       "alert_notifications": {
         "name": "Powiadomienia o alarmach"
+      },
+      "ot_outdoor_sensor": {
+        "name": "Sonda zewnętrzna"
+      },
+      "ot_modulation": {
+        "name": "Modulacja"
+      },
+      "ot_room_sensor": {
+        "name": "Czujnik pokojowy"
+      },
+      "ot_frost_protection": {
+        "name": "Ochrona przed zamarzaniem"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Wyjazd do"
+      }
+    },
+    "button": {
+      "ot_reset": {
+        "name": "Reset kotła"
       }
     }
   },

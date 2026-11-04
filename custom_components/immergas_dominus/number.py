@@ -33,10 +33,12 @@ async def async_setup_entry(
     """Set up numbers."""
     coordinator: ImmergasDominusCoordinator = hass.data[DOMAIN][entry.entry_id]
     if entry.data.get(CONF_PROTOCOL) == PROTOCOL_OPENTHERM:
+        from .ot_programs import ot_numbers
         async_add_entities(
             ImmergasOpenThermNumber(coordinator, description)
             for description in OT_NUMBER_DESCRIPTIONS
         )
+        async_add_entities(ot_numbers(coordinator))
         return
     entities: list[NumberEntity] = [
         ImmergasDominusNumber(coordinator, description)
@@ -99,16 +101,26 @@ class ImmergasOpenThermNumber(ImmergasDominusEntity, NumberEntity):
         raw = self.raw_value
         if raw is None:
             return None
-        if self.entity_description.param is not None:
-            return float(int(raw) & 0xFF)  # module parameter: whole °C in the reply LB
+        d = self.entity_description
+        if d.param is not None:
+            # module parameter: the reply LB, signed (s8) or scaled down by the divisor (curve 1.0-9.0 = 10-90)
+            lb = int(raw) & 0xFF
+            if d.signed and lb & 0x80:
+                lb -= 0x100
+            return round(lb / d.divisor, 1) if d.divisor != 1 else float(lb)
         raw = int(raw) & 0xFFFF
         signed = raw - 0x10000 if raw & 0x8000 else raw
         return round(signed / 256, 1)
 
     async def async_set_native_value(self, value: float) -> None:
-        # whole degrees, as the official app sends them (f8.8 with LB = 0, or the parameter value)
-        whole = int(round(float(value)))
-        raw_value = whole & 0xFF if self.entity_description.param is not None else (whole << 8) & 0xFFFF
+        d = self.entity_description
+        if d.param is not None:
+            raw_value = int(round(float(value) * d.divisor)) & 0xFF
+        elif d.whole:
+            # whole degrees, as the official app sends the DHW setpoint (f8.8 with LB = 0)
+            raw_value = (int(round(float(value))) << 8) & 0xFFFF
+        else:
+            raw_value = int(round(float(value) * 256)) & 0xFFFF
         ack_value = await self.coordinator.client.async_write_data_id(self._pdu, raw_value)
         self.coordinator.set_local_value(self._pdu, ack_value)
         await self.coordinator.async_request_refresh()

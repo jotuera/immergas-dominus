@@ -140,6 +140,9 @@
       },
       "heating_hours_per_degree_day": {
         "name": "Heures de chauffage par degré-jour"
+      },
+      "ot_room_temperature": {
+        "name": "Température ambiante"
       }
     },
     "binary_sensor": {
@@ -321,6 +324,30 @@
       },
       "heated_area": {
         "name": "Surface chauffée"
+      },
+      "ot_room_setpoint": {
+        "name": "Consigne ambiante"
+      },
+      "ot_otc_curve": {
+        "name": "Courbe de chauffe"
+      },
+      "ot_ch_offset": {
+        "name": "Décalage température chauffage"
+      },
+      "ot_hysteresis": {
+        "name": "Hystérésis ambiante"
+      },
+      "ot_building_inertia": {
+        "name": "Inertie du bâtiment"
+      },
+      "ot_frost_temperature": {
+        "name": "Température hors-gel"
+      },
+      "ot_ch_min": {
+        "name": "Température chauffage minimale"
+      },
+      "ot_legionella_temp": {
+        "name": "Température anti-légionelle"
       }
     },
     "select": {
@@ -360,10 +387,10 @@
       "ot_mode": {
         "name": "Mode",
         "state": {
-          "off": "Arrêt",
-          "heating": "Chauffage",
-          "water": "ECS",
-          "heating_water": "Chauffage + ECS"
+          "off": "Veille",
+          "heating": "Chauffage seul",
+          "water": "Été",
+          "heating_water": "Hiver"
         }
       },
       "fault_language": {
@@ -417,6 +444,28 @@
         "state": {
           "manual": "Manuel – consigne fixe 24 h",
           "auto": "Auto – selon les calendriers"
+        }
+      },
+      "ot_ntc_use": {
+        "name": "Usage de la sonde Dominus",
+        "state": {
+          "room": "Ambiance",
+          "outdoor": "Extérieur"
+        }
+      },
+      "ot_eco_action": {
+        "name": "Action en phase Éco",
+        "state": {
+          "setpoint": "Consigne Éco",
+          "ch_off": "Chauffage arrêté"
+        }
+      },
+      "ot_legionella": {
+        "name": "Anti-légionelle",
+        "state": {
+          "off": "Arrêt",
+          "daily": "Tous les jours à 02:00",
+          "weekly": "Lundi à 02:00"
         }
       }
     },
@@ -475,11 +524,28 @@
       },
       "alert_notifications": {
         "name": "Notifications d'alerte"
+      },
+      "ot_outdoor_sensor": {
+        "name": "Sonde extérieure"
+      },
+      "ot_modulation": {
+        "name": "Modulation"
+      },
+      "ot_room_sensor": {
+        "name": "Capteur ambiant"
+      },
+      "ot_frost_protection": {
+        "name": "Protection hors-gel"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Vacances jusqu'au"
+      }
+    },
+    "button": {
+      "ot_reset": {
+        "name": "Réarmement chaudière"
       }
     }
   },

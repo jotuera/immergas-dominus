@@ -140,6 +140,9 @@
       },
       "heating_hours_per_degree_day": {
         "name": "Horas de aquecimento por grau-dia"
+      },
+      "ot_room_temperature": {
+        "name": "Temperatura ambiente"
       }
     },
     "binary_sensor": {
@@ -321,6 +324,30 @@
       },
       "heated_area": {
         "name": "Área aquecida"
+      },
+      "ot_room_setpoint": {
+        "name": "Setpoint ambiente"
+      },
+      "ot_otc_curve": {
+        "name": "Curva de aquecimento"
+      },
+      "ot_ch_offset": {
+        "name": "Offset temperatura aquecimento"
+      },
+      "ot_hysteresis": {
+        "name": "Histerese ambiente"
+      },
+      "ot_building_inertia": {
+        "name": "Inércia do edifício"
+      },
+      "ot_frost_temperature": {
+        "name": "Temperatura anticongelamento"
+      },
+      "ot_ch_min": {
+        "name": "Temperatura mínima aquecimento"
+      },
+      "ot_legionella_temp": {
+        "name": "Temperatura anti-legionela"
       }
     },
     "select": {
@@ -360,10 +387,10 @@
       "ot_mode": {
         "name": "Modo",
         "state": {
-          "off": "Desligado",
-          "heating": "Aquecimento",
-          "water": "AQS",
-          "heating_water": "Aquecimento + AQS"
+          "off": "Standby",
+          "heating": "Só aquecimento",
+          "water": "Verão",
+          "heating_water": "Inverno"
         }
       },
       "fault_language": {
@@ -417,6 +444,28 @@
         "state": {
           "manual": "Manual – setpoint fixo 24 h",
           "auto": "Auto – pelos calendários"
+        }
+      },
+      "ot_ntc_use": {
+        "name": "Uso da sonda Dominus",
+        "state": {
+          "room": "Ambiente",
+          "outdoor": "Exterior"
+        }
+      },
+      "ot_eco_action": {
+        "name": "Ação na fase Eco",
+        "state": {
+          "setpoint": "Setpoint Eco",
+          "ch_off": "Aquecimento desligado"
+        }
+      },
+      "ot_legionella": {
+        "name": "Anti-legionela",
+        "state": {
+          "off": "Desligado",
+          "daily": "Diariamente às 02:00",
+          "weekly": "Segunda às 02:00"
         }
       }
     },
@@ -475,11 +524,28 @@
       },
       "alert_notifications": {
         "name": "Notificações de alarme"
+      },
+      "ot_outdoor_sensor": {
+        "name": "Sonda exterior"
+      },
+      "ot_modulation": {
+        "name": "Modulação"
+      },
+      "ot_room_sensor": {
+        "name": "Sensor ambiente"
+      },
+      "ot_frost_protection": {
+        "name": "Proteção anticongelamento"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Férias até"
+      }
+    },
+    "button": {
+      "ot_reset": {
+        "name": "Reset caldeira"
       }
     }
   },

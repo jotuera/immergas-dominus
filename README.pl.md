@@ -238,6 +238,13 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.5.8
+
+- **Okrojony dashboard dla kotłów OpenTherm** (VICTRIX ZEUS / AVIO, STAR …): strategia `custom:immergas-dominus`
+  rozpoznaje tryb OpenTherm i buduje Teraz / Sterowanie / Historię ze standardowych kart Home Assistant;
+  `opentherm: true` / `false` wymusza widok (#2).
+- Karty dashboardu 0.51.5.
+
 ### 1.5.7
 
 - **Program czasowy CO strefy 1 AUTO / MANUAL** (nowy select, jak w oficjalnej aplikacji): MANUAL ustawia wszystkie dni na

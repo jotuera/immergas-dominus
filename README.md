@@ -236,6 +236,13 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.5.8
+
+- **Reduced dashboard for OpenTherm boilers** (VICTRIX ZEUS / AVIO, STAR …): the `custom:immergas-dominus` strategy
+  detects the OpenTherm mode and builds Now / Control / History from standard Home Assistant cards; `opentherm: true` /
+  `false` forces the view (#2).
+- Dashboard cards 0.51.5.
+
 ### 1.5.7
 
 - **Zone 1 CH time program AUTO / MANUAL** (new select, like the official app): MANUAL puts every day on a whole-day

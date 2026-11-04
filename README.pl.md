@@ -128,6 +128,13 @@ strategy:
 
 ![Wykresy](docs/images/card-charts.png)
 
+**Kotły OpenTherm (VICTRIX ZEUS / AVIO, STAR …).** W trybie OpenTherm ta sama strategia `custom:immergas-dominus`
+sama buduje **okrojony dashboard**, bo dostępne są tylko wartości OpenTherm (bez harmonogramów, krzywej i statystyk):
+**Teraz** (temperatura zasilania / powrotu / CWU / zewnętrzna, modulacja, ciśnienie, przepływ CWU, płomień, praca CO /
+CWU, awaria), **Sterowanie** (tryb, nastawa CO i CWU z −/+, maks. nastawa CO) i **Historia** (temperatury i palnik
+z 24 h, ciśnienie z 72 h). Dopisz `opentherm: true` albo `opentherm: false` pod `strategy:`, żeby wymusić jeden albo
+drugi widok.
+
 Danych pompy ciepła (sprężarka, COP, zasilanie / powrót pompy, energia) nie da się odczytać przez Dominusa – do tego
 służy hub.
 

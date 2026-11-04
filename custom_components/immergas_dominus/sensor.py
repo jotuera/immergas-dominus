@@ -41,8 +41,9 @@ async def async_setup_entry(
     """Set up sensors."""
     coordinator: ImmergasDominusCoordinator = hass.data[DOMAIN][entry.entry_id]
     if entry.data.get(CONF_PROTOCOL) == PROTOCOL_OPENTHERM:
+        from .ot_diagnostics import OtLastWriteSensor, OtScanSensor
         from .ot_programs import ot_sensors
-        async_add_entities(ot_sensors(coordinator))
+        async_add_entities([*ot_sensors(coordinator), OtScanSensor(coordinator), OtLastWriteSensor(coordinator)])
         async_add_entities(
             ImmergasOpenThermSensor(coordinator, description)
             for description in OT_SENSOR_DESCRIPTIONS

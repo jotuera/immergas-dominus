@@ -48,6 +48,14 @@ _TEST_DATA_IDS = (0, 25, 27)  # status, boiler flow temp, outside temp
 # The module serves a single TCP client: after each full polling cycle the session is
 # released for this long so the official Dominus app can connect in between.
 _IDLE_BETWEEN_CYCLES = 20.0
+# A Data-ID the boiler answers DATA-INVALID / UNKNOWN-DATAID this many times in a row is skipped
+# for _SUPPRESS_SECONDS (then tried again), so unsupported IDs do not slow every cycle down.
+_SUPPRESS_AFTER = 3
+_SUPPRESS_SECONDS = 3600.0
+# Data-ID scan (diagnostics): the standard OpenTherm range
+_SCAN_IDS = tuple(range(0, 128))
+# Writes that are commands, not values - nothing to read back
+_NO_READBACK = (4,)
 
 
 def ot_param_key(data_id: int, index: int) -> int:
@@ -103,6 +111,18 @@ class DominusOpenThermClient:
         self._stop = threading.Event()
         self._thread: threading.Thread | None = None
         self._sock: socket.socket | None = None
+        # diagnostics (see the "OpenTherm diagnostics" entities)
+        # low byte added to every Data-ID 0 frame: None = standard (0), 0xCA = the "Immergas fix" of other
+        # OpenTherm gateways (reported to unlock Data-ID 1 / 57 writes on Immergas boilers)
+        self.status_lb: int | None = None
+        self._unsupported: dict[int, int] = {}       # key -> consecutive unsupported replies
+        self.suppressed: dict[int, float] = {}       # key -> monotonic time until it is polled again
+        self._scan_queue: list[int] = []
+        self.scan_running = False
+        self.scan_result: dict[int, str] = {}        # Data-ID -> "ok" / "unsupported" / "error"
+        self.scan_values: dict[int, int] = {}
+        self.scan_finished: float | None = None      # time.time() of the last finished scan
+        self.last_write: dict | None = None          # key, sent, ack, readback, result
 
     # -- lifecycle -------------------------------------------------------------
 
@@ -147,6 +167,14 @@ class DominusOpenThermClient:
                 snapshot = dict(self._values)
         return snapshot
 
+    def start_scan(self) -> None:
+        """Queue a read of every standard Data-ID; the session loop works through it between polls."""
+        self._scan_queue = list(_SCAN_IDS)
+        self.scan_result = {}
+        self.scan_values = {}
+        self.scan_running = True
+        self.start()
+
     async def async_write_data_id(self, data_id: int, value: int) -> int:
         """Queue a write into the live session and wait for the ack."""
         self.start()
@@ -178,6 +206,7 @@ class DominusOpenThermClient:
                         request.ack = self._exchange_key(request.data_id, request.value, write=True)
                         with self._lock:
                             self._values[request.data_id] = request.ack
+                        self._read_back(request)
                     except DominusOpenThermUnsupported as err:
                         request.error = err
                     except Exception as err:  # noqa: BLE001 - hand the cause to the waiting caller
@@ -188,6 +217,11 @@ class DominusOpenThermClient:
                     self._stop.wait(_MESSAGE_GAP)
                     continue
 
+                if self._scan_queue:
+                    self._scan_step()
+                    self._stop.wait(_MESSAGE_GAP)
+                    continue
+
                 with self._lock:
                     ids = self._poll_ids
                 if not ids:
@@ -195,12 +229,24 @@ class DominusOpenThermClient:
                     continue
                 data_id = ids[pos % len(ids)]
                 pos += 1
-                try:
-                    value = self._exchange_key(data_id)
-                    with self._lock:
-                        self._values[data_id] = value
-                except DominusOpenThermUnsupported:
-                    pass  # boiler doesn't support this Data-ID; keep polling others
+                until = self.suppressed.get(data_id)
+                if until is not None and time.monotonic() < until:
+                    pass  # unsupported by this boiler: skipped until the suppression ends
+                else:
+                    try:
+                        value = self._exchange_key(data_id)
+                        with self._lock:
+                            self._values[data_id] = value
+                        self._unsupported.pop(data_id, None)
+                        self.suppressed.pop(data_id, None)
+                    except DominusOpenThermUnsupported:
+                        count = self._unsupported.get(data_id, 0) + 1
+                        self._unsupported[data_id] = count
+                        if count >= _SUPPRESS_AFTER:
+                            self.suppressed[data_id] = time.monotonic() + _SUPPRESS_SECONDS
+                            self._unsupported[data_id] = 0
+                            _LOGGER.debug("OpenTherm key %s unsupported %s times, skipped for %.0f s",
+                                          data_id, _SUPPRESS_AFTER, _SUPPRESS_SECONDS)
                 if pos % len(ids) == 0 and self._write_queue.empty():
                     # full cycle done: free the module for the official app until the next one
                     self._close_socket()
@@ -216,6 +262,48 @@ class DominusOpenThermClient:
                 self._fail_pending_writes(err)
                 self._stop.wait(backoff)
                 backoff = min(backoff * 2.0, 20.0)
+
+    def _scan_step(self) -> None:
+        data_id = self._scan_queue.pop(0)
+        try:
+            self.scan_values[data_id] = self._exchange_key(data_id)
+            self.scan_result[data_id] = "ok"
+        except DominusOpenThermUnsupported:
+            self.scan_result[data_id] = "unsupported"
+        except DominusProtocolError:
+            self.scan_result[data_id] = "error"  # no / invalid reply; the session itself is kept
+        if not self._scan_queue:
+            self.scan_running = False
+            self.scan_finished = time.time()
+            _LOGGER.info("OpenTherm Data-ID scan finished: %s supported", sum(1 for r in self.scan_result.values() if r == "ok"))
+
+    def _read_back(self, request: _WriteRequest) -> None:
+        """Read the written key again: did the boiler take the value, or only acknowledge it?"""
+        data_id, index = _split_key(request.data_id)
+        sent = request.value & (0xFF if index is not None else 0xFFFF)
+        record = {"key": data_id if index is None else f"{data_id}/{index}", "sent": sent, "ack": request.ack,
+                  "readback": None, "result": "no_readback", "at": time.time()}
+        if data_id not in _NO_READBACK:
+            self._stop.wait(_MESSAGE_GAP)
+            try:
+                back = self._exchange_key(request.data_id)
+                record["readback"] = back
+                if data_id == 0:
+                    ok = (back >> 8) & 0x07 == (sent >> 8) & 0x07  # master enable bits
+                else:
+                    ok = back == sent
+                record["result"] = "ok" if ok else "mismatch"
+                with self._lock:
+                    self._values[request.data_id] = back
+            except DominusOpenThermUnsupported:
+                record["result"] = "unsupported"
+            except DominusProtocolError as err:
+                record["result"] = "error"
+                _LOGGER.debug("OpenTherm read-back of %s failed: %s", record["key"], err)
+        if record["result"] == "mismatch":
+            _LOGGER.info("OpenTherm write %s: sent %s, acknowledged %s, but reads back %s", record["key"], sent,
+                         request.ack, record["readback"])
+        self.last_write = record
 
     def _next_write(self) -> _WriteRequest | None:
         try:
@@ -236,7 +324,14 @@ class DominusOpenThermClient:
         """Read or write a plain Data-ID or an indexed parameter (see :func:`ot_param_key`)."""
         data_id, index = _split_key(key)
         if index is None:
-            frame = self._build_write_frame(data_id, value) if write else self._build_read_frame(data_id)
+            if data_id == 0 and self.status_lb is not None:
+                # status overlay: the master status (HB = the selected enable bits) with the configured low byte
+                if not write:
+                    with self._lock:
+                        hb = (self._values.get(0, 0) >> 8) & 0xFF
+                    value = hb << 8
+                value = (value & 0xFF00) | (self.status_lb & 0xFF)
+            frame = self._build_write_frame(data_id, value) if write else self._build_read_frame(data_id, value)
             return self._exchange(frame, data_id, expect_write=write)
         # indexed parameter: HB = index, LB = value (u8); the reply LB is the parameter value
         frame = self._build_write_frame(data_id, (index << 8) | (value & 0xFF)) if write else self._build_read_frame(data_id, index << 8)

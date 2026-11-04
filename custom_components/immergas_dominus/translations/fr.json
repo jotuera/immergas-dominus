@@ -143,6 +143,19 @@
       },
       "ot_room_temperature": {
         "name": "Température ambiante"
+      },
+      "ot_supported_ids": {
+        "name": "Data-ID pris en charge"
+      },
+      "ot_last_write": {
+        "name": "Dernière écriture",
+        "state": {
+          "ok": "Prise en compte",
+          "mismatch": "Acquittée, non prise",
+          "no_readback": "Commande (sans relecture)",
+          "unsupported": "Non pris en charge",
+          "error": "Pas de réponse"
+        }
       }
     },
     "binary_sensor": {
@@ -467,6 +480,13 @@
           "daily": "Tous les jours à 02:00",
           "weekly": "Lundi à 02:00"
         }
+      },
+      "ot_status_overlay": {
+        "name": "Octet bas de la trame d’état",
+        "state": {
+          "standard": "Standard (0x00)",
+          "immergas": "Immergas (0xCA)"
+        }
       }
     },
     "time": {
@@ -546,6 +566,9 @@
     "button": {
       "ot_reset": {
         "name": "Réarmement chaudière"
+      },
+      "ot_scan": {
+        "name": "Scanner les Data-ID"
       }
     }
   },

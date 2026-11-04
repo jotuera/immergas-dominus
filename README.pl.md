@@ -146,6 +146,14 @@ prowadzi w Home Assistant programy z CAR V2, bo moduł nie ma zegara:
 
 Z podłączonym CAR V2 steruje pilot – te programy zostaw wyłączone.
 
+**Diagnostyka OpenTherm (niewydane).** Żeby sprawdzić, co kocioł naprawdę obsługuje: **Skanuj Data-ID** (przycisk;
+odczytuje raz każdy standardowy Data-ID, ok. minuty, odpytywanie stoi w tym czasie) → czujnik **Obsługiwane Data-ID**
+pokazuje, co odpowiedziało, co jest nieobsługiwane i surowe wartości; **Ostatni zapis** odczytuje każdą zapisaną wartość
+z powrotem – *Przyjęty* albo *Potwierdzony, nieprzyjęty*, gdy kocioł potwierdza zapis, ale zostawia swoją wartość;
+**Bajt LB ramki statusu** wysyła 0xCA w każdej ramce Data-ID 0 – „poprawka Immergas” innych bramek OpenTherm, która
+według zgłoszeń odblokowuje zapis Data-ID 1 / 57 w kotłach Immergas (eksperymentalne, domyślnie standard 0x00).
+Data-ID, na które kocioł trzy razy z rzędu odpowie „nieobsługiwane”, są pomijane przez godzinę.
+
 **Kotły OpenTherm (VICTRIX ZEUS / AVIO, STAR …).** W trybie OpenTherm ta sama strategia `custom:immergas-dominus`
 pokazuje **te same karty** bez tych, dla których OpenTherm nie ma danych (harmonogramy, krzywa grzewcza, kalibracja /
 statystyki, ustawienia, automatyzacje, łączność): **Schemat**, **Teraz** (zasilanie / powrót, CWU, zewnętrzna, modulacja,

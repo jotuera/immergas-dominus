@@ -143,6 +143,19 @@
       },
       "ot_room_temperature": {
         "name": "Temperatura ambiente"
+      },
+      "ot_supported_ids": {
+        "name": "Data-ID supportati"
+      },
+      "ot_last_write": {
+        "name": "Ultima scrittura",
+        "state": {
+          "ok": "Accettata",
+          "mismatch": "Confermata, non accettata",
+          "no_readback": "Comando (senza rilettura)",
+          "unsupported": "Non supportato",
+          "error": "Nessuna risposta"
+        }
       }
     },
     "binary_sensor": {
@@ -467,6 +480,13 @@
           "daily": "Ogni giorno alle 02:00",
           "weekly": "Lunedì alle 02:00"
         }
+      },
+      "ot_status_overlay": {
+        "name": "Byte basso del frame di stato",
+        "state": {
+          "standard": "Standard (0x00)",
+          "immergas": "Immergas (0xCA)"
+        }
       }
     },
     "time": {
@@ -546,6 +566,9 @@
     "button": {
       "ot_reset": {
         "name": "Reset caldaia"
+      },
+      "ot_scan": {
+        "name": "Scansiona Data-ID"
       }
     }
   },

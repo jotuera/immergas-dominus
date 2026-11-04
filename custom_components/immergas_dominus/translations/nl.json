@@ -143,6 +143,19 @@
       },
       "ot_room_temperature": {
         "name": "Ruimtetemperatuur"
+      },
+      "ot_supported_ids": {
+        "name": "Ondersteunde Data-ID’s"
+      },
+      "ot_last_write": {
+        "name": "Laatste schrijfactie",
+        "state": {
+          "ok": "Overgenomen",
+          "mismatch": "Bevestigd, niet overgenomen",
+          "no_readback": "Opdracht (geen teruglezen)",
+          "unsupported": "Niet ondersteund",
+          "error": "Geen antwoord"
+        }
       }
     },
     "binary_sensor": {
@@ -467,6 +480,13 @@
           "daily": "Dagelijks om 02:00",
           "weekly": "Maandag om 02:00"
         }
+      },
+      "ot_status_overlay": {
+        "name": "Lage byte van het statusframe",
+        "state": {
+          "standard": "Standaard (0x00)",
+          "immergas": "Immergas (0xCA)"
+        }
       }
     },
     "time": {
@@ -546,6 +566,9 @@
     "button": {
       "ot_reset": {
         "name": "Ketel resetten"
+      },
+      "ot_scan": {
+        "name": "Data-ID’s scannen"
       }
     }
   },

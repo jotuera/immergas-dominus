@@ -143,6 +143,19 @@
       },
       "ot_room_temperature": {
         "name": "Room temperature"
+      },
+      "ot_supported_ids": {
+        "name": "Supported Data-IDs"
+      },
+      "ot_last_write": {
+        "name": "Last write",
+        "state": {
+          "ok": "Taken",
+          "mismatch": "Acknowledged, not taken",
+          "no_readback": "Command (no read-back)",
+          "unsupported": "Not supported",
+          "error": "No reply"
+        }
       }
     },
     "binary_sensor": {
@@ -467,6 +480,13 @@
           "daily": "Daily at 02:00",
           "weekly": "Monday at 02:00"
         }
+      },
+      "ot_status_overlay": {
+        "name": "Status frame low byte",
+        "state": {
+          "standard": "Standard (0x00)",
+          "immergas": "Immergas (0xCA)"
+        }
       }
     },
     "time": {
@@ -546,6 +566,9 @@
     "button": {
       "ot_reset": {
         "name": "Boiler reset"
+      },
+      "ot_scan": {
+        "name": "Scan Data-IDs"
       }
     }
   },

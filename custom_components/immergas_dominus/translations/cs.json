@@ -143,6 +143,19 @@
       },
       "ot_room_temperature": {
         "name": "Teplota místnosti"
+      },
+      "ot_supported_ids": {
+        "name": "Podporovaná Data-ID"
+      },
+      "ot_last_write": {
+        "name": "Poslední zápis",
+        "state": {
+          "ok": "Přijat",
+          "mismatch": "Potvrzen, nepřijat",
+          "no_readback": "Příkaz (bez zpětného čtení)",
+          "unsupported": "Nepodporováno",
+          "error": "Bez odpovědi"
+        }
       }
     },
     "binary_sensor": {
@@ -467,6 +480,13 @@
           "daily": "Denně ve 02:00",
           "weekly": "V pondělí ve 02:00"
         }
+      },
+      "ot_status_overlay": {
+        "name": "Nižší bajt stavového rámce",
+        "state": {
+          "standard": "Standard (0x00)",
+          "immergas": "Immergas (0xCA)"
+        }
       }
     },
     "time": {
@@ -546,6 +566,9 @@
     "button": {
       "ot_reset": {
         "name": "Reset kotle"
+      },
+      "ot_scan": {
+        "name": "Skenovat Data-ID"
       }
     }
   },

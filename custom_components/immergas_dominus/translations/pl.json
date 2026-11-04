@@ -143,6 +143,19 @@
       },
       "ot_room_temperature": {
         "name": "Temperatura pokoju"
+      },
+      "ot_supported_ids": {
+        "name": "Obsługiwane Data-ID"
+      },
+      "ot_last_write": {
+        "name": "Ostatni zapis",
+        "state": {
+          "ok": "Przyjęty",
+          "mismatch": "Potwierdzony, nieprzyjęty",
+          "no_readback": "Polecenie (bez odczytu)",
+          "unsupported": "Nieobsługiwany",
+          "error": "Brak odpowiedzi"
+        }
       }
     },
     "binary_sensor": {
@@ -467,6 +480,13 @@
           "daily": "Codziennie o 02:00",
           "weekly": "W poniedziałek o 02:00"
         }
+      },
+      "ot_status_overlay": {
+        "name": "Bajt LB ramki statusu",
+        "state": {
+          "standard": "Standard (0x00)",
+          "immergas": "Immergas (0xCA)"
+        }
       }
     },
     "time": {
@@ -546,6 +566,9 @@
     "button": {
       "ot_reset": {
         "name": "Reset kotła"
+      },
+      "ot_scan": {
+        "name": "Skanuj Data-ID"
       }
     }
   },

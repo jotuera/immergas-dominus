@@ -143,6 +143,19 @@
       },
       "ot_room_temperature": {
         "name": "Szobahőmérséklet"
+      },
+      "ot_supported_ids": {
+        "name": "Támogatott Data-ID-k"
+      },
+      "ot_last_write": {
+        "name": "Utolsó írás",
+        "state": {
+          "ok": "Elfogadva",
+          "mismatch": "Nyugtázva, nem fogadva el",
+          "no_readback": "Parancs (visszaolvasás nélkül)",
+          "unsupported": "Nem támogatott",
+          "error": "Nincs válasz"
+        }
       }
     },
     "binary_sensor": {
@@ -467,6 +480,13 @@
           "daily": "Naponta 02:00-kor",
           "weekly": "Hétfőn 02:00-kor"
         }
+      },
+      "ot_status_overlay": {
+        "name": "Státuszkeret alsó bájt",
+        "state": {
+          "standard": "Szabványos (0x00)",
+          "immergas": "Immergas (0xCA)"
+        }
       }
     },
     "time": {
@@ -546,6 +566,9 @@
     "button": {
       "ot_reset": {
         "name": "Kazán reset"
+      },
+      "ot_scan": {
+        "name": "Data-ID-k keresése"
       }
     }
   },

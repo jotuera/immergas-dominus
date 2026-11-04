@@ -147,6 +147,14 @@ the Dominus regulator and runs the CAR V2 programs in Home Assistant, because th
 
 With a CAR V2 connected the remote stays in charge – leave these programs off.
 
+**OpenTherm diagnostics (unreleased).** To find out what a boiler really supports:
+**Scan Data-IDs** (button; reads every standard Data-ID once, about a minute, polling pauses meanwhile) → the
+**Supported Data-IDs** sensor lists what answered, what is unsupported and the raw values; **Last write** reads every
+written value back – *Taken*, or *Acknowledged, not taken* when the boiler acknowledges a write but keeps its own value;
+**Status frame low byte** sends 0xCA with every Data-ID 0 frame – the "Immergas fix" of other OpenTherm gateways,
+reported to unlock writes to Data-ID 1 / 57 on Immergas boilers (experimental, default standard 0x00). Data-IDs the
+boiler answers as unsupported three times in a row are skipped for an hour.
+
 **OpenTherm boilers (VICTRIX ZEUS / AVIO, STAR …).** In the OpenTherm mode the same `custom:immergas-dominus`
 strategy shows the **same cards** without those that have no OpenTherm data (schedules, heating curve, calibration /
 statistics, settings, automations, connectivity): **Diagram**, **Now** (flow / return, DHW, outdoor, modulation, pressure,

@@ -143,6 +143,19 @@
       },
       "ot_room_temperature": {
         "name": "Temperatura ambiente"
+      },
+      "ot_supported_ids": {
+        "name": "Data-ID compatibles"
+      },
+      "ot_last_write": {
+        "name": "Última escritura",
+        "state": {
+          "ok": "Aceptada",
+          "mismatch": "Confirmada, no aceptada",
+          "no_readback": "Orden (sin relectura)",
+          "unsupported": "No compatible",
+          "error": "Sin respuesta"
+        }
       }
     },
     "binary_sensor": {
@@ -467,6 +480,13 @@
           "daily": "Diario a las 02:00",
           "weekly": "Lunes a las 02:00"
         }
+      },
+      "ot_status_overlay": {
+        "name": "Byte bajo de la trama de estado",
+        "state": {
+          "standard": "Estándar (0x00)",
+          "immergas": "Immergas (0xCA)"
+        }
       }
     },
     "time": {
@@ -546,6 +566,9 @@
     "button": {
       "ot_reset": {
         "name": "Reset caldera"
+      },
+      "ot_scan": {
+        "name": "Escanear Data-ID"
       }
     }
   },

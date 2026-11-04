@@ -15,7 +15,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     """Set up the buttons (OpenTherm mode only)."""
     coordinator: ImmergasDominusCoordinator = hass.data[DOMAIN][entry.entry_id]
     if entry.data.get(CONF_PROTOCOL) == PROTOCOL_OPENTHERM:
-        async_add_entities([ImmergasOpenThermResetButton(coordinator)])
+        from .ot_diagnostics import OtScanButton
+        async_add_entities([ImmergasOpenThermResetButton(coordinator), OtScanButton(coordinator)])
 
 
 class ImmergasOpenThermResetButton(ImmergasDominusEntity, ButtonEntity):

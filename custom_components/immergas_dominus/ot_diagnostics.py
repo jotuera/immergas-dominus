@@ -1,0 +1,133 @@
+"""OpenTherm diagnostics: what does this boiler support and does it really take a written value.
+
+* **Status overlay** - the low byte sent with every Data-ID 0 frame.  Standard OpenTherm sends 0; other OpenTherm
+  gateways send 0xCA for Immergas boilers ("Immergas fix"), reported to unlock writes to Data-ID 1 / 57.
+* **Data-ID scan** - reads every standard Data-ID once and lists what the boiler answers.
+* **Last write** - after every write the value is read back: "ok" (taken), "mismatch" (acknowledged, but the boiler
+  keeps another value), "no_readback" (a command such as the reset).
+* Data-IDs the boiler answers as unsupported three times in a row are skipped for an hour (listed in the scan sensor).
+"""
+from __future__ import annotations
+
+from datetime import datetime, timezone
+from typing import Any
+
+from homeassistant.components.button import ButtonEntity
+from homeassistant.components.select import SelectEntity
+from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
+from homeassistant.const import EntityCategory
+from homeassistant.helpers.restore_state import RestoreEntity
+
+from .const import DEVICE_MAIN
+from .coordinator import ImmergasDominusCoordinator
+from .entity import ImmergasDominusEntity
+
+STATUS_OVERLAYS = {"standard": None, "immergas": 0xCA}
+WRITE_RESULTS = ["ok", "mismatch", "no_readback", "unsupported", "error"]
+
+
+class _DiagEntity(ImmergasDominusEntity):
+    _attr_entity_category = EntityCategory.DIAGNOSTIC
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator, key: str) -> None:
+        super().__init__(coordinator, key, 0, DEVICE_MAIN)
+        self._attr_translation_key = key
+
+    def _poll_pdus(self) -> tuple[int, ...]:
+        return ()
+
+    @property
+    def client(self):
+        return self.coordinator.client
+
+
+class OtStatusOverlaySelect(_DiagEntity, SelectEntity, RestoreEntity):
+    """Low byte of the Data-ID 0 frames: standard (0) or the Immergas 0xCA."""
+
+    _attr_entity_category = EntityCategory.CONFIG
+    _attr_options = list(STATUS_OVERLAYS)
+    _attr_icon = "mdi:code-brackets"
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_status_overlay")
+
+    async def async_added_to_hass(self) -> None:
+        await super().async_added_to_hass()
+        last = await self.async_get_last_state()
+        if last is not None and last.state in STATUS_OVERLAYS:
+            self.client.status_lb = STATUS_OVERLAYS[last.state]
+
+    @property
+    def current_option(self) -> str:
+        return next((k for k, v in STATUS_OVERLAYS.items() if v == self.client.status_lb), "standard")
+
+    async def async_select_option(self, option: str) -> None:
+        self.client.status_lb = STATUS_OVERLAYS[option]
+        self.async_write_ha_state()
+
+
+class OtScanButton(_DiagEntity, ButtonEntity):
+    """Read every standard Data-ID once (takes about a minute; polling pauses meanwhile)."""
+
+    _attr_icon = "mdi:radar"
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_scan")
+
+    async def async_press(self) -> None:
+        self.client.start_scan()
+
+
+class OtScanSensor(_DiagEntity, SensorEntity):
+    """Number of Data-IDs the boiler answered in the last scan; the lists in the attributes."""
+
+    _attr_icon = "mdi:format-list-checks"
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_supported_ids")
+
+    @property
+    def native_value(self) -> int | None:
+        res = self.client.scan_result
+        return sum(1 for r in res.values() if r == "ok") if res else None
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any]:
+        c, res = self.client, self.client.scan_result
+        pick = lambda what: [i for i, r in sorted(res.items()) if r == what]  # noqa: E731
+        finished = c.scan_finished
+        return {
+            "running": c.scan_running,
+            "supported": pick("ok"),
+            "unsupported": pick("unsupported"),
+            "no_reply": pick("error"),
+            "values": {i: f"0x{v:04X}" for i, v in sorted(c.scan_values.items())},
+            "suppressed_now": sorted(f"{(k >> 8) & 0xFF}/{k & 0xFF}" if k >= 0x10000 else k for k in c.suppressed),
+            "finished": datetime.fromtimestamp(finished, timezone.utc).isoformat() if finished else None,
+        }
+
+
+class OtLastWriteSensor(_DiagEntity, SensorEntity):
+    """Result of the last write, checked by reading the value back."""
+
+    _attr_device_class = SensorDeviceClass.ENUM
+    _attr_options = WRITE_RESULTS
+    _attr_icon = "mdi:check-network-outline"
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_last_write")
+
+    @property
+    def native_value(self) -> str | None:
+        last = self.client.last_write
+        return last["result"] if last else None
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any] | None:
+        last = self.client.last_write
+        if not last:
+            return None
+        hexv = lambda v: None if v is None else f"0x{int(v):04X}"  # noqa: E731
+        return {"data_id": last["key"], "sent": hexv(last["sent"]), "acknowledged": hexv(last["ack"]),
+                "read_back": hexv(last["readback"]),
+                "at": datetime.fromtimestamp(last["at"], timezone.utc).isoformat()}

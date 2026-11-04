@@ -143,6 +143,19 @@
       },
       "ot_room_temperature": {
         "name": "Raumtemperatur"
+      },
+      "ot_supported_ids": {
+        "name": "Unterstützte Data-IDs"
+      },
+      "ot_last_write": {
+        "name": "Letzter Schreibvorgang",
+        "state": {
+          "ok": "Übernommen",
+          "mismatch": "Bestätigt, nicht übernommen",
+          "no_readback": "Befehl (ohne Rücklesen)",
+          "unsupported": "Nicht unterstützt",
+          "error": "Keine Antwort"
+        }
       }
     },
     "binary_sensor": {
@@ -467,6 +480,13 @@
           "daily": "Täglich um 02:00",
           "weekly": "Montags um 02:00"
         }
+      },
+      "ot_status_overlay": {
+        "name": "Low-Byte des Statusrahmens",
+        "state": {
+          "standard": "Standard (0x00)",
+          "immergas": "Immergas (0xCA)"
+        }
       }
     },
     "time": {
@@ -546,6 +566,9 @@
     "button": {
       "ot_reset": {
         "name": "Kessel-Reset"
+      },
+      "ot_scan": {
+        "name": "Data-IDs scannen"
       }
     }
   },

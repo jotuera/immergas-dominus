@@ -264,6 +264,12 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.5
+
+- **Home Assistant 2026.11:** termostaty używają nowych właściwości temperatury `native_*` (stare są przestarzałe i
+  przestaną działać w 2027.11); starsze wersje Home Assistant działają dalej.
+- README: bezwzględne linki do obrazków (w sklepie HACS brakowało zrzutów kart).
+
 ### 1.6.4
 
 - **Stabilne wydanie linii 1.6.** Potwierdzone na kotłach OpenTherm (VICTRIX ZEUS, #2): dashboard OpenTherm i jego

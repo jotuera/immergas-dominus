@@ -262,6 +262,12 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.5
+
+- **Home Assistant 2026.11:** the thermostats use the new `native_*` temperature properties (the old ones are
+  deprecated and stop working in 2027.11); older Home Assistant versions keep working.
+- README: absolute image links (the cards were missing in the HACS store view).
+
 ### 1.6.4
 
 - **Stable release of the 1.6 line.** Confirmed on real OpenTherm boilers (VICTRIX ZEUS, #2): the OpenTherm dashboard

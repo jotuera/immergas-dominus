@@ -29,6 +29,10 @@ from .const import (
 from .coordinator import ImmergasDominusCoordinator
 from .entity import ImmergasDominusEntity
 
+# 1.6.5: Home Assistant 2026.11 moved the climate temperatures to native_* (current_temperature, target_temperature and
+# temperature_unit are deprecated, removed in 2027.11). Older versions only know the old names - see the end of the file.
+_NATIVE_TEMPERATURES = hasattr(ClimateEntity, "native_current_temperature")
+
 OPERATION_PDU = 2000
 
 # Zone 1 Comfort / Eco setpoints (heat 2210/2211, cool 2214/2215); zones 2-3 +10 / +20.
@@ -69,7 +73,10 @@ class ImmergasDominusClimate(ImmergasDominusEntity, ClimateEntity):
 
     entity_description: DominusClimateEntityDescription
     _attr_supported_features = ClimateEntityFeature.TARGET_TEMPERATURE
-    _attr_temperature_unit = UnitOfTemperature.CELSIUS
+    if _NATIVE_TEMPERATURES:
+        _attr_native_temperature_unit = UnitOfTemperature.CELSIUS
+    else:
+        _attr_temperature_unit = UnitOfTemperature.CELSIUS
 
     def __init__(
         self,
@@ -109,7 +116,7 @@ class ImmergasDominusClimate(ImmergasDominusEntity, ClimateEntity):
         return self.coordinator.data.get(pdu) if self.coordinator.data else None
 
     @property
-    def current_temperature(self) -> float | None:
+    def native_current_temperature(self) -> float | None:
         """Return current temperature."""
         raw = self._raw(self.entity_description.current_pdu)
         if raw is None or raw == 32767:
@@ -118,7 +125,7 @@ class ImmergasDominusClimate(ImmergasDominusEntity, ClimateEntity):
         return round(raw / 10, 1)
 
     @property
-    def target_temperature(self) -> float | None:
+    def native_target_temperature(self) -> float | None:
         """Return target temperature."""
         raw = self._raw(self.entity_description.target_pdu)
         if raw is None:
@@ -155,8 +162,8 @@ class ImmergasDominusClimate(ImmergasDominusEntity, ClimateEntity):
     def hvac_action(self) -> HVACAction | None:
         """Return a best-effort action from current and target temperature."""
         mode = self.hvac_mode
-        current = self.current_temperature
-        target = self.target_temperature
+        current = self.native_current_temperature
+        target = self.native_target_temperature
         if mode is None or current is None or target is None:
             return None
         if mode == HVACMode.OFF:
@@ -252,3 +259,9 @@ class ImmergasDominusClimate(ImmergasDominusEntity, ClimateEntity):
         ack_value = await self.coordinator.client.async_write_pdu(OPERATION_PDU, raw_value)
         self.coordinator.set_local_value(OPERATION_PDU, ack_value)
         await self.coordinator.async_request_refresh()
+
+
+if not _NATIVE_TEMPERATURES:
+    # Home Assistant before 2026.11: the same values under the old property names
+    ImmergasDominusClimate.current_temperature = ImmergasDominusClimate.native_current_temperature
+    ImmergasDominusClimate.target_temperature = ImmergasDominusClimate.native_target_temperature

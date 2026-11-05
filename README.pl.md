@@ -264,6 +264,13 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.3 (pre-release)
+
+- **Dashboard OpenTherm wykrywany automatycznie** także wtedy, gdy Home Assistant trzyma jeszcze encje z wcześniejszej
+  konfiguracji Modbus (osierocone wpisy rejestru nie są już brane pod uwagę); `opentherm: true` nie jest już potrzebne (#2).
+  Karty 0.52.4.
+- Karty 0.52.3: T05 maks. 15 min.
+
 ### 1.6.2 (pre-release)
 
 - **OpenTherm:** temperatura spalin (Data-ID 33), moc maks. i modulacja min. kotła (Data-ID 15); suwaki nastaw CWU i CO

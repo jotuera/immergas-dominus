@@ -262,6 +262,12 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.3 (pre-release)
+
+- **OpenTherm dashboard detected automatically** also when Home Assistant still keeps entities from an earlier Modbus
+  setup (orphaned registry entries no longer count); `opentherm: true` is not needed any more (#2). Cards 0.52.4.
+- Cards 0.52.3: T05 max. 15 min.
+
 ### 1.6.2 (pre-release)
 
 - **OpenTherm:** exhaust temperature (Data-ID 33), boiler max. capacity and min. modulation (Data-ID 15); the DHW and

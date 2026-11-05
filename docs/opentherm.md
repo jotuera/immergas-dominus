@@ -56,7 +56,13 @@ Data-ID.
 - **The remote stays in charge.** With a **CAR V2** (on the Dominus terminals) or a **Super Amico** (on the boiler)
   connected, the remote runs the heating. A value written once from Home Assistant (e.g. the DHW setpoint) is **kept by
   the Dominus** and sent to the boiler over the remote's own until the module is power-cycled (#2). Turn on
-  **Read only (remote in charge)** (1.6.8): Home Assistant then refuses every write, and the readings stay.
+  **Read only (remote in charge)** (1.6.8): Home Assistant then refuses every write, and the readings stay. The HA
+  programs (CH / DHW program, anti-legionella, vacation, automatic Summer / Winter) are paused and cannot be switched
+  on (1.6.9).
+- **No night mode and no anti-legionella in the boiler.** The VICTRIX ZEUS manual has neither: the night reduction
+  comes from the remote (CAR V2 program, chrono-thermostat), and the DHW range ends at 60 °C. Without a remote the
+  integration does both in Home Assistant (CH program Eco phase, DHW Comfort / Eco, anti-legionella capped at the
+  boiler's DHW maximum from Data-ID 48).
 - **E31** "loss of communication with the remote" – the boiler expects the remote it was paired with; while E31 is
   active it ignores CH / DHW / mode commands from the app and from Home Assistant alike.
 - **Low byte 0xCA in Data-ID 0** – the "Immergas fix" of other OpenTherm gateways (OTGateway, ESPHome users): without it

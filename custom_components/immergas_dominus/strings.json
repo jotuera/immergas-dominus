@@ -654,6 +654,9 @@
   "exceptions": {
     "read_only": {
       "message": "Read-only mode is on: Home Assistant does not write to the boiler. Switch off \"Read only (remote in charge)\" to change settings."
+    },
+    "programs_blocked": {
+      "message": "A remote (CAR V2 / Super Amico) is in charge: the Home Assistant programs are paused. Switch off \"Read only (remote in charge)\" to use them."
     }
   }
 }

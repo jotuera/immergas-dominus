@@ -286,6 +286,10 @@ przyjmie sesję.
   README).
 - **Łączność OpenTherm** (karty 0.54.1): Dominus, kocioł i kafel **pilota CAR V2** zamiast panelu strefy 1 – E31 (utrata
   pilota), jest temperatura pokoju, włączone *Tylko odczyt* – z przełącznikiem blokującym zapis z HA.
+- **OpenTherm: programy HA są wstrzymane, gdy steruje pilot** (*Tylko odczyt* włączone): program CO / CWU,
+  antylegionella, urlop i automatyczne Lato / Zima nie zapisują i nie da się ich włączyć; karty pokazują je szare
+  z kłódką (karty 0.54.2). **Antylegionella** nigdy nie żąda więcej niż maksimum CWU kotła (Data-ID 48, 60 °C
+  w VICTRIX ZEUS) – powyżej cel nie był osiągany, a cykl trwał 3 h.
 
 ### 1.6.8
 

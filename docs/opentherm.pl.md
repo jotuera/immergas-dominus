@@ -56,7 +56,11 @@ Data-ID** dodaje tu kolumnę.
 - **Steruje pilot.** Z podłączonym **CAR V2** (na zaciskach Dominusa) albo **Super Amico** (na kotle) ogrzewaniem
   kieruje pilot. Wartość raz zapisana z Home Assistant (np. nastawa CWU) jest **zapamiętywana przez Dominusa** i wysyłana
   do kotła ponad nastawą pilota, aż do odłączenia zasilania modułu (#2). Włącz **Tylko odczyt (steruje pilot)** (1.6.8):
-  Home Assistant odrzuca wtedy każdy zapis, a odczyty zostają.
+  Home Assistant odrzuca wtedy każdy zapis, a odczyty zostają. Programy HA (program CO / CWU, antylegionella, urlop,
+  automatyczne Lato / Zima) są wstrzymane i nie da się ich włączyć (1.6.9).
+- **Kocioł nie ma trybu nocnego ani antylegionelli.** Instrukcja VICTRIX ZEUS nie zawiera żadnego z nich: obniżenie
+  nocne daje pilot (program CAR V2, chronotermostat), a zakres CWU kończy się na 60 °C. Bez pilota integracja robi oba
+  w Home Assistant (faza Eko programu CO, CWU Komfort / Eko, antylegionella ograniczona do maksimum CWU kotła z Data-ID 48).
 - **E31** „utrata komunikacji z pilotem” – kocioł oczekuje pilota, z którym był sparowany; dopóki E31 jest aktywny,
   ignoruje polecenia CO / CWU / trybu zarówno z apki, jak i z Home Assistant.
 - **Młodszy bajt 0xCA w Data-ID 0** – „poprawka Immergas” innych bramek OpenTherm (OTGateway, użytkownicy ESPHome): bez

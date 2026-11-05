@@ -654,6 +654,9 @@
   "exceptions": {
     "read_only": {
       "message": "El modo solo lectura está activo: Home Assistant no escribe en la caldera. Desactive «Solo lectura (manda el mando)» para cambiar ajustes."
+    },
+    "programs_blocked": {
+      "message": "Manda un mando (CAR V2 / Super Amico): los programas de Home Assistant están en pausa. Desactive «Solo lectura (manda el mando)» para usarlos."
     }
   }
 }

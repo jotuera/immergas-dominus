@@ -654,6 +654,9 @@
   "exceptions": {
     "read_only": {
       "message": "Der Nur-Lesen-Modus ist aktiv: Home Assistant schreibt nichts in den Kessel. Schalten Sie „Nur lesen (Fernbedienung regelt)“ aus, um Einstellungen zu ändern."
+    },
+    "programs_blocked": {
+      "message": "Eine Fernbedienung (CAR V2 / Super Amico) regelt: die Home-Assistant-Programme sind pausiert. Schalten Sie „Nur lesen (Fernbedienung regelt)“ aus, um sie zu nutzen."
     }
   }
 }

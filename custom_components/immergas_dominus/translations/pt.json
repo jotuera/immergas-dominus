@@ -654,6 +654,9 @@
   "exceptions": {
     "read_only": {
       "message": "O modo só leitura está ativo: o Home Assistant não escreve na caldeira. Desative «Só leitura (o comando controla)» para alterar definições."
+    },
+    "programs_blocked": {
+      "message": "Controla um comando (CAR V2 / Super Amico): os programas do Home Assistant estão em pausa. Desative «Só leitura (o comando controla)» para os usar."
     }
   }
 }

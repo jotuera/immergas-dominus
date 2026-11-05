@@ -654,6 +654,9 @@
   "exceptions": {
     "read_only": {
       "message": "Włączony jest tryb tylko do odczytu: Home Assistant nie zapisuje nic do kotła. Wyłącz „Tylko odczyt (steruje pilot)”, żeby zmieniać ustawienia."
+    },
+    "programs_blocked": {
+      "message": "Steruje pilot (CAR V2 / Super Amico): programy Home Assistant są wstrzymane. Wyłącz „Tylko odczyt (steruje pilot)”, żeby z nich korzystać."
     }
   }
 }

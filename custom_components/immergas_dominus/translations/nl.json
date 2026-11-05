@@ -654,6 +654,9 @@
   "exceptions": {
     "read_only": {
       "message": "De modus alleen lezen staat aan: Home Assistant schrijft niets naar de ketel. Zet „Alleen lezen (afstandsbediening regelt)” uit om instellingen te wijzigen."
+    },
+    "programs_blocked": {
+      "message": "Een afstandsbediening (CAR V2 / Super Amico) regelt: de Home Assistant-programma's zijn gepauzeerd. Zet „Alleen lezen (afstandsbediening regelt)” uit om ze te gebruiken."
     }
   }
 }

@@ -654,6 +654,9 @@
   "exceptions": {
     "read_only": {
       "message": "Je zapnutý režim iba na čítanie: Home Assistant nič nezapisuje do kotla. Na zmenu nastavení vypnite „Iba čítanie (riadi ovládač)“."
+    },
+    "programs_blocked": {
+      "message": "Riadi ovládač (CAR V2 / Super Amico): programy Home Assistant sú pozastavené. Na ich použitie vypnite „Iba čítanie (riadi ovládač)“."
     }
   }
 }

@@ -290,6 +290,10 @@ the module accepts the session.
   table moved out of the README).
 - **OpenTherm Connectivity** (cards 0.54.1): Dominus, the boiler and a **CAR V2 remote** tile instead of the zone 1
   panel – E31 (remote lost), room temperature present, *Read only* on – with the switch that blocks writes from HA.
+- **OpenTherm: the HA programs are paused while the remote is in charge** (*Read only* on): CH / DHW program,
+  anti-legionella, vacation and automatic Summer / Winter do not write and cannot be switched on; the cards show them
+  greyed out with a lock (cards 0.54.2). **Anti-legionella** never asks more than the boiler's DHW maximum (Data-ID 48,
+  60 °C on a VICTRIX ZEUS) – above it the target was never reached and the run lasted 3 h.
 
 ### 1.6.8
 

@@ -33,6 +33,7 @@ from homeassistant.components.switch import SwitchEntity
 from homeassistant.components.time import TimeEntity
 from homeassistant.const import EntityCategory, UnitOfTemperature
 from homeassistant.core import CALLBACK_TYPE, HomeAssistant, callback
+from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.event import async_track_time_interval
 from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.util import dt as dt_util
@@ -45,6 +46,7 @@ _LOGGER = logging.getLogger(__name__)
 
 ROOM_SETPOINT_ID = 16
 DHW_SETPOINT_ID = 56
+DHW_BOUNDS_ID = 48  # HB = the boiler's max. DHW setpoint, LB = min. (s8 °C)
 DHW_TEMP_ID = 26
 OUTDOOR_ID = 27
 _DAY = 24 * 60
@@ -108,7 +110,7 @@ class OtPrograms:
         self._leg_last_day: str | None = None
         self._listeners: list[Callable[[], None]] = []
         self._unsub: list[CALLBACK_TYPE] = []
-        self._polls = (OT_MODE_PDU, OUTDOOR_ID, DHW_TEMP_ID, DHW_SETPOINT_ID, ROOM_SETPOINT_ID)
+        self._polls = (OT_MODE_PDU, OUTDOOR_ID, DHW_TEMP_ID, DHW_SETPOINT_ID, ROOM_SETPOINT_ID, DHW_BOUNDS_ID)
 
     # -- lifecycle ---------------------------------------------------------------
 
@@ -134,6 +136,30 @@ class OtPrograms:
         self.hass.async_create_task(self._async_tick(dt_util.now()))
 
     # -- values from the module --------------------------------------------------
+
+    @property
+    def blocked(self) -> bool:
+        """1.6.9: a remote (CAR V2 / Super Amico) runs the boiler - "Read only (remote in charge)" is on: the programs
+        are paused (they would fight the remote) and cannot be switched on."""
+        return bool(getattr(self.coordinator.client, "read_only", False))
+
+    def check_not_blocked(self) -> None:
+        if self.blocked:
+            raise HomeAssistantError(translation_domain="immergas_dominus", translation_key="programs_blocked")
+
+    def dhw_max(self) -> float | None:
+        """The boiler's max. DHW setpoint (Data-ID 48 high byte, e.g. 60 °C on a VICTRIX ZEUS), when it reports it."""
+        raw = self._raw(DHW_BOUNDS_ID)
+        if raw is None:
+            return None
+        hb = (int(raw) >> 8) & 0xFF
+        hb = hb - 0x100 if hb & 0x80 else hb
+        return float(hb) if 30 <= hb <= 90 else None
+
+    def legionella_target(self) -> float:
+        """Anti-legionella temperature, never above what the boiler accepts (otherwise it is never reached)."""
+        target, top = self.numbers["ot_legionella_temp"], self.dhw_max()
+        return min(target, top) if top is not None else target
 
     def _raw(self, key: int) -> int | None:
         value = (self.coordinator.data or {}).get(key)
@@ -222,6 +248,11 @@ class OtPrograms:
     # -- the tick ----------------------------------------------------------------
 
     async def _async_tick(self, now: datetime) -> None:
+        if self.blocked:
+            if self._leg_active:  # a remote took over: the anti-legionella run ends without writing
+                self._leg_active, self._leg_restore = False, None
+                self._notify()
+            return
         day, minute = self._now_minute(now)
         if self.vacation and self.vacation_until is not None and dt_util.utcnow() >= dt_util.as_utc(self.vacation_until):
             self.vacation_until = None
@@ -291,7 +322,7 @@ class OtPrograms:
     async def _legionella(self, now: datetime, day: int, minute: int) -> None:
         mono = time.monotonic()
         if self._leg_active:
-            target = self.numbers["ot_legionella_temp"]
+            target = self.legionella_target()
             temp = self._f88(self._raw(DHW_TEMP_ID))
             if temp is not None and temp >= target - 2:
                 self._leg_since = self._leg_since or mono
@@ -313,9 +344,10 @@ class OtPrograms:
             return
         self._leg_last_day = today
         self._leg_restore = self._raw(DHW_SETPOINT_ID)
-        if await self._set_dhw(self.numbers["ot_legionella_temp"], "anti-legionella"):
+        target = self.legionella_target()
+        if await self._set_dhw(target, "anti-legionella"):
             self._leg_active, self._leg_start, self._leg_since = True, mono, None
-            _LOGGER.info("Anti-legionella started (%s °C)", self.numbers["ot_legionella_temp"])
+            _LOGGER.info("Anti-legionella started (%s °C)", target)
             self._notify()
 
     def _notify(self) -> None:
@@ -434,6 +466,9 @@ class OtChoiceSelect(_ProgramEntity, SelectEntity):
         return getattr(self.programs, self._attr)
 
     async def async_select_option(self, option: str) -> None:
+        # AUTO program / anti-legionella on are refused while a remote is in charge; MANUAL / off always work
+        if option not in ("manual", "off", "setpoint", "ch_off"):
+            self.programs.check_not_blocked()
         setattr(self.programs, self._attr, option)
         self.programs.changed()
 
@@ -468,6 +503,11 @@ class OtProgramNumber(ImmergasDominusEntity, RestoreNumber):
     def native_value(self) -> float:
         return self.programs.numbers[self._key]
 
+    @property
+    def native_max_value(self) -> float:
+        top = self.programs.dhw_max() if self._key in ("ot_legionella_temp", "dhw_comfort", "dhw_eco") else None
+        return min(self._attr_native_max_value, top) if top is not None else self._attr_native_max_value
+
     async def async_set_native_value(self, value: float) -> None:
         self.programs.numbers[self._key] = float(value)
         # a new Comfort / Eco value is written at once when that phase is on
@@ -499,10 +539,11 @@ class OtProgramSwitch(_ProgramEntity, SwitchEntity):
 
     @property
     def extra_state_attributes(self) -> dict[str, Any] | None:
-        if self._attr != "auto_season":
-            return None
-        mean, hours = self.programs.outdoor_24h()
-        return {"outdoor_mean_24h": mean, "hours_of_data": hours}
+        attrs: dict[str, Any] = {"blocked_by_remote": self.programs.blocked}
+        if self._attr == "auto_season":
+            mean, hours = self.programs.outdoor_24h()
+            attrs.update(outdoor_mean_24h=mean, hours_of_data=hours)
+        return attrs
 
     async def _async_set(self, on: bool) -> None:
         if self._attr == "vacation":
@@ -514,6 +555,7 @@ class OtProgramSwitch(_ProgramEntity, SwitchEntity):
         self.programs.changed()
 
     async def async_turn_on(self, **kwargs: Any) -> None:
+        self.programs.check_not_blocked()
         await self._async_set(True)
 
     async def async_turn_off(self, **kwargs: Any) -> None:

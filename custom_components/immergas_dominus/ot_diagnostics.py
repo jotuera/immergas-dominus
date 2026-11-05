@@ -105,11 +105,18 @@ class OtReadOnlySwitch(_DiagEntity, SwitchEntity, RestoreEntity):
 
     async def async_turn_on(self, **kwargs: Any) -> None:
         self.client.read_only = True
-        self.async_write_ha_state()
+        self._changed()
 
     async def async_turn_off(self, **kwargs: Any) -> None:
         self.client.read_only = False
+        self._changed()
+
+    def _changed(self) -> None:
         self.async_write_ha_state()
+        programs = getattr(self.coordinator, "ot_programs", None)
+        if programs is not None:  # program entities show "blocked_by_remote"; MANUAL / AUTO write their phase again
+            programs._ch_written = programs._dhw_written = None
+            programs.changed()
 
 
 class OtScanButton(_DiagEntity, ButtonEntity):

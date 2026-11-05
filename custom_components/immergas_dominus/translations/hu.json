@@ -654,6 +654,9 @@
   "exceptions": {
     "read_only": {
       "message": "Csak olvasás mód aktív: a Home Assistant nem ír a kazánba. A beállítások módosításához kapcsolja ki a „Csak olvasás (a távvezérlő irányít)” kapcsolót."
+    },
+    "programs_blocked": {
+      "message": "Távvezérlő irányít (CAR V2 / Super Amico): a Home Assistant programok szünetelnek. A használatukhoz kapcsolja ki a „Csak olvasás (a távvezérlő irányít)” kapcsolót."
     }
   }
 }

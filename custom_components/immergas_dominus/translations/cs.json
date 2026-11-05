@@ -654,6 +654,9 @@
   "exceptions": {
     "read_only": {
       "message": "Je zapnutý režim pouze pro čtení: Home Assistant nic nezapisuje do kotle. Pro změnu nastavení vypněte „Pouze čtení (řídí ovladač)“."
+    },
+    "programs_blocked": {
+      "message": "Řídí ovladač (CAR V2 / Super Amico): programy Home Assistant jsou pozastavené. Pro jejich použití vypněte „Pouze čtení (řídí ovladač)“."
     }
   }
 }

@@ -654,6 +654,9 @@
   "exceptions": {
     "read_only": {
       "message": "La modalità sola lettura è attiva: Home Assistant non scrive nulla in caldaia. Disattiva «Sola lettura (comanda il comando remoto)» per modificare le impostazioni."
+    },
+    "programs_blocked": {
+      "message": "Comanda un comando remoto (CAR V2 / Super Amico): i programmi di Home Assistant sono in pausa. Disattiva «Sola lettura (comanda il comando remoto)» per usarli."
     }
   }
 }

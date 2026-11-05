@@ -192,6 +192,21 @@
       "ot_flame": {
         "name": "Fiamma"
       },
+      "ot_service_request": {
+        "name": "Richiesta di assistenza"
+      },
+      "ot_low_water_pressure": {
+        "name": "Bassa pressione acqua"
+      },
+      "ot_flame_fault": {
+        "name": "Anomalia gas / fiamma"
+      },
+      "ot_air_pressure_fault": {
+        "name": "Anomalia pressione aria"
+      },
+      "ot_water_overtemp": {
+        "name": "Sovratemperatura acqua"
+      },
       "frost_risk": {
         "name": "Rischio gelo"
       },

@@ -192,6 +192,21 @@
       "ot_flame": {
         "name": "Flamme"
       },
+      "ot_service_request": {
+        "name": "Wartungsanforderung"
+      },
+      "ot_low_water_pressure": {
+        "name": "Niedriger Wasserdruck"
+      },
+      "ot_flame_fault": {
+        "name": "Gas- / Flammenstörung"
+      },
+      "ot_air_pressure_fault": {
+        "name": "Luftdruckstörung"
+      },
+      "ot_water_overtemp": {
+        "name": "Wasserübertemperatur"
+      },
       "frost_risk": {
         "name": "Frostgefahr"
       },

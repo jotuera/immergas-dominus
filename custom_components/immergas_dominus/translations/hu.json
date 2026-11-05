@@ -192,6 +192,21 @@
       "ot_flame": {
         "name": "Láng"
       },
+      "ot_service_request": {
+        "name": "Szervizkérés"
+      },
+      "ot_low_water_pressure": {
+        "name": "Alacsony víznyomás"
+      },
+      "ot_flame_fault": {
+        "name": "Gáz- / lánghiba"
+      },
+      "ot_air_pressure_fault": {
+        "name": "Légnyomáshiba"
+      },
+      "ot_water_overtemp": {
+        "name": "Víz túlmelegedés"
+      },
       "frost_risk": {
         "name": "Fagyveszély"
       },

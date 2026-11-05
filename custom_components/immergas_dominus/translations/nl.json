@@ -192,6 +192,21 @@
       "ot_flame": {
         "name": "Vlam"
       },
+      "ot_service_request": {
+        "name": "Serviceverzoek"
+      },
+      "ot_low_water_pressure": {
+        "name": "Lage waterdruk"
+      },
+      "ot_flame_fault": {
+        "name": "Gas- / vlamstoring"
+      },
+      "ot_air_pressure_fault": {
+        "name": "Luchtdrukstoring"
+      },
+      "ot_water_overtemp": {
+        "name": "Water oververhit"
+      },
       "frost_risk": {
         "name": "Vorstrisico"
       },

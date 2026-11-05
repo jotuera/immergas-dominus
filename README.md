@@ -129,7 +129,7 @@ strategy:
 
 ![Charts](docs/images/en/card-charts.png)
 
-**OpenTherm without the CAR V2 remote – the Dominus as the controller (1.6.0, pre-release).** When the Dominus is the only
+**OpenTherm without the CAR V2 remote – the Dominus as the controller (1.6.0, experimental: regulator writes not yet confirmed on a real boiler).** When the Dominus is the only
 controller of an OpenTherm boiler (CAR V2 removed, the room probe of the Dominus kit connected), the integration exposes
 the Dominus regulator and runs the CAR V2 programs in Home Assistant, because the module has no clock:
 
@@ -147,7 +147,7 @@ the Dominus regulator and runs the CAR V2 programs in Home Assistant, because th
 
 With a CAR V2 connected the remote stays in charge – leave these programs off.
 
-**OpenTherm diagnostics (1.6.1, pre-release).** To find out what a boiler really supports:
+**OpenTherm diagnostics (1.6.1).** To find out what a boiler really supports:
 **Scan Data-IDs** (button; reads every standard Data-ID once, about a minute, polling pauses meanwhile) → the
 **Supported Data-IDs** sensor lists what answered, what is unsupported and the raw values; **Last write** reads every
 written value back – *Taken*, or *Acknowledged, not taken* when the boiler acknowledges a write but keeps its own value;
@@ -261,6 +261,14 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 1.6.4
+
+- **Stable release of the 1.6 line.** Confirmed on real OpenTherm boilers (VICTRIX ZEUS, #2): the OpenTherm dashboard
+  and its automatic detection, the readings, the Data-ID scan. The Dominus regulator and the programs kept in Home
+  Assistant (1.6.0) stay experimental until a tester confirms the writes.
+- **OpenTherm fault flags** (Data-ID 5): low water pressure, gas / flame fault, air pressure fault, water
+  over-temperature, service request – e.g. a low-pressure alert on boilers that do not publish the pressure (#2).
 
 ### 1.6.3 (pre-release)
 

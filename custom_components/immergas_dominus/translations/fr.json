@@ -192,6 +192,21 @@
       "ot_flame": {
         "name": "Flamme"
       },
+      "ot_service_request": {
+        "name": "Demande d'entretien"
+      },
+      "ot_low_water_pressure": {
+        "name": "Pression d'eau basse"
+      },
+      "ot_flame_fault": {
+        "name": "Défaut gaz / flamme"
+      },
+      "ot_air_pressure_fault": {
+        "name": "Défaut pression d'air"
+      },
+      "ot_water_overtemp": {
+        "name": "Surchauffe de l'eau"
+      },
       "frost_risk": {
         "name": "Risque de gel"
       },

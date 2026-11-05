@@ -128,7 +128,7 @@ strategy:
 
 ![Wykresy](docs/images/card-charts.png)
 
-**OpenTherm bez pilota CAR V2 – Dominus jako regulator (1.6.0, pre-release).** Gdy Dominus jest jedynym sterownikiem kotła
+**OpenTherm bez pilota CAR V2 – Dominus jako regulator (1.6.0, eksperymentalne: zapisy regulatora niepotwierdzone jeszcze na kotle).** Gdy Dominus jest jedynym sterownikiem kotła
 OpenTherm (CAR V2 odłączony, podłączona sonda pokojowa z kompletu Dominusa), integracja wystawia regulator Dominusa i
 prowadzi w Home Assistant programy z CAR V2, bo moduł nie ma zegara:
 
@@ -146,7 +146,7 @@ prowadzi w Home Assistant programy z CAR V2, bo moduł nie ma zegara:
 
 Z podłączonym CAR V2 steruje pilot – te programy zostaw wyłączone.
 
-**Diagnostyka OpenTherm (1.6.1, pre-release).** Żeby sprawdzić, co kocioł naprawdę obsługuje: **Skanuj Data-ID** (przycisk;
+**Diagnostyka OpenTherm (1.6.1).** Żeby sprawdzić, co kocioł naprawdę obsługuje: **Skanuj Data-ID** (przycisk;
 odczytuje raz każdy standardowy Data-ID, ok. minuty, odpytywanie stoi w tym czasie) → czujnik **Obsługiwane Data-ID**
 pokazuje, co odpowiedziało, co jest nieobsługiwane i surowe wartości; **Ostatni zapis** odczytuje każdą zapisaną wartość
 z powrotem – *Przyjęty* albo *Potwierdzony, nieprzyjęty*, gdy kocioł potwierdza zapis, ale zostawia swoją wartość;
@@ -263,6 +263,14 @@ przyjmie sesję.
   sprawdzone krzyżowo, ale na innych modelach mogą wymagać weryfikacji przez TCP AUTH.
 
 ## Historia zmian
+
+### 1.6.4
+
+- **Stabilne wydanie linii 1.6.** Potwierdzone na kotłach OpenTherm (VICTRIX ZEUS, #2): dashboard OpenTherm i jego
+  automatyczne wykrywanie, odczyty, skaner Data-ID. Regulator Dominusa i programy w Home Assistant (1.6.0) zostają
+  eksperymentalne, dopóki tester nie potwierdzi zapisów.
+- **Flagi błędów OpenTherm** (Data-ID 5): niskie ciśnienie wody, błąd gazu / płomienia, błąd ciśnienia powietrza,
+  przegrzanie wody, żądanie serwisu – np. alarm niskiego ciśnienia na kotłach, które nie podają ciśnienia (#2).
 
 ### 1.6.3 (pre-release)
 

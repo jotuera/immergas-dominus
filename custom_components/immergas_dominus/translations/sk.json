@@ -192,6 +192,21 @@
       "ot_flame": {
         "name": "Plameň"
       },
+      "ot_service_request": {
+        "name": "Požiadavka servisu"
+      },
+      "ot_low_water_pressure": {
+        "name": "Nízky tlak vody"
+      },
+      "ot_flame_fault": {
+        "name": "Porucha plynu / plameňa"
+      },
+      "ot_air_pressure_fault": {
+        "name": "Porucha tlaku vzduchu"
+      },
+      "ot_water_overtemp": {
+        "name": "Prehriatie vody"
+      },
       "frost_risk": {
         "name": "Riziko zamrznutia"
       },

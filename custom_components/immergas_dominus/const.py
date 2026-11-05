@@ -703,6 +703,20 @@ OT_BINARY_DESCRIPTIONS: tuple[DominusOpenThermBinaryDescription, ...] = (
         key="ot_flame", data_id=0, byte="lb", mask=0x08,
         translation_key="ot_flame", icon="mdi:fire",
     ),
+) + tuple(
+    # 1.6.4: application-specific fault flags (Data-ID 5 high byte) - e.g. an alert on low water pressure when the
+    # boiler does not publish the pressure itself (Data-ID 18)
+    DominusOpenThermBinaryDescription(
+        key=key, data_id=5, byte="hb", mask=mask, translation_key=key,
+        device_class=BinarySensorDeviceClass.PROBLEM, entity_category=EntityCategory.DIAGNOSTIC, icon=icon,
+    )
+    for key, mask, icon in (
+        ("ot_service_request", 0x01, "mdi:wrench-clock"),
+        ("ot_low_water_pressure", 0x04, "mdi:gauge-low"),
+        ("ot_flame_fault", 0x08, "mdi:fire-alert"),
+        ("ot_air_pressure_fault", 0x10, "mdi:fan-alert"),
+        ("ot_water_overtemp", 0x20, "mdi:thermometer-alert"),
+    )
 )
 
 

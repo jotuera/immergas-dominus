@@ -280,6 +280,9 @@ the module accepts the session.
 - **OpenTherm: fan speed and setpoint** (Data-ID 35), **flame current** (Data-ID 36) and **fault history**
   (Data-ID 12/13: the number of entries, each code with its description in the attributes) – found on a VICTRIX ZEUS
   25 ErP. Disabled by default (not every boiler answers them): enable them in the device's *Diagnostic* entities.
+- **OpenTherm: Last write** no longer reports a false *Acknowledged, not taken*: a setpoint within 0.5 °C of the sent
+  value counts as taken (some boilers store 45.0 as 44.7), and a mismatch is read again up to 3× after 5 s, because
+  right after a write the module may still answer the previous value (attribute *rechecks*).
 
 ### 1.6.5
 

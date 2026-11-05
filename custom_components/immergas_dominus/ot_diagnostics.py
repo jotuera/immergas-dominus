@@ -186,5 +186,5 @@ class OtLastWriteSensor(_DiagEntity, SensorEntity):
             return None
         hexv = lambda v: None if v is None else f"0x{int(v):04X}"  # noqa: E731
         return {"data_id": last["key"], "sent": hexv(last["sent"]), "acknowledged": hexv(last["ack"]),
-                "read_back": hexv(last["readback"]),
+                "read_back": hexv(last["readback"]), "rechecks": last.get("rechecks", 0),
                 "at": datetime.fromtimestamp(last["at"], timezone.utc).isoformat()}

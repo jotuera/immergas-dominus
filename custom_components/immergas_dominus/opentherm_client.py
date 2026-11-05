@@ -56,6 +56,26 @@ _SUPPRESS_SECONDS = 3600.0
 _SCAN_IDS = tuple(range(0, 128))
 # Writes that are commands, not values - nothing to read back
 _NO_READBACK = (4,)
+# 1.6.6: f8.8 setpoints may be stored slightly differently from what was sent (a VICTRIX stores 45.0 as 44.7 and
+# 42.0 as 41.7), so they count as taken within half a degree
+_F88_WRITE_IDS = (1, 8, 14, 16, 23, 56, 57, 71)
+_F88_TOLERANCE = 0x80  # 0.5 in f8.8
+# 1.6.6: right after a write the module may still answer the previous value, so a mismatch is read again a few
+# seconds later (up to _RECHECKS times) before it is reported as "acknowledged, not taken"
+_RECHECK_DELAY = 5.0
+_RECHECKS = 3
+
+
+def _write_taken(data_id: int, index: int | None, sent: int, back: int) -> bool:
+    """Did the boiler take the written value? (``back`` = the value read back)."""
+    if index is not None:
+        return back == sent
+    if data_id == 0:
+        return (back >> 8) & 0x07 == (sent >> 8) & 0x07  # master enable bits
+    if data_id in _F88_WRITE_IDS:
+        s = lambda v: v - 0x10000 if v & 0x8000 else v  # noqa: E731 - signed f8.8
+        return abs(s(back & 0xFFFF) - s(sent & 0xFFFF)) <= _F88_TOLERANCE
+    return back == sent
 
 
 def ot_param_key(data_id: int, index: int) -> int:
@@ -122,7 +142,8 @@ class DominusOpenThermClient:
         self.scan_result: dict[int, str] = {}        # Data-ID -> "ok" / "unsupported" / "error"
         self.scan_values: dict[int, int] = {}
         self.scan_finished: float | None = None      # time.time() of the last finished scan
-        self.last_write: dict | None = None          # key, sent, ack, readback, result
+        self.last_write: dict | None = None          # key, sent, ack, readback, result, rechecks
+        self._recheck: tuple[int, float, int] | None = None  # (write key, monotonic due time, rechecks left)
 
     # -- lifecycle -------------------------------------------------------------
 
@@ -217,6 +238,11 @@ class DominusOpenThermClient:
                     self._stop.wait(_MESSAGE_GAP)
                     continue
 
+                if self._recheck is not None and time.monotonic() >= self._recheck[1]:
+                    self._recheck_step()
+                    self._stop.wait(_MESSAGE_GAP)
+                    continue
+
                 if self._scan_queue:
                     self._scan_step()
                     self._stop.wait(_MESSAGE_GAP)
@@ -251,7 +277,7 @@ class DominusOpenThermClient:
                     # full cycle done: free the module for the official app until the next one
                     self._close_socket()
                     idle_until = time.monotonic() + _IDLE_BETWEEN_CYCLES
-                    while time.monotonic() < idle_until and self._write_queue.empty():
+                    while time.monotonic() < idle_until and self._write_queue.empty() and not self._recheck_due():
                         if self._stop.wait(0.25):
                             break
                     continue
@@ -288,11 +314,7 @@ class DominusOpenThermClient:
             try:
                 back = self._exchange_key(request.data_id)
                 record["readback"] = back
-                if data_id == 0:
-                    ok = (back >> 8) & 0x07 == (sent >> 8) & 0x07  # master enable bits
-                else:
-                    ok = back == sent
-                record["result"] = "ok" if ok else "mismatch"
+                record["result"] = "ok" if _write_taken(data_id, index, sent, back) else "mismatch"
                 with self._lock:
                     self._values[request.data_id] = back
             except DominusOpenThermUnsupported:
@@ -300,10 +322,43 @@ class DominusOpenThermClient:
             except DominusProtocolError as err:
                 record["result"] = "error"
                 _LOGGER.debug("OpenTherm read-back of %s failed: %s", record["key"], err)
-        if record["result"] == "mismatch":
-            _LOGGER.info("OpenTherm write %s: sent %s, acknowledged %s, but reads back %s", record["key"], sent,
-                         request.ack, record["readback"])
+        record["rechecks"] = 0
         self.last_write = record
+        # a new write replaces the recheck of an older one
+        self._recheck = (request.data_id, time.monotonic() + _RECHECK_DELAY, _RECHECKS) if record["result"] == "mismatch" else None
+
+    def _recheck_due(self) -> bool:
+        return self._recheck is not None and time.monotonic() >= self._recheck[1]
+
+    def _recheck_step(self) -> None:
+        """Read a mismatched write again: the module may have answered the previous value right after the write."""
+        key, _due, left = self._recheck
+        self._recheck = None
+        record = self.last_write
+        if record is None:
+            return
+        data_id, index = _split_key(key)
+        try:
+            back = self._exchange_key(key)
+        except DominusOpenThermUnsupported:
+            return
+        except DominusProtocolError as err:
+            _LOGGER.debug("OpenTherm recheck of %s failed: %s", record["key"], err)
+            back = None
+        if back is not None:
+            with self._lock:
+                self._values[key] = back
+            record["readback"] = back
+            record["rechecks"] = record.get("rechecks", 0) + 1
+            if _write_taken(data_id, index, record["sent"], back):
+                record["result"] = "ok"
+                _LOGGER.debug("OpenTherm write %s taken on recheck %s", record["key"], record["rechecks"])
+                return
+        if left > 1:
+            self._recheck = (key, time.monotonic() + _RECHECK_DELAY, left - 1)
+        else:
+            _LOGGER.info("OpenTherm write %s: sent %s, acknowledged %s, but reads back %s", record["key"],
+                         record["sent"], record["ack"], record["readback"])
 
     def _next_write(self) -> _WriteRequest | None:
         try:

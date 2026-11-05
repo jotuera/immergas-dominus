@@ -200,20 +200,19 @@ pokój `2011`, zadana `2015`, zewnętrzna `3002`, zasobnik CWU `3016`, tryb `200
   dotknięcie −/+ zaczyna od tej sugestii. Każda funkcja (pasek, krzywa, podpowiedź) włącza się dopiero, gdy wszystkie
   jej wartości są ustawione.
 
-## Baza wiedzy: rejestry po TCP
+## Baza wiedzy
 
-Które rejestry kotła (PDU) moduł Dominus udostępnia po lokalnym TCP – ramka, wartości, strefy, programy czasowe,
-czego nie da się odczytać, Data-ID OpenTherm: [docs/pdu-map.pl.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/pdu-map.pl.md).
+Moduł Dominus mówi po lokalnym porcie TCP 2000 jednym z dwóch protokołów, zależnie od konfiguracji kotła:
 
-**Pomóż zmapować swój kocioł (1.6.6).** Urządzenie Dominus ma **skaner PDU** w sekcjach *Diagnostyka* /
-*Konfiguracja*: ustaw **Skan PDU od** / **Skan PDU do** (do 2000 PDU, np. 2000–2999 albo 3000–3999) i **Model kotła**
-(jak na tabliczce znamionowej), naciśnij **Skanuj PDU** (ok. sekundy na PDU, zwykłe odpytywanie działa dalej; ponowne
-naciśnięcie zatrzymuje skan). Czujnik **Skan PDU** pokazuje wartości niezerowe, zera i PDU bez odpowiedzi. **Zgłoś mapę
-PDU** tworzy powiadomienie z linkiem do **gotowego zgłoszenia na GitHubie** (model kotła, wersja integracji, mapa – bez
-adresu, MAC i hasła). Nic nie jest wysyłane automatycznie: sprawdź zgłoszenie na GitHubie i naciśnij *Create*. PDU,
-którego kocioł nie udostępnia, zwykle zwraca 0, dlatego zera są wypisane osobno. Najcenniejsze są skany innych modeli.
-W trybie **OpenTherm** działa to tak samo: **Skanuj Data-ID** → **Zgłoś mapę Data-ID** (model kotła w tym samym polu
-**Model kotła**).
+| Protokół | Kotły | Co jest opisane |
+|---|---|---|
+| **Modbus** (główny) | Magis Combo / Pro-Combo V2, Magis Pro i inne konfiguracje `*_MBUS_*` | [docs/pdu-map.pl.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/pdu-map.pl.md) – ramka, każde PDU z encją (urządzenie główne, strefy, programy czasowe), PDU znalezione, ale jeszcze nierozpoznane, czego nie da się odczytać po TCP |
+| **OpenTherm** | VICTRIX ZEUS / AVIO, STAR … | [docs/opentherm.pl.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.pl.md) – ramka, każdy Data-ID z encją i odpowiedziami testowanych kotłów, specyfika Immergas, źródła |
+
+**Pomóż zmapować swój kocioł (1.6.6).** **Skanuj PDU** (Modbus) albo **Skanuj Data-ID** (OpenTherm), wpisz **Model
+kotła** i naciśnij **Zgłoś mapę PDU** / **Zgłoś mapę Data-ID**: powiadomienie zawiera link do **gotowego zgłoszenia na
+GitHubie** (model, wersja integracji, mapa – bez adresu, MAC i hasła). Nic nie jest wysyłane automatycznie. Najcenniejsze
+są skany innych modeli – każdy dokłada kolumnę do tabel powyżej.
 
 ## Obsługiwane modele
 
@@ -274,7 +273,34 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.9
+
+- **Dashboard OpenTherm** (karty 0.54.0): nowa karta **Kocioł OpenTherm** (moc, min. modulacja, zakresy CO / CWU, typ
+  CWU, spaliny, wentylator, starty palnika, flagi i historia błędów, reset kotła, przełącznik tylko do odczytu) i karta
+  **Mapa Data-ID** (skan, parametry kotła, zgłoszenie); przy *Tylko odczyt* kontrolki pokazują kłódkę zamiast zapisywać;
+  wynik ostatniego zapisu pod nastawami; kafelki ciśnienia / przepływu CWU znikają, gdy kocioł ich nie podaje; spaliny na
+  wykresie kotła, wykres modulacji palnika i godziny pracy palnika na dobę.
+- **OpenTherm: starty palnika dziś / w ostatniej godzinie i czas pracy palnika dziś** (liczone z płomienia co cykl
+  odczytu – bardzo krótkie zapłony mogą umknąć) oraz **opis błędu kotła** (kod z Data-ID 5, np. E31).
+- Dokumentacja: baza wiedzy w `docs/` – Modbus po TCP (każde PDU z encją) i OpenTherm (tabela Data-ID przeniesiona z
+  README).
+
+### 1.6.8
+
+- **OpenTherm: Tylko odczyt (steruje pilot)** – przełącznik blokujący każdy zapis z Home Assistant (kontrolki, programy,
+  reset); odczyty i wyświetlane nastawy zostają. Dla kotła sterowanego CAR V2 / Super Amico: wartość raz zapisana z HA
+  Dominus zapamiętuje i nadpisuje nią pilota aż do odłączenia zasilania modułu (#2).
+
+### 1.6.7
+
+- **OpenTherm: Skanuj Data-ID czyta też własne parametry kotła** (TSP, Data-ID 10 / 11 – 42 w VICTRIX ZEUS 25 ErP) i
+  **historię błędów** (Data-ID 12 / 13), gdy kocioł je podaje: atrybuty *boiler_parameters* / *fault_history* czujnika
+  *Obsługiwane Data-ID* i w **Zgłoś mapę Data-ID**.
+
 ### 1.6.6
+
+- **OpenTherm: obroty wentylatora** (Data-ID 35), **prąd płomienia** (36) i **historia błędów** (12 / 13), domyślnie
+  wyłączone; **Ostatni zapis** bez fałszywego *Potwierdzony, nieprzyjęty* (tolerancja 0,5 °C i ponowny odczyt).
 
 - **Skaner PDU** (tryb Modbus): skan zakresu PDU przez TCP Dominusa, mapa w czujniku i **Zgłoś mapę PDU** – link do
   gotowego zgłoszenia na GitHubie z modelem kotła (nic nie jest wysyłane automatycznie).

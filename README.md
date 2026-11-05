@@ -158,38 +158,8 @@ written value back – *Taken*, or *Acknowledged, not taken* when the boiler ack
 reported to unlock writes to Data-ID 1 / 57 on Immergas boilers (experimental, default standard 0x00). Data-IDs the
 boiler answers as unsupported three times in a row are skipped for an hour.
 
-**OpenTherm Data-IDs.** What the integration reads (R) and writes (W), and what the boilers in
-[#2](https://github.com/jotuera/immergas-dominus/issues/2) answered in the Data-ID scan (✅ answers, ❌ no reply,
-– not checked). Entities marked *off* are disabled by default – enable them when your boiler answers that Data-ID
-(a Data-ID without a reply costs a timeout every polling cycle).
-
-| Data-ID | Entity | R/W | VICTRIX ZEUS 25 ErP<br>(old Dominus Wi-Fi) | Victrix Zeus Superior 26 2 ErP<br>(Dominus V2) |
-|---|---|---|---|---|
-| 0 | Fault, CH active, DHW active, Flame; Operating mode; Burner starts today / last hour, Burner hours today (computed from the flame) | R/W | ✅ ¹ | ✅ |
-| 3 | – (slave config: DHW present / storage tank, member ID 27 = Immergas) | scan | ✅ | ✅ |
-| 4 | Boiler reset (button) | W | – | – |
-| 5 | Fault code, Boiler fault description; Service request, Low water pressure, Gas / flame fault, Air pressure fault, Water over-temperature | R | ✅ | ✅ |
-| 10 / 11 | – (the boiler's own parameters, TSP: read by **Scan Data-IDs**, attribute *boiler_parameters*) | scan | ✅ (42) | ❌ |
-| 12 / 13 | Fault history (*off*) – number of entries, each code in the attributes; also read by the scan | R | ✅ (5) | ❌ / ✅ |
-| 15 | Boiler max. capacity, Min. modulation | R | ✅ (0 / 0) | ✅ |
-| 16 | Room setpoint | R/W | ✅ | ✅ |
-| 17 | Modulation level | R | ✅ | ✅ |
-| 18 | CH water pressure | R | ❌ | ❌ |
-| 19 | DHW flow rate | R | ❌ | ✅ (always 0) |
-| 24 | Room temperature | R | ✅ | ❌ |
-| 25 / 28 | Flow / return temperature | R | ✅ | ✅ |
-| 26 | DHW temperature | R | ✅ | ✅ |
-| 27 | Outdoor temperature | R | ✅ | ✅ |
-| 33 | Exhaust temperature | R | ✅ | ✅ |
-| 35 | Fan speed, Fan speed setpoint (*off*) | R | ✅ | ❌ |
-| 36 | Flame current (*off*) | R | ✅ (not available) | ❌ |
-| 48 / 49 | – (DHW / CH setpoint limits: the sliders follow them) | R | ✅ | ✅ |
-| 56 | DHW setpoint | R/W | ✅ | ✅ |
-| 57 | Max. CH setpoint | R | ✅ | ✅ |
-| 89 / n | Dominus module parameters: CH setpoint (17), curve (4), offset (5), outdoor sensor (6), modulation (7), hysteresis (8), room sensor (9), inertia (10), probe use (11), frost (14 / 15), min. CH (16) | R/W | ✅ | ✅ |
-
-¹ No reply in the scan (a one-off timeout), but the status entities work. Answered as well, not used yet: 6, 7, 20 (boiler clock), 29, 30, 32 (Superior), 77, 85, 88 (ventilation IDs, both / ZEUS).
-A scan of your boiler → **Report Data-ID map** adds a column here.
+**OpenTherm Data-IDs** – what the integration reads and writes and what the tested boilers answer, plus the Immergas
+specifics (the remote in charge, E31, the 0xCA fix): [docs/opentherm.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.md).
 
 **OpenTherm boilers (VICTRIX ZEUS / AVIO, STAR …).** In the OpenTherm mode the same `custom:immergas-dominus`
 strategy shows the **same cards** without those that have no OpenTherm data (schedules, heating curve, calibration /
@@ -234,20 +204,19 @@ room `2011`, target `2015`, outdoor `3002`, DHW cylinder `3016`, mode `2000`); n
   the boiler menu: an empty one is shown greyed with "not set – enter it from the boiler" and a suggested value; the
   first −/+ tap starts from that suggestion. Each feature (bar, curve, hint) turns on only when all its values are set.
 
-## Knowledge base: registers over TCP
+## Knowledge base
 
-Which boiler registers (PDUs) the Dominus module answers over local TCP – frame, values, zones, time programs, what
-is not readable, OpenTherm Data-IDs: [docs/pdu-map.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/pdu-map.md).
+The Dominus module speaks one of two protocols over its local TCP port 2000, depending on the boiler's configuration:
 
-**Help map your boiler (1.6.6).** The Dominus device has a **PDU scanner** in *Diagnostic* / *Configuration*:
-set **PDU scan from** / **PDU scan to** (up to 2000 PDUs, e.g. 2000–2999 or 3000–3999) and the **Boiler model** (as on
-the rating plate), press **Scan PDUs** (about a second per PDU, the normal polling continues; press again to stop).
-The **PDU scan** sensor shows the non-zero values, the zeros and the PDUs without a reply. **Report PDU map** then
-creates a notification with a link to a **pre-filled GitHub issue** (boiler model, integration version, the map –
-no host, MAC or password). Nothing is sent automatically: check the issue on GitHub and press *Create*. A PDU the
-boiler does not provide usually reads 0, so the zeros are listed separately. Scans of other boiler models are the
-most useful. In the **OpenTherm** mode the same works with **Scan Data-IDs** → **Report Data-ID map** (the boiler model
-in the same **Boiler model** field).
+| Protocol | Boilers | What is documented |
+|---|---|---|
+| **Modbus** (main) | Magis Combo / Pro-Combo V2, Magis Pro and other `*_MBUS_*` configurations | [docs/pdu-map.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/pdu-map.md) – frame, every PDU with its entity (main device, zones, time programs), PDUs found but not yet understood, what is not readable over TCP |
+| **OpenTherm** | VICTRIX ZEUS / AVIO, STAR … | [docs/opentherm.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.md) – frame, every Data-ID with its entity and what the tested boilers answer, Immergas specifics, sources |
+
+**Help map your boiler (1.6.6).** **Scan PDUs** (Modbus) or **Scan Data-IDs** (OpenTherm), fill in the **Boiler model**
+and press **Report PDU map** / **Report Data-ID map**: a notification links to a **pre-filled GitHub issue** (model,
+integration version, the map – no host, MAC or password). Nothing is sent automatically. Scans of other boiler models
+are the most useful – each one adds a column to the tables above.
 
 ## Supported models
 
@@ -317,6 +286,8 @@ the module accepts the session.
   exhaust on the boiler chart, a burner modulation chart and burner hours per day.
 - **OpenTherm: burner starts today / in the last hour and burner hours today** (counted from the flame flag every
   polling cycle – very short burns may be missed) and the **boiler fault description** (Data-ID 5 code, e.g. E31).
+- Documentation: a knowledge base in `docs/` – Modbus over TCP (every PDU with its entity) and OpenTherm (the Data-ID
+  table moved out of the README).
 
 ### 1.6.8
 

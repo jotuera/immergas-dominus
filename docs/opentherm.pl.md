@@ -1,0 +1,90 @@
+# OpenTherm po TCP – kotły Immergas bez Modbusa
+
+[English](opentherm.md) · **Polski** · [Modbus](pdu-map.pl.md) · powrót do [README](../README.pl.md)
+
+Kotły, których moduł Dominus nie ma konfiguracji Modbus – **VICTRIX ZEUS / AVIO, STAR …** – rozmawiają z modułem przez
+OpenTherm (Immergas nazywa swoją odmianę *IMG Bus*). Integracja dociera do nich przez ten sam lokalny port TCP 2000
+(*Protokół: OpenTherm* przy konfiguracji). Przetestowane w [#2](https://github.com/jotuera/immergas-dominus/issues/2)
+na VICTRIX ZEUS 25 ErP (stary Dominus Wi-Fi) i Victrix Zeus Superior 26 2 ErP (Dominus V2).
+
+## Ramka i odpytywanie
+
+6 bajtów: `[typ, Data-ID, wartość hi, wartość lo, CRC, CRC]` – standardowe OpenTherm READ-DATA / WRITE-DATA
+z 16-bitową wartością (temperatury f8.8, czyli /256). Data-ID *indeksowany* (89 parametry modułu, 11 parametry kotła,
+13 historia błędów) wysyła indeks w starszym bajcie i dostaje wartość w młodszym. Integracja trzyma jedną sesję, czyta
+po kolei Data-ID włączonych encji, a potem na ~20 s zwalnia moduł, żeby mogła się połączyć oficjalna apka. Data-ID,
+na który kocioł trzy razy z rzędu odpowie „nieobsługiwany”, jest pomijany przez godzinę; taki **bez odpowiedzi**
+kosztuje timeout w każdym cyklu – trzymaj jego encje wyłączone.
+
+## Data-ID
+
+Co integracja czyta (R) i zapisuje (W) oraz co odpowiedziały kotły z #2 w skanie Data-ID (✅ odpowiada, ❌ brak
+odpowiedzi, – nie sprawdzano). Encje oznaczone *off* są domyślnie wyłączone – włącz je, jeśli Twój kocioł odpowiada
+na dany Data-ID.
+
+| Data-ID | Encja | R/W | VICTRIX ZEUS 25 ErP<br>(stary Dominus Wi-Fi) | Victrix Zeus Superior 26 2 ErP<br>(Dominus V2) |
+|---|---|---|---|---|
+| 0 | Błąd, Ogrzewanie CO, CWU, Płomień; Tryb; Starty palnika dziś / ostatnia godzina, Czas pracy palnika dziś (liczone z płomienia) | R/W | ✅ ¹ | ✅ |
+| 3 | – (konfiguracja kotła: CWU jest / zasobnik, member ID 27 = Immergas) | skan | ✅ | ✅ |
+| 4 | Reset kotła (przycisk) | W | – | – |
+| 5 | Kod błędu, Opis błędu kotła; Żądanie serwisu, Niskie ciśnienie wody, Błąd gazu / płomienia, Błąd ciśnienia powietrza, Przegrzanie wody | R | ✅ | ✅ |
+| 10 / 11 | – (własne parametry kotła, TSP: czyta je **Skanuj Data-ID**, atrybut *boiler_parameters*) | skan | ✅ (42) | ❌ |
+| 12 / 13 | Historia błędów (*off*) – liczba wpisów, każdy kod w atrybutach; czyta ją też skan | R | ✅ (5) | ❌ / ✅ |
+| 15 | Moc maks. kotła, Modulacja min. kotła | R | ✅ (0 / 0) | ✅ |
+| 16 | Zadana temperatura pokoju | R/W | ✅ | ✅ |
+| 17 | Poziom modulacji | R | ✅ | ✅ |
+| 18 | Ciśnienie wody CO | R | ❌ | ❌ |
+| 19 | Przepływ CWU | R | ❌ | ✅ (zawsze 0) |
+| 24 | Temperatura pokoju | R | ✅ | ❌ |
+| 25 / 28 | Temperatura zasilania / powrotu | R | ✅ | ✅ |
+| 26 | Temperatura CWU | R | ✅ | ✅ |
+| 27 | Temperatura zewnętrzna | R | ✅ | ✅ |
+| 33 | Temperatura spalin | R | ✅ | ✅ |
+| 35 | Obroty wentylatora, Zadane obroty wentylatora (*off*) | R | ✅ | ❌ |
+| 36 | Prąd jonizacji płomienia (*off*) | R | ✅ (niedostępny) | ❌ |
+| 48 / 49 | – (limity nastaw CWU / CO: suwaki się do nich dostosowują) | R | ✅ | ✅ |
+| 56 | Zadana CWU | R/W | ✅ | ✅ |
+| 57 | Maks. zadana CO | R | ✅ | ✅ |
+| 89 / n | Parametry modułu Dominus: Zadana CO (17), Krzywa grzewcza (4), Offset temperatury CO (5), Sonda zewnętrzna (6), Modulacja (7), Histereza pokojowa (8), Czujnik pokojowy (9), Bezwładność budynku (10), Sonda Dominusa mierzy (11), Ochrona przed zamarzaniem i jej temperatura (14 / 15), Minimalna temperatura CO (16) | R/W | ✅ | ✅ |
+
+¹ Brak odpowiedzi w skanie (jednorazowy timeout), ale encje statusu działają. Odpowiadają też, jeszcze nieużywane: 6,
+7, 20 (zegar kotła), 29, 30, 32 (Superior), 77, 85, 88 (ID wentylacji, oba / ZEUS). Skan Twojego kotła → **Zgłoś mapę
+Data-ID** dodaje tu kolumnę.
+
+## Specyfika Immergas
+
+- **Steruje pilot.** Z podłączonym **CAR V2** (na zaciskach Dominusa) albo **Super Amico** (na kotle) ogrzewaniem
+  kieruje pilot. Wartość raz zapisana z Home Assistant (np. nastawa CWU) jest **zapamiętywana przez Dominusa** i wysyłana
+  do kotła ponad nastawą pilota, aż do odłączenia zasilania modułu (#2). Włącz **Tylko odczyt (steruje pilot)** (1.6.8):
+  Home Assistant odrzuca wtedy każdy zapis, a odczyty zostają.
+- **E31** „utrata komunikacji z pilotem” – kocioł oczekuje pilota, z którym był sparowany; dopóki E31 jest aktywny,
+  ignoruje polecenia CO / CWU / trybu zarówno z apki, jak i z Home Assistant.
+- **Młodszy bajt 0xCA w Data-ID 0** – „poprawka Immergas” innych bramek OpenTherm (OTGateway, użytkownicy ESPHome): bez
+  niej zapisy do Data-ID 1 / 57 są potwierdzane, ale nic nie zmieniają. Opcja **Bajt LB ramki statusu** (eksperymentalna,
+  domyślnie standard 0x00).
+- **Nastawa CO** jest zapisywana jako parametr modułu 17 (Data-ID 89), tak jak robi to oficjalna apka; Data-ID 1 to
+  zadana sterująca, którą moduł przelicza sam.
+- **Zapisane wartości różnią się nieco** od wysłanych (VICTRIX zapisuje 45,0 °C jako 44,7): *Ostatni zapis* uznaje
+  nastawę w granicy 0,5 °C za przyjętą i niezgodność czyta ponownie po kilku sekundach (1.6.6).
+- **Parametry kotła (TSP, Data-ID 10 / 11)** to wartości z menu kotła; Immergas nie publikuje ich znaczenia. Firmware
+  OTGW przed każdą zmianą maks. modulacji zapisuje w Immergasie TSP 12, więc 12 to najpewniej maks. moc CO (P2).
+  Zgłoszenie z wartościami menu P / t / A / F Twojego kotła obok skanu pomaga je dopasować.
+- **Historia błędów** (Data-ID 12 / 13) = „pięć ostatnich anomalii” kotła (menu d0.8), kody jak w instrukcji kotła (np.
+  E89 niestabilny sygnał spalania).
+
+## Diagnostyka
+
+**Skanuj Data-ID** (przycisk, ok. minuty, odpytywanie pauzuje) → **Obsługiwane Data-ID** pokazuje, co odpowiedziało,
+co jest nieobsługiwane, surowe wartości oraz parametry kotła i historię błędów. **Ostatni zapis** odczytuje każdy zapis
+z powrotem (*Przyjęty* / *Potwierdzony, nieprzyjęty*). **Zgłoś mapę Data-ID** tworzy powiadomienie z linkiem do gotowego
+zgłoszenia na GitHubie (model kotła, wersja integracji, skan – bez hosta, MAC i hasła); nic nie jest wysyłane
+automatycznie.
+
+## Źródła
+
+- Instrukcja instalatora VICTRIX ZEUS 25 (kody błędów, menu informacyjne, parametry P / t / A / F).
+- [Zgodność OTGateway](https://github.com/Laxilef/OTGateway/wiki/Compatibility) – poprawka Immergas, brak przepływu CWU
+  w Victrix.
+- [Wątek arduino.ru o termostacie OpenTherm](https://arduino.ru/forum/programmirovanie/termostat-opentherm-na-esp8266?page=15#comment-649392)
+  – młodszy bajt 0xCA i sekwencja zapisów Immergas.
+- [Firmware OTGW](https://github.com/rvdbreemen/OTGW-firmware) – `TP=11:12` dla Immergas.

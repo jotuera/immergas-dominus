@@ -1,54 +1,69 @@
-# What the Dominus module exposes over local TCP
+# Modbus over TCP – what the Dominus module exposes
 
-**English** · [Polski](pdu-map.pl.md) · back to the [README](../README.md)
+**English** · [Polski](pdu-map.pl.md) · [OpenTherm](opentherm.md) · back to the [README](../README.md)
+
+Boilers whose Dominus module uses a Modbus configuration (`*_MBUS_*`, e.g. **`WFC01_IM_MBUS_MPROCOMBOV2`**: Magis
+Combo / Pro-Combo V2, Magis Pro) – the **main protocol** of the integration (*Protocol: Modbus* in the setup).
 
 The Dominus Wi-Fi module answers on local TCP port **2000** after an authenticated session (module MAC + password).
-It reads and writes the boiler through its own bus connection, but only the registers (PDUs) that the official
-Dominus app uses. A PDU that is not on the list below usually answers 0 or nothing over TCP, even if it exists on the
-boiler bus.
+It reads and writes the boiler through its own bus connection (D+/D-), but only the registers (PDUs) that the
+official Dominus app uses. A PDU that is not on the list below usually answers 0 or nothing over TCP, even if it
+exists on the boiler bus. The module serves one TCP client at a time: Home Assistant polls about every 45 s, only the
+PDUs of enabled entities, and the official app can still connect in between.
 
-## Frame (Modbus boilers: Magis Combo / Pro and other `*_MBUS_*` configurations)
+## Frame
 
 7 bytes: `[type, PDU hi, PDU lo, value hi, value lo, CRC, CRC]`, 16-bit PDU address, 16-bit signed value. Reads and
-writes use different `type` codes; a write is answered with the value the boiler accepted (ACK).
+writes use different `type` codes; a write is answered with the value the boiler accepted (ACK), and the integration
+shows that value, not the requested one. Temperatures are °C × 10.
 
 ## Main device
 
-| PDU | Meaning | Access | Value |
-|---|---|---|---|
-| 2000 | Operating mode | read / write | 0 Standby, 1 Summer, 2 Cooling, 3 Winter |
-| 2001 | Boiler status flags | read | low byte bit 0 = DHW request (set ~9 min before a DHW cycle) |
-| 2095 | DHW setpoint | read / write | °C × 10 |
-| 2100 | Fault code | read | 0 = no fault, otherwise E&lt;code&gt; |
-| 2101 | Fault flags | read | low byte bit 1 = reset available |
-| 3002 | Outdoor temperature | read | °C × 10; 255 = no outdoor probe |
-| 3016 | DHW cylinder temperature | read | °C × 10 |
-| 4199 | Number of zones | read | 1–3 |
+| PDU | Meaning | R/W | Value | Entity |
+|---|---|---|---|---|
+| 2000 | Operating mode | R/W | 0 Standby, 1 Summer, 2 Cooling, 3 Winter | Operation mode (select), mode of the thermostats |
+| 2001 | Boiler status flags | R | low byte bit 0 = DHW request (set ~9 min before a DHW cycle) | DHW request |
+| 2095 | DHW setpoint | R/W | °C × 10 | DHW target, DHW (thermostat) |
+| 2100 | Fault code | R | 0 = no fault, otherwise E&lt;code&gt; | Boiler fault code, Boiler fault description, Boiler fault |
+| 2101 | Fault flags | R | low byte bit 1 = reset available | Reset available |
+| 3002 | Outdoor temperature | R | °C × 10; 255 = no outdoor probe | Outdoor temperature |
+| 3016 | DHW cylinder temperature | R | °C × 10 | DHW tank temperature, DHW (thermostat) |
+| 4199 | Number of zones | R | 1–3 | Number of zones |
 
 ## Zones (zone 2 = +10, zone 3 = +20)
 
-| PDU (zone 1) | Meaning | Access | Value |
-|---|---|---|---|
-| 2010 | Zone status | read | bit 2 manual, bit 3 heating demand, bit 6 Comfort phase, bit 7 Eco phase |
-| 2011 | Room temperature | read | °C × 10; 32767 = no room sensor. The module does not measure it: it comes from a zone panel on D+/D- (physical, or emulated by the hub). There is no panel firmware register over TCP, so a physical and an emulated panel look the same. An on/off room thermostat gives only the heating demand (not tested). |
-| 2015 | Room setpoint (target) | read / write | °C × 10 |
-| 2017 | Heating curve offset (U03) | read / write | °C × 10 (zones 2/3 inferred from the +10 pattern) |
-| 2210 / 2211 | Comfort / Eco heating | read / write | °C × 10 |
-| 2214 / 2215 | Comfort / Eco cooling | read / write | °C × 10 |
-| 2216 | Humidity setpoint | read / write | % |
-| 2217 | Flow setpoint | read / write | °C × 10 |
+| PDU (zone 1) | Meaning | R/W | Value | Entity |
+|---|---|---|---|---|
+| 2010 | Zone status | R | bit 2 manual, bit 3 heating demand, bit 6 Comfort phase, bit 7 Eco phase | Zone 1 status, Zone 1 heating demand, Zone 1 program phase |
+| 2011 | Room temperature | R | °C × 10; 32767 = no room sensor | Zone 1 room temperature, Zone 1 thermostat |
+| 2015 | Room setpoint (target) | R/W | °C × 10 | Zone 1 heating target, Zone 1 thermostat |
+| 2017 | Heating curve offset (U03) | R/W | °C × 10 (zones 2/3 inferred from the +10 pattern) | Zone 1 heating curve offset |
+| 2210 / 2211 | Comfort / Eco heating | R/W | °C × 10 | Zone 1 comfort heat / eco heat, thermostat presets |
+| 2214 / 2215 | Comfort / Eco cooling | R/W | °C × 10 | Zone 1 comfort cool / eco cool |
+| 2216 | Humidity setpoint | R/W | % | Zone 1 humidity target |
+| 2217 | Flow setpoint | R/W | °C × 10 | Zone 1 flow target |
+
+**Room temperature (2011)** is not measured by the module: it comes from a zone panel on D+/D- (physical, or emulated
+by the hub). There is no panel firmware register over TCP, so a physical and an emulated panel look the same. An
+on/off room thermostat gives only the heating demand (not tested).
 
 ## Time programs
 
-| PDU | Meaning | Value |
-|---|---|---|
-| 2310–2347 | Calendars 1–4, each with 4 ranges (start / end) | calendar P base = 2300 + P × 10, range F start = base + (F−1) × 2, end = start + 1; high byte = hour, low byte = minute |
-| 2410–2416 | Zone 1: calendar of Monday–Sunday | low byte = 1–4 |
-| 2420–2426 / 2430–2436 | Zone 2 / zone 3 | as above |
-| 2490–2496 | DHW: calendar of Monday–Sunday | as above (the calendars are shared) |
+| PDU | Meaning | Value | Entity |
+|---|---|---|---|
+| 2310–2347 | Calendars 1–4, each with 4 ranges (start / end) | calendar P base = 2300 + P × 10, range F start = base + (F−1) × 2, end = start + 1; high byte = hour, low byte = minute | Calendar P range F start / end (time, disabled by default) |
+| 2410–2416 | Zone 1: calendar of Monday–Sunday | low byte = 1–4 | Zone 1 — Monday … Sunday, Zone 1 — same profile for all days |
+| 2420–2426 / 2430–2436 | Zone 2 / zone 3 | as above | – |
+| 2490–2496 | DHW: calendar of Monday–Sunday | as above (the calendars are shared) | used by DHW Comfort-Eco by schedule |
 
 The boiler keeps one DHW setpoint; its DHW schedule only allows or blocks heating. *DHW Comfort-Eco by schedule* in
 the integration switches PDU 2095 between the two values itself.
+
+## Answered, meaning unknown
+
+Found by the **PDU scanner** on a Magis Pro-Combo V2 (range 2000–2016): **2012 = 570** and **2016 = 300**. 2012 is also
+written by the boiler on the D+/D- bus (570). If you know what they mean, or your boiler answers other PDUs, use
+**Report PDU map** (below).
 
 ## Not readable over TCP
 
@@ -58,12 +73,19 @@ AUTO / MANUAL time-program switch, and everything on the T-/T+ (BMS) and F1/F2 (
 COP, refrigerant circuit. For those see the
 [IMMERGAS Modbus BMS NASA Hub](https://github.com/jotuera/immergas-modbus-bms-nasa-hub).
 
-## OpenTherm boilers (experimental)
+What the boiler has no PDU for, the integration keeps **in Home Assistant**: statistics, vacation, automatic Summer /
+Winter, alerts and the declared boiler parameters (heating curve R02–R13, T02, T05, I01–I10, A31, P07, anti-legionella
+P13–P17) – see *Statistics and automations* in the README.
 
-Boilers without the Modbus configuration (VICTRIX ZEUS / AVIO, STAR…) use a 6-byte OpenTherm frame
-`[type, Data-ID, hi, lo, CRC, CRC]`. The integration reads Data-ID 0 (status: fault, CH, DHW, flame), 1 (CH setpoint),
-5 (fault code), 17 (modulation), 18 (CH pressure), 19 (DHW flow), 25 / 28 (flow / return), 26 (DHW), 27 (outdoor),
-56 (DHW setpoint) and 57 (max CH); it writes Data-ID 0 (mode), 4 (reset), 16 (room setpoint), 56 (DHW setpoint) and the module parameters (Data-ID 89, the CH setpoint = parameter 17). Values the boiler does not support stay empty.
+## Map your boiler
 
-The full, maintained list of Data-IDs (entities, read / write, what each tested boiler answers) is the
-[OpenTherm Data-IDs table in the README](https://github.com/jotuera/immergas-dominus#readme).
+The Dominus device has a **PDU scanner** (1.6.6) in *Diagnostic* / *Configuration*: set **PDU scan from** / **PDU scan
+to** (up to 2000 PDUs, e.g. 2000–2999) and the **Boiler model** (rating plate), press **Scan PDUs** (about a second per
+PDU, the normal polling continues; press again to stop). **Report PDU map** creates a notification with a link to a
+**pre-filled GitHub issue** (model, integration version, the map – no host, MAC or password). Nothing is sent
+automatically. A PDU the boiler does not provide usually reads 0, so the zeros are listed separately.
+
+## OpenTherm boilers
+
+Boilers without the Modbus configuration (VICTRIX ZEUS / AVIO, STAR …) use OpenTherm through the same module:
+see [OpenTherm over TCP](opentherm.md).

@@ -38,6 +38,7 @@ from homeassistant.components.number import NumberDeviceClass, NumberMode, Resto
 from homeassistant.components.select import SelectEntity
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
 from homeassistant.components.switch import SwitchEntity
+from homeassistant.components.text import TextEntity
 from homeassistant.components.time import TimeEntity
 from homeassistant.const import EntityCategory, UnitOfTemperature
 from homeassistant.core import CALLBACK_TYPE, HomeAssistant, callback
@@ -118,6 +119,13 @@ class OtPrograms:
         self.maintenance = "off"
         self.last_service: datetime | None = None
         self.flow_base: int | None = None    # CH setpoint before "Eco = lower flow" lowered it (restored)
+        # 1.6.9: room thermostat - none / physical (on/off contacts 40-41 of the boiler, not reported over OpenTherm) /
+        # emulated: Home Assistant sends the temperature of an HA entity to the module as the room temperature
+        self.thermostat = "none"
+        self.room_source = ""
+        self.room_sent: float | None = None
+        self.room_sent_at: datetime | None = None
+        self._room_mono = 0.0
         self._learn: list[float] = []         # room - setpoint in the Comfort phase today (self-learning)
         self._learn_day: str | None = None
         self.numbers = {k: v[0] for k, v in NUMBER_SPECS.items()}
@@ -312,6 +320,7 @@ class OtPrograms:
         await self._season()
         await self._legionella(now, day, minute)
         await self._self_learning(now)
+        await self._emulated_thermostat()
 
     async def _ch_program(self, day: int, minute: int) -> None:
         if self.ch_program != "auto":
@@ -372,6 +381,37 @@ class OtPrograms:
             self._notify()
             return True
         return False
+
+    def room_source_value(self) -> float | None:
+        """Temperature of the HA entity chosen for the emulated thermostat (None = missing / not a number)."""
+        if not self.room_source:
+            return None
+        st = self.hass.states.get(self.room_source)
+        try:
+            v = float(st.state) if st is not None else None
+        except (TypeError, ValueError):
+            return None
+        return v if v is not None and -20 < v < 50 else None
+
+    async def _emulated_thermostat(self) -> None:
+        """Emulated thermostat (experimental): the room temperature of an HA entity goes to the module as Data-ID 24
+        (WRITE-DATA "room temperature", as a room unit sends it) - on a change of 0.1 °C or every 5 minutes. Whether the
+        Dominus regulator uses it instead of its own probe is to be confirmed on a real boiler."""
+        if self.thermostat != "emulated":
+            return
+        v = self.room_source_value()
+        if v is None:
+            return
+        mono = time.monotonic()
+        if self.room_sent is not None and abs(v - self.room_sent) < 0.05 and mono - self._room_mono < 300:
+            return
+        try:
+            await self.coordinator.client.async_write_data_id(ROOM_TEMP_ID, int(round(v * 256)) & 0xFFFF, quiet=True)
+        except Exception as err:  # noqa: BLE001 - the next tick tries again
+            _LOGGER.debug("Emulated thermostat: writing the room temperature failed: %s", err)
+            return
+        self.room_sent, self.room_sent_at, self._room_mono = v, dt_util.now(), mono
+        self._notify()
 
     async def _self_learning(self, now: datetime) -> None:
         """CAR V2 "AUTO A": the mean of (room - setpoint) in yesterday's Comfort phase moves the CH offset by 1 °C."""
@@ -567,7 +607,8 @@ class OtChoiceSelect(_ProgramEntity, SelectEntity):
 
     async def async_select_option(self, option: str) -> None:
         # AUTO program / anti-legionella on are refused while a remote is in charge; MANUAL / off always work
-        if option not in ("manual", "off", "setpoint", "ch_off", "reduce_flow", "standby", "summer", "6", "12", "18", "24"):
+        if option not in ("manual", "off", "setpoint", "ch_off", "reduce_flow", "standby", "summer", "6", "12", "18", "24",
+                          "none", "physical", "emulated"):
             self.programs.check_not_blocked()
         setattr(self.programs, self._attr, option)
         self.programs.changed()
@@ -701,6 +742,61 @@ class OtVacationUntil(_ProgramEntity, DateTimeEntity):
         self.programs.changed()
 
 
+class OtThermostatSelect(_ProgramEntity, SelectEntity):
+    """Room thermostat: none / physical (contacts 40-41 of the boiler) / emulated (an HA entity's temperature)."""
+
+    _attr_translation_key = "ot_thermostat"
+    _attr_entity_category = EntityCategory.CONFIG
+    _attr_options = ["none", "physical", "emulated"]
+    _attr_icon = "mdi:thermostat"
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_thermostat")
+
+    def _restore(self, state: str) -> None:
+        if state in self._attr_options:
+            self.programs.thermostat = state
+
+    @property
+    def current_option(self) -> str:
+        return self.programs.thermostat
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any]:
+        p = self.programs
+        return {"room_source": p.room_source or None, "room_source_value": p.room_source_value(),
+                "room_sent": p.room_sent, "room_sent_at": p.room_sent_at.isoformat() if p.room_sent_at else None}
+
+    async def async_select_option(self, option: str) -> None:
+        self.programs.thermostat = option
+        self.programs.room_sent = None
+        self.programs.changed()
+
+
+class OtRoomSource(_ProgramEntity, TextEntity):
+    """Entity id whose temperature the emulated thermostat sends to the module (e.g. sensor.living_room_temperature)."""
+
+    _attr_translation_key = "ot_room_source"
+    _attr_entity_category = EntityCategory.CONFIG
+    _attr_icon = "mdi:home-thermometer-outline"
+    _attr_native_max = 255
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_room_source")
+
+    def _restore(self, state: str) -> None:
+        self.programs.room_source = state
+
+    @property
+    def native_value(self) -> str:
+        return self.programs.room_source
+
+    async def async_set_value(self, value: str) -> None:
+        self.programs.room_source = value.strip()
+        self.programs.room_sent = None
+        self.programs.changed()
+
+
 class OtLastService(_ProgramEntity, DateTimeEntity):
     """Date of the last service (the maintenance reminder counts from it)."""
 
@@ -801,7 +897,12 @@ def ot_selects(coordinator: ImmergasDominusCoordinator) -> list:
         OtChoiceSelect(coordinator, "ot_legionella", "legionella", LEGIONELLA_OPTIONS, "mdi:bacteria-outline"),
         OtChoiceSelect(coordinator, "ot_vacation_action", "vacation_action", VACATION_ACTIONS, "mdi:bag-suitcase-outline"),
         OtChoiceSelect(coordinator, "ot_maintenance", "maintenance", MAINTENANCE_OPTIONS, "mdi:wrench-clock"),
+        OtThermostatSelect(coordinator),
     ]
+
+
+def ot_texts(coordinator: ImmergasDominusCoordinator) -> list:
+    return [OtRoomSource(coordinator)]
 
 
 def ot_numbers(coordinator: ImmergasDominusCoordinator) -> list:

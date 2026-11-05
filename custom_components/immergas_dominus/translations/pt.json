@@ -620,6 +620,14 @@
           "intermittent": "Intermitente",
           "continuous": "Contínuo"
         }
+      },
+      "ot_thermostat": {
+        "name": "Termóstato ambiente",
+        "state": {
+          "none": "Nenhum",
+          "physical": "Físico (bornes 40-41 da caldeira)",
+          "emulated": "Emulado (entidade HA)"
+        }
       }
     },
     "time": {
@@ -728,6 +736,9 @@
     "text": {
       "boiler_model": {
         "name": "Modelo da caldeira"
+      },
+      "ot_room_source": {
+        "name": "Fonte da temperatura ambiente (entidade)"
       }
     }
   },

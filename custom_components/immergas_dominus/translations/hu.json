@@ -620,6 +620,14 @@
           "intermittent": "Szakaszos",
           "continuous": "Folyamatos"
         }
+      },
+      "ot_thermostat": {
+        "name": "Szobatermosztát",
+        "state": {
+          "none": "Nincs",
+          "physical": "Fizikai (kazán 40-41 kapcsok)",
+          "emulated": "Emulált (HA entitás)"
+        }
       }
     },
     "time": {
@@ -728,6 +736,9 @@
     "text": {
       "boiler_model": {
         "name": "Kazán típusa"
+      },
+      "ot_room_source": {
+        "name": "Szobahőmérséklet forrása (entitás)"
       }
     }
   },

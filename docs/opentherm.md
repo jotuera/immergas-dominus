@@ -114,6 +114,16 @@ The **OpenTherm boiler** card lists these as a checklist (*Running without the C
 | AMB CR (probe correction ±3 °C) | – (no module parameter) |
 | REMOTO, LANGUAGE, cooling, humidity | – (Home Assistant itself; not on these boilers) |
 
+## Room thermostat
+
+The boiler does not report a room thermostat over OpenTherm, so **Room thermostat** says what is connected:
+**None**, **Physical** (an on/off thermostat on boiler contacts 40-41 – its demand is not visible, only the CH demand)
+or **Emulated** – Home Assistant sends the temperature of an HA entity chosen in **Room temperature source**
+(e.g. a room sensor) to the module as Data-ID 24 (WRITE-DATA "room temperature", as a room unit sends it), on a change
+of 0.1 °C or every 5 minutes; *Read only* blocks it. **Experimental:** whether the Dominus regulator uses it instead of
+its own probe has to be confirmed on a real boiler – the *Supported Data-IDs* / *Room temperature* readings show it.
+The Connectivity card has a **Thermostat** tile with the choice and the entity list.
+
 ## Boiler menu (declared, offline)
 
 The boiler's own menu (VICTRIX ZEUS 25 manual) cannot be read over OpenTherm yet: the boiler reports 42 transparent

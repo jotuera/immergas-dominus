@@ -620,6 +620,14 @@
           "intermittent": "Intermitterend",
           "continuous": "Continu"
         }
+      },
+      "ot_thermostat": {
+        "name": "Kamerthermostaat",
+        "state": {
+          "none": "Geen",
+          "physical": "Fysiek (ketelklemmen 40-41)",
+          "emulated": "Geëmuleerd (HA-entiteit)"
+        }
       }
     },
     "time": {
@@ -728,6 +736,9 @@
     "text": {
       "boiler_model": {
         "name": "Ketelmodel"
+      },
+      "ot_room_source": {
+        "name": "Bron kamertemperatuur (entiteit)"
       }
     }
   },

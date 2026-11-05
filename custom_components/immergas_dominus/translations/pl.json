@@ -620,6 +620,14 @@
           "intermittent": "Przerywana (wg termostatu)",
           "continuous": "Ciągła"
         }
+      },
+      "ot_thermostat": {
+        "name": "Termostat pokojowy",
+        "state": {
+          "none": "Brak",
+          "physical": "Fizyczny (zaciski kotła 40-41)",
+          "emulated": "Emulowany (encja HA)"
+        }
       }
     },
     "time": {
@@ -728,6 +736,9 @@
     "text": {
       "boiler_model": {
         "name": "Model kotła"
+      },
+      "ot_room_source": {
+        "name": "Źródło temperatury pokoju (encja)"
       }
     }
   },

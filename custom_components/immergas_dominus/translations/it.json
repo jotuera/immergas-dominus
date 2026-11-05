@@ -620,6 +620,14 @@
           "intermittent": "Intermittente",
           "continuous": "Continuo"
         }
+      },
+      "ot_thermostat": {
+        "name": "Termostato ambiente",
+        "state": {
+          "none": "Nessuno",
+          "physical": "Fisico (morsetti 40-41 caldaia)",
+          "emulated": "Emulato (entità HA)"
+        }
       }
     },
     "time": {
@@ -728,6 +736,9 @@
     "text": {
       "boiler_model": {
         "name": "Modello caldaia"
+      },
+      "ot_room_source": {
+        "name": "Sorgente temperatura ambiente (entità)"
       }
     }
   },

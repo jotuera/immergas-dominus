@@ -620,6 +620,14 @@
           "intermittent": "Intermittent (by the thermostat)",
           "continuous": "Continuous"
         }
+      },
+      "ot_thermostat": {
+        "name": "Room thermostat",
+        "state": {
+          "none": "None",
+          "physical": "Physical (boiler contacts 40-41)",
+          "emulated": "Emulated (HA entity)"
+        }
       }
     },
     "time": {
@@ -728,6 +736,9 @@
     "text": {
       "boiler_model": {
         "name": "Boiler model"
+      },
+      "ot_room_source": {
+        "name": "Room temperature source (entity)"
       }
     }
   },

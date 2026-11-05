@@ -620,6 +620,14 @@
           "intermittent": "Intermittent",
           "continuous": "Continu"
         }
+      },
+      "ot_thermostat": {
+        "name": "Thermostat d’ambiance",
+        "state": {
+          "none": "Aucun",
+          "physical": "Physique (bornes 40-41 de la chaudière)",
+          "emulated": "Émulé (entité HA)"
+        }
       }
     },
     "time": {
@@ -728,6 +736,9 @@
     "text": {
       "boiler_model": {
         "name": "Modèle de chaudière"
+      },
+      "ot_room_source": {
+        "name": "Source de température ambiante (entité)"
       }
     }
   },

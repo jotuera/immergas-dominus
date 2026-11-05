@@ -114,11 +114,12 @@ def _even_parity_byte0(base0: int, data_id: int, hb: int, lb: int) -> int:
 class _WriteRequest:
     """A queued OpenTherm write, resolved by the session loop."""
 
-    __slots__ = ("data_id", "value", "event", "ack", "error")
+    __slots__ = ("data_id", "value", "event", "ack", "error", "quiet")
 
-    def __init__(self, data_id: int, value: int) -> None:
+    def __init__(self, data_id: int, value: int, quiet: bool = False) -> None:
         self.data_id = data_id
         self.value = value & 0xFFFF
+        self.quiet = quiet  # a periodic write (e.g. the emulated room temperature): not shown as "Last write"
         self.event = threading.Event()
         self.ack: int | None = None
         self.error: Exception | None = None
@@ -206,13 +207,13 @@ class DominusOpenThermClient:
         self.scan_running = True
         self.start()
 
-    async def async_write_data_id(self, data_id: int, value: int) -> int:
+    async def async_write_data_id(self, data_id: int, value: int, quiet: bool = False) -> int:
         """Queue a write into the live session and wait for the ack."""
         if self.read_only:
             from homeassistant.exceptions import HomeAssistantError
             raise HomeAssistantError(translation_domain="immergas_dominus", translation_key="read_only")
         self.start()
-        request = _WriteRequest(data_id, value)
+        request = _WriteRequest(data_id, value, quiet)
         self._write_queue.put(request)
         await asyncio.to_thread(request.event.wait, _WRITE_TIMEOUT)
         if not request.event.is_set():
@@ -240,7 +241,8 @@ class DominusOpenThermClient:
                         request.ack = self._exchange_key(request.data_id, request.value, write=True)
                         with self._lock:
                             self._values[request.data_id] = request.ack
-                        self._read_back(request)
+                        if not request.quiet:
+                            self._read_back(request)
                     except DominusOpenThermUnsupported as err:
                         request.error = err
                     except Exception as err:  # noqa: BLE001 - hand the cause to the waiting caller

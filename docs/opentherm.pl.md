@@ -111,6 +111,16 @@ Karta **Kocioł OpenTherm** pokazuje to jako listę kontrolną (*Praca bez CAR V
 | AMB CR (korekta sondy ±3 °C) | – (brak parametru modułu) |
 | REMOTO, LANGUAGE, chłodzenie, wilgotność | – (robi to sam Home Assistant; nie w tych kotłach) |
 
+## Termostat pokojowy
+
+Kocioł nie zgłasza termostatu pokojowego przez OpenTherm, więc **Termostat pokojowy** mówi, co jest podłączone:
+**Brak**, **Fizyczny** (termostat on/off na zaciskach kotła 40-41 – jego żądania nie widać, tylko żądanie CO) albo
+**Emulowany** – Home Assistant wysyła do modułu temperaturę encji HA wybranej w **Źródło temperatury pokoju** (np.
+czujnika pokojowego) jako Data-ID 24 (WRITE-DATA „temperatura pokoju”, tak jak wysyła ją regulator pokojowy), przy
+zmianie o 0,1 °C albo co 5 minut; *Tylko odczyt* to blokuje. **Eksperymentalne:** czy regulator Dominusa użyje jej
+zamiast własnej sondy, trzeba potwierdzić na prawdziwym kotle. Karta Łączność ma kafel **Termostat** z wyborem i listą
+encji.
+
 ## Menu kotła (deklarowane, offline)
 
 Własnego menu kotła (instrukcja VICTRIX ZEUS 25) nie da się jeszcze odczytać przez OpenTherm: kocioł podaje 42

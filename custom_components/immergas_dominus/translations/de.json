@@ -620,6 +620,14 @@
           "intermittent": "Intermittierend",
           "continuous": "Dauerbetrieb"
         }
+      },
+      "ot_thermostat": {
+        "name": "Raumthermostat",
+        "state": {
+          "none": "Keiner",
+          "physical": "Physisch (Kesselklemmen 40-41)",
+          "emulated": "Emuliert (HA-Entität)"
+        }
       }
     },
     "time": {
@@ -728,6 +736,9 @@
     "text": {
       "boiler_model": {
         "name": "Kesselmodell"
+      },
+      "ot_room_source": {
+        "name": "Quelle der Raumtemperatur (Entität)"
       }
     }
   },

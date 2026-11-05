@@ -620,6 +620,14 @@
           "intermittent": "Prerušovaný",
           "continuous": "Nepretržitý"
         }
+      },
+      "ot_thermostat": {
+        "name": "Izbový termostat",
+        "state": {
+          "none": "Žiadny",
+          "physical": "Fyzický (svorky kotla 40-41)",
+          "emulated": "Emulovaný (entita HA)"
+        }
       }
     },
     "time": {
@@ -728,6 +736,9 @@
     "text": {
       "boiler_model": {
         "name": "Model kotla"
+      },
+      "ot_room_source": {
+        "name": "Zdroj teploty miestnosti (entita)"
       }
     }
   },

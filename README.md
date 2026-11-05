@@ -294,6 +294,11 @@ the module accepts the session.
   anti-legionella, vacation and automatic Summer / Winter do not write and cannot be switched on; the cards show them
   greyed out with a lock (cards 0.54.2). **Anti-legionella** never asks more than the boiler's DHW maximum (Data-ID 48,
   60 °C on a VICTRIX ZEUS) – above it the target was never reached and the run lasted 3 h.
+- **OpenTherm: the rest of the CAR V2** so the remote can be removed – Eco phase **lower the flow setpoint** (RIDOTT
+  ON), **self-learning** of the CH offset (AUTO A), **maintenance reminder** (MANUTZ), vacation as **Standby** (CH and
+  DHW off, as the CAR V2) or Summer, DHW Eco down to the boiler minimum, anti-legionella held 20 min, boiler reset
+  limited to 5 attempts per hour; a *Running without the CAR V2* checklist on the OpenTherm boiler card (cards 0.54.3).
+  See [Replacing the CAR V2](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.md#replacing-the-car-v2).
 
 ### 1.6.8
 

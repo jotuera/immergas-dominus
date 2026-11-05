@@ -236,6 +236,9 @@
       },
       "module_offline": {
         "name": "Moduł Dominus offline"
+      },
+      "ot_maintenance_due": {
+        "name": "Przegląd wymagany"
       }
     },
     "number": {
@@ -415,6 +418,9 @@
       },
       "pdu_scan_to": {
         "name": "Skan PDU do"
+      },
+      "ot_eco_flow_reduction": {
+        "name": "Obniżenie zasilania w Eko"
       }
     },
     "select": {
@@ -524,7 +530,8 @@
         "name": "Faza Eko",
         "state": {
           "setpoint": "Zadana Eko",
-          "ch_off": "Wyłącz ogrzewanie"
+          "ch_off": "Wyłącz ogrzewanie",
+          "reduce_flow": "Obniż zadaną zasilania"
         }
       },
       "ot_legionella": {
@@ -540,6 +547,23 @@
         "state": {
           "standard": "Standard (0x00)",
           "immergas": "Immergas (0xCA)"
+        }
+      },
+      "ot_vacation_action": {
+        "name": "Działanie urlopu",
+        "state": {
+          "standby": "Stand-by (CO i CWU wył.)",
+          "summer": "Lato (CO wył.)"
+        }
+      },
+      "ot_maintenance": {
+        "name": "Przypomnienie o przeglądzie",
+        "state": {
+          "off": "Wyłączone",
+          "6": "Co 6 miesięcy",
+          "12": "Co 12 miesięcy",
+          "18": "Co 18 miesięcy",
+          "24": "Co 24 miesięcy"
         }
       }
     },
@@ -613,11 +637,17 @@
       },
       "ot_read_only": {
         "name": "Tylko odczyt (steruje pilot)"
+      },
+      "ot_self_learning": {
+        "name": "Samouczenie (offset CO)"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Wyjazd do"
+      },
+      "ot_last_service": {
+        "name": "Ostatni przegląd"
       }
     },
     "button": {
@@ -635,6 +665,9 @@
       },
       "ot_scan_report": {
         "name": "Zgłoś mapę Data-ID"
+      },
+      "ot_service_done": {
+        "name": "Przegląd wykonany"
       }
     },
     "text": {
@@ -657,6 +690,9 @@
     },
     "programs_blocked": {
       "message": "Steruje pilot (CAR V2 / Super Amico): programy Home Assistant są wstrzymane. Wyłącz „Tylko odczyt (steruje pilot)”, żeby z nich korzystać."
+    },
+    "reset_limit": {
+      "message": "5 prób resetu z rzędu – następna za {minutes} min (jak w CAR V2)."
     }
   }
 }

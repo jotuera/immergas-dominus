@@ -236,6 +236,9 @@
       },
       "module_offline": {
         "name": "Módulo Dominus sin conexión"
+      },
+      "ot_maintenance_due": {
+        "name": "Mantenimiento pendiente"
       }
     },
     "number": {
@@ -415,6 +418,9 @@
       },
       "pdu_scan_to": {
         "name": "Escaneo PDU hasta"
+      },
+      "ot_eco_flow_reduction": {
+        "name": "Reducción de impulsión en Eco"
       }
     },
     "select": {
@@ -524,7 +530,8 @@
         "name": "Acción en fase Eco",
         "state": {
           "setpoint": "Consigna Eco",
-          "ch_off": "Calefacción apagada"
+          "ch_off": "Calefacción apagada",
+          "reduce_flow": "Bajar la consigna de impulsión"
         }
       },
       "ot_legionella": {
@@ -540,6 +547,23 @@
         "state": {
           "standard": "Estándar (0x00)",
           "immergas": "Immergas (0xCA)"
+        }
+      },
+      "ot_vacation_action": {
+        "name": "Acción de vacaciones",
+        "state": {
+          "standby": "Stand-by (calefacción y ACS apagadas)",
+          "summer": "Verano (calefacción apagada)"
+        }
+      },
+      "ot_maintenance": {
+        "name": "Recordatorio de mantenimiento",
+        "state": {
+          "off": "Apagado",
+          "6": "Cada 6 meses",
+          "12": "Cada 12 meses",
+          "18": "Cada 18 meses",
+          "24": "Cada 24 meses"
         }
       }
     },
@@ -613,11 +637,17 @@
       },
       "ot_read_only": {
         "name": "Solo lectura (manda el mando)"
+      },
+      "ot_self_learning": {
+        "name": "Autoaprendizaje (offset calefacción)"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Vacaciones hasta"
+      },
+      "ot_last_service": {
+        "name": "Último mantenimiento"
       }
     },
     "button": {
@@ -635,6 +665,9 @@
       },
       "ot_scan_report": {
         "name": "Enviar mapa de Data-ID"
+      },
+      "ot_service_done": {
+        "name": "Mantenimiento hecho"
       }
     },
     "text": {
@@ -657,6 +690,9 @@
     },
     "programs_blocked": {
       "message": "Manda un mando (CAR V2 / Super Amico): los programas de Home Assistant están en pausa. Desactive «Solo lectura (manda el mando)» para usarlos."
+    },
+    "reset_limit": {
+      "message": "5 intentos de reset seguidos – el siguiente en {minutes} min (como el CAR V2)."
     }
   }
 }

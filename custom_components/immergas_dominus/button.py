@@ -1,6 +1,8 @@
 """Button platform for Immergas Dominus: boiler reset, Data-ID scan (OpenTherm), PDU scan and report (Modbus)."""
 from __future__ import annotations
 
+import time
+
 from homeassistant.components.button import ButtonEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
@@ -16,8 +18,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     coordinator: ImmergasDominusCoordinator = hass.data[DOMAIN][entry.entry_id]
     if entry.data.get(CONF_PROTOCOL) == PROTOCOL_OPENTHERM:
         from .ot_diagnostics import OtReportButton, OtScanButton
+        from .ot_programs import ot_buttons
         async_add_entities([ImmergasOpenThermResetButton(coordinator), OtScanButton(coordinator),
-                            OtReportButton(coordinator)])
+                            OtReportButton(coordinator), *ot_buttons(coordinator)])
     elif getattr(coordinator, "pdu_scan", None) is not None:
         from .pdu_scan import pdu_scan_buttons
         async_add_entities(pdu_scan_buttons(coordinator))
@@ -36,5 +39,13 @@ class ImmergasOpenThermResetButton(ImmergasDominusEntity, ButtonEntity):
         return ()  # a command, nothing to read
 
     async def async_press(self) -> None:
+        # as the CAR V2: at most 5 reset attempts in a row, then an hour must pass
+        now = time.monotonic()
+        self._presses = [t for t in getattr(self, "_presses", []) if now - t < 3600]
+        if len(self._presses) >= 5:
+            from homeassistant.exceptions import HomeAssistantError
+            raise HomeAssistantError(translation_domain=DOMAIN, translation_key="reset_limit",
+                                     translation_placeholders={"minutes": str(int((3600 - (now - self._presses[0])) // 60) + 1)})
         await self.coordinator.client.async_write_data_id(OT_RESET_DATA_ID, OT_RESET_VALUE)
+        self._presses.append(now)
         await self.coordinator.async_request_refresh()

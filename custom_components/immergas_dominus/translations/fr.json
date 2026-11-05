@@ -236,6 +236,9 @@
       },
       "module_offline": {
         "name": "Module Dominus hors ligne"
+      },
+      "ot_maintenance_due": {
+        "name": "Entretien à faire"
       }
     },
     "number": {
@@ -415,6 +418,9 @@
       },
       "pdu_scan_to": {
         "name": "Scan PDU à"
+      },
+      "ot_eco_flow_reduction": {
+        "name": "Abaissement du départ en Éco"
       }
     },
     "select": {
@@ -524,7 +530,8 @@
         "name": "Action en phase Éco",
         "state": {
           "setpoint": "Consigne Éco",
-          "ch_off": "Chauffage arrêté"
+          "ch_off": "Chauffage arrêté",
+          "reduce_flow": "Baisser la consigne de départ"
         }
       },
       "ot_legionella": {
@@ -540,6 +547,23 @@
         "state": {
           "standard": "Standard (0x00)",
           "immergas": "Immergas (0xCA)"
+        }
+      },
+      "ot_vacation_action": {
+        "name": "Action vacances",
+        "state": {
+          "standby": "Stand-by (chauffage et ECS arrêtés)",
+          "summer": "Été (chauffage arrêté)"
+        }
+      },
+      "ot_maintenance": {
+        "name": "Rappel d’entretien",
+        "state": {
+          "off": "Désactivé",
+          "6": "Tous les 6 mois",
+          "12": "Tous les 12 mois",
+          "18": "Tous les 18 mois",
+          "24": "Tous les 24 mois"
         }
       }
     },
@@ -613,11 +637,17 @@
       },
       "ot_read_only": {
         "name": "Lecture seule (la télécommande pilote)"
+      },
+      "ot_self_learning": {
+        "name": "Auto-apprentissage (offset chauffage)"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Vacances jusqu'au"
+      },
+      "ot_last_service": {
+        "name": "Dernier entretien"
       }
     },
     "button": {
@@ -635,6 +665,9 @@
       },
       "ot_scan_report": {
         "name": "Signaler la carte Data-ID"
+      },
+      "ot_service_done": {
+        "name": "Entretien effectué"
       }
     },
     "text": {
@@ -657,6 +690,9 @@
     },
     "programs_blocked": {
       "message": "Une télécommande (CAR V2 / Super Amico) pilote : les programmes Home Assistant sont en pause. Désactivez « Lecture seule (la télécommande pilote) » pour les utiliser."
+    },
+    "reset_limit": {
+      "message": "5 tentatives de reset d’affilée – la prochaine dans {minutes} min (comme la CAR V2)."
     }
   }
 }

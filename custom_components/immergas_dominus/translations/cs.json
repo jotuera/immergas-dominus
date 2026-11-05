@@ -236,6 +236,9 @@
       },
       "module_offline": {
         "name": "Modul Dominus offline"
+      },
+      "ot_maintenance_due": {
+        "name": "Servis je nutný"
       }
     },
     "number": {
@@ -415,6 +418,9 @@
       },
       "pdu_scan_to": {
         "name": "Sken PDU do"
+      },
+      "ot_eco_flow_reduction": {
+        "name": "Snížení výstupu v Eko"
       }
     },
     "select": {
@@ -524,7 +530,8 @@
         "name": "Akce ve fázi Eko",
         "state": {
           "setpoint": "Teplota Eko",
-          "ch_off": "Vypnout topení"
+          "ch_off": "Vypnout topení",
+          "reduce_flow": "Snížit teplotu výstupu"
         }
       },
       "ot_legionella": {
@@ -540,6 +547,23 @@
         "state": {
           "standard": "Standard (0x00)",
           "immergas": "Immergas (0xCA)"
+        }
+      },
+      "ot_vacation_action": {
+        "name": "Akce dovolené",
+        "state": {
+          "standby": "Stand-by (ÚT i TUV vyp.)",
+          "summer": "Léto (ÚT vyp.)"
+        }
+      },
+      "ot_maintenance": {
+        "name": "Připomínka servisu",
+        "state": {
+          "off": "Vypnuto",
+          "6": "Každých 6 měsíců",
+          "12": "Každých 12 měsíců",
+          "18": "Každých 18 měsíců",
+          "24": "Každých 24 měsíců"
         }
       }
     },
@@ -613,11 +637,17 @@
       },
       "ot_read_only": {
         "name": "Pouze čtení (řídí ovladač)"
+      },
+      "ot_self_learning": {
+        "name": "Samoučení (offset ÚT)"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Dovolená do"
+      },
+      "ot_last_service": {
+        "name": "Poslední servis"
       }
     },
     "button": {
@@ -635,6 +665,9 @@
       },
       "ot_scan_report": {
         "name": "Nahlásit mapu Data-ID"
+      },
+      "ot_service_done": {
+        "name": "Servis proveden"
       }
     },
     "text": {
@@ -657,6 +690,9 @@
     },
     "programs_blocked": {
       "message": "Řídí ovladač (CAR V2 / Super Amico): programy Home Assistant jsou pozastavené. Pro jejich použití vypněte „Pouze čtení (řídí ovladač)“."
+    },
+    "reset_limit": {
+      "message": "5 pokusů o reset za sebou – další za {minutes} min (jako CAR V2)."
     }
   }
 }

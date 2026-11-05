@@ -9,10 +9,16 @@ module, the same way the official app writes it:
   Comfort / Eco room setpoint (Data-ID 16) when the phase changes, so a manual change holds until the next change (the
   CAR V2 "temporary override").  The Eco action can instead switch heating off (CAR V2 "RIDOTT OFF").
 * **DHW program** (CAR V2 "PR SAN"): DHW Comfort / Eco setpoint (Data-ID 56) by the DHW calendar per weekday.
-* **Vacation**: heating off (mode Summer) until the end date, then the mode from before.
+* **Vacation** (CAR V2 "VACANZ"): Standby (CH and DHW off, as the CAR V2) or Summer (CH off) until the end date,
+  then the mode from before.
 * **Automatic Summer / Winter** by the 24 h mean of the outdoor temperature (Data-ID 27).
-* **Anti-legionella** (CAR V2 "LEGION"): daily or on Monday at 02:00 the DHW setpoint goes up until the DHW temperature
-  held it for 15 minutes (at most 3 hours), then back.
+* **Anti-legionella** (CAR V2 "LEGION"): daily or on Monday at 02:00 the DHW setpoint goes up to the boiler maximum
+  until the DHW temperature held it for 20 minutes (at most 3 hours), then back.
+* **Eco = lower flow** (CAR V2 "RIDOTT ON"): in the Eco phase the CH setpoint (module parameter 17) is lowered by a set
+  amount, back in Comfort - for a Dominus without the room probe.
+* **Self-learning** (CAR V2 "AUTO A"): once a day the CH offset (parameter 5) moves by 1 °C when the room stayed below /
+  above the Comfort setpoint the day before.
+* **Maintenance reminder** (CAR V2 "MANUTZ"): 6-24 months from the last service.
 
 Everything is kept in Home Assistant (restored after a restart); the entities reuse the keys of the Modbus mode
 (calendars, weekdays, Comfort / Eco, vacation, automatic season), so the dashboard cards work with them as they are.
@@ -25,6 +31,8 @@ import logging
 import time
 from typing import Any, Callable
 
+from homeassistant.components.binary_sensor import BinarySensorDeviceClass, BinarySensorEntity
+from homeassistant.components.button import ButtonEntity
 from homeassistant.components.datetime import DateTimeEntity
 from homeassistant.components.number import NumberDeviceClass, NumberMode, RestoreNumber
 from homeassistant.components.select import SelectEntity
@@ -41,6 +49,7 @@ from homeassistant.util import dt as dt_util
 from .const import CHRONO_PROFILE_OPTIONS, DEVICE_MAIN, DEVICE_SCHEDULE, OT_MODE_PDU, OT_MODE_TO_STATUS, PROGRAM_PHASE_OPTIONS
 from .coordinator import ImmergasDominusCoordinator
 from .entity import ImmergasDominusEntity
+from .opentherm_client import ot_param_key
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -49,6 +58,11 @@ DHW_SETPOINT_ID = 56
 DHW_BOUNDS_ID = 48  # HB = the boiler's max. DHW setpoint, LB = min. (s8 °C)
 DHW_TEMP_ID = 26
 OUTDOOR_ID = 27
+ROOM_TEMP_ID = 24
+CH_SETPOINT_KEY = ot_param_key(89, 17)  # module parameter 17 = CH (max flow) setpoint, as the official app
+CH_MIN_KEY = ot_param_key(89, 16)
+CH_OFFSET_KEY = ot_param_key(89, 5)
+_OFF = OT_MODE_TO_STATUS["off"]
 _DAY = 24 * 60
 _WATER = OT_MODE_TO_STATUS["water"]
 _WINTER = OT_MODE_TO_STATUS["heating_water"]
@@ -63,20 +77,23 @@ _DEFAULT_CALENDARS: dict[int, list[tuple[int, int]]] = {
 _DEFAULT_CH_DAYS = [1, 1, 1, 1, 1, 2, 2]
 _DEFAULT_DHW_DAYS = [3] * 7
 
-ECO_ACTIONS = ["setpoint", "ch_off"]
+ECO_ACTIONS = ["setpoint", "ch_off", "reduce_flow"]
 LEGIONELLA_OPTIONS = ["off", "daily", "weekly"]
-_LEG_HOLD = 15 * 60
+VACATION_ACTIONS = ["standby", "summer"]
+MAINTENANCE_OPTIONS = ["off", "6", "12", "18", "24"]
+_LEG_HOLD = 20 * 60  # CAR V2: 20 minutes at the maximum
 _LEG_TIMEOUT = 3 * 3600
 
 # key -> (default, min, max, step, icon); numbers kept in Home Assistant
 NUMBER_SPECS: dict[str, tuple[float, float, float, float, str]] = {
     "comfort_heat": (20.0, 10, 35, 0.5, "mdi:sofa-outline"),
     "eco_heat": (16.0, 10, 35, 0.5, "mdi:leaf"),
-    "dhw_comfort": (50.0, 30, 60, 1, "mdi:sofa-outline"),
-    "dhw_eco": (40.0, 30, 60, 1, "mdi:leaf"),
+    "dhw_comfort": (50.0, 10, 60, 1, "mdi:sofa-outline"),
+    "dhw_eco": (40.0, 10, 60, 1, "mdi:leaf"),  # CAR V2 "minimum" = the boiler's DHW minimum (Data-ID 48 LB)
     "season_winter_below": (15.0, 0, 25, 0.5, "mdi:snowflake"),
     "season_summer_above": (18.0, 0, 30, 0.5, "mdi:white-balance-sunny"),
     "ot_legionella_temp": (60.0, 50, 65, 1, "mdi:bacteria-outline"),
+    "ot_eco_flow_reduction": (10.0, 1, 40, 1, "mdi:thermometer-minus"),
 }
 
 
@@ -96,6 +113,13 @@ class OtPrograms:
         self.vacation_until: datetime | None = None
         self.auto_season = False
         self.legionella = "off"
+        self.vacation_action = "standby"
+        self.self_learning = False
+        self.maintenance = "off"
+        self.last_service: datetime | None = None
+        self.flow_base: int | None = None    # CH setpoint before "Eco = lower flow" lowered it (restored)
+        self._learn: list[float] = []         # room - setpoint in the Comfort phase today (self-learning)
+        self._learn_day: str | None = None
         self.numbers = {k: v[0] for k, v in NUMBER_SPECS.items()}
         self.phase: str | None = None        # comfort / economy / manual (shown by the phase sensor)
         self._ch_written: str | None = None  # last CH phase written to the module
@@ -110,7 +134,8 @@ class OtPrograms:
         self._leg_last_day: str | None = None
         self._listeners: list[Callable[[], None]] = []
         self._unsub: list[CALLBACK_TYPE] = []
-        self._polls = (OT_MODE_PDU, OUTDOOR_ID, DHW_TEMP_ID, DHW_SETPOINT_ID, ROOM_SETPOINT_ID, DHW_BOUNDS_ID)
+        self._polls = (OT_MODE_PDU, OUTDOOR_ID, DHW_TEMP_ID, DHW_SETPOINT_ID, ROOM_SETPOINT_ID, DHW_BOUNDS_ID,
+                       ROOM_TEMP_ID, CH_SETPOINT_KEY, CH_MIN_KEY, CH_OFFSET_KEY)
 
     # -- lifecycle ---------------------------------------------------------------
 
@@ -155,6 +180,25 @@ class OtPrograms:
         hb = (int(raw) >> 8) & 0xFF
         hb = hb - 0x100 if hb & 0x80 else hb
         return float(hb) if 30 <= hb <= 90 else None
+
+    def dhw_min(self) -> float | None:
+        """The boiler's min. DHW setpoint (Data-ID 48 low byte, e.g. 10 °C)."""
+        raw = self._raw(DHW_BOUNDS_ID)
+        if raw is None:
+            return None
+        lb = int(raw) & 0xFF
+        lb = lb - 0x100 if lb & 0x80 else lb
+        return float(lb) if 0 < lb <= 60 else None
+
+    def maintenance_due(self) -> datetime | None:
+        """When the next service is due (None = reminder off or no last service date)."""
+        if self.maintenance == "off" or self.last_service is None:
+            return None
+        months = int(self.maintenance)
+        base = dt_util.as_local(self.last_service)
+        y, m = divmod(base.month - 1 + months, 12)
+        day = min(base.day, 28)
+        return base.replace(year=base.year + y, month=m + 1, day=day)
 
     def legionella_target(self) -> float:
         """Anti-legionella temperature, never above what the boiler accepts (otherwise it is never reached)."""
@@ -235,9 +279,10 @@ class OtPrograms:
         self.vacation = on
         mode = self.mode_status()
         if on:
-            self._vac_prev_mode = mode if mode not in (None, _WATER) else None
-            if mode is not None and mode & 0x01:
-                await self._set_mode(_WATER, "vacation")
+            target = _OFF if self.vacation_action == "standby" else _WATER
+            self._vac_prev_mode = mode if mode not in (None, target) else None
+            if mode is not None and (mode != target if target == _OFF else mode & 0x01):
+                await self._set_mode(target, "vacation")
         else:
             prev, self._vac_prev_mode = self._vac_prev_mode, None
             if prev is not None:
@@ -248,6 +293,10 @@ class OtPrograms:
     # -- the tick ----------------------------------------------------------------
 
     async def _async_tick(self, now: datetime) -> None:
+        due = self.maintenance_due()
+        if due is not None and dt_util.now() >= due and not getattr(self, "_maint_notified", False):
+            self._maint_notified = True
+            self._notify()
         if self.blocked:
             if self._leg_active:  # a remote took over: the anti-legionella run ends without writing
                 self._leg_active, self._leg_restore = False, None
@@ -262,6 +311,7 @@ class OtPrograms:
         await self._dhw_program(day, minute)
         await self._season()
         await self._legionella(now, day, minute)
+        await self._self_learning(now)
 
     async def _ch_program(self, day: int, minute: int) -> None:
         if self.ch_program != "auto":
@@ -271,6 +321,7 @@ class OtPrograms:
             if self._ch_off_by_eco:  # back from AUTO with "Eco = heating off": heating on again
                 self._ch_off_by_eco = False
                 await self._set_mode(_WINTER, "program manual")
+            await self._restore_flow("program manual")
             self._ch_written = None
             return
         phase = "comfort" if self.in_comfort(self.ch_days[day], minute) else "economy"
@@ -290,10 +341,59 @@ class OtPrograms:
                 self._ch_off_by_eco = not ok
             if phase == "comfort" and ok:
                 ok = await self._set_room(self.numbers["comfort_heat"], "Comfort")
+        elif self.eco_action == "reduce_flow":
+            # CAR V2 "RIDOTT ON": the room setpoint stays Comfort, the CH (flow) setpoint drops in the Eco phase
+            if phase == "economy":
+                ok = await self._lower_flow()
+            else:
+                ok = await self._restore_flow("Comfort") and await self._set_room(self.numbers["comfort_heat"], "Comfort")
         else:
-            ok = await self._set_room(self.numbers["comfort_heat" if phase == "comfort" else "eco_heat"], phase)
+            ok = await self._restore_flow(phase) and await self._set_room(
+                self.numbers["comfort_heat" if phase == "comfort" else "eco_heat"], phase)
         if ok:
             self._ch_written = phase
+
+    async def _lower_flow(self) -> bool:
+        cur = self._raw(CH_SETPOINT_KEY)
+        if self.flow_base is None:
+            if cur is None:
+                return False  # not read yet: the next tick tries again
+            self.flow_base = int(cur) & 0xFF
+            self._notify()
+        floor = self._raw(CH_MIN_KEY)
+        low = max(int(floor) & 0xFF if floor is not None else 20, self.flow_base - int(self.numbers["ot_eco_flow_reduction"]))
+        return await self._write(CH_SETPOINT_KEY, low, f"CH setpoint {low} (Eco = lower flow)")
+
+    async def _restore_flow(self, what: str) -> bool:
+        if self.flow_base is None:
+            return True
+        if await self._write(CH_SETPOINT_KEY, self.flow_base, f"CH setpoint {self.flow_base} ({what})"):
+            self.flow_base = None
+            self._notify()
+            return True
+        return False
+
+    async def _self_learning(self, now: datetime) -> None:
+        """CAR V2 "AUTO A": the mean of (room - setpoint) in yesterday's Comfort phase moves the CH offset by 1 °C."""
+        today = dt_util.as_local(now).date().isoformat()
+        if self._learn_day is None:
+            self._learn_day = today
+        if today != self._learn_day:
+            samples, self._learn, self._learn_day = self._learn, [], today
+            if self.self_learning and len(samples) >= 60:  # at least an hour of Comfort
+                mean = sum(samples) / len(samples)
+                raw = self._raw(CH_OFFSET_KEY)
+                if raw is not None and abs(mean) > 0.5:
+                    off = int(raw) & 0xFF
+                    off = off - 0x100 if off & 0x80 else off
+                    new = max(-15, min(15, off + (1 if mean < 0 else -1)))
+                    if new != off:
+                        _LOGGER.info("Self-learning: room %.1f °C from the setpoint, CH offset %s -> %s", mean, off, new)
+                        await self._write(CH_OFFSET_KEY, new & 0xFF, f"CH offset {new} (self-learning)")
+            return
+        room, sp = self._f88(self._raw(ROOM_TEMP_ID)), self._f88(self._raw(ROOM_SETPOINT_ID))
+        if self.phase == "comfort" and room is not None and sp is not None and 5 < room < 40:
+            self._learn.append(room - sp)
 
     async def _dhw_program(self, day: int, minute: int) -> None:
         if not self.dhw_sched or self._leg_active:
@@ -467,7 +567,7 @@ class OtChoiceSelect(_ProgramEntity, SelectEntity):
 
     async def async_select_option(self, option: str) -> None:
         # AUTO program / anti-legionella on are refused while a remote is in charge; MANUAL / off always work
-        if option not in ("manual", "off", "setpoint", "ch_off"):
+        if option not in ("manual", "off", "setpoint", "ch_off", "reduce_flow", "standby", "summer", "6", "12", "18", "24"):
             self.programs.check_not_blocked()
         setattr(self.programs, self._attr, option)
         self.programs.changed()
@@ -498,10 +598,27 @@ class OtProgramNumber(ImmergasDominusEntity, RestoreNumber):
         last = await self.async_get_last_number_data()
         if last is not None and last.native_value is not None:
             self.programs.numbers[self._key] = float(last.native_value)
+        if self._key == "ot_eco_flow_reduction":
+            self.async_on_remove(self.programs.add_listener(self.async_write_ha_state))
+            state = await self.async_get_last_state()
+            base = state.attributes.get("comfort_flow_setpoint") if state is not None else None
+            if isinstance(base, (int, float)):
+                self.programs.flow_base = int(base)  # lowered before the restart: restored at the next Comfort
 
     @property
     def native_value(self) -> float:
         return self.programs.numbers[self._key]
+
+    @property
+    def native_min_value(self) -> float:
+        low = self.programs.dhw_min() if self._key in ("dhw_comfort", "dhw_eco") else None
+        return max(self._attr_native_min_value, low) if low is not None else self._attr_native_min_value
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any] | None:
+        if self._key == "ot_eco_flow_reduction":
+            return {"comfort_flow_setpoint": self.programs.flow_base}
+        return None
 
     @property
     def native_max_value(self) -> float:
@@ -584,6 +701,71 @@ class OtVacationUntil(_ProgramEntity, DateTimeEntity):
         self.programs.changed()
 
 
+class OtLastService(_ProgramEntity, DateTimeEntity):
+    """Date of the last service (the maintenance reminder counts from it)."""
+
+    _attr_entity_category = EntityCategory.CONFIG
+    _attr_icon = "mdi:calendar-check"
+    _attr_translation_key = "ot_last_service"
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_last_service")
+
+    def _restore(self, state: str) -> None:
+        self.programs.last_service = dt_util.parse_datetime(state)
+
+    @property
+    def native_value(self) -> datetime | None:
+        return self.programs.last_service
+
+    async def async_set_value(self, value: datetime) -> None:
+        self.programs.last_service = value
+        self.programs._maint_notified = False
+        self.programs.changed()
+
+
+class OtServiceDoneButton(ImmergasDominusEntity, ButtonEntity):
+    """The boiler was serviced today: the maintenance reminder starts again."""
+
+    _attr_translation_key = "ot_service_done"
+    _attr_icon = "mdi:wrench-check"
+    _attr_entity_category = EntityCategory.CONFIG
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_service_done", 0, DEVICE_MAIN)
+
+    def _poll_pdus(self) -> tuple[int, ...]:
+        return ()
+
+    async def async_press(self) -> None:
+        programs: OtPrograms = self.coordinator.ot_programs
+        programs.last_service = dt_util.now()
+        programs._maint_notified = False
+        programs.changed()
+
+
+class OtMaintenanceDue(_ProgramEntity, BinarySensorEntity):
+    """On when the periodic service is due (CAR V2 "MANUTZ")."""
+
+    _attr_translation_key = "ot_maintenance_due"
+    _attr_device_class = BinarySensorDeviceClass.PROBLEM
+    _attr_icon = "mdi:wrench-clock"
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_maintenance_due")
+
+    @property
+    def is_on(self) -> bool:
+        due = self.programs.maintenance_due()
+        return due is not None and dt_util.now() >= due
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any]:
+        due = self.programs.maintenance_due()
+        return {"next_service": due.isoformat() if due else None,
+                "days_left": (due - dt_util.now()).days if due else None}
+
+
 class OtProgramPhase(_ProgramEntity, SensorEntity):
     """Phase of the CH program: Comfort / Eco (AUTO) or manual."""
 
@@ -617,6 +799,8 @@ def ot_selects(coordinator: ImmergasDominusCoordinator) -> list:
         OtChoiceSelect(coordinator, "zone1_time_program", "ch_program", ["manual", "auto"], "mdi:calendar-clock", config=False),
         OtChoiceSelect(coordinator, "ot_eco_action", "eco_action", ECO_ACTIONS, "mdi:leaf"),
         OtChoiceSelect(coordinator, "ot_legionella", "legionella", LEGIONELLA_OPTIONS, "mdi:bacteria-outline"),
+        OtChoiceSelect(coordinator, "ot_vacation_action", "vacation_action", VACATION_ACTIONS, "mdi:bag-suitcase-outline"),
+        OtChoiceSelect(coordinator, "ot_maintenance", "maintenance", MAINTENANCE_OPTIONS, "mdi:wrench-clock"),
     ]
 
 
@@ -629,11 +813,20 @@ def ot_switches(coordinator: ImmergasDominusCoordinator) -> list:
         OtProgramSwitch(coordinator, "dhw_comfort_eco", "dhw_sched", "mdi:calendar-clock"),
         OtProgramSwitch(coordinator, "vacation_mode", "vacation", "mdi:bag-suitcase"),
         OtProgramSwitch(coordinator, "auto_season", "auto_season", "mdi:sun-snowflake-variant"),
+        OtProgramSwitch(coordinator, "ot_self_learning", "self_learning", "mdi:school-outline"),
     ]
 
 
 def ot_datetimes(coordinator: ImmergasDominusCoordinator) -> list:
-    return [OtVacationUntil(coordinator)]
+    return [OtVacationUntil(coordinator), OtLastService(coordinator)]
+
+
+def ot_buttons(coordinator: ImmergasDominusCoordinator) -> list:
+    return [OtServiceDoneButton(coordinator)]
+
+
+def ot_binary_sensors(coordinator: ImmergasDominusCoordinator) -> list:
+    return [OtMaintenanceDue(coordinator)]
 
 
 def ot_sensors(coordinator: ImmergasDominusCoordinator) -> list:

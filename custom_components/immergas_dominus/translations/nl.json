@@ -236,6 +236,9 @@
       },
       "module_offline": {
         "name": "Dominus-module offline"
+      },
+      "ot_maintenance_due": {
+        "name": "Onderhoud nodig"
       }
     },
     "number": {
@@ -415,6 +418,9 @@
       },
       "pdu_scan_to": {
         "name": "PDU-scan tot"
+      },
+      "ot_eco_flow_reduction": {
+        "name": "Aanvoerverlaging in Eco"
       }
     },
     "select": {
@@ -524,7 +530,8 @@
         "name": "Actie in Eco-fase",
         "state": {
           "setpoint": "Eco-setpoint",
-          "ch_off": "Verwarming uit"
+          "ch_off": "Verwarming uit",
+          "reduce_flow": "Aanvoerinstelwaarde verlagen"
         }
       },
       "ot_legionella": {
@@ -540,6 +547,23 @@
         "state": {
           "standard": "Standaard (0x00)",
           "immergas": "Immergas (0xCA)"
+        }
+      },
+      "ot_vacation_action": {
+        "name": "Vakantieactie",
+        "state": {
+          "standby": "Stand-by (CV en SWW uit)",
+          "summer": "Zomer (CV uit)"
+        }
+      },
+      "ot_maintenance": {
+        "name": "Onderhoudsherinnering",
+        "state": {
+          "off": "Uit",
+          "6": "Elke 6 maanden",
+          "12": "Elke 12 maanden",
+          "18": "Elke 18 maanden",
+          "24": "Elke 24 maanden"
         }
       }
     },
@@ -613,11 +637,17 @@
       },
       "ot_read_only": {
         "name": "Alleen lezen (afstandsbediening regelt)"
+      },
+      "ot_self_learning": {
+        "name": "Zelflerend (CV-offset)"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Vakantie tot"
+      },
+      "ot_last_service": {
+        "name": "Laatste onderhoud"
       }
     },
     "button": {
@@ -635,6 +665,9 @@
       },
       "ot_scan_report": {
         "name": "Data-ID-kaart melden"
+      },
+      "ot_service_done": {
+        "name": "Onderhoud uitgevoerd"
       }
     },
     "text": {
@@ -657,6 +690,9 @@
     },
     "programs_blocked": {
       "message": "Een afstandsbediening (CAR V2 / Super Amico) regelt: de Home Assistant-programma's zijn gepauzeerd. Zet „Alleen lezen (afstandsbediening regelt)” uit om ze te gebruiken."
+    },
+    "reset_limit": {
+      "message": "5 resetpogingen op rij – de volgende over {minutes} min (zoals de CAR V2)."
     }
   }
 }

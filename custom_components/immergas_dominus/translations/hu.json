@@ -236,6 +236,9 @@
       },
       "module_offline": {
         "name": "Dominus modul offline"
+      },
+      "ot_maintenance_due": {
+        "name": "Karbantartás esedékes"
       }
     },
     "number": {
@@ -415,6 +418,9 @@
       },
       "pdu_scan_to": {
         "name": "PDU szkennelés eddig"
+      },
+      "ot_eco_flow_reduction": {
+        "name": "Előremenő csökkentés Eco-ban"
       }
     },
     "select": {
@@ -524,7 +530,8 @@
         "name": "Eco fázis művelet",
         "state": {
           "setpoint": "Eco alapjel",
-          "ch_off": "Fűtés ki"
+          "ch_off": "Fűtés ki",
+          "reduce_flow": "Előremenő alapjel csökkentése"
         }
       },
       "ot_legionella": {
@@ -540,6 +547,23 @@
         "state": {
           "standard": "Szabványos (0x00)",
           "immergas": "Immergas (0xCA)"
+        }
+      },
+      "ot_vacation_action": {
+        "name": "Szabadság művelet",
+        "state": {
+          "standby": "Stand-by (fűtés és HMV ki)",
+          "summer": "Nyár (fűtés ki)"
+        }
+      },
+      "ot_maintenance": {
+        "name": "Karbantartási emlékeztető",
+        "state": {
+          "off": "Ki",
+          "6": "6 havonta",
+          "12": "12 havonta",
+          "18": "18 havonta",
+          "24": "24 havonta"
         }
       }
     },
@@ -613,11 +637,17 @@
       },
       "ot_read_only": {
         "name": "Csak olvasás (a távvezérlő irányít)"
+      },
+      "ot_self_learning": {
+        "name": "Öntanulás (fűtési offset)"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Szabadság vége"
+      },
+      "ot_last_service": {
+        "name": "Utolsó karbantartás"
       }
     },
     "button": {
@@ -635,6 +665,9 @@
       },
       "ot_scan_report": {
         "name": "Data-ID térkép bejelentése"
+      },
+      "ot_service_done": {
+        "name": "Karbantartás kész"
       }
     },
     "text": {
@@ -657,6 +690,9 @@
     },
     "programs_blocked": {
       "message": "Távvezérlő irányít (CAR V2 / Super Amico): a Home Assistant programok szünetelnek. A használatukhoz kapcsolja ki a „Csak olvasás (a távvezérlő irányít)” kapcsolót."
+    },
+    "reset_limit": {
+      "message": "5 reset kísérlet egymás után – a következő {minutes} perc múlva (mint a CAR V2)."
     }
   }
 }

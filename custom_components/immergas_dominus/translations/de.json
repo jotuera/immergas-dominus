@@ -236,6 +236,9 @@
       },
       "module_offline": {
         "name": "Dominus-Modul offline"
+      },
+      "ot_maintenance_due": {
+        "name": "Wartung fällig"
       }
     },
     "number": {
@@ -415,6 +418,9 @@
       },
       "pdu_scan_to": {
         "name": "PDU-Scan bis"
+      },
+      "ot_eco_flow_reduction": {
+        "name": "Vorlaufabsenkung in Eco"
       }
     },
     "select": {
@@ -524,7 +530,8 @@
         "name": "Eco-Phase",
         "state": {
           "setpoint": "Eco-Sollwert",
-          "ch_off": "Heizung aus"
+          "ch_off": "Heizung aus",
+          "reduce_flow": "Vorlaufsollwert senken"
         }
       },
       "ot_legionella": {
@@ -540,6 +547,23 @@
         "state": {
           "standard": "Standard (0x00)",
           "immergas": "Immergas (0xCA)"
+        }
+      },
+      "ot_vacation_action": {
+        "name": "Urlaubsaktion",
+        "state": {
+          "standby": "Standby (HZ und WW aus)",
+          "summer": "Sommer (HZ aus)"
+        }
+      },
+      "ot_maintenance": {
+        "name": "Wartungserinnerung",
+        "state": {
+          "off": "Aus",
+          "6": "Alle 6 Monate",
+          "12": "Alle 12 Monate",
+          "18": "Alle 18 Monate",
+          "24": "Alle 24 Monate"
         }
       }
     },
@@ -613,11 +637,17 @@
       },
       "ot_read_only": {
         "name": "Nur lesen (Fernbedienung regelt)"
+      },
+      "ot_self_learning": {
+        "name": "Selbstlernend (HZ-Offset)"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Urlaub bis"
+      },
+      "ot_last_service": {
+        "name": "Letzte Wartung"
       }
     },
     "button": {
@@ -635,6 +665,9 @@
       },
       "ot_scan_report": {
         "name": "Data-ID-Karte melden"
+      },
+      "ot_service_done": {
+        "name": "Wartung erledigt"
       }
     },
     "text": {
@@ -657,6 +690,9 @@
     },
     "programs_blocked": {
       "message": "Eine Fernbedienung (CAR V2 / Super Amico) regelt: die Home-Assistant-Programme sind pausiert. Schalten Sie „Nur lesen (Fernbedienung regelt)“ aus, um sie zu nutzen."
+    },
+    "reset_limit": {
+      "message": "5 Reset-Versuche in Folge – der nächste in {minutes} min (wie bei der CAR V2)."
     }
   }
 }

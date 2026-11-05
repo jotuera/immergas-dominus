@@ -236,6 +236,9 @@
       },
       "module_offline": {
         "name": "Dominus module offline"
+      },
+      "ot_maintenance_due": {
+        "name": "Maintenance due"
       }
     },
     "number": {
@@ -415,6 +418,9 @@
       },
       "pdu_scan_to": {
         "name": "PDU scan to"
+      },
+      "ot_eco_flow_reduction": {
+        "name": "Eco flow reduction"
       }
     },
     "select": {
@@ -524,7 +530,8 @@
         "name": "Eco phase action",
         "state": {
           "setpoint": "Eco room setpoint",
-          "ch_off": "Heating off"
+          "ch_off": "Heating off",
+          "reduce_flow": "Lower the flow setpoint"
         }
       },
       "ot_legionella": {
@@ -540,6 +547,23 @@
         "state": {
           "standard": "Standard (0x00)",
           "immergas": "Immergas (0xCA)"
+        }
+      },
+      "ot_vacation_action": {
+        "name": "Vacation action",
+        "state": {
+          "standby": "Standby (CH and DHW off)",
+          "summer": "Summer (CH off)"
+        }
+      },
+      "ot_maintenance": {
+        "name": "Maintenance reminder",
+        "state": {
+          "off": "Off",
+          "6": "Every 6 months",
+          "12": "Every 12 months",
+          "18": "Every 18 months",
+          "24": "Every 24 months"
         }
       }
     },
@@ -613,11 +637,17 @@
       },
       "ot_read_only": {
         "name": "Read only (remote in charge)"
+      },
+      "ot_self_learning": {
+        "name": "Self-learning (CH offset)"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Vacation until"
+      },
+      "ot_last_service": {
+        "name": "Last service"
       }
     },
     "button": {
@@ -635,6 +665,9 @@
       },
       "ot_scan_report": {
         "name": "Report Data-ID map"
+      },
+      "ot_service_done": {
+        "name": "Service done"
       }
     },
     "text": {
@@ -657,6 +690,9 @@
     },
     "programs_blocked": {
       "message": "A remote (CAR V2 / Super Amico) is in charge: the Home Assistant programs are paused. Switch off \"Read only (remote in charge)\" to use them."
+    },
+    "reset_limit": {
+      "message": "5 reset attempts in a row – the next one in {minutes} min (as the CAR V2)."
     }
   }
 }

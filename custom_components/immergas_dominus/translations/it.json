@@ -236,6 +236,9 @@
       },
       "module_offline": {
         "name": "Modulo Dominus offline"
+      },
+      "ot_maintenance_due": {
+        "name": "Manutenzione necessaria"
       }
     },
     "number": {
@@ -415,6 +418,9 @@
       },
       "pdu_scan_to": {
         "name": "Scansione PDU a"
+      },
+      "ot_eco_flow_reduction": {
+        "name": "Riduzione mandata in Eco"
       }
     },
     "select": {
@@ -524,7 +530,8 @@
         "name": "Azione in fase Eco",
         "state": {
           "setpoint": "Set Eco",
-          "ch_off": "Riscaldamento spento"
+          "ch_off": "Riscaldamento spento",
+          "reduce_flow": "Riduci la mandata"
         }
       },
       "ot_legionella": {
@@ -540,6 +547,23 @@
         "state": {
           "standard": "Standard (0x00)",
           "immergas": "Immergas (0xCA)"
+        }
+      },
+      "ot_vacation_action": {
+        "name": "Azione vacanze",
+        "state": {
+          "standby": "Stand-by (riscaldamento e ACS spenti)",
+          "summer": "Estate (riscaldamento spento)"
+        }
+      },
+      "ot_maintenance": {
+        "name": "Promemoria manutenzione",
+        "state": {
+          "off": "Off",
+          "6": "Ogni 6 mesi",
+          "12": "Ogni 12 mesi",
+          "18": "Ogni 18 mesi",
+          "24": "Ogni 24 mesi"
         }
       }
     },
@@ -613,11 +637,17 @@
       },
       "ot_read_only": {
         "name": "Sola lettura (comanda il comando remoto)"
+      },
+      "ot_self_learning": {
+        "name": "Autoapprendimento (offset riscaldamento)"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Vacanza fino al"
+      },
+      "ot_last_service": {
+        "name": "Ultima manutenzione"
       }
     },
     "button": {
@@ -635,6 +665,9 @@
       },
       "ot_scan_report": {
         "name": "Segnala mappa Data-ID"
+      },
+      "ot_service_done": {
+        "name": "Manutenzione eseguita"
       }
     },
     "text": {
@@ -657,6 +690,9 @@
     },
     "programs_blocked": {
       "message": "Comanda un comando remoto (CAR V2 / Super Amico): i programmi di Home Assistant sono in pausa. Disattiva «Sola lettura (comanda il comando remoto)» per usarli."
+    },
+    "reset_limit": {
+      "message": "5 tentativi di reset consecutivi – il prossimo tra {minutes} min (come il CAR V2)."
     }
   }
 }

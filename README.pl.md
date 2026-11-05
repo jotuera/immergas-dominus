@@ -290,6 +290,11 @@ przyjmie sesję.
   antylegionella, urlop i automatyczne Lato / Zima nie zapisują i nie da się ich włączyć; karty pokazują je szare
   z kłódką (karty 0.54.2). **Antylegionella** nigdy nie żąda więcej niż maksimum CWU kotła (Data-ID 48, 60 °C
   w VICTRIX ZEUS) – powyżej cel nie był osiągany, a cykl trwał 3 h.
+- **OpenTherm: reszta funkcji CAR V2**, żeby pilota dało się zdjąć – w fazie Eko **obniżenie zadanej zasilania**
+  (RIDOTT ON), **samouczenie** offsetu CO (AUTO A), **przypomnienie o przeglądzie** (MANUTZ), urlop jako **Stand-by**
+  (CO i CWU wył., jak CAR V2) albo Lato, CWU Eko do minimum kotła, antylegionella trzymana 20 min, reset kotła
+  ograniczony do 5 prób na godzinę; lista kontrolna *Praca bez CAR V2* w karcie Kocioł OpenTherm (karty 0.54.3).
+  Zob. [Zastąpienie CAR V2](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.pl.md#zastąpienie-car-v2).
 
 ### 1.6.8
 

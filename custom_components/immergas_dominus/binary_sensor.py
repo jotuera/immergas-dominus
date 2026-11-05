@@ -43,6 +43,9 @@ async def async_setup_entry(
             ImmergasOpenThermBinarySensor(coordinator, description)
             for description in OT_BINARY_DESCRIPTIONS
         )
+        if getattr(coordinator, "ot_programs", None) is not None:
+            from .ot_programs import ot_binary_sensors
+            async_add_entities(ot_binary_sensors(coordinator))
         return
     async_add_entities(
         [

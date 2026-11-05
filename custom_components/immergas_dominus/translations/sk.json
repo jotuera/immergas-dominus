@@ -236,6 +236,9 @@
       },
       "module_offline": {
         "name": "Modul Dominus offline"
+      },
+      "ot_maintenance_due": {
+        "name": "Servis je potrebný"
       }
     },
     "number": {
@@ -415,6 +418,9 @@
       },
       "pdu_scan_to": {
         "name": "Sken PDU do"
+      },
+      "ot_eco_flow_reduction": {
+        "name": "Zníženie výstupu v Eko"
       }
     },
     "select": {
@@ -524,7 +530,8 @@
         "name": "Akcia vo fáze Eko",
         "state": {
           "setpoint": "Teplota Eko",
-          "ch_off": "Vypnúť kúrenie"
+          "ch_off": "Vypnúť kúrenie",
+          "reduce_flow": "Znížiť teplotu výstupu"
         }
       },
       "ot_legionella": {
@@ -540,6 +547,23 @@
         "state": {
           "standard": "Štandard (0x00)",
           "immergas": "Immergas (0xCA)"
+        }
+      },
+      "ot_vacation_action": {
+        "name": "Akcia dovolenky",
+        "state": {
+          "standby": "Stand-by (ÚK aj TÚV vyp.)",
+          "summer": "Leto (ÚK vyp.)"
+        }
+      },
+      "ot_maintenance": {
+        "name": "Pripomienka servisu",
+        "state": {
+          "off": "Vypnuté",
+          "6": "Každých 6 mesiacov",
+          "12": "Každých 12 mesiacov",
+          "18": "Každých 18 mesiacov",
+          "24": "Každých 24 mesiacov"
         }
       }
     },
@@ -613,11 +637,17 @@
       },
       "ot_read_only": {
         "name": "Iba čítanie (riadi ovládač)"
+      },
+      "ot_self_learning": {
+        "name": "Samoučenie (offset ÚK)"
       }
     },
     "datetime": {
       "vacation_until": {
         "name": "Dovolenka do"
+      },
+      "ot_last_service": {
+        "name": "Posledný servis"
       }
     },
     "button": {
@@ -635,6 +665,9 @@
       },
       "ot_scan_report": {
         "name": "Nahlásiť mapu Data-ID"
+      },
+      "ot_service_done": {
+        "name": "Servis vykonaný"
       }
     },
     "text": {
@@ -657,6 +690,9 @@
     },
     "programs_blocked": {
       "message": "Riadi ovládač (CAR V2 / Super Amico): programy Home Assistant sú pozastavené. Na ich použitie vypnite „Iba čítanie (riadi ovládač)“."
+    },
+    "reset_limit": {
+      "message": "5 pokusov o reset za sebou – ďalší o {minutes} min (ako CAR V2)."
     }
   }
 }

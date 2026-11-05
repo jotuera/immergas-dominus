@@ -76,6 +76,41 @@ Data-ID** dodaje tu kolumnę.
 - **Historia błędów** (Data-ID 12 / 13) = „pięć ostatnich anomalii” kotła (menu d0.8), kody jak w instrukcji kotła (np.
   E89 niestabilny sygnał spalania).
 
+## Zastąpienie CAR V2
+
+Cel: kocioł prowadzony przez Dominusa i Home Assistant, CAR V2 zdjęty. Co jest potrzebne:
+
+1. **Mostek X40 z powrotem na zaciskach 40-41 kotła** (albo termostat pokojowy). CAR V2 podłącza się do zacisków
+   41 / 44 po zdjęciu X40; bez CAR V2 i bez X40 kocioł po E31 przechodzi w tryb lokalny i nie grzeje (instrukcja kotła).
+2. **Skasować E31**: odłączyć i włączyć zasilanie kotła, żeby przestał czekać na pilota.
+3. **Sonda Dominusa na zaciskach 1-2 jako sonda pokojowa** (*Sonda Dominusa mierzy* = pokój, *Czujnik pokojowy*
+   włączony) – dla zadanej pokoju, programów Komfort / Eko i ochrony przed zamarzaniem. Sonda zewnętrzna idzie do kotła.
+4. ***Tylko odczyt (steruje pilot)* wyłączone** i działający Home Assistant (moduł trzyma ostatnią nastawę, gdy HA nie
+   działa, ale faz nie zmienia).
+
+Karta **Kocioł OpenTherm** pokazuje to jako listę kontrolną (*Praca bez CAR V2*).
+
+| CAR V2 | Dominus + Home Assistant |
+|---|---|
+| Stand-by / Lato / Zima | Tryb (Data-ID 0) |
+| Ręczny (pokój 10–35 °C), wymuszony automatyczny | Program CO MANUAL, Zadana temperatura pokoju; ręczna zmiana trzyma do następnej fazy |
+| Automatyczny PR RIS (4 zakresy Komfort na dobę) | Program CO AUTO: 4 kalendarze × 4 zakresy, jeden na dzień tygodnia |
+| Komfort / Ekonomiczny (20 / 16 °C) | Temperatury pokoju Komfort / Eko |
+| Pokrętło CWU, PR SAN (Komfort / minimum) | Zadana CWU; CWU Komfort / Eko wg kalendarza CWU, Eko do minimum kotła (Data-ID 48) |
+| S.RIS maks. zasilanie, krzywa OTC 0–9 | Zadana CO (parametr 17), Krzywa grzewcza |
+| ANTIGL ochrona pomieszczenia 0–10 °C | Ochrona przed zamarzaniem i jej temperatura |
+| Menu informacji | sensory (zewnętrzna, zasilanie, powrót, CWU, ciśnienie, gdy kocioł je podaje) |
+| ERR>xx, reset (maks. 5 na godzinę) | Kod i opis błędu, Reset kotła (5 prób na godzinę) |
+| REGOLAZ: MINRIS, OFFSET, DIMENS | Minimalna temperatura CO, Offset temperatury CO, Bezwładność budynku |
+| AUTO A samouczenie | Samouczenie (offset CO ±1 °C na dobę wg błędu Komfortu z poprzedniego dnia) |
+| VACANZ (CO i CWU wył.) | Tryb wyjazdowy do daty, *Działanie urlopu* Stand-by (domyślnie) albo Lato |
+| LEGION (maksimum przez 20 min, 02:00 codziennie / w poniedziałek) | Antylegionella: to samo, ograniczona do maksimum CWU kotła |
+| AMB, MODUL | Czujnik pokojowy, Modulacja |
+| RIDOTT OFF / ON (−1 … −40 °C) | Faza Eko: wyłącz ogrzewanie / obniż zadaną zasilania o *Obniżenie zasilania w Eko* |
+| MANUTZ (6–24 mies.) | Przypomnienie o przeglądzie, Ostatni przegląd, Przegląd wykonany, Przegląd wymagany |
+| AMB CR (korekta sondy ±3 °C) | – (brak parametru modułu) |
+| REMOTO, LANGUAGE, chłodzenie, wilgotność | – (robi to sam Home Assistant; nie w tych kotłach) |
+
 ## Diagnostyka
 
 **Skanuj Data-ID** (przycisk, ok. minuty, odpytywanie pauzuje) → **Obsługiwane Data-ID** pokazuje, co odpowiedziało,

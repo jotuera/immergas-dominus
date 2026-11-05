@@ -78,6 +78,42 @@ Data-ID.
 - **Fault history** (Data-ID 12 / 13) = the boiler's "last five anomalies" (menu d0.8), codes as in the boiler manual
   (e.g. E89 unstable combustion signal).
 
+## Replacing the CAR V2
+
+The goal: run the boiler with the Dominus + Home Assistant and remove the CAR V2. What it needs:
+
+1. **Jumper X40 back on boiler terminals 40-41** (or a room thermostat there). The CAR V2 is connected to terminals
+   41 / 44 with X40 removed; without the CAR V2 and without X40 the boiler goes to local mode after E31 and does not
+   heat (boiler manual).
+2. **Clear E31**: power-cycle the boiler so it stops waiting for its remote.
+3. **The Dominus probe on terminals 1-2 as the room probe** (*Dominus probe use* = room, *Room sensor* on) – for the
+   room setpoint, the Comfort / Eco programs and the room frost protection. The outdoor probe goes to the boiler.
+4. ***Read only (remote in charge)* off** and Home Assistant running (the module keeps the last setpoint when HA is down,
+   but no phase changes).
+
+The **OpenTherm boiler** card lists these as a checklist (*Running without the CAR V2*).
+
+| CAR V2 | Dominus + Home Assistant |
+|---|---|
+| Standby / Summer / Winter | Mode (Data-ID 0) |
+| Manual (room 10–35 °C), forced automatic | CH program MANUAL, Room setpoint; a manual change holds until the next phase |
+| Automatic PR RIS (4 Comfort ranges a day) | CH program AUTO: 4 calendars × 4 ranges, one per weekday |
+| Comfort / Economy (20 / 16 °C) | Comfort / Eco room temperatures |
+| DHW dial, PR SAN (Comfort / minimum) | DHW setpoint; DHW Comfort / Eco by the DHW calendar, Eco down to the boiler minimum (Data-ID 48) |
+| S.RIS max flow, OTC curve 0–9 | CH setpoint (parameter 17), Heating curve |
+| ANTIGL room frost protection 0–10 °C | Frost protection and its temperature |
+| Info menu | sensors (outdoor, flow, return, DHW, pressure when the boiler reports it) |
+| ERR>xx, reset (max. 5 per hour) | Fault code and description, Boiler reset (5 attempts per hour) |
+| REGOLAZ: MINRIS, OFFSET, DIMENS | Minimum CH temperature, CH offset, Building inertia |
+| AUTO A self-learning | Self-learning (CH offset ±1 °C a day by yesterday's Comfort error) |
+| VACANZ (CH and DHW off) | Vacation mode until a date, *Vacation action* Standby (default) or Summer |
+| LEGION (maximum for 20 min, 02:00 daily / Monday) | Anti-legionella: the same, capped at the boiler's DHW maximum |
+| AMB, MODUL | Room sensor, Modulation |
+| RIDOTT OFF / ON (−1 … −40 °C) | Eco phase action: heating off / lower the flow setpoint by *Eco flow reduction* |
+| MANUTZ (6–24 months) | Maintenance reminder, Last service, Service done, Maintenance due |
+| AMB CR (probe correction ±3 °C) | – (no module parameter) |
+| REMOTO, LANGUAGE, cooling, humidity | – (Home Assistant itself; not on these boilers) |
+
 ## Diagnostics
 
 **Scan Data-IDs** (button, about a minute, polling pauses) → **Supported Data-IDs** lists what answered, what is

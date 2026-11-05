@@ -155,6 +155,39 @@ written value back – *Taken*, or *Acknowledged, not taken* when the boiler ack
 reported to unlock writes to Data-ID 1 / 57 on Immergas boilers (experimental, default standard 0x00). Data-IDs the
 boiler answers as unsupported three times in a row are skipped for an hour.
 
+**OpenTherm Data-IDs.** What the integration reads (R) and writes (W), and what the boilers in
+[#2](https://github.com/jotuera/immergas-dominus/issues/2) answered in the Data-ID scan (✅ answers, ❌ no reply,
+– not checked). Entities marked *off* are disabled by default – enable them when your boiler answers that Data-ID
+(a Data-ID without a reply costs a timeout every polling cycle).
+
+| Data-ID | Entity | R/W | VICTRIX ZEUS 25 ErP<br>(old Dominus Wi-Fi) | Victrix Zeus Superior 26 2 ErP<br>(Dominus V2) |
+|---|---|---|---|---|
+| 0 | Fault, CH active, DHW active, Flame; Operating mode | R/W | ✅ ¹ | ✅ |
+| 3 | – (slave config: DHW present / storage tank, member ID 27 = Immergas) | scan | ✅ | ✅ |
+| 4 | Boiler reset (button) | W | – | – |
+| 5 | Fault code; Service request, Low water pressure, Gas / flame fault, Air pressure fault, Water over-temperature | R | ✅ | ✅ |
+| 12 / 13 | Fault history (*off*) – number of entries, each code in the attributes | R | ✅ | ❌ / ✅ |
+| 15 | Boiler max. capacity, Min. modulation | R | ✅ (0 / 0) | ✅ |
+| 16 | Room setpoint | R/W | ✅ | ✅ |
+| 17 | Modulation level | R | ✅ | ✅ |
+| 18 | CH water pressure | R | ❌ | ❌ |
+| 19 | DHW flow rate | R | ❌ | ✅ (always 0) |
+| 24 | Room temperature | R | ✅ | ❌ |
+| 25 / 28 | Flow / return temperature | R | ✅ | ✅ |
+| 26 | DHW temperature | R | ✅ | ✅ |
+| 27 | Outdoor temperature | R | ✅ | ✅ |
+| 33 | Exhaust temperature | R | ✅ | ✅ |
+| 35 | Fan speed, Fan speed setpoint (*off*) | R | ✅ | ❌ |
+| 36 | Flame current (*off*) | R | ✅ (not available) | ❌ |
+| 48 / 49 | – (DHW / CH setpoint limits: the sliders follow them) | R | ✅ | ✅ |
+| 56 | DHW setpoint | R/W | ✅ | ✅ |
+| 57 | Max. CH setpoint | R | ✅ | ✅ |
+| 89 / n | Dominus module parameters: CH setpoint (17), curve (4), offset (5), outdoor sensor (6), modulation (7), hysteresis (8), room sensor (9), inertia (10), probe use (11), frost (14 / 15), min. CH (16) | R/W | ✅ | ✅ |
+
+¹ No reply in the scan (a one-off timeout), but the status entities work. Answered as well, not used yet: 10 / 11
+(boiler parameters, ZEUS), 6, 7, 20 (boiler clock), 29, 30, 32 (Superior), 77, 85, 88 (ventilation IDs, both / ZEUS).
+A scan of your boiler → **Report Data-ID map** adds a column here.
+
 **OpenTherm boilers (VICTRIX ZEUS / AVIO, STAR …).** In the OpenTherm mode the same `custom:immergas-dominus`
 strategy shows the **same cards** without those that have no OpenTherm data (schedules, heating curve, calibration /
 statistics, settings, automations, connectivity): **Diagram**, **Now** (flow / return, DHW, outdoor, modulation, pressure,

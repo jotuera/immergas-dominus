@@ -63,4 +63,7 @@ COP, refrigerant circuit. For those see the
 Boilers without the Modbus configuration (VICTRIX ZEUS / AVIO, STAR…) use a 6-byte OpenTherm frame
 `[type, Data-ID, hi, lo, CRC, CRC]`. The integration reads Data-ID 0 (status: fault, CH, DHW, flame), 1 (CH setpoint),
 5 (fault code), 17 (modulation), 18 (CH pressure), 19 (DHW flow), 25 / 28 (flow / return), 26 (DHW), 27 (outdoor),
-56 (DHW setpoint) and 57 (max CH); it writes Data-ID 1 and 56. Values the boiler does not support stay empty.
+56 (DHW setpoint) and 57 (max CH); it writes Data-ID 0 (mode), 4 (reset), 16 (room setpoint), 56 (DHW setpoint) and the module parameters (Data-ID 89, the CH setpoint = parameter 17). Values the boiler does not support stay empty.
+
+The full, maintained list of Data-IDs (entities, read / write, what each tested boiler answers) is the
+[OpenTherm Data-IDs table in the README](https://github.com/jotuera/immergas-dominus#readme).

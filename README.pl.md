@@ -1,6 +1,10 @@
 # Immergas Dominus
 
 <p align="center">
+  <img src="https://raw.githubusercontent.com/jotuera/immergas-dominus/main/custom_components/immergas_dominus/brand/icon@2x.png" alt="Immergas Dominus" width="128">
+</p>
+
+<p align="center">
   <a href="https://github.com/hacs/integration"><img src="https://img.shields.io/badge/HACS-Custom-41BDF5.svg" alt="HACS Custom"></a>
   <img src="https://img.shields.io/github/v/tag/jotuera/immergas-dominus?label=version&color=blue" alt="Wersja">
   <img src="https://img.shields.io/badge/HA-2024.1%2B-41BDF5.svg" alt="Home Assistant 2024.1+">

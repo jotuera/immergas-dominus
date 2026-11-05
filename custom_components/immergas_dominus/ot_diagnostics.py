@@ -26,6 +26,17 @@ STATUS_OVERLAYS = {"standard": None, "immergas": 0xCA}
 WRITE_RESULTS = ["ok", "mismatch", "no_readback", "unsupported", "error"]
 
 
+def _table(table: dict | None) -> dict[int, int | str] | None:
+    """An indexed scan table for the attributes / the report: index -> value (decimal) or the failure."""
+    return None if table is None else dict(sorted(table.items()))
+
+
+def _table_text(table: dict | None) -> str:
+    if table is None:
+        return "-"
+    return ", ".join(f"{i}={v}" for i, v in sorted(table.items())) or "(0 entries)"
+
+
 class _DiagEntity(ImmergasDominusEntity):
     _attr_entity_category = EntityCategory.DIAGNOSTIC
 
@@ -102,6 +113,9 @@ class OtScanSensor(_DiagEntity, SensorEntity):
             "unsupported": pick("unsupported"),
             "no_reply": pick("error"),
             "values": {i: f"0x{v:04X}" for i, v in sorted(c.scan_values.items())},
+            # 1.6.7: the boiler's own parameters (TSP, Data-ID 11) and the fault history (Data-ID 13), index: value
+            "boiler_parameters": _table(c.scan_tables.get(11)),
+            "fault_history": _table(c.scan_tables.get(13)),
             "suppressed_now": sorted(f"{(k >> 8) & 0xFF}/{k & 0xFF}" if k >= 0x10000 else k for k in c.suppressed),
             "finished": datetime.fromtimestamp(finished, timezone.utc).isoformat() if finished else None,
         }
@@ -128,6 +142,11 @@ class OtReportButton(_DiagEntity, ButtonEntity):
             "",
             f"unsupported: {', '.join(map(str, pick('unsupported'))) or '-'}",
             f"no reply: {', '.join(map(str, pick('error'))) or '-'}",
+            "",
+            "boiler parameters (TSP, Data-ID 11 index=value):",
+            _table_text(c.scan_tables.get(11)),
+            "fault history (Data-ID 13 index=code):",
+            _table_text(c.scan_tables.get(13)),
             f"status low byte sent: {'0xCA (Immergas)' if c.status_lb == 0xCA else '0x00 (standard)'}",
         ]
         return "\n".join(lines)

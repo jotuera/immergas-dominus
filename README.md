@@ -166,7 +166,8 @@ boiler answers as unsupported three times in a row are skipped for an hour.
 | 3 | – (slave config: DHW present / storage tank, member ID 27 = Immergas) | scan | ✅ | ✅ |
 | 4 | Boiler reset (button) | W | – | – |
 | 5 | Fault code; Service request, Low water pressure, Gas / flame fault, Air pressure fault, Water over-temperature | R | ✅ | ✅ |
-| 12 / 13 | Fault history (*off*) – number of entries, each code in the attributes | R | ✅ | ❌ / ✅ |
+| 10 / 11 | – (the boiler's own parameters, TSP: read by **Scan Data-IDs**, attribute *boiler_parameters*) | scan | ✅ (42) | ❌ |
+| 12 / 13 | Fault history (*off*) – number of entries, each code in the attributes; also read by the scan | R | ✅ (5) | ❌ / ✅ |
 | 15 | Boiler max. capacity, Min. modulation | R | ✅ (0 / 0) | ✅ |
 | 16 | Room setpoint | R/W | ✅ | ✅ |
 | 17 | Modulation level | R | ✅ | ✅ |
@@ -184,8 +185,7 @@ boiler answers as unsupported three times in a row are skipped for an hour.
 | 57 | Max. CH setpoint | R | ✅ | ✅ |
 | 89 / n | Dominus module parameters: CH setpoint (17), curve (4), offset (5), outdoor sensor (6), modulation (7), hysteresis (8), room sensor (9), inertia (10), probe use (11), frost (14 / 15), min. CH (16) | R/W | ✅ | ✅ |
 
-¹ No reply in the scan (a one-off timeout), but the status entities work. Answered as well, not used yet: 10 / 11
-(boiler parameters, ZEUS), 6, 7, 20 (boiler clock), 29, 30, 32 (Superior), 77, 85, 88 (ventilation IDs, both / ZEUS).
+¹ No reply in the scan (a one-off timeout), but the status entities work. Answered as well, not used yet: 6, 7, 20 (boiler clock), 29, 30, 32 (Superior), 77, 85, 88 (ventilation IDs, both / ZEUS).
 A scan of your boiler → **Report Data-ID map** adds a column here.
 
 **OpenTherm boilers (VICTRIX ZEUS / AVIO, STAR …).** In the OpenTherm mode the same `custom:immergas-dominus`
@@ -304,6 +304,13 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 1.6.7
+
+- **OpenTherm: Scan Data-IDs also reads the boiler's own parameters** (transparent slave parameters, Data-ID 10 / 11 –
+  42 on a VICTRIX ZEUS 25 ErP) and the **fault history** (Data-ID 12 / 13) when the boiler reports them: attributes
+  *boiler_parameters* / *fault_history* of *Supported Data-IDs* and in **Report Data-ID map**. Their meaning is not
+  published by Immergas – a report together with the boiler's P / t / A / F menu values helps to map them.
 
 ### 1.6.6
 

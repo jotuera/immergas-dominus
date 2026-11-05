@@ -54,6 +54,11 @@ _SUPPRESS_AFTER = 3
 _SUPPRESS_SECONDS = 3600.0
 # Data-ID scan (diagnostics): the standard OpenTherm range
 _SCAN_IDS = tuple(range(0, 128))
+# 1.6.7: indexed tables read after the scan when the boiler reports their size - Data-ID 10 HB = number of transparent
+# slave parameters (TSP, the boiler's own parameters, read with Data-ID 11 HB = index) and Data-ID 12 HB = number of
+# fault history entries (read with Data-ID 13 HB = index)
+_SCAN_TABLES = {10: 11, 12: 13}
+_SCAN_TABLE_MAX = 128
 # Writes that are commands, not values - nothing to read back
 _NO_READBACK = (4,)
 # 1.6.6: f8.8 setpoints may be stored slightly differently from what was sent (a VICTRIX stores 45.0 as 44.7 and
@@ -141,6 +146,7 @@ class DominusOpenThermClient:
         self.scan_running = False
         self.scan_result: dict[int, str] = {}        # Data-ID -> "ok" / "unsupported" / "error"
         self.scan_values: dict[int, int] = {}
+        self.scan_tables: dict[int, dict[int, int | str]] = {}  # 11 / 13 -> index -> value (LB) or "unsupported" / "error"
         self.scan_finished: float | None = None      # time.time() of the last finished scan
         self.last_write: dict | None = None          # key, sent, ack, readback, result, rechecks
         self._recheck: tuple[int, float, int] | None = None  # (write key, monotonic due time, rechecks left)
@@ -193,6 +199,7 @@ class DominusOpenThermClient:
         self._scan_queue = list(_SCAN_IDS)
         self.scan_result = {}
         self.scan_values = {}
+        self.scan_tables = {}
         self.scan_running = True
         self.start()
 
@@ -290,14 +297,29 @@ class DominusOpenThermClient:
                 backoff = min(backoff * 2.0, 20.0)
 
     def _scan_step(self) -> None:
-        data_id = self._scan_queue.pop(0)
-        try:
-            self.scan_values[data_id] = self._exchange_key(data_id)
-            self.scan_result[data_id] = "ok"
-        except DominusOpenThermUnsupported:
-            self.scan_result[data_id] = "unsupported"
-        except DominusProtocolError:
-            self.scan_result[data_id] = "error"  # no / invalid reply; the session itself is kept
+        key = self._scan_queue.pop(0)
+        data_id, index = _split_key(key)
+        if index is not None:  # an entry of an indexed table (TSP / fault history)
+            table = self.scan_tables.setdefault(data_id, {})
+            try:
+                table[index] = self._exchange_key(key)
+            except DominusOpenThermUnsupported:
+                table[index] = "unsupported"
+            except DominusProtocolError:
+                table[index] = "error"
+        else:
+            try:
+                self.scan_values[data_id] = self._exchange_key(data_id)
+                self.scan_result[data_id] = "ok"
+                entry_id = _SCAN_TABLES.get(data_id)
+                if entry_id is not None:
+                    size = min((self.scan_values[data_id] >> 8) & 0xFF, _SCAN_TABLE_MAX)
+                    self.scan_tables[entry_id] = {}
+                    self._scan_queue.extend(ot_param_key(entry_id, i) for i in range(size))
+            except DominusOpenThermUnsupported:
+                self.scan_result[data_id] = "unsupported"
+            except DominusProtocolError:
+                self.scan_result[data_id] = "error"  # no / invalid reply; the session itself is kept
         if not self._scan_queue:
             self.scan_running = False
             self.scan_finished = time.time()

@@ -421,6 +421,45 @@
       },
       "ot_eco_flow_reduction": {
         "name": "Aanvoerverlaging in Eco"
+      },
+      "ot_t0": {
+        "name": "t0 · Min. aanvoertemperatuur CV"
+      },
+      "ot_t1": {
+        "name": "t1 · Max. aanvoertemperatuur CV"
+      },
+      "ot_t4": {
+        "name": "t4 · Wachttijd na SWW"
+      },
+      "ot_t5": {
+        "name": "t5 · CV-pendelblokkering"
+      },
+      "ot_t6": {
+        "name": "t6 · CV-vermogensopbouw"
+      },
+      "ot_t7": {
+        "name": "t7 · CV-ontstekingsvertraging"
+      },
+      "ot_p0": {
+        "name": "P0 · Max. vermogen SWW"
+      },
+      "ot_p1": {
+        "name": "P1 · Min. vermogen"
+      },
+      "ot_p2": {
+        "name": "P2 · Max. vermogen CV"
+      },
+      "ot_p7": {
+        "name": "P7 · Correctie buitenvoeler"
+      },
+      "ot_a3": {
+        "name": "A3 · Max. pomptoerental"
+      },
+      "ot_a4": {
+        "name": "A4 · Min. pomptoerental"
+      },
+      "ot_a5": {
+        "name": "A5 · Pompmodus (0 = proportioneel, 5-25 = ΔT)"
       }
     },
     "select": {
@@ -564,6 +603,22 @@
           "12": "Elke 12 maanden",
           "18": "Elke 18 maanden",
           "24": "Elke 24 maanden"
+        }
+      },
+      "ot_t2": {
+        "name": "t2 · SWW-thermostaat",
+        "state": {
+          "0": "0: DHW setpoint + 25 °C",
+          "1": "1: by the boiler output",
+          "2": "2: 1.1 × DHW setpoint + 6 °C",
+          "3": "3: 85 °C"
+        }
+      },
+      "ot_p6": {
+        "name": "P6 · Pompwerking",
+        "state": {
+          "intermittent": "Intermitterend",
+          "continuous": "Continu"
         }
       }
     },

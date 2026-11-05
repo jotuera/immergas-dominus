@@ -298,6 +298,8 @@ the module accepts the session.
   ON), **self-learning** of the CH offset (AUTO A), **maintenance reminder** (MANUTZ), vacation as **Standby** (CH and
   DHW off, as the CAR V2) or Summer, DHW Eco down to the boiler minimum, anti-legionella held 20 min, boiler reset
   limited to 5 attempts per hour; a *Running without the CAR V2* checklist on the OpenTherm boiler card (cards 0.54.3).
+- **OpenTherm: boiler menu declared offline** (t0 / t1, t2, t4–t7, P0–P2, P6, P7, A3–A5) with hints – e.g. t5 when
+  the burner short-cycles; **Boiler parameters (offline)** card on the OpenTherm dashboard (cards 0.55.2).
   See [Replacing the CAR V2](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.md#replacing-the-car-v2).
 
 ### 1.6.8

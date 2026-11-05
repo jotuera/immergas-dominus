@@ -421,6 +421,45 @@
       },
       "ot_eco_flow_reduction": {
         "name": "Előremenő csökkentés Eco-ban"
+      },
+      "ot_t0": {
+        "name": "t0 · Min. fűtési előremenő"
+      },
+      "ot_t1": {
+        "name": "t1 · Max. fűtési előremenő"
+      },
+      "ot_t4": {
+        "name": "t4 · Várakozás HMV után"
+      },
+      "ot_t5": {
+        "name": "t5 · Fűtési újragyújtás tiltás"
+      },
+      "ot_t6": {
+        "name": "t6 · Fűtési teljesítmény rámpa"
+      },
+      "ot_t7": {
+        "name": "t7 · Gyújtás késleltetés"
+      },
+      "ot_p0": {
+        "name": "P0 · Max. HMV teljesítmény"
+      },
+      "ot_p1": {
+        "name": "P1 · Min. teljesítmény"
+      },
+      "ot_p2": {
+        "name": "P2 · Max. fűtési teljesítmény"
+      },
+      "ot_p7": {
+        "name": "P7 · Külső szonda korrekció"
+      },
+      "ot_a3": {
+        "name": "A3 · Max. szivattyú fordulat"
+      },
+      "ot_a4": {
+        "name": "A4 · Min. szivattyú fordulat"
+      },
+      "ot_a5": {
+        "name": "A5 · Szivattyú mód (0 = arányos, 5-25 = ΔT)"
       }
     },
     "select": {
@@ -564,6 +603,22 @@
           "12": "12 havonta",
           "18": "18 havonta",
           "24": "24 havonta"
+        }
+      },
+      "ot_t2": {
+        "name": "t2 · HMV termosztát",
+        "state": {
+          "0": "0: DHW setpoint + 25 °C",
+          "1": "1: by the boiler output",
+          "2": "2: 1.1 × DHW setpoint + 6 °C",
+          "3": "3: 85 °C"
+        }
+      },
+      "ot_p6": {
+        "name": "P6 · Szivattyú működés",
+        "state": {
+          "intermittent": "Szakaszos",
+          "continuous": "Folyamatos"
         }
       }
     },

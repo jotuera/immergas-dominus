@@ -114,6 +114,30 @@ The **OpenTherm boiler** card lists these as a checklist (*Running without the C
 | AMB CR (probe correction ±3 °C) | – (no module parameter) |
 | REMOTO, LANGUAGE, cooling, humidity | – (Home Assistant itself; not on these boilers) |
 
+## Boiler menu (declared, offline)
+
+The boiler's own menu (VICTRIX ZEUS 25 manual) cannot be read over OpenTherm yet: the boiler reports 42 transparent
+slave parameters (Data-ID 10 / 11), but Immergas does not publish which number is which. Like the Modbus mode, the
+integration keeps them as **declared values**, copied once from the boiler menu, empty by default (a *suggested* value
+is the factory default). Nothing is written to the boiler; the **Boiler parameters (offline)** card uses them for
+hints.
+
+| Menu | Entity (factory default) | Hint on the dashboard |
+|---|---|---|
+| t0 / t1 | CH min. / max. flow temperature (25 / 85 °C) | next to the CH range the boiler reports (Data-ID 49) |
+| t5 | CH ignitions timer, 0–600 s (180 s) | with more than 6 burner starts an hour: lengthen t5 (300–600 s) |
+| t6 / t7 | CH ramp timer (180 s) / ignition delay (0 s) | – |
+| t4 | DHW priority timing (20 s) | – |
+| t2 | DHW thermostat: flow while heating the cylinder (1) | – |
+| P0 / P1 / P2 | DHW max. / min. / CH max. output (99 / 0 / 80 %) | P1 next to the min. modulation (Data-ID 15); P2 next to boiler parameter 12 of the scan |
+| P6 | pump intermittent / continuous | – |
+| A3 / A4 / A5 | pump max. / min. speed, pump mode (9 / 6 / 15) | – |
+| P7 | outdoor probe correction (0 K) | – |
+
+Built-in automatic functions (pump / 3-way valve anti-block every 24 h, radiator frost protection below 4 °C, P.C.B.
+self-check every 18 h, automatic venting A7, chimney sweep) need no settings and are not reported over OpenTherm.
+Scans together with the menu values (**Report Data-ID map**) will let the integration read them directly.
+
 ## Diagnostics
 
 **Scan Data-IDs** (button, about a minute, polling pauses) → **Supported Data-IDs** lists what answered, what is

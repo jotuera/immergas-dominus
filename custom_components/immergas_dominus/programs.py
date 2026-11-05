@@ -249,6 +249,53 @@ class ImmergasFloorType(_Declared, SelectEntity, RestoreEntity):
         self.async_write_ha_state()
 
 
+class ImmergasDeclaredSelect(_Declared, SelectEntity, RestoreEntity):
+    """A boiler menu choice declared by the user (starts empty)."""
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator, key: str, icon: str, options: list[str], suggested: str) -> None:
+        super().__init__(coordinator, key, icon, suggested)
+        self._attr_options = options
+        self._attr_current_option = None
+
+    async def async_added_to_hass(self) -> None:
+        await super().async_added_to_hass()
+        last = await self.async_get_last_state()
+        if last is not None and last.state in self.options:
+            self._attr_current_option = last.state
+
+    async def async_select_option(self, option: str) -> None:
+        self._attr_current_option = option
+        self.async_write_ha_state()
+
+
+# 1.6.9: OpenTherm boilers (VICTRIX ZEUS ...) - the P / t / A menu of the boiler, copied once from the boiler; Immergas
+# does not publish which transparent slave parameter (Data-ID 11) is which, so they cannot be read yet
+def ot_declared_numbers(coordinator: ImmergasDominusCoordinator) -> list[RestoreNumber]:
+    c, s, pct = UnitOfTemperature.CELSIUS, UnitOfTime.SECONDS, "%"
+    return [
+        ImmergasDeclaredNumber(coordinator, "ot_t0", "mdi:thermometer-low", 25, 20, 50, c),        # CH min. flow
+        ImmergasDeclaredNumber(coordinator, "ot_t1", "mdi:thermometer-high", 85, 25, 85, c),       # CH max. flow
+        ImmergasDeclaredNumber(coordinator, "ot_t4", "mdi:timer-sand", 20, 0, 100, s, 10),         # DHW priority timing
+        ImmergasDeclaredNumber(coordinator, "ot_t5", "mdi:timer-lock-outline", 180, 0, 600, s, 10),  # CH ignitions timer
+        ImmergasDeclaredNumber(coordinator, "ot_t6", "mdi:chart-line-variant", 180, 0, 840, s, 10),  # CH ramp timer
+        ImmergasDeclaredNumber(coordinator, "ot_t7", "mdi:timer-play-outline", 0, 0, 600, s, 10),  # CH ignition delay
+        ImmergasDeclaredNumber(coordinator, "ot_p0", "mdi:water-boiler", 99, 0, 99, pct),          # DHW max. output
+        ImmergasDeclaredNumber(coordinator, "ot_p1", "mdi:fire-circle", 0, 0, 99, pct),            # min. output
+        ImmergasDeclaredNumber(coordinator, "ot_p2", "mdi:fire", 80, 0, 99, pct),                  # CH max. output
+        ImmergasDeclaredNumber(coordinator, "ot_p7", "mdi:thermometer-plus", 0, -9, 9, UnitOfTemperature.KELVIN),
+        ImmergasDeclaredNumber(coordinator, "ot_a3", "mdi:pump", 9, 1, 9, None),                   # pump max. speed
+        ImmergasDeclaredNumber(coordinator, "ot_a4", "mdi:pump-off", 6, 1, 9, None),               # pump min. speed
+        ImmergasDeclaredNumber(coordinator, "ot_a5", "mdi:delta", 15, 0, 25, UnitOfTemperature.KELVIN),  # pump mode / delta T
+    ]
+
+
+def ot_declared_selects(coordinator: ImmergasDominusCoordinator) -> list[SelectEntity]:
+    return [
+        ImmergasDeclaredSelect(coordinator, "ot_t2", "mdi:water-thermometer", ["0", "1", "2", "3"], "1"),
+        ImmergasDeclaredSelect(coordinator, "ot_p6", "mdi:pump", ["intermittent", "continuous"], "intermittent"),
+    ]
+
+
 def declared_times(coordinator: ImmergasDominusCoordinator) -> list[TimeEntity]:
     return [
         ImmergasDeclaredTime(coordinator, "night_start", "mdi:weather-sunset-down", time(21, 0)),

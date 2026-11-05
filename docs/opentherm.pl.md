@@ -111,6 +111,29 @@ Karta **Kocioł OpenTherm** pokazuje to jako listę kontrolną (*Praca bez CAR V
 | AMB CR (korekta sondy ±3 °C) | – (brak parametru modułu) |
 | REMOTO, LANGUAGE, chłodzenie, wilgotność | – (robi to sam Home Assistant; nie w tych kotłach) |
 
+## Menu kotła (deklarowane, offline)
+
+Własnego menu kotła (instrukcja VICTRIX ZEUS 25) nie da się jeszcze odczytać przez OpenTherm: kocioł podaje 42
+parametry (Data-ID 10 / 11), ale Immergas nie publikuje, który numer jest który. Jak w trybie Modbus, integracja trzyma
+je jako **wartości deklarowane**, przepisane raz z menu kotła, domyślnie puste (wartość *sugerowana* to ustawienie
+fabryczne). Nic nie trafia do kotła; karta **Parametry pieca (offline)** używa ich do podpowiedzi.
+
+| Menu | Encja (ustawienie fabryczne) | Podpowiedź na dashboardzie |
+|---|---|---|
+| t0 / t1 | min. / maks. temperatura zasilania CO (25 / 85 °C) | obok zakresu CO podawanego przez kocioł (Data-ID 49) |
+| t5 | blokada ponownego zapłonu CO, 0–600 s (180 s) | przy ponad 6 startach palnika na godzinę: wydłuż t5 (300–600 s) |
+| t6 / t7 | rampa mocy CO (180 s) / opóźnienie zapłonu (0 s) | – |
+| t4 | czekanie po CWU przed CO (20 s) | – |
+| t2 | termostat CWU: zasilanie przy grzaniu zasobnika (1) | – |
+| P0 / P1 / P2 | maks. moc CWU / min. moc / maks. moc CO (99 / 0 / 80 %) | P1 obok min. modulacji (Data-ID 15); P2 obok parametru kotła 12 ze skanu |
+| P6 | pompa przerywana / ciągła | – |
+| A3 / A4 / A5 | maks. / min. prędkość pompy, tryb pompy (9 / 6 / 15) | – |
+| P7 | korekta sondy zewnętrznej (0 K) | – |
+
+Funkcje automatyczne kotła (ochrona pompy i zaworu 3-drogowego co 24 h, ochrona grzejników poniżej 4 °C, autotest
+płytki co 18 h, odpowietrzanie A7, kominiarz) nie wymagają ustawień i nie są zgłaszane przez OpenTherm. Skany razem
+z wartościami z menu (**Zgłoś mapę Data-ID**) pozwolą integracji czytać je bezpośrednio.
+
 ## Diagnostyka
 
 **Skanuj Data-ID** (przycisk, ok. minuty, odpytywanie pauzuje) → **Obsługiwane Data-ID** pokazuje, co odpowiedziało,

@@ -50,8 +50,9 @@ async def async_setup_entry(
     if entry.data.get(CONF_PROTOCOL) == PROTOCOL_OPENTHERM:
         from .ot_diagnostics import OtStatusOverlaySelect
         from .ot_programs import ot_selects
+        from .programs import ot_declared_selects
         async_add_entities([ImmergasOpenThermModeSelect(coordinator), ImmergasOpenThermNtcUseSelect(coordinator), *ot_selects(coordinator),
-                            OtStatusOverlaySelect(coordinator)])
+                            OtStatusOverlaySelect(coordinator), *ot_declared_selects(coordinator)])
         return
     entities: list[SelectEntity] = [
         ImmergasDominusSelect(coordinator, description)

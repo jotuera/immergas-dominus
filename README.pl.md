@@ -294,6 +294,8 @@ przyjmie sesję.
   (RIDOTT ON), **samouczenie** offsetu CO (AUTO A), **przypomnienie o przeglądzie** (MANUTZ), urlop jako **Stand-by**
   (CO i CWU wył., jak CAR V2) albo Lato, CWU Eko do minimum kotła, antylegionella trzymana 20 min, reset kotła
   ograniczony do 5 prób na godzinę; lista kontrolna *Praca bez CAR V2* w karcie Kocioł OpenTherm (karty 0.54.3).
+- **OpenTherm: menu kotła deklarowane offline** (t0 / t1, t2, t4–t7, P0–P2, P6, P7, A3–A5) z podpowiedziami – np. t5
+  przy taktowaniu palnika; karta **Parametry pieca (offline)** na dashboardzie OpenTherm (karty 0.55.2).
   Zob. [Zastąpienie CAR V2](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.pl.md#zastąpienie-car-v2).
 
 ### 1.6.8

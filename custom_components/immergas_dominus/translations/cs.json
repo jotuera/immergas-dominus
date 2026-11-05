@@ -421,6 +421,45 @@
       },
       "ot_eco_flow_reduction": {
         "name": "Snížení výstupu v Eko"
+      },
+      "ot_t0": {
+        "name": "t0 · Min. teplota výstupu ÚT"
+      },
+      "ot_t1": {
+        "name": "t1 · Max. teplota výstupu ÚT"
+      },
+      "ot_t4": {
+        "name": "t4 · Zpoždění po TUV"
+      },
+      "ot_t5": {
+        "name": "t5 · Blokace opětovného zapálení ÚT"
+      },
+      "ot_t6": {
+        "name": "t6 · Rampa výkonu ÚT"
+      },
+      "ot_t7": {
+        "name": "t7 · Zpoždění zapálení ÚT"
+      },
+      "ot_p0": {
+        "name": "P0 · Max. výkon TUV"
+      },
+      "ot_p1": {
+        "name": "P1 · Min. výkon"
+      },
+      "ot_p2": {
+        "name": "P2 · Max. výkon ÚT"
+      },
+      "ot_p7": {
+        "name": "P7 · Korekce venkovní sondy"
+      },
+      "ot_a3": {
+        "name": "A3 · Max. otáčky čerpadla"
+      },
+      "ot_a4": {
+        "name": "A4 · Min. otáčky čerpadla"
+      },
+      "ot_a5": {
+        "name": "A5 · Režim čerpadla (0 = proporcionální, 5-25 = ΔT)"
       }
     },
     "select": {
@@ -564,6 +603,22 @@
           "12": "Každých 12 měsíců",
           "18": "Každých 18 měsíců",
           "24": "Každých 24 měsíců"
+        }
+      },
+      "ot_t2": {
+        "name": "t2 · Termostat TUV",
+        "state": {
+          "0": "0: DHW setpoint + 25 °C",
+          "1": "1: by the boiler output",
+          "2": "2: 1.1 × DHW setpoint + 6 °C",
+          "3": "3: 85 °C"
+        }
+      },
+      "ot_p6": {
+        "name": "P6 · Provoz čerpadla",
+        "state": {
+          "intermittent": "Přerušovaný",
+          "continuous": "Nepřetržitý"
         }
       }
     },

@@ -39,6 +39,8 @@ async def async_setup_entry(
             for description in OT_NUMBER_DESCRIPTIONS
         )
         async_add_entities(ot_numbers(coordinator))
+        from .programs import ot_declared_numbers
+        async_add_entities(ot_declared_numbers(coordinator))
         return
     entities: list[NumberEntity] = [
         ImmergasDominusNumber(coordinator, description)

@@ -421,6 +421,45 @@
       },
       "ot_eco_flow_reduction": {
         "name": "Reducción de impulsión en Eco"
+      },
+      "ot_t0": {
+        "name": "t0 · Temp. mín. impulsión calefacción"
+      },
+      "ot_t1": {
+        "name": "t1 · Temp. máx. impulsión calefacción"
+      },
+      "ot_t4": {
+        "name": "t4 · Espera tras ACS"
+      },
+      "ot_t5": {
+        "name": "t5 · Temporizador de encendidos"
+      },
+      "ot_t6": {
+        "name": "t6 · Rampa de potencia"
+      },
+      "ot_t7": {
+        "name": "t7 · Retardo de encendido"
+      },
+      "ot_p0": {
+        "name": "P0 · Potencia máx. ACS"
+      },
+      "ot_p1": {
+        "name": "P1 · Potencia mín."
+      },
+      "ot_p2": {
+        "name": "P2 · Potencia máx. calefacción"
+      },
+      "ot_p7": {
+        "name": "P7 · Corrección sonda exterior"
+      },
+      "ot_a3": {
+        "name": "A3 · Velocidad máx. bomba"
+      },
+      "ot_a4": {
+        "name": "A4 · Velocidad mín. bomba"
+      },
+      "ot_a5": {
+        "name": "A5 · Modo bomba (0 = proporcional, 5-25 = ΔT)"
       }
     },
     "select": {
@@ -564,6 +603,22 @@
           "12": "Cada 12 meses",
           "18": "Cada 18 meses",
           "24": "Cada 24 meses"
+        }
+      },
+      "ot_t2": {
+        "name": "t2 · Termostato ACS",
+        "state": {
+          "0": "0: DHW setpoint + 25 °C",
+          "1": "1: by the boiler output",
+          "2": "2: 1.1 × DHW setpoint + 6 °C",
+          "3": "3: 85 °C"
+        }
+      },
+      "ot_p6": {
+        "name": "P6 · Funcionamiento bomba",
+        "state": {
+          "intermittent": "Intermitente",
+          "continuous": "Continuo"
         }
       }
     },

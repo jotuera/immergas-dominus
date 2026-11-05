@@ -421,6 +421,45 @@
       },
       "ot_eco_flow_reduction": {
         "name": "Redução da ida em Eco"
+      },
+      "ot_t0": {
+        "name": "t0 · Temp. mín. ida aquecimento"
+      },
+      "ot_t1": {
+        "name": "t1 · Temp. máx. ida aquecimento"
+      },
+      "ot_t4": {
+        "name": "t4 · Espera após AQS"
+      },
+      "ot_t5": {
+        "name": "t5 · Temporizador de ignições"
+      },
+      "ot_t6": {
+        "name": "t6 · Rampa de potência"
+      },
+      "ot_t7": {
+        "name": "t7 · Atraso de ignição"
+      },
+      "ot_p0": {
+        "name": "P0 · Potência máx. AQS"
+      },
+      "ot_p1": {
+        "name": "P1 · Potência mín."
+      },
+      "ot_p2": {
+        "name": "P2 · Potência máx. aquecimento"
+      },
+      "ot_p7": {
+        "name": "P7 · Correção sonda exterior"
+      },
+      "ot_a3": {
+        "name": "A3 · Velocidade máx. bomba"
+      },
+      "ot_a4": {
+        "name": "A4 · Velocidade mín. bomba"
+      },
+      "ot_a5": {
+        "name": "A5 · Modo bomba (0 = proporcional, 5-25 = ΔT)"
       }
     },
     "select": {
@@ -564,6 +603,22 @@
           "12": "A cada 12 meses",
           "18": "A cada 18 meses",
           "24": "A cada 24 meses"
+        }
+      },
+      "ot_t2": {
+        "name": "t2 · Termóstato AQS",
+        "state": {
+          "0": "0: DHW setpoint + 25 °C",
+          "1": "1: by the boiler output",
+          "2": "2: 1.1 × DHW setpoint + 6 °C",
+          "3": "3: 85 °C"
+        }
+      },
+      "ot_p6": {
+        "name": "P6 · Funcionamento da bomba",
+        "state": {
+          "intermittent": "Intermitente",
+          "continuous": "Contínuo"
         }
       }
     },

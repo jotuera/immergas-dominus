@@ -421,6 +421,45 @@
       },
       "ot_eco_flow_reduction": {
         "name": "Abaissement du départ en Éco"
+      },
+      "ot_t0": {
+        "name": "t0 · Temp. départ chauffage min."
+      },
+      "ot_t1": {
+        "name": "t1 · Temp. départ chauffage max."
+      },
+      "ot_t4": {
+        "name": "t4 · Attente après ECS"
+      },
+      "ot_t5": {
+        "name": "t5 · Temporisation des allumages"
+      },
+      "ot_t6": {
+        "name": "t6 · Rampe de puissance"
+      },
+      "ot_t7": {
+        "name": "t7 · Retard d’allumage"
+      },
+      "ot_p0": {
+        "name": "P0 · Puissance max. ECS"
+      },
+      "ot_p1": {
+        "name": "P1 · Puissance min."
+      },
+      "ot_p2": {
+        "name": "P2 · Puissance max. chauffage"
+      },
+      "ot_p7": {
+        "name": "P7 · Correction sonde extérieure"
+      },
+      "ot_a3": {
+        "name": "A3 · Vitesse max. pompe"
+      },
+      "ot_a4": {
+        "name": "A4 · Vitesse min. pompe"
+      },
+      "ot_a5": {
+        "name": "A5 · Mode pompe (0 = proportionnel, 5-25 = ΔT)"
       }
     },
     "select": {
@@ -564,6 +603,22 @@
           "12": "Tous les 12 mois",
           "18": "Tous les 18 mois",
           "24": "Tous les 24 mois"
+        }
+      },
+      "ot_t2": {
+        "name": "t2 · Thermostat ECS",
+        "state": {
+          "0": "0: DHW setpoint + 25 °C",
+          "1": "1: by the boiler output",
+          "2": "2: 1.1 × DHW setpoint + 6 °C",
+          "3": "3: 85 °C"
+        }
+      },
+      "ot_p6": {
+        "name": "P6 · Fonctionnement pompe",
+        "state": {
+          "intermittent": "Intermittent",
+          "continuous": "Continu"
         }
       }
     },

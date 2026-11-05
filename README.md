@@ -203,6 +203,15 @@ room `2011`, target `2015`, outdoor `3002`, DHW cylinder `3016`, mode `2000`); n
 Which boiler registers (PDUs) the Dominus module answers over local TCP – frame, values, zones, time programs, what
 is not readable, OpenTherm Data-IDs: [docs/pdu-map.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/pdu-map.md).
 
+**Help map your boiler (1.6.6).** The Dominus device has a **PDU scanner** in *Diagnostic* / *Configuration*:
+set **PDU scan from** / **PDU scan to** (up to 2000 PDUs, e.g. 2000–2999 or 3000–3999) and the **Boiler model** (as on
+the rating plate), press **Scan PDUs** (about a second per PDU, the normal polling continues; press again to stop).
+The **PDU scan** sensor shows the non-zero values, the zeros and the PDUs without a reply. **Report PDU map** then
+creates a notification with a link to a **pre-filled GitHub issue** (boiler model, integration version, the map –
+no host, MAC or password). Nothing is sent automatically: check the issue on GitHub and press *Create*. A PDU the
+boiler does not provide usually reads 0, so the zeros are listed separately. Scans of other boiler models are the
+most useful.
+
 ## Supported models
 
 All boilers whose Dominus module uses the **`WFC01_IM_MBUS_MPROCOMBOV2`** configuration
@@ -261,6 +270,11 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 1.6.6
+
+- **PDU scanner** (Modbus mode): scan a PDU range through the Dominus TCP, the map in a sensor, and **Report PDU map**
+  – a link to a pre-filled GitHub issue with the boiler model (nothing is sent automatically).
 
 ### 1.6.5
 

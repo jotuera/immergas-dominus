@@ -165,6 +165,9 @@
           "unsupported": "Nicht unterstützt",
           "error": "Keine Antwort"
         }
+      },
+      "pdu_scan_result": {
+        "name": "PDU-Scan"
       }
     },
     "binary_sensor": {
@@ -385,6 +388,12 @@
       },
       "ot_legionella_temp": {
         "name": "Legionellenschutz-Temperatur"
+      },
+      "pdu_scan_from": {
+        "name": "PDU-Scan von"
+      },
+      "pdu_scan_to": {
+        "name": "PDU-Scan bis"
       }
     },
     "select": {
@@ -593,6 +602,17 @@
       },
       "ot_scan": {
         "name": "Data-IDs scannen"
+      },
+      "pdu_scan": {
+        "name": "PDUs scannen"
+      },
+      "pdu_scan_report": {
+        "name": "PDU-Karte melden"
+      }
+    },
+    "text": {
+      "boiler_model": {
+        "name": "Kesselmodell"
       }
     }
   },

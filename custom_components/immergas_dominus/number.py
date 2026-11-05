@@ -52,6 +52,9 @@ async def async_setup_entry(
     if coordinator.stats is not None:
         entities += [ImmergasStatsSetting(coordinator, spec) for spec in SETTING_SPECS]
         entities += declared_numbers(coordinator)
+    if getattr(coordinator, "pdu_scan", None) is not None:
+        from .pdu_scan import pdu_scan_numbers
+        entities += pdu_scan_numbers(coordinator)
     async_add_entities(entities)
 
 

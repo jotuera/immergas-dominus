@@ -165,6 +165,9 @@
           "unsupported": "Non pris en charge",
           "error": "Pas de réponse"
         }
+      },
+      "pdu_scan_result": {
+        "name": "Scan PDU"
       }
     },
     "binary_sensor": {
@@ -385,6 +388,12 @@
       },
       "ot_legionella_temp": {
         "name": "Température anti-légionelle"
+      },
+      "pdu_scan_from": {
+        "name": "Scan PDU de"
+      },
+      "pdu_scan_to": {
+        "name": "Scan PDU à"
       }
     },
     "select": {
@@ -593,6 +602,17 @@
       },
       "ot_scan": {
         "name": "Scanner les Data-ID"
+      },
+      "pdu_scan": {
+        "name": "Scanner les PDU"
+      },
+      "pdu_scan_report": {
+        "name": "Signaler la carte PDU"
+      }
+    },
+    "text": {
+      "boiler_model": {
+        "name": "Modèle de chaudière"
       }
     }
   },

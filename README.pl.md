@@ -205,6 +205,14 @@ pokój `2011`, zadana `2015`, zewnętrzna `3002`, zasobnik CWU `3016`, tryb `200
 Które rejestry kotła (PDU) moduł Dominus udostępnia po lokalnym TCP – ramka, wartości, strefy, programy czasowe,
 czego nie da się odczytać, Data-ID OpenTherm: [docs/pdu-map.pl.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/pdu-map.pl.md).
 
+**Pomóż zmapować swój kocioł (1.6.6).** Urządzenie Dominus ma **skaner PDU** w sekcjach *Diagnostyka* /
+*Konfiguracja*: ustaw **Skan PDU od** / **Skan PDU do** (do 2000 PDU, np. 2000–2999 albo 3000–3999) i **Model kotła**
+(jak na tabliczce znamionowej), naciśnij **Skanuj PDU** (ok. sekundy na PDU, zwykłe odpytywanie działa dalej; ponowne
+naciśnięcie zatrzymuje skan). Czujnik **Skan PDU** pokazuje wartości niezerowe, zera i PDU bez odpowiedzi. **Zgłoś mapę
+PDU** tworzy powiadomienie z linkiem do **gotowego zgłoszenia na GitHubie** (model kotła, wersja integracji, mapa – bez
+adresu, MAC i hasła). Nic nie jest wysyłane automatycznie: sprawdź zgłoszenie na GitHubie i naciśnij *Create*. PDU,
+którego kocioł nie udostępnia, zwykle zwraca 0, dlatego zera są wypisane osobno. Najcenniejsze są skany innych modeli.
+
 ## Obsługiwane modele
 
 Wszystkie kotły, których moduł Dominus używa konfiguracji **`WFC01_IM_MBUS_MPROCOMBOV2`**,
@@ -263,6 +271,11 @@ przyjmie sesję.
   sprawdzone krzyżowo, ale na innych modelach mogą wymagać weryfikacji przez TCP AUTH.
 
 ## Historia zmian
+
+### 1.6.6
+
+- **Skaner PDU** (tryb Modbus): skan zakresu PDU przez TCP Dominusa, mapa w czujniku i **Zgłoś mapę PDU** – link do
+  gotowego zgłoszenia na GitHubie z modelem kotła (nic nie jest wysyłane automatycznie).
 
 ### 1.6.5
 

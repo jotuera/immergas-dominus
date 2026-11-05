@@ -159,6 +159,12 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     if coordinator.stats is not None:
         coordinator.stats.start()
         entry.async_on_unload(coordinator.stats.stop)
+    # Modbus mode: PDU scanner + map report (entities in number / button / sensor / text)
+    coordinator.pdu_scan = None
+    if not opentherm:
+        from .pdu_scan import PduScanner
+        coordinator.pdu_scan = PduScanner(hass, coordinator)
+        entry.async_on_unload(coordinator.pdu_scan.stop)
 
     integration = await async_get_integration(hass, DOMAIN)
     version = str(integration.version) if integration.version else None

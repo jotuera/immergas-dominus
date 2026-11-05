@@ -165,6 +165,9 @@
           "unsupported": "Not supported",
           "error": "No reply"
         }
+      },
+      "pdu_scan_result": {
+        "name": "PDU scan"
       }
     },
     "binary_sensor": {
@@ -385,6 +388,12 @@
       },
       "ot_legionella_temp": {
         "name": "Anti-legionella temperature"
+      },
+      "pdu_scan_from": {
+        "name": "PDU scan from"
+      },
+      "pdu_scan_to": {
+        "name": "PDU scan to"
       }
     },
     "select": {
@@ -593,6 +602,17 @@
       },
       "ot_scan": {
         "name": "Scan Data-IDs"
+      },
+      "pdu_scan": {
+        "name": "Scan PDUs"
+      },
+      "pdu_scan_report": {
+        "name": "Report PDU map"
+      }
+    },
+    "text": {
+      "boiler_model": {
+        "name": "Boiler model"
       }
     }
   },

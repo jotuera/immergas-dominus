@@ -165,6 +165,9 @@
           "unsupported": "Nepodporované",
           "error": "Bez odpovede"
         }
+      },
+      "pdu_scan_result": {
+        "name": "Sken PDU"
       }
     },
     "binary_sensor": {
@@ -385,6 +388,12 @@
       },
       "ot_legionella_temp": {
         "name": "Teplota proti legionele"
+      },
+      "pdu_scan_from": {
+        "name": "Sken PDU od"
+      },
+      "pdu_scan_to": {
+        "name": "Sken PDU do"
       }
     },
     "select": {
@@ -593,6 +602,17 @@
       },
       "ot_scan": {
         "name": "Skenovať Data-ID"
+      },
+      "pdu_scan": {
+        "name": "Skenovať PDU"
+      },
+      "pdu_scan_report": {
+        "name": "Nahlásiť mapu PDU"
+      }
+    },
+    "text": {
+      "boiler_model": {
+        "name": "Model kotla"
       }
     }
   },

@@ -165,6 +165,9 @@
           "unsupported": "Não suportado",
           "error": "Sem resposta"
         }
+      },
+      "pdu_scan_result": {
+        "name": "Análise PDU"
       }
     },
     "binary_sensor": {
@@ -385,6 +388,12 @@
       },
       "ot_legionella_temp": {
         "name": "Temperatura anti-legionela"
+      },
+      "pdu_scan_from": {
+        "name": "Análise PDU de"
+      },
+      "pdu_scan_to": {
+        "name": "Análise PDU até"
       }
     },
     "select": {
@@ -593,6 +602,17 @@
       },
       "ot_scan": {
         "name": "Analisar Data-ID"
+      },
+      "pdu_scan": {
+        "name": "Analisar PDU"
+      },
+      "pdu_scan_report": {
+        "name": "Reportar mapa de PDU"
+      }
+    },
+    "text": {
+      "boiler_model": {
+        "name": "Modelo da caldeira"
       }
     }
   },

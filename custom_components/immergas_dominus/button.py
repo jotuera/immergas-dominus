@@ -1,4 +1,4 @@
-"""Button platform for Immergas Dominus: boiler reset (OpenTherm mode)."""
+"""Button platform for Immergas Dominus: boiler reset, Data-ID scan (OpenTherm), PDU scan and report (Modbus)."""
 from __future__ import annotations
 
 from homeassistant.components.button import ButtonEntity
@@ -12,11 +12,14 @@ from .entity import ImmergasDominusEntity
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback) -> None:
-    """Set up the buttons (OpenTherm mode only)."""
+    """Set up the buttons."""
     coordinator: ImmergasDominusCoordinator = hass.data[DOMAIN][entry.entry_id]
     if entry.data.get(CONF_PROTOCOL) == PROTOCOL_OPENTHERM:
         from .ot_diagnostics import OtScanButton
         async_add_entities([ImmergasOpenThermResetButton(coordinator), OtScanButton(coordinator)])
+    elif getattr(coordinator, "pdu_scan", None) is not None:
+        from .pdu_scan import pdu_scan_buttons
+        async_add_entities(pdu_scan_buttons(coordinator))
 
 
 class ImmergasOpenThermResetButton(ImmergasDominusEntity, ButtonEntity):

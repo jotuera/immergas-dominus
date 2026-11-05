@@ -165,6 +165,9 @@
           "unsupported": "Nem támogatott",
           "error": "Nincs válasz"
         }
+      },
+      "pdu_scan_result": {
+        "name": "PDU szkennelés"
       }
     },
     "binary_sensor": {
@@ -385,6 +388,12 @@
       },
       "ot_legionella_temp": {
         "name": "Legionella elleni hőmérséklet"
+      },
+      "pdu_scan_from": {
+        "name": "PDU szkennelés ettől"
+      },
+      "pdu_scan_to": {
+        "name": "PDU szkennelés eddig"
       }
     },
     "select": {
@@ -593,6 +602,17 @@
       },
       "ot_scan": {
         "name": "Data-ID-k keresése"
+      },
+      "pdu_scan": {
+        "name": "PDU-k szkennelése"
+      },
+      "pdu_scan_report": {
+        "name": "PDU-térkép bejelentése"
+      }
+    },
+    "text": {
+      "boiler_model": {
+        "name": "Kazán típusa"
       }
     }
   },

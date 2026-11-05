@@ -165,6 +165,9 @@
           "unsupported": "Non supportato",
           "error": "Nessuna risposta"
         }
+      },
+      "pdu_scan_result": {
+        "name": "Scansione PDU"
       }
     },
     "binary_sensor": {
@@ -385,6 +388,12 @@
       },
       "ot_legionella_temp": {
         "name": "Temperatura antilegionella"
+      },
+      "pdu_scan_from": {
+        "name": "Scansione PDU da"
+      },
+      "pdu_scan_to": {
+        "name": "Scansione PDU a"
       }
     },
     "select": {
@@ -593,6 +602,17 @@
       },
       "ot_scan": {
         "name": "Scansiona Data-ID"
+      },
+      "pdu_scan": {
+        "name": "Scansiona PDU"
+      },
+      "pdu_scan_report": {
+        "name": "Segnala mappa PDU"
+      }
+    },
+    "text": {
+      "boiler_model": {
+        "name": "Modello caldaia"
       }
     }
   },

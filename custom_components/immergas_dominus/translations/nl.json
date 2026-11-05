@@ -165,6 +165,9 @@
           "unsupported": "Niet ondersteund",
           "error": "Geen antwoord"
         }
+      },
+      "pdu_scan_result": {
+        "name": "PDU-scan"
       }
     },
     "binary_sensor": {
@@ -385,6 +388,12 @@
       },
       "ot_legionella_temp": {
         "name": "Anti-legionella-temperatuur"
+      },
+      "pdu_scan_from": {
+        "name": "PDU-scan vanaf"
+      },
+      "pdu_scan_to": {
+        "name": "PDU-scan tot"
       }
     },
     "select": {
@@ -593,6 +602,17 @@
       },
       "ot_scan": {
         "name": "Data-ID’s scannen"
+      },
+      "pdu_scan": {
+        "name": "PDU's scannen"
+      },
+      "pdu_scan_report": {
+        "name": "PDU-kaart melden"
+      }
+    },
+    "text": {
+      "boiler_model": {
+        "name": "Ketelmodel"
       }
     }
   },

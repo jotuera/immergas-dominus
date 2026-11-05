@@ -61,6 +61,9 @@ async def async_setup_entry(
     entities += [ImmergasStatSensor(coordinator, spec) for spec in STAT_SPECS]
     if coordinator.dhw is not None:
         entities.append(ImmergasDhwPhaseSensor(coordinator))
+    if getattr(coordinator, "pdu_scan", None) is not None:
+        from .pdu_scan import pdu_scan_sensors
+        entities += pdu_scan_sensors(coordinator)
     async_add_entities(entities)
 
 

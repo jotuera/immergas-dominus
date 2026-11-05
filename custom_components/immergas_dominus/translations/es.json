@@ -165,6 +165,9 @@
           "unsupported": "No compatible",
           "error": "Sin respuesta"
         }
+      },
+      "pdu_scan_result": {
+        "name": "Escaneo PDU"
       }
     },
     "binary_sensor": {
@@ -385,6 +388,12 @@
       },
       "ot_legionella_temp": {
         "name": "Temperatura antilegionela"
+      },
+      "pdu_scan_from": {
+        "name": "Escaneo PDU desde"
+      },
+      "pdu_scan_to": {
+        "name": "Escaneo PDU hasta"
       }
     },
     "select": {
@@ -593,6 +602,17 @@
       },
       "ot_scan": {
         "name": "Escanear Data-ID"
+      },
+      "pdu_scan": {
+        "name": "Escanear PDU"
+      },
+      "pdu_scan_report": {
+        "name": "Enviar mapa de PDU"
+      }
+    },
+    "text": {
+      "boiler_model": {
+        "name": "Modelo de caldera"
       }
     }
   },

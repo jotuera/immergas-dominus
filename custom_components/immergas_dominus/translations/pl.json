@@ -165,6 +165,9 @@
           "unsupported": "Nieobsługiwany",
           "error": "Brak odpowiedzi"
         }
+      },
+      "pdu_scan_result": {
+        "name": "Skan PDU"
       }
     },
     "binary_sensor": {
@@ -385,6 +388,12 @@
       },
       "ot_legionella_temp": {
         "name": "Temperatura anty-legionella"
+      },
+      "pdu_scan_from": {
+        "name": "Skan PDU od"
+      },
+      "pdu_scan_to": {
+        "name": "Skan PDU do"
       }
     },
     "select": {
@@ -593,6 +602,17 @@
       },
       "ot_scan": {
         "name": "Skanuj Data-ID"
+      },
+      "pdu_scan": {
+        "name": "Skanuj PDU"
+      },
+      "pdu_scan_report": {
+        "name": "Zgłoś mapę PDU"
+      }
+    },
+    "text": {
+      "boiler_model": {
+        "name": "Model kotła"
       }
     }
   },

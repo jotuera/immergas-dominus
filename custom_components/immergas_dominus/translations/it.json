@@ -80,6 +80,15 @@
       "ot_max_ch_setpoint": {
         "name": "Setpoint riscaldamento max."
       },
+      "ot_exhaust_temperature": {
+        "name": "Temperatura fumi"
+      },
+      "ot_max_capacity": {
+        "name": "Potenza max caldaia"
+      },
+      "ot_min_modulation": {
+        "name": "Modulazione min. caldaia"
+      },
       "ot_modulation_level": {
         "name": "Livello di modulazione"
       },

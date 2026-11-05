@@ -96,6 +96,35 @@ class ImmergasOpenThermNumber(ImmergasDominusEntity, NumberEntity):
         super().__init__(coordinator, description.key, key, DEVICE_MAIN)
         self.entity_description = description
 
+    def _poll_pdus(self) -> tuple[int, ...]:
+        bounds = self.entity_description.bounds_id
+        return (self._pdu,) if bounds is None else (self._pdu, bounds)
+
+    def _bounds(self) -> tuple[int, int] | None:
+        """The boiler's own limits (Data-ID 48 / 49: HB upper, LB lower, s8 °C), if it answers them sensibly."""
+        bounds = self.entity_description.bounds_id
+        data = self.coordinator.data
+        if bounds is None or not data or data.get(bounds) is None:
+            return None
+        raw = int(data[bounds]) & 0xFFFF
+        hi, lo = raw >> 8, raw & 0xFF
+        hi, lo = (hi - 0x100 if hi & 0x80 else hi), (lo - 0x100 if lo & 0x80 else lo)
+        if not 0 < lo < hi <= 100:
+            return None
+        return lo, hi
+
+    @property
+    def native_min_value(self) -> float:
+        b = self._bounds()
+        default = self.entity_description.native_min_value
+        return float(max(b[0], default)) if b else default
+
+    @property
+    def native_max_value(self) -> float:
+        b = self._bounds()
+        default = self.entity_description.native_max_value
+        return float(min(b[1], default)) if b else default
+
     @property
     def native_value(self) -> float | None:
         raw = self.raw_value

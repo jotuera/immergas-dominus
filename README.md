@@ -262,6 +262,12 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.2 (pre-release)
+
+- **OpenTherm:** exhaust temperature (Data-ID 33), boiler max. capacity and min. modulation (Data-ID 15); the DHW and
+  CH setpoint sliders follow the limits the boiler reports (Data-ID 48 / 49) (#2).
+- Cards 0.52.2.
+
 ### 1.6.1 (pre-release)
 
 - **OpenTherm diagnostics:** Data-ID scan (button + sensor with the supported / unsupported lists), read-back of every

@@ -258,4 +258,6 @@ class ImmergasOpenThermSensor(ImmergasDominusEntity, SensorEntity):
             return round(signed / 256, 1)
         if decode == "lb_u8":
             return raw & 0xFF
+        if decode == "hb_u8":
+            return raw >> 8
         return raw  # u16

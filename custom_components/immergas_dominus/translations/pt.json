@@ -80,6 +80,15 @@
       "ot_max_ch_setpoint": {
         "name": "Setpoint máx. aquecimento"
       },
+      "ot_exhaust_temperature": {
+        "name": "Temperatura dos fumos"
+      },
+      "ot_max_capacity": {
+        "name": "Potência máx. da caldeira"
+      },
+      "ot_min_modulation": {
+        "name": "Modulação mín. da caldeira"
+      },
       "ot_modulation_level": {
         "name": "Nível de modulação"
       },

@@ -80,6 +80,15 @@
       "ot_max_ch_setpoint": {
         "name": "Max. CV-instelwaarde"
       },
+      "ot_exhaust_temperature": {
+        "name": "Rookgastemperatuur"
+      },
+      "ot_max_capacity": {
+        "name": "Max. ketelvermogen"
+      },
+      "ot_min_modulation": {
+        "name": "Min. ketelmodulatie"
+      },
       "ot_modulation_level": {
         "name": "Modulatieniveau"
       },

@@ -264,6 +264,12 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.2 (pre-release)
+
+- **OpenTherm:** temperatura spalin (Data-ID 33), moc maks. i modulacja min. kotła (Data-ID 15); suwaki nastaw CWU i CO
+  trzymają się limitów podawanych przez kocioł (Data-ID 48 / 49) (#2).
+- Karty 0.52.2.
+
 ### 1.6.1 (pre-release)
 
 - **Diagnostyka OpenTherm:** skaner Data-ID (przycisk + czujnik z listą obsługiwanych / nieobsługiwanych), odczyt

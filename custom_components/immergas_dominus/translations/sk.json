@@ -80,6 +80,15 @@
       "ot_max_ch_setpoint": {
         "name": "Max. žiadaná teplota vykurovania"
       },
+      "ot_exhaust_temperature": {
+        "name": "Teplota spalín"
+      },
+      "ot_max_capacity": {
+        "name": "Max. výkon kotla"
+      },
+      "ot_min_modulation": {
+        "name": "Min. modulácia kotla"
+      },
       "ot_modulation_level": {
         "name": "Úroveň modulácie"
       },

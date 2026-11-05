@@ -16,6 +16,7 @@ from homeassistant.components.sensor import SensorDeviceClass, SensorEntityDescr
 from homeassistant.const import (
     PERCENTAGE,
     EntityCategory,
+    UnitOfPower,
     UnitOfPressure,
     UnitOfTemperature,
     UnitOfVolumeFlowRate,
@@ -594,7 +595,7 @@ class DominusOpenThermSensorDescription(SensorEntityDescription):
     """Read-only OpenTherm Data-ID sensor."""
 
     data_id: int
-    decode: str = "f88"  # "f88" | "u16" | "lb_u8"
+    decode: str = "f88"  # "f88" | "u16" | "lb_u8" | "hb_u8"
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -626,6 +627,28 @@ OT_SENSOR_DESCRIPTIONS: tuple[DominusOpenThermSensorDescription, ...] = (
     # room temperature measured by the Dominus probe (when it is used as the room probe, module parameter 11)
     _ot_temp("ot_room_temperature", 24),
     _ot_temp("ot_max_ch_setpoint", 57, entity_category=EntityCategory.DIAGNOSTIC),
+    # 1.6.2: exhaust temperature (Data-ID 33) and the boiler capacity / min. modulation (Data-ID 15, HB kW / LB %)
+    _ot_temp("ot_exhaust_temperature", 33),
+    DominusOpenThermSensorDescription(
+        key="ot_max_capacity",
+        data_id=15,
+        decode="hb_u8",
+        translation_key="ot_max_capacity",
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.KILO_WATT,
+        suggested_display_precision=0,
+        entity_category=EntityCategory.DIAGNOSTIC,
+    ),
+    DominusOpenThermSensorDescription(
+        key="ot_min_modulation",
+        data_id=15,
+        decode="lb_u8",
+        translation_key="ot_min_modulation",
+        native_unit_of_measurement=PERCENTAGE,
+        suggested_display_precision=0,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:percent-outline",
+    ),
     DominusOpenThermSensorDescription(
         key="ot_modulation_level",
         data_id=17,
@@ -694,6 +717,9 @@ class DominusOpenThermNumberDescription(NumberEntityDescription):
     signed: bool = False
     # f8.8 Data-ID: True = whole degrees (LB = 0, as the app sends the DHW setpoint), False = 1/256 resolution
     whole: bool = True
+    # 1.6.2: Data-ID with the boiler's own limits (HB upper / LB lower bound, s8 °C): 48 = DHW setpoint, 49 = max CH
+    # setpoint; when the boiler answers it, they narrow native_min / native_max
+    bounds_id: int | None = None
 
 
 OT_NUMBER_DESCRIPTIONS: tuple[DominusOpenThermNumberDescription, ...] = (
@@ -703,6 +729,7 @@ OT_NUMBER_DESCRIPTIONS: tuple[DominusOpenThermNumberDescription, ...] = (
         # the control setpoint the module itself recalculates, so a write there does not stick
         data_id=89,
         param=17,
+        bounds_id=49,
         translation_key="ot_ch_setpoint",
         device_class=NumberDeviceClass.TEMPERATURE,
         native_min_value=10,
@@ -715,6 +742,7 @@ OT_NUMBER_DESCRIPTIONS: tuple[DominusOpenThermNumberDescription, ...] = (
     DominusOpenThermNumberDescription(
         key="ot_dhw_setpoint",
         data_id=56,
+        bounds_id=48,
         translation_key="ot_dhw_setpoint",
         device_class=NumberDeviceClass.TEMPERATURE,
         native_min_value=10,
@@ -744,7 +772,7 @@ OT_NUMBER_DESCRIPTIONS: tuple[DominusOpenThermNumberDescription, ...] = (
         key=key, data_id=89, param=index, divisor=div, signed=signed, translation_key=key,
         native_min_value=lo, native_max_value=hi, native_step=step, native_unit_of_measurement=unit,
         device_class=NumberDeviceClass.TEMPERATURE if unit else None, mode=NumberMode.BOX, icon=icon,
-        entity_category=EntityCategory.CONFIG,
+        entity_category=EntityCategory.CONFIG, bounds_id=49 if key == "ot_ch_min" else None,
     )
     for key, index, lo, hi, step, div, signed, unit, icon in (
         ("ot_otc_curve", 4, 1, 9, 0.1, 10, False, None, "mdi:chart-bell-curve-cumulative"),

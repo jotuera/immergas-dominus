@@ -80,6 +80,15 @@
       "ot_max_ch_setpoint": {
         "name": "Max. Heizungssollwert"
       },
+      "ot_exhaust_temperature": {
+        "name": "Abgastemperatur"
+      },
+      "ot_max_capacity": {
+        "name": "Max. Kesselleistung"
+      },
+      "ot_min_modulation": {
+        "name": "Min. Kesselmodulation"
+      },
       "ot_modulation_level": {
         "name": "Modulationsgrad"
       },

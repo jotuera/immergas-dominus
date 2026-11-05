@@ -80,6 +80,15 @@
       "ot_max_ch_setpoint": {
         "name": "Consigna calefacción máx."
       },
+      "ot_exhaust_temperature": {
+        "name": "Temperatura de humos"
+      },
+      "ot_max_capacity": {
+        "name": "Potencia máx. de la caldera"
+      },
+      "ot_min_modulation": {
+        "name": "Modulación mín. de la caldera"
+      },
       "ot_modulation_level": {
         "name": "Nivel de modulación"
       },

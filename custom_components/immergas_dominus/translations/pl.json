@@ -80,6 +80,15 @@
       "ot_max_ch_setpoint": {
         "name": "Maks. zadana CO"
       },
+      "ot_exhaust_temperature": {
+        "name": "Temperatura spalin"
+      },
+      "ot_max_capacity": {
+        "name": "Moc maks. kotła"
+      },
+      "ot_min_modulation": {
+        "name": "Modulacja min. kotła"
+      },
       "ot_modulation_level": {
         "name": "Poziom modulacji"
       },

@@ -80,6 +80,15 @@
       "ot_max_ch_setpoint": {
         "name": "Max. teplota topení"
       },
+      "ot_exhaust_temperature": {
+        "name": "Teplota spalin"
+      },
+      "ot_max_capacity": {
+        "name": "Max. výkon kotle"
+      },
+      "ot_min_modulation": {
+        "name": "Min. modulace kotle"
+      },
       "ot_modulation_level": {
         "name": "Úroveň modulace"
       },

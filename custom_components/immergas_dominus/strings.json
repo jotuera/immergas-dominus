@@ -80,6 +80,15 @@
       "ot_max_ch_setpoint": {
         "name": "Max CH setpoint"
       },
+      "ot_exhaust_temperature": {
+        "name": "Exhaust temperature"
+      },
+      "ot_max_capacity": {
+        "name": "Boiler max. capacity"
+      },
+      "ot_min_modulation": {
+        "name": "Boiler min. modulation"
+      },
       "ot_modulation_level": {
         "name": "Modulation level"
       },

@@ -80,6 +80,15 @@
       "ot_max_ch_setpoint": {
         "name": "Consigne chauffage max."
       },
+      "ot_exhaust_temperature": {
+        "name": "Température des fumées"
+      },
+      "ot_max_capacity": {
+        "name": "Puissance max. de la chaudière"
+      },
+      "ot_min_modulation": {
+        "name": "Modulation min. de la chaudière"
+      },
       "ot_modulation_level": {
         "name": "Niveau de modulation"
       },

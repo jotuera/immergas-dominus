@@ -288,6 +288,8 @@ the module accepts the session.
   polling cycle – very short burns may be missed) and the **boiler fault description** (Data-ID 5 code, e.g. E31).
 - Documentation: a knowledge base in `docs/` – Modbus over TCP (every PDU with its entity) and OpenTherm (the Data-ID
   table moved out of the README).
+- **OpenTherm Connectivity** (cards 0.54.1): Dominus, the boiler and a **CAR V2 remote** tile instead of the zone 1
+  panel – E31 (remote lost), room temperature present, *Read only* on – with the switch that blocks writes from HA.
 
 ### 1.6.8
 

@@ -284,6 +284,8 @@ przyjmie sesję.
   odczytu – bardzo krótkie zapłony mogą umknąć) oraz **opis błędu kotła** (kod z Data-ID 5, np. E31).
 - Dokumentacja: baza wiedzy w `docs/` – Modbus po TCP (każde PDU z encją) i OpenTherm (tabela Data-ID przeniesiona z
   README).
+- **Łączność OpenTherm** (karty 0.54.1): Dominus, kocioł i kafel **pilota CAR V2** zamiast panelu strefy 1 – E31 (utrata
+  pilota), jest temperatura pokoju, włączone *Tylko odczyt* – z przełącznikiem blokującym zapis z HA.
 
 ### 1.6.8
 

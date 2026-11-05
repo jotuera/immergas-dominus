@@ -47,12 +47,12 @@ shows that value, not the requested one. Temperatures are °C × 10.
 by the hub). There is no panel firmware register over TCP, so a physical and an emulated panel look the same. An
 on/off room thermostat gives only the heating demand (not tested).
 
-**Room thermostat (1.6.9).** The Dominus does not report it, so **Room thermostat** says what is connected: none,
-physical (with the A31 room control RPT / RT) or **emulated** – Home Assistant writes the temperature of an HA entity
-to PDU 2011 (on a change of 0.1 °C or every 5 minutes), the way the hub's ESP emulates the zone panel. **Test on a Magis
-Pro-Combo V2 (05.11.2026): the module echoes the written value as the acknowledgement, but 2011 keeps the zone panel's
-temperature – the write is not taken.** The integration therefore judges it by reading 2011 back (*not taken* on the
-Thermostat tile); a room temperature from HA needs the zone panel emulated on D+/D- (the hub).
+**Room thermostat.** The Dominus does not report it; the **Thermostat** tile of the Connectivity card shows what the
+declared **A31 room control** (Boiler parameters, offline) says: RP – the zone panel only, RPT – the panel gives the
+temperature and setpoint and the room thermostat switches heating, RT – the room thermostat only. **Writing the room
+temperature over TCP does not work:** a test on a Magis Pro-Combo V2 (05.11.2026) got PDU 2011 echoed as the
+acknowledgement while 2011 kept the zone panel's value. A room temperature from Home Assistant needs the zone panel
+emulated on D+/D- – the hub does it (its *Zone 1 temperature source*: the boiler took the new value within 20 s).
 
 ## Time programs
 

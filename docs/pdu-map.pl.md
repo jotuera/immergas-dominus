@@ -47,12 +47,12 @@ integracja, nie wartość żądaną. Temperatury to °C × 10.
 przez hub). Po TCP nie ma rejestru wersji panelu, więc panel fizyczny i emulowany wyglądają tak samo. Termostat
 pokojowy on/off daje tylko żądanie grzania (nie testowane).
 
-**Termostat pokojowy (1.6.9).** Dominus go nie zgłasza, więc **Termostat pokojowy** mówi, co jest podłączone: brak,
-fizyczny (ze sposobem sterowania A31 RPT / RT) albo **emulowany** – Home Assistant zapisuje temperaturę encji HA do
-PDU 2011 (przy zmianie o 0,1 °C albo co 5 minut), tak jak ESP huba emuluje panel strefy. **Test na Magis
-Pro-Combo V2 (05.11.2026): moduł odsyła zapisaną wartość jako potwierdzenie, ale 2011 zostaje przy temperaturze z panelu
-strefy – zapis nie jest przyjmowany.** Integracja ocenia go więc po ponownym odczycie 2011 (*nie przyjął* na kaflu
-Termostat); temperatura pokoju z HA wymaga panelu strefy emulowanego na D+/D- (hub).
+**Termostat pokojowy.** Dominus go nie zgłasza; kafel **Termostat** w karcie Łączność pokazuje to, co mówi deklarowany
+**sposób sterowania A31** (Parametry pieca, offline): RP – sam panel strefy, RPT – panel daje temperaturę i nastawę,
+a termostat pokojowy włącza i wyłącza grzanie, RT – sam termostat pokojowy. **Zapis temperatury pokoju przez TCP nie
+działa:** test na Magis Pro-Combo V2 (05.11.2026) – moduł odesłał PDU 2011 jako potwierdzenie, ale 2011 zostało przy
+wartości z panelu strefy. Temperaturę z Home Assistant kocioł dostaje tylko przez panel strefy emulowany na D+/D- – robi to
+hub (jego *Źródło temperatury Strefy 1*: kocioł przyjął nową wartość w ciągu 20 s).
 
 ## Programy czasowe
 

@@ -14,9 +14,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
     coordinator: ImmergasDominusCoordinator = hass.data[DOMAIN][entry.entry_id]
     from .pdu_scan import pdu_scan_texts
     async_add_entities(pdu_scan_texts(coordinator))
-    if getattr(coordinator, "room_emulator", None) is not None:
-        from .room_emulation import RoomSourceText
-        async_add_entities([RoomSourceText(coordinator)])
     if getattr(coordinator, "ot_programs", None) is not None:
         from .ot_programs import ot_texts
         async_add_entities(ot_texts(coordinator))

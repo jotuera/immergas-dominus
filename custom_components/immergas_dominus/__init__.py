@@ -168,13 +168,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # map reports of both modes (text entity, restored)
     coordinator.boiler_model = ""
     coordinator.pdu_scan = None
-    # 1.6.9: Modbus room thermostat of zone 1 (none / physical / emulated from an HA entity, entities in room_emulation.py)
-    coordinator.room_emulator = None
-    if not opentherm:
-        from .room_emulation import RoomEmulator
-        coordinator.room_emulator = RoomEmulator(hass, coordinator)
-        coordinator.room_emulator.start()
-        entry.async_on_unload(coordinator.room_emulator.stop)
     if not opentherm:
         from .pdu_scan import PduScanner
         coordinator.pdu_scan = PduScanner(hass, coordinator)

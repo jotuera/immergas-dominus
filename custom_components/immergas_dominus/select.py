@@ -65,9 +65,6 @@ async def async_setup_entry(
         entities.append(ImmergasLegionellaDay(coordinator))
         entities.append(ImmergasRoomControlMode(coordinator))
         entities.append(ImmergasFloorType(coordinator))
-    if getattr(coordinator, "room_emulator", None) is not None:
-        from .room_emulation import RoomThermostatSelect
-        entities.append(RoomThermostatSelect(coordinator))
     async_add_entities(entities)
 
 

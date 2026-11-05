@@ -122,7 +122,7 @@ or **Emulated** – Home Assistant sends the temperature of an HA entity chosen 
 (e.g. a room sensor) to the module as Data-ID 24 (WRITE-DATA "room temperature", as a room unit sends it), on a change
 of 0.1 °C or every 5 minutes; *Read only* blocks it. **Experimental:** whether the Dominus regulator uses it instead of
 its own probe has to be confirmed on a real boiler – the *Supported Data-IDs* / *Room temperature* readings show it.
-The Connectivity card has a **Thermostat** tile with the choice and the entity list.
+The choice and the entity are in the **Boiler parameters (offline)** card; the **Thermostat** tile of the Connectivity card shows the state. Data-ID 24 is judged by reading it back a minute later (*it works* / *the module does not take it*) – the acknowledgement alone is no proof (a Modbus test got the written value echoed).
 
 ## Boiler menu (declared, offline)
 

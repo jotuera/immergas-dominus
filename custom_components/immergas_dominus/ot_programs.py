@@ -125,6 +125,7 @@ class OtPrograms:
         self.room_source = ""
         self.room_sent: float | None = None
         self.room_sent_at: datetime | None = None
+        self.room_result: str | None = None  # pending / taken / not_taken (judged by reading Data-ID 24 back)
         self._room_mono = 0.0
         self._learn: list[float] = []         # room - setpoint in the Comfort phase today (self-learning)
         self._learn_day: str | None = None
@@ -399,6 +400,7 @@ class OtPrograms:
         Dominus regulator uses it instead of its own probe is to be confirmed on a real boiler."""
         if self.thermostat != "emulated":
             return
+        self._judge_room()
         v = self.room_source_value()
         if v is None:
             return
@@ -411,6 +413,23 @@ class OtPrograms:
             _LOGGER.debug("Emulated thermostat: writing the room temperature failed: %s", err)
             return
         self.room_sent, self.room_sent_at, self._room_mono = v, dt_util.now(), mono
+        if self.room_result != "taken":
+            self.room_result = "pending"
+        self._notify()
+
+    def _judge_room(self) -> None:
+        """A minute after a write: does Data-ID 24 (read by the normal polling) show the sent temperature? The ACK of a
+        write is not proof (the Modbus test showed an echo) - only the read-back decides whether the module takes it."""
+        if self.room_result != "pending" or self.room_sent is None or time.monotonic() - self._room_mono < 60:
+            return
+        cur = self._f88(self._raw(ROOM_TEMP_ID))
+        if cur is None:
+            return
+        taken = abs(cur - self.room_sent) <= 0.15
+        self.room_result = "taken" if taken else "not_taken"
+        if not taken:
+            _LOGGER.info("Emulated thermostat: Data-ID 24 reads back %.1f after writing %.1f - the module does not take it",
+                         cur, self.room_sent)
         self._notify()
 
     async def _self_learning(self, now: datetime) -> None:
@@ -765,11 +784,13 @@ class OtThermostatSelect(_ProgramEntity, SelectEntity):
     def extra_state_attributes(self) -> dict[str, Any]:
         p = self.programs
         return {"room_source": p.room_source or None, "room_source_value": p.room_source_value(),
-                "room_sent": p.room_sent, "room_sent_at": p.room_sent_at.isoformat() if p.room_sent_at else None}
+                "room_sent": p.room_sent, "room_sent_at": p.room_sent_at.isoformat() if p.room_sent_at else None,
+                "write_result": p.room_result}
 
     async def async_select_option(self, option: str) -> None:
         self.programs.thermostat = option
         self.programs.room_sent = None
+        self.programs.room_result = None
         self.programs.changed()
 
 

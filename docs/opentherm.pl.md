@@ -118,8 +118,9 @@ Kocioł nie zgłasza termostatu pokojowego przez OpenTherm, więc **Termostat po
 **Emulowany** – Home Assistant wysyła do modułu temperaturę encji HA wybranej w **Źródło temperatury pokoju** (np.
 czujnika pokojowego) jako Data-ID 24 (WRITE-DATA „temperatura pokoju”, tak jak wysyła ją regulator pokojowy), przy
 zmianie o 0,1 °C albo co 5 minut; *Tylko odczyt* to blokuje. **Eksperymentalne:** czy regulator Dominusa użyje jej
-zamiast własnej sondy, trzeba potwierdzić na prawdziwym kotle. Karta Łączność ma kafel **Termostat** z wyborem i listą
-encji.
+zamiast własnej sondy, trzeba potwierdzić na prawdziwym kotle. Wybór i encja są w karcie **Parametry pieca (offline)**; kafel **Termostat** w karcie Łączność pokazuje stan. Data-ID 24
+jest oceniany po odczycie zwrotnym minutę później (*działa* / *moduł nie przyjmuje*) – samo potwierdzenie niczego nie
+dowodzi (test Modbus dał echo zapisanej wartości).
 
 ## Menu kotła (deklarowane, offline)
 

@@ -180,6 +180,15 @@
       },
       "ot_fault_history": {
         "name": "História porúch"
+      },
+      "ot_burner_starts_today": {
+        "name": "Štarty horáka dnes"
+      },
+      "ot_burner_starts_hour": {
+        "name": "Štarty horáka (posledná hodina)"
+      },
+      "ot_burner_hours_today": {
+        "name": "Doba chodu horáka dnes"
       }
     },
     "binary_sensor": {

@@ -156,6 +156,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         coordinator.ot_programs = OtPrograms(hass, coordinator)
         coordinator.ot_programs.start()
         entry.async_on_unload(coordinator.ot_programs.stop)
+        # 1.6.9: burner starts / hours from the flame flag (entities in ot_stats.py)
+        from .ot_stats import OtBurnerStats
+        coordinator.ot_stats = OtBurnerStats(hass, coordinator)
+        coordinator.ot_stats.start()
+        entry.async_on_unload(coordinator.ot_stats.stop)
     if coordinator.stats is not None:
         coordinator.stats.start()
         entry.async_on_unload(coordinator.stats.stop)

@@ -46,8 +46,10 @@ async def async_setup_entry(
     if entry.data.get(CONF_PROTOCOL) == PROTOCOL_OPENTHERM:
         from .ot_diagnostics import OtLastWriteSensor, OtScanSensor
         from .ot_programs import ot_sensors
+        from .ot_stats import ot_stat_sensors
         async_add_entities([*ot_sensors(coordinator), OtScanSensor(coordinator), OtLastWriteSensor(coordinator),
-                            ImmergasOpenThermFaultHistorySensor(coordinator)])
+                            ImmergasOpenThermFaultHistorySensor(coordinator), ImmergasOpenThermFaultDescriptionSensor(coordinator),
+                            *ot_stat_sensors(coordinator)])
         async_add_entities(
             ImmergasOpenThermSensor(coordinator, description)
             for description in OT_SENSOR_DESCRIPTIONS
@@ -274,6 +276,26 @@ class ImmergasOpenThermSensor(ImmergasDominusEntity, SensorEntity):
         if decode == "hb_rpm":
             return (raw >> 8) * 60
         return raw  # u16
+
+
+class ImmergasOpenThermFaultDescriptionSensor(ImmergasDominusEntity, SensorEntity):
+    """1.6.9: description of the boiler fault code (Data-ID 5 low byte = the Immergas code, e.g. 31 = E31) in the Home
+    Assistant language, like the Modbus mode's fault description (same translation key, so the cards find it)."""
+
+    _attr_translation_key = "fault_description"
+    _attr_entity_category = EntityCategory.DIAGNOSTIC
+    _attr_icon = "mdi:alert-circle-outline"
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_fault_description", 5, DEVICE_MAIN)
+
+    @property
+    def native_value(self) -> str | None:
+        raw = self.raw_value
+        if raw is None:
+            return None
+        lang = self.coordinator.fault_language
+        return anomalies.describe(int(raw) & 0xFF, self.hass.config.language if lang == "auto" else lang)
 
 
 class ImmergasOpenThermFaultHistorySensor(ImmergasDominusEntity, SensorEntity):

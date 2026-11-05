@@ -180,6 +180,15 @@
       },
       "ot_fault_history": {
         "name": "Historique des défauts"
+      },
+      "ot_burner_starts_today": {
+        "name": "Démarrages du brûleur aujourd’hui"
+      },
+      "ot_burner_starts_hour": {
+        "name": "Démarrages du brûleur (dernière heure)"
+      },
+      "ot_burner_hours_today": {
+        "name": "Heures de brûleur aujourd’hui"
       }
     },
     "binary_sensor": {

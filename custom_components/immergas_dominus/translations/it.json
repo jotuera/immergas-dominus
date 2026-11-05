@@ -180,6 +180,15 @@
       },
       "ot_fault_history": {
         "name": "Storico anomalie"
+      },
+      "ot_burner_starts_today": {
+        "name": "Accensioni bruciatore oggi"
+      },
+      "ot_burner_starts_hour": {
+        "name": "Accensioni bruciatore (ultima ora)"
+      },
+      "ot_burner_hours_today": {
+        "name": "Ore bruciatore oggi"
       }
     },
     "binary_sensor": {

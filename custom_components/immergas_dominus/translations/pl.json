@@ -180,6 +180,15 @@
       },
       "ot_fault_history": {
         "name": "Historia błędów"
+      },
+      "ot_burner_starts_today": {
+        "name": "Starty palnika dziś"
+      },
+      "ot_burner_starts_hour": {
+        "name": "Starty palnika (ostatnia godzina)"
+      },
+      "ot_burner_hours_today": {
+        "name": "Czas pracy palnika dziś"
       }
     },
     "binary_sensor": {

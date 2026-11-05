@@ -180,6 +180,15 @@
       },
       "ot_fault_history": {
         "name": "Störungsverlauf"
+      },
+      "ot_burner_starts_today": {
+        "name": "Brennerstarts heute"
+      },
+      "ot_burner_starts_hour": {
+        "name": "Brennerstarts (letzte Stunde)"
+      },
+      "ot_burner_hours_today": {
+        "name": "Brennerlaufzeit heute"
       }
     },
     "binary_sensor": {

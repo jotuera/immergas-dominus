@@ -180,6 +180,15 @@
       },
       "ot_fault_history": {
         "name": "Historie poruch"
+      },
+      "ot_burner_starts_today": {
+        "name": "Starty hořáku dnes"
+      },
+      "ot_burner_starts_hour": {
+        "name": "Starty hořáku (poslední hodina)"
+      },
+      "ot_burner_hours_today": {
+        "name": "Doba chodu hořáku dnes"
       }
     },
     "binary_sensor": {

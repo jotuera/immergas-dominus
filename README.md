@@ -165,10 +165,10 @@ boiler answers as unsupported three times in a row are skipped for an hour.
 
 | Data-ID | Entity | R/W | VICTRIX ZEUS 25 ErP<br>(old Dominus Wi-Fi) | Victrix Zeus Superior 26 2 ErP<br>(Dominus V2) |
 |---|---|---|---|---|
-| 0 | Fault, CH active, DHW active, Flame; Operating mode | R/W | ✅ ¹ | ✅ |
+| 0 | Fault, CH active, DHW active, Flame; Operating mode; Burner starts today / last hour, Burner hours today (computed from the flame) | R/W | ✅ ¹ | ✅ |
 | 3 | – (slave config: DHW present / storage tank, member ID 27 = Immergas) | scan | ✅ | ✅ |
 | 4 | Boiler reset (button) | W | – | – |
-| 5 | Fault code; Service request, Low water pressure, Gas / flame fault, Air pressure fault, Water over-temperature | R | ✅ | ✅ |
+| 5 | Fault code, Boiler fault description; Service request, Low water pressure, Gas / flame fault, Air pressure fault, Water over-temperature | R | ✅ | ✅ |
 | 10 / 11 | – (the boiler's own parameters, TSP: read by **Scan Data-IDs**, attribute *boiler_parameters*) | scan | ✅ (42) | ❌ |
 | 12 / 13 | Fault history (*off*) – number of entries, each code in the attributes; also read by the scan | R | ✅ (5) | ❌ / ✅ |
 | 15 | Boiler max. capacity, Min. modulation | R | ✅ (0 / 0) | ✅ |
@@ -307,6 +307,16 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 1.6.9
+
+- **OpenTherm dashboard** (cards 0.54.0): new **OpenTherm boiler** card (capacity, min. modulation, CH / DHW range,
+  DHW type, exhaust, fan, burner starts, fault flags and fault history, boiler reset, read-only switch) and **Data-ID
+  map** card (scan, boiler parameters, report); with *Read only* on, the controls show a lock instead of writing; the
+  result of the last write under the setpoints; pressure / DHW flow tiles hidden when the boiler does not report them;
+  exhaust on the boiler chart, a burner modulation chart and burner hours per day.
+- **OpenTherm: burner starts today / in the last hour and burner hours today** (counted from the flame flag every
+  polling cycle – very short burns may be missed) and the **boiler fault description** (Data-ID 5 code, e.g. E31).
 
 ### 1.6.8
 

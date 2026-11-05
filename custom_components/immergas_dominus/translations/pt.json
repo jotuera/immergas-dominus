@@ -180,6 +180,15 @@
       },
       "ot_fault_history": {
         "name": "Histórico de avarias"
+      },
+      "ot_burner_starts_today": {
+        "name": "Arranques do queimador hoje"
+      },
+      "ot_burner_starts_hour": {
+        "name": "Arranques do queimador (última hora)"
+      },
+      "ot_burner_hours_today": {
+        "name": "Horas do queimador hoje"
       }
     },
     "binary_sensor": {

@@ -180,6 +180,15 @@
       },
       "ot_fault_history": {
         "name": "Storingsgeschiedenis"
+      },
+      "ot_burner_starts_today": {
+        "name": "Branderstarts vandaag"
+      },
+      "ot_burner_starts_hour": {
+        "name": "Branderstarts (laatste uur)"
+      },
+      "ot_burner_hours_today": {
+        "name": "Branderuren vandaag"
       }
     },
     "binary_sensor": {

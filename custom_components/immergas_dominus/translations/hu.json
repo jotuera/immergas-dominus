@@ -180,6 +180,15 @@
       },
       "ot_fault_history": {
         "name": "Hibanapló"
+      },
+      "ot_burner_starts_today": {
+        "name": "Égőindítások ma"
+      },
+      "ot_burner_starts_hour": {
+        "name": "Égőindítások (utolsó óra)"
+      },
+      "ot_burner_hours_today": {
+        "name": "Égő üzemideje ma"
       }
     },
     "binary_sensor": {

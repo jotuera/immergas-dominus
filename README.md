@@ -4,11 +4,11 @@
   <a href="https://github.com/hacs/integration"><img src="https://img.shields.io/badge/HACS-Custom-41BDF5.svg" alt="HACS Custom"></a>
   <img src="https://img.shields.io/github/v/tag/jotuera/immergas-dominus?label=version&color=blue" alt="Version">
   <img src="https://img.shields.io/badge/HA-2024.1%2B-41BDF5.svg" alt="Home Assistant 2024.1+">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-PolyForm%20Noncommercial-blue.svg" alt="License: PolyForm Noncommercial 1.0.0"></a>
+  <a href="https://github.com/jotuera/immergas-dominus/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-PolyForm%20Noncommercial-blue.svg" alt="License: PolyForm Noncommercial 1.0.0"></a>
   <a href="https://buymeacoffee.com/jotuera"><img src="https://img.shields.io/badge/Buy%20me%20a%20coffee-jotuera-FFDD00?logo=buymeacoffee&logoColor=black" alt="Buy Me a Coffee"></a>
 </p>
 
-**🇬🇧 English** · [🇵🇱 Polski](README.pl.md)
+**🇬🇧 English** · [🇵🇱 Polski](https://github.com/jotuera/immergas-dominus/blob/main/README.pl.md)
 
 Author: **JoTu** ([github.com/jotuera](https://github.com/jotuera))
 
@@ -116,18 +116,18 @@ strategy:
 - **Charts** – day: zone 1 room / target / outdoor with the program phases and heating demand, DHW cylinder with the
   DHW requests; week / month: hours of CH and DHW demand per day and the mean outdoor temperature.
 
-![Diagram](docs/images/en/card-diagram.png)
+![Diagram](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/en/card-diagram.png)
 
 | | |
 |---|---|
-| ![Now](docs/images/en/card-now.png) | ![Setpoints](docs/images/en/card-setpoints.png) |
-| ![Operating mode](docs/images/en/card-mode.png) | ![Schedule](docs/images/en/card-schedule.png) |
-| ![Connectivity](docs/images/en/card-links.png) | ![Heating curve](docs/images/en/card-curve.png) |
-| ![Online settings](docs/images/en/card-settings-online.png) | ![Boiler parameters (offline)](docs/images/en/card-settings-offline.png) |
+| ![Now](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/en/card-now.png) | ![Setpoints](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/en/card-setpoints.png) |
+| ![Operating mode](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/en/card-mode.png) | ![Schedule](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/en/card-schedule.png) |
+| ![Connectivity](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/en/card-links.png) | ![Heating curve](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/en/card-curve.png) |
+| ![Online settings](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/en/card-settings-online.png) | ![Boiler parameters (offline)](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/en/card-settings-offline.png) |
 
-![Calibration](docs/images/en/card-calibration.png)
+![Calibration](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/en/card-calibration.png)
 
-![Charts](docs/images/en/card-charts.png)
+![Charts](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/en/card-charts.png)
 
 **OpenTherm without the CAR V2 remote – the Dominus as the controller (1.6.0, experimental: regulator writes not yet confirmed on a real boiler).** When the Dominus is the only
 controller of an OpenTherm boiler (CAR V2 removed, the room probe of the Dominus kit connected), the integration exposes
@@ -201,7 +201,7 @@ room `2011`, target `2015`, outdoor `3002`, DHW cylinder `3016`, mode `2000`); n
 ## Knowledge base: registers over TCP
 
 Which boiler registers (PDUs) the Dominus module answers over local TCP – frame, values, zones, time programs, what
-is not readable, OpenTherm Data-IDs: [docs/pdu-map.md](docs/pdu-map.md).
+is not readable, OpenTherm Data-IDs: [docs/pdu-map.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/pdu-map.md).
 
 ## Supported models
 
@@ -428,7 +428,7 @@ symbols) and does not copy Immergas/Dominus app artwork.
 
 ## License
 
-[PolyForm Noncommercial 1.0.0](LICENSE) © JoTu: free for personal and other noncommercial use – at home, for your
+[PolyForm Noncommercial 1.0.0](https://github.com/jotuera/immergas-dominus/blob/main/LICENSE) © JoTu: free for personal and other noncommercial use – at home, for your
 own boiler, for learning and research. **Commercial use** (installers, resellers, building it into a paid product)
-needs a separate license – please get in touch through GitHub. See also [CONTRIBUTING](CONTRIBUTING.md).
+needs a separate license – please get in touch through GitHub. See also [CONTRIBUTING](https://github.com/jotuera/immergas-dominus/blob/main/CONTRIBUTING.md).
 Not affiliated with or endorsed by Immergas.

@@ -4,11 +4,11 @@
   <a href="https://github.com/hacs/integration"><img src="https://img.shields.io/badge/HACS-Custom-41BDF5.svg" alt="HACS Custom"></a>
   <img src="https://img.shields.io/github/v/tag/jotuera/immergas-dominus?label=version&color=blue" alt="Wersja">
   <img src="https://img.shields.io/badge/HA-2024.1%2B-41BDF5.svg" alt="Home Assistant 2024.1+">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-PolyForm%20Noncommercial-blue.svg" alt="Licencja: PolyForm Noncommercial 1.0.0"></a>
+  <a href="https://github.com/jotuera/immergas-dominus/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-PolyForm%20Noncommercial-blue.svg" alt="Licencja: PolyForm Noncommercial 1.0.0"></a>
   <a href="https://buymeacoffee.com/jotuera"><img src="https://img.shields.io/badge/Buy%20me%20a%20coffee-jotuera-FFDD00?logo=buymeacoffee&logoColor=black" alt="Buy Me a Coffee"></a>
 </p>
 
-[🇬🇧 English](README.md) · **🇵🇱 Polski**
+[🇬🇧 English](https://github.com/jotuera/immergas-dominus/blob/main/README.md) · **🇵🇱 Polski**
 
 Autor: **JoTu** ([github.com/jotuera](https://github.com/jotuera))
 
@@ -115,18 +115,18 @@ strategy:
 - **Wykresy** – doba: pokój / zadana / zewnętrzna Strefy 1 z fazami programu i żądaniami grzania, zasobnik CWU z żądaniami
   CWU; tydzień / miesiąc: godziny żądań CO i CWU na dzień i średnia temperatura zewnętrzna.
 
-![Diagram](docs/images/card-diagram.png)
+![Diagram](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/card-diagram.png)
 
 | | |
 |---|---|
-| ![Teraz](docs/images/card-now.png) | ![Nastawy](docs/images/card-setpoints.png) |
-| ![Tryb pracy](docs/images/card-mode.png) | ![Harmonogram](docs/images/card-schedule.png) |
-| ![Łączność](docs/images/card-links.png) | ![Krzywa grzewcza](docs/images/card-curve.png) |
-| ![Ustawienia online](docs/images/card-settings-online.png) | ![Parametry pieca (offline)](docs/images/card-settings-offline.png) |
+| ![Teraz](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/card-now.png) | ![Nastawy](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/card-setpoints.png) |
+| ![Tryb pracy](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/card-mode.png) | ![Harmonogram](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/card-schedule.png) |
+| ![Łączność](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/card-links.png) | ![Krzywa grzewcza](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/card-curve.png) |
+| ![Ustawienia online](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/card-settings-online.png) | ![Parametry pieca (offline)](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/card-settings-offline.png) |
 
-![Kalibracja](docs/images/card-calibration.png)
+![Kalibracja](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/card-calibration.png)
 
-![Wykresy](docs/images/card-charts.png)
+![Wykresy](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/card-charts.png)
 
 **OpenTherm bez pilota CAR V2 – Dominus jako regulator (1.6.0, eksperymentalne: zapisy regulatora niepotwierdzone jeszcze na kotle).** Gdy Dominus jest jedynym sterownikiem kotła
 OpenTherm (CAR V2 odłączony, podłączona sonda pokojowa z kompletu Dominusa), integracja wystawia regulator Dominusa i
@@ -203,7 +203,7 @@ pokój `2011`, zadana `2015`, zewnętrzna `3002`, zasobnik CWU `3016`, tryb `200
 ## Baza wiedzy: rejestry po TCP
 
 Które rejestry kotła (PDU) moduł Dominus udostępnia po lokalnym TCP – ramka, wartości, strefy, programy czasowe,
-czego nie da się odczytać, Data-ID OpenTherm: [docs/pdu-map.pl.md](docs/pdu-map.pl.md).
+czego nie da się odczytać, Data-ID OpenTherm: [docs/pdu-map.pl.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/pdu-map.pl.md).
 
 ## Obsługiwane modele
 
@@ -431,7 +431,7 @@ Dołączone zasoby brandowe Home Assistant znajdują się w
 
 ## Licencja
 
-[PolyForm Noncommercial 1.0.0](LICENSE) © JoTu: bezpłatnie do użytku osobistego i innego niekomercyjnego – w domu,
+[PolyForm Noncommercial 1.0.0](https://github.com/jotuera/immergas-dominus/blob/main/LICENSE) © JoTu: bezpłatnie do użytku osobistego i innego niekomercyjnego – w domu,
 dla własnego kotła, do nauki i badań. **Użycie komercyjne** (instalatorzy, sprzedawcy, wbudowanie w płatny produkt)
-wymaga osobnej licencji – skontaktuj się przez GitHub. Zobacz też [CONTRIBUTING](CONTRIBUTING.md).
+wymaga osobnej licencji – skontaktuj się przez GitHub. Zobacz też [CONTRIBUTING](https://github.com/jotuera/immergas-dominus/blob/main/CONTRIBUTING.md).
 Niezwiązane z Immergas ani nierekomendowane przez Immergas.

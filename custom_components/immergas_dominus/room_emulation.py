@@ -4,8 +4,9 @@ The Dominus does not report the room thermostat, so the user says what is there:
 boiler's A31 room control RP / RPT / RT, the declared select) or **emulated**: Home Assistant sends the temperature of
 an HA entity to the module as the zone 1 room temperature (PDU 2011, °C × 10) - the way the hub's ESP emulates the zone
 panel on D+/D-. **Experimental:** PDU 2011 is the room temperature the zone panel gives the boiler; whether the module
-accepts a write of it over TCP (and the boiler regulates by it) is checked by the acknowledgement (shown in the
-attributes: taken / not taken). Written on a change of 0.1 °C or every 5 minutes.
+accepts a write of it over TCP is judged by reading 2011 back on the next polls - NOT by the acknowledgement: a test on
+a Magis Pro-Combo V2 (05.11.2026) got the written value echoed as the ACK while 2011 kept the zone panel's value, so the
+module does not take it. Written on a change of 0.1 °C or every 5 minutes.
 """
 from __future__ import annotations
 
@@ -75,9 +76,25 @@ class RoomEmulator:
             return None
         return v if v is not None and -20 < v < 50 else None
 
+    def _judge(self) -> None:
+        """A minute after a write: did PDU 2011 (read by the normal polling) take the sent temperature?"""
+        if self.result != "pending" or self.room_sent is None or time.monotonic() - self._mono < 60:
+            return
+        cur = (self.coordinator.data or {}).get(ROOM_PDU)
+        if cur is None:
+            return
+        taken = abs(int(cur) / 10 - self.room_sent) <= 0.15
+        self.result = "taken" if taken else "not_taken"
+        if not taken:
+            _LOGGER.info("Emulated thermostat: PDU %s reads back %.1f after writing %.1f - the module does not take it",
+                         ROOM_PDU, int(cur) / 10, self.room_sent)
+        for cb in list(self._listeners):
+            cb()
+
     async def _tick(self, _now: datetime) -> None:
         if self.thermostat != "emulated":
             return
+        self._judge()
         v = self.source_value()
         if v is None:
             return
@@ -92,7 +109,8 @@ class RoomEmulator:
             self.result, self.last_ack = "error", None
         else:
             self.last_ack = ack / 10
-            self.result = "taken" if ack == raw else "not_taken"
+            # the ACK only echoes the request: "pending" until 2011 is read back on a later poll (_judge)
+            self.result = "pending" if ack == raw else "not_taken"
             if ack != raw:
                 _LOGGER.info("Emulated thermostat: PDU %s written %s, acknowledged %s", ROOM_PDU, raw, ack)
         self.room_sent, self.room_sent_at, self._mono = v, dt_util.now(), mono

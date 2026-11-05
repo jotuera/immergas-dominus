@@ -49,9 +49,10 @@ on/off room thermostat gives only the heating demand (not tested).
 
 **Room thermostat (1.6.9).** The Dominus does not report it, so **Room thermostat** says what is connected: none,
 physical (with the A31 room control RPT / RT) or **emulated** – Home Assistant writes the temperature of an HA entity
-to PDU 2011 (on a change of 0.1 °C or every 5 minutes), the way the hub's ESP emulates the zone panel. **Experimental:**
-whether the module accepts a write of 2011 is shown by its acknowledgement (*taken* / *not taken* on the Thermostat
-tile of the Connectivity card).
+to PDU 2011 (on a change of 0.1 °C or every 5 minutes), the way the hub's ESP emulates the zone panel. **Test on a Magis
+Pro-Combo V2 (05.11.2026): the module echoes the written value as the acknowledgement, but 2011 keeps the zone panel's
+temperature – the write is not taken.** The integration therefore judges it by reading 2011 back (*not taken* on the
+Thermostat tile); a room temperature from HA needs the zone panel emulated on D+/D- (the hub).
 
 ## Time programs
 

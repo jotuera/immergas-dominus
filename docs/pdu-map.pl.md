@@ -49,8 +49,10 @@ pokojowy on/off daje tylko żądanie grzania (nie testowane).
 
 **Termostat pokojowy (1.6.9).** Dominus go nie zgłasza, więc **Termostat pokojowy** mówi, co jest podłączone: brak,
 fizyczny (ze sposobem sterowania A31 RPT / RT) albo **emulowany** – Home Assistant zapisuje temperaturę encji HA do
-PDU 2011 (przy zmianie o 0,1 °C albo co 5 minut), tak jak ESP huba emuluje panel strefy. **Eksperymentalne:** czy moduł
-przyjmuje zapis 2011, pokazuje jego potwierdzenie (*przyjął* / *nie przyjął* na kaflu Termostat w karcie Łączność).
+PDU 2011 (przy zmianie o 0,1 °C albo co 5 minut), tak jak ESP huba emuluje panel strefy. **Test na Magis
+Pro-Combo V2 (05.11.2026): moduł odsyła zapisaną wartość jako potwierdzenie, ale 2011 zostaje przy temperaturze z panelu
+strefy – zapis nie jest przyjmowany.** Integracja ocenia go więc po ponownym odczycie 2011 (*nie przyjął* na kaflu
+Termostat); temperatura pokoju z HA wymaga panelu strefy emulowanego na D+/D- (hub).
 
 ## Programy czasowe
 

@@ -296,6 +296,8 @@ przyjmie sesję.
   ograniczony do 5 prób na godzinę; lista kontrolna *Praca bez CAR V2* w karcie Kocioł OpenTherm (karty 0.54.3).
 - **OpenTherm: menu kotła deklarowane offline** (t0 / t1, t2, t4–t7, P0–P2, P6, P7, A3–A5) z podpowiedziami – np. t5
   przy taktowaniu palnika; karta **Parametry pieca (offline)** na dashboardzie OpenTherm (karty 0.55.2).
+- **Modbus: termostat pokojowy strefy 1** – brak / fizyczny (A31 RPT / RT) / **emulowany**: temperatura encji HA
+  zapisywana do PDU 2011 (eksperymentalne, potwierdzenie pokazuje, czy moduł ją przyjmuje); kafel Termostat (karty 0.55.4).
 - **OpenTherm: termostat pokojowy** – brak / fizyczny (zaciski 40-41) / **emulowany**: temperatura encji HA trafia do
   modułu jako Data-ID 24 (eksperymentalne); kafel Termostat w karcie Łączność (karty 0.55.3).
   Zob. [Zastąpienie CAR V2](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.pl.md#zastąpienie-car-v2).

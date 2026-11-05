@@ -47,6 +47,12 @@ shows that value, not the requested one. Temperatures are °C × 10.
 by the hub). There is no panel firmware register over TCP, so a physical and an emulated panel look the same. An
 on/off room thermostat gives only the heating demand (not tested).
 
+**Room thermostat (1.6.9).** The Dominus does not report it, so **Room thermostat** says what is connected: none,
+physical (with the A31 room control RPT / RT) or **emulated** – Home Assistant writes the temperature of an HA entity
+to PDU 2011 (on a change of 0.1 °C or every 5 minutes), the way the hub's ESP emulates the zone panel. **Experimental:**
+whether the module accepts a write of 2011 is shown by its acknowledgement (*taken* / *not taken* on the Thermostat
+tile of the Connectivity card).
+
 ## Time programs
 
 | PDU | Meaning | Value | Entity |

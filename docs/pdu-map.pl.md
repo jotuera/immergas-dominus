@@ -47,6 +47,11 @@ integracja, nie wartość żądaną. Temperatury to °C × 10.
 przez hub). Po TCP nie ma rejestru wersji panelu, więc panel fizyczny i emulowany wyglądają tak samo. Termostat
 pokojowy on/off daje tylko żądanie grzania (nie testowane).
 
+**Termostat pokojowy (1.6.9).** Dominus go nie zgłasza, więc **Termostat pokojowy** mówi, co jest podłączone: brak,
+fizyczny (ze sposobem sterowania A31 RPT / RT) albo **emulowany** – Home Assistant zapisuje temperaturę encji HA do
+PDU 2011 (przy zmianie o 0,1 °C albo co 5 minut), tak jak ESP huba emuluje panel strefy. **Eksperymentalne:** czy moduł
+przyjmuje zapis 2011, pokazuje jego potwierdzenie (*przyjął* / *nie przyjął* na kaflu Termostat w karcie Łączność).
+
 ## Programy czasowe
 
 | PDU | Znaczenie | Wartość | Encja |

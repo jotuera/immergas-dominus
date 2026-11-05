@@ -212,6 +212,8 @@ naciśnięcie zatrzymuje skan). Czujnik **Skan PDU** pokazuje wartości niezerow
 PDU** tworzy powiadomienie z linkiem do **gotowego zgłoszenia na GitHubie** (model kotła, wersja integracji, mapa – bez
 adresu, MAC i hasła). Nic nie jest wysyłane automatycznie: sprawdź zgłoszenie na GitHubie i naciśnij *Create*. PDU,
 którego kocioł nie udostępnia, zwykle zwraca 0, dlatego zera są wypisane osobno. Najcenniejsze są skany innych modeli.
+W trybie **OpenTherm** działa to tak samo: **Skanuj Data-ID** → **Zgłoś mapę Data-ID** (model kotła w tym samym polu
+**Model kotła**).
 
 ## Obsługiwane modele
 
@@ -276,6 +278,7 @@ przyjmie sesję.
 
 - **Skaner PDU** (tryb Modbus): skan zakresu PDU przez TCP Dominusa, mapa w czujniku i **Zgłoś mapę PDU** – link do
   gotowego zgłoszenia na GitHubie z modelem kotła (nic nie jest wysyłane automatycznie).
+- **OpenTherm: Zgłoś mapę Data-ID** – ten sam raport dla skanu Data-ID.
 
 ### 1.6.5
 

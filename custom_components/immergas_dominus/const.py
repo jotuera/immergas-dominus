@@ -60,7 +60,7 @@ PROGRAM_PHASE_OPTIONS = ["manual", "comfort", "economy"]
 
 PLATFORMS = ["sensor", "binary_sensor", "number", "select", "climate", "time", "switch", "datetime", "button", "text"]
 # OpenTherm mode: read sensors + writable setpoints/mode (experimental).
-OPENTHERM_PLATFORMS = ["sensor", "binary_sensor", "number", "select", "switch", "button", "time", "datetime"]
+OPENTHERM_PLATFORMS = ["sensor", "binary_sensor", "number", "select", "switch", "button", "time", "datetime", "text"]
 
 DEVICE_MAIN = "dominus"
 DEVICE_ZONE_1 = "zone_1"

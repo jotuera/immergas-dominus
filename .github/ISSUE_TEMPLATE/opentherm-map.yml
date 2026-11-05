@@ -1,0 +1,32 @@
+name: OpenTherm Data-ID map
+description: A Data-ID scan of your OpenTherm boiler (made by the integration's "Report Data-ID map" button).
+title: "OpenTherm map: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! This report was prepared by **Scan Data-IDs** / **Report Data-ID map** (Dominus device → Diagnostic).
+        It holds only OpenTherm Data-IDs and raw values - no host, MAC or password. Check it and press *Create*.
+  - type: input
+    id: model
+    attributes:
+      label: Boiler model
+      description: e.g. VICTRIX ZEUS 25 ErP (as on the rating plate); the remote too (CAR V2, Super Amico, none)
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Integration version
+  - type: textarea
+    id: map
+    attributes:
+      label: Data-ID map
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: What was the boiler doing during the scan (heating, DHW, standby, a fault)? Which remote is connected?

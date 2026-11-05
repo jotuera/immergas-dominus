@@ -608,6 +608,9 @@
       },
       "pdu_scan_report": {
         "name": "Signaler la carte PDU"
+      },
+      "ot_scan_report": {
+        "name": "Signaler la carte Data-ID"
       }
     },
     "text": {

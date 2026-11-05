@@ -608,6 +608,9 @@
       },
       "pdu_scan_report": {
         "name": "Segnala mappa PDU"
+      },
+      "ot_scan_report": {
+        "name": "Segnala mappa Data-ID"
       }
     },
     "text": {

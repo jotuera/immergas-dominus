@@ -159,7 +159,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     if coordinator.stats is not None:
         coordinator.stats.start()
         entry.async_on_unload(coordinator.stats.stop)
-    # Modbus mode: PDU scanner + map report (entities in number / button / sensor / text)
+    # Modbus mode: PDU scanner + map report (entities in number / button / sensor / text); the boiler model for the
+    # map reports of both modes (text entity, restored)
+    coordinator.boiler_model = ""
     coordinator.pdu_scan = None
     if not opentherm:
         from .pdu_scan import PduScanner

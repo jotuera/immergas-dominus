@@ -64,7 +64,6 @@ class PduScanner:
         self.coordinator = coordinator
         self.from_pdu = DEFAULT_FROM
         self.to_pdu = DEFAULT_TO
-        self.model = ""
         self.running = False
         self.current: int | None = None
         self.values: dict[int, int] = {}
@@ -75,6 +74,10 @@ class PduScanner:
         self._stop = False
         self._task: asyncio.Task | None = None
         self._listeners: list[Any] = []
+
+    @property
+    def model(self) -> str:
+        return getattr(self.coordinator, "boiler_model", "")
 
     # --- listeners (the entities) ---
     def add_listener(self, cb) -> Any:
@@ -226,28 +229,32 @@ class PduScanRangeNumber(_ScanEntity, RestoreNumber):
         self.async_write_ha_state()
 
 
-class BoilerModelText(_ScanEntity, TextEntity, RestoreEntity):
-    """Boiler model typed by the user, goes into the PDU map report."""
+class BoilerModelText(ImmergasDominusEntity, TextEntity, RestoreEntity):
+    """Boiler model typed by the user, goes into the PDU / Data-ID map report (both modes)."""
 
     _attr_entity_category = EntityCategory.CONFIG
     _attr_native_max = 80
     _attr_icon = "mdi:water-boiler"
+    _attr_translation_key = "boiler_model"
 
     def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
-        super().__init__(coordinator, "boiler_model")
+        super().__init__(coordinator, "boiler_model", 0, DEVICE_MAIN)
+
+    def _poll_pdus(self) -> tuple[int, ...]:
+        return ()
 
     async def async_added_to_hass(self) -> None:
         await super().async_added_to_hass()
         last = await self.async_get_last_state()
         if last is not None and last.state not in (None, "unknown", "unavailable"):
-            self.scanner.model = last.state
+            self.coordinator.boiler_model = last.state
 
     @property
     def native_value(self) -> str:
-        return self.scanner.model
+        return getattr(self.coordinator, "boiler_model", "")
 
     async def async_set_value(self, value: str) -> None:
-        self.scanner.model = value.strip()
+        self.coordinator.boiler_model = value.strip()
         self.async_write_ha_state()
 
 

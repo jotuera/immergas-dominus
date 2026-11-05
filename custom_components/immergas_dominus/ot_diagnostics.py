@@ -107,6 +107,63 @@ class OtScanSensor(_DiagEntity, SensorEntity):
         }
 
 
+class OtReportButton(_DiagEntity, ButtonEntity):
+    """Prepare the GitHub report of the Data-ID scan: a notification with a link to a pre-filled issue (nothing is
+    sent automatically)."""
+
+    _attr_icon = "mdi:github"
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_scan_report")
+
+    def map_text(self) -> str:
+        c, res = self.client, self.client.scan_result
+        pick = lambda what: [i for i, r in sorted(res.items()) if r == what]  # noqa: E731
+        sup = pick("ok")
+        lines = [
+            f"supported: {len(sup)}, unsupported: {len(pick('unsupported'))}, no reply: {len(pick('error'))}",
+            "",
+            "values (Data-ID=raw hex, HB/LB):",
+            ", ".join(f"{i}=0x{c.scan_values[i]:04X}" for i in sup if i in c.scan_values),
+            "",
+            f"unsupported: {', '.join(map(str, pick('unsupported'))) or '-'}",
+            f"no reply: {', '.join(map(str, pick('error'))) or '-'}",
+            f"status low byte sent: {'0xCA (Immergas)' if c.status_lb == 0xCA else '0x00 (standard)'}",
+        ]
+        return "\n".join(lines)
+
+    async def async_press(self) -> None:
+        from urllib.parse import urlencode
+
+        from homeassistant.components import persistent_notification
+        from homeassistant.loader import async_get_integration
+
+        from .const import DOMAIN
+        c = self.client
+        nid, title = f"{DOMAIN}_ot_report", "Immergas Dominus – OpenTherm Data-ID map"
+        if not c.scan_result or c.scan_running:
+            persistent_notification.async_create(
+                self.hass, "Run **Scan Data-IDs** first and wait until it finishes (about a minute).",
+                title=title, notification_id=nid)
+            return
+        integration = await async_get_integration(self.hass, DOMAIN)
+        version = str(integration.version) if integration.version else ""
+        model = getattr(self.coordinator, "boiler_model", "")
+        query = urlencode({"template": "opentherm-map.yml", "title": f"OpenTherm map: {model or 'boiler model?'}",
+                           "model": model, "version": version, "map": self.map_text()})
+        url = f"https://github.com/jotuera/immergas-dominus/issues/new?{query}"
+        sup = sum(1 for r in c.scan_result.values() if r == "ok")
+        msg = (
+            f"Data-ID scan: {sup} supported of {len(c.scan_result)}. Boiler model: "
+            f"**{model or '(not set – fill in “Boiler model”)'}**.\n\n"
+            f"**[Open the pre-filled GitHub issue]({url})**\n\n"
+            "Nothing is sent automatically: the link opens GitHub with the report filled in (boiler model, integration "
+            "version, the Data-ID values – no host, MAC or password). Check it there and press *Create* to send it, or "
+            "just close the page. A GitHub account is needed."
+        )
+        persistent_notification.async_create(self.hass, msg, title=title, notification_id=nid)
+
+
 class OtLastWriteSensor(_DiagEntity, SensorEntity):
     """Result of the last write, checked by reading the value back."""
 

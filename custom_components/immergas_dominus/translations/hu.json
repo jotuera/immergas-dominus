@@ -608,6 +608,9 @@
       },
       "pdu_scan_report": {
         "name": "PDU-térkép bejelentése"
+      },
+      "ot_scan_report": {
+        "name": "Data-ID térkép bejelentése"
       }
     },
     "text": {

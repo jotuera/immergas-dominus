@@ -210,7 +210,8 @@ The **PDU scan** sensor shows the non-zero values, the zeros and the PDUs withou
 creates a notification with a link to a **pre-filled GitHub issue** (boiler model, integration version, the map –
 no host, MAC or password). Nothing is sent automatically: check the issue on GitHub and press *Create*. A PDU the
 boiler does not provide usually reads 0, so the zeros are listed separately. Scans of other boiler models are the
-most useful.
+most useful. In the **OpenTherm** mode the same works with **Scan Data-IDs** → **Report Data-ID map** (the boiler model
+in the same **Boiler model** field).
 
 ## Supported models
 
@@ -275,6 +276,7 @@ the module accepts the session.
 
 - **PDU scanner** (Modbus mode): scan a PDU range through the Dominus TCP, the map in a sensor, and **Report PDU map**
   – a link to a pre-filled GitHub issue with the boiler model (nothing is sent automatically).
+- **OpenTherm: Report Data-ID map** – the same report for the Data-ID scan.
 
 ### 1.6.5
 

@@ -608,6 +608,9 @@
       },
       "pdu_scan_report": {
         "name": "Nahlásiť mapu PDU"
+      },
+      "ot_scan_report": {
+        "name": "Nahlásiť mapu Data-ID"
       }
     },
     "text": {

@@ -608,6 +608,9 @@
       },
       "pdu_scan_report": {
         "name": "PDU-Karte melden"
+      },
+      "ot_scan_report": {
+        "name": "Data-ID-Karte melden"
       }
     },
     "text": {

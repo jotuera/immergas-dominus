@@ -608,6 +608,9 @@
       },
       "pdu_scan_report": {
         "name": "Zgłoś mapę PDU"
+      },
+      "ot_scan_report": {
+        "name": "Zgłoś mapę Data-ID"
       }
     },
     "text": {

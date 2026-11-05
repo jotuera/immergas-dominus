@@ -601,6 +601,9 @@
       },
       "ot_frost_protection": {
         "name": "Frostschutz"
+      },
+      "ot_read_only": {
+        "name": "Nur lesen (Fernbedienung regelt)"
       }
     },
     "datetime": {
@@ -637,6 +640,11 @@
         "modbus": "Modbus (Magis Combo / Pro)",
         "opentherm": "OpenTherm (VICTRIX, experimentell)"
       }
+    }
+  },
+  "exceptions": {
+    "read_only": {
+      "message": "Der Nur-Lesen-Modus ist aktiv: Home Assistant schreibt nichts in den Kessel. Schalten Sie „Nur lesen (Fernbedienung regelt)“ aus, um Einstellungen zu ändern."
     }
   }
 }

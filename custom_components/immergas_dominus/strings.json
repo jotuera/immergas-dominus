@@ -601,6 +601,9 @@
       },
       "ot_frost_protection": {
         "name": "Frost protection"
+      },
+      "ot_read_only": {
+        "name": "Read only (remote in charge)"
       }
     },
     "datetime": {
@@ -637,6 +640,11 @@
         "modbus": "Modbus (Magis Combo / Pro)",
         "opentherm": "OpenTherm (VICTRIX, experimental)"
       }
+    }
+  },
+  "exceptions": {
+    "read_only": {
+      "message": "Read-only mode is on: Home Assistant does not write to the boiler. Switch off \"Read only (remote in charge)\" to change settings."
     }
   }
 }

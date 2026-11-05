@@ -601,6 +601,9 @@
       },
       "ot_frost_protection": {
         "name": "Protimrazová ochrana"
+      },
+      "ot_read_only": {
+        "name": "Pouze čtení (řídí ovladač)"
       }
     },
     "datetime": {
@@ -637,6 +640,11 @@
         "modbus": "Modbus (Magis Combo / Pro)",
         "opentherm": "OpenTherm (VICTRIX, experimentální)"
       }
+    }
+  },
+  "exceptions": {
+    "read_only": {
+      "message": "Je zapnutý režim pouze pro čtení: Home Assistant nic nezapisuje do kotle. Pro změnu nastavení vypněte „Pouze čtení (řídí ovladač)“."
     }
   }
 }

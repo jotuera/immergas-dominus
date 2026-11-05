@@ -601,6 +601,9 @@
       },
       "ot_frost_protection": {
         "name": "Protimrazová ochrana"
+      },
+      "ot_read_only": {
+        "name": "Iba čítanie (riadi ovládač)"
       }
     },
     "datetime": {
@@ -637,6 +640,11 @@
         "modbus": "Modbus (Magis Combo / Pro)",
         "opentherm": "OpenTherm (VICTRIX, experimentálny)"
       }
+    }
+  },
+  "exceptions": {
+    "read_only": {
+      "message": "Je zapnutý režim iba na čítanie: Home Assistant nič nezapisuje do kotla. Na zmenu nastavení vypnite „Iba čítanie (riadi ovládač)“."
     }
   }
 }

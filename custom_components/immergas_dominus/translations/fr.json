@@ -601,6 +601,9 @@
       },
       "ot_frost_protection": {
         "name": "Protection hors-gel"
+      },
+      "ot_read_only": {
+        "name": "Lecture seule (la télécommande pilote)"
       }
     },
     "datetime": {
@@ -637,6 +640,11 @@
         "modbus": "Modbus (Magis Combo / Pro)",
         "opentherm": "OpenTherm (VICTRIX, expérimental)"
       }
+    }
+  },
+  "exceptions": {
+    "read_only": {
+      "message": "Le mode lecture seule est actif : Home Assistant n’écrit rien dans la chaudière. Désactivez « Lecture seule (la télécommande pilote) » pour modifier les réglages."
     }
   }
 }

@@ -149,6 +149,9 @@ class DominusOpenThermClient:
         self.scan_tables: dict[int, dict[int, int | str]] = {}  # 11 / 13 -> index -> value (LB) or "unsupported" / "error"
         self.scan_finished: float | None = None      # time.time() of the last finished scan
         self.last_write: dict | None = None          # key, sent, ack, readback, result, rechecks
+        # 1.6.8: read-only - with a remote (CAR V2 / Super Amico) in charge, no write reaches the module: the Dominus
+        # keeps the last value it got from Home Assistant and keeps sending it to the boiler, over the remote's own
+        self.read_only = False
         self._recheck: tuple[int, float, int] | None = None  # (write key, monotonic due time, rechecks left)
 
     # -- lifecycle -------------------------------------------------------------
@@ -205,6 +208,9 @@ class DominusOpenThermClient:
 
     async def async_write_data_id(self, data_id: int, value: int) -> int:
         """Queue a write into the live session and wait for the ack."""
+        if self.read_only:
+            from homeassistant.exceptions import HomeAssistantError
+            raise HomeAssistantError(translation_domain="immergas_dominus", translation_key="read_only")
         self.start()
         request = _WriteRequest(data_id, value)
         self._write_queue.put(request)

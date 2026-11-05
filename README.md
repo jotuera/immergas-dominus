@@ -145,7 +145,10 @@ the Dominus regulator and runs the CAR V2 programs in Home Assistant, because th
 - The **operating mode** now shows the selected mode (enable bits) instead of what the boiler is doing right now, with the
   app's names Standby / Summer / Winter (+ CH only).
 
-With a CAR V2 connected the remote stays in charge – leave these programs off.
+With a CAR V2 (or Super Amico) connected the remote stays in charge – leave these programs off. Turn on **Read only
+(remote in charge)** (1.6.8) so that Home Assistant never writes: the Dominus keeps the last value it got from Home
+Assistant (e.g. a DHW setpoint) and keeps sending it to the boiler over the remote's own until the module is
+power-cycled (#2).
 
 **OpenTherm diagnostics (1.6.1).** To find out what a boiler really supports:
 **Scan Data-IDs** (button; reads every standard Data-ID once, about a minute, polling pauses meanwhile) → the
@@ -304,6 +307,12 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 1.6.8
+
+- **OpenTherm: Read only (remote in charge)** – a switch that blocks every write from Home Assistant (controls, programs,
+  reset); readings and the displayed setpoints stay. For a boiler controlled by its CAR V2 / Super Amico: a value written
+  once from Home Assistant is kept by the Dominus and overrides the remote until the module is power-cycled (#2).
 
 ### 1.6.7
 

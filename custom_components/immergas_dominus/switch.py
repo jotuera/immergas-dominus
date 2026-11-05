@@ -28,6 +28,8 @@ async def async_setup_entry(
         from .ot_programs import ot_switches
         async_add_entities([ImmergasOpenThermParamSwitch(coordinator, d) for d in OT_PARAM_SWITCH_DESCRIPTIONS])
         async_add_entities(ot_switches(coordinator))
+        from .ot_diagnostics import OtReadOnlySwitch
+        async_add_entities([OtReadOnlySwitch(coordinator)])
         return
     if coordinator.dhw is not None:
         async_add_entities([ImmergasDhwScheduleSwitch(coordinator)])

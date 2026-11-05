@@ -180,6 +180,9 @@ class OtPrograms:
     # -- writes ------------------------------------------------------------------
 
     async def _write(self, key: int, value: int, what: str) -> bool:
+        if getattr(self.coordinator.client, "read_only", False):
+            _LOGGER.debug("OpenTherm program: %s not written (read-only mode)", what)
+            return False
         try:
             ack = await self.coordinator.client.async_write_data_id(key, value)
         except Exception as err:  # noqa: BLE001 - the next tick tries again

@@ -601,6 +601,9 @@
       },
       "ot_frost_protection": {
         "name": "Protección antihielo"
+      },
+      "ot_read_only": {
+        "name": "Solo lectura (manda el mando)"
       }
     },
     "datetime": {
@@ -637,6 +640,11 @@
         "modbus": "Modbus (Magis Combo / Pro)",
         "opentherm": "OpenTherm (VICTRIX, experimental)"
       }
+    }
+  },
+  "exceptions": {
+    "read_only": {
+      "message": "El modo solo lectura está activo: Home Assistant no escribe en la caldera. Desactive «Solo lectura (manda el mando)» para cambiar ajustes."
     }
   }
 }

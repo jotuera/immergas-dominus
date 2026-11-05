@@ -601,6 +601,9 @@
       },
       "ot_frost_protection": {
         "name": "Ochrona przed zamarzaniem"
+      },
+      "ot_read_only": {
+        "name": "Tylko odczyt (steruje pilot)"
       }
     },
     "datetime": {
@@ -637,6 +640,11 @@
         "modbus": "Modbus (Magis Combo / Pro)",
         "opentherm": "OpenTherm (VICTRIX, eksperymentalny)"
       }
+    }
+  },
+  "exceptions": {
+    "read_only": {
+      "message": "Włączony jest tryb tylko do odczytu: Home Assistant nie zapisuje nic do kotła. Wyłącz „Tylko odczyt (steruje pilot)”, żeby zmieniać ustawienia."
     }
   }
 }

@@ -601,6 +601,9 @@
       },
       "ot_frost_protection": {
         "name": "Proteção anticongelamento"
+      },
+      "ot_read_only": {
+        "name": "Só leitura (o comando controla)"
       }
     },
     "datetime": {
@@ -637,6 +640,11 @@
         "modbus": "Modbus (Magis Combo / Pro)",
         "opentherm": "OpenTherm (VICTRIX, experimental)"
       }
+    }
+  },
+  "exceptions": {
+    "read_only": {
+      "message": "O modo só leitura está ativo: o Home Assistant não escreve na caldeira. Desative «Só leitura (o comando controla)» para alterar definições."
     }
   }
 }

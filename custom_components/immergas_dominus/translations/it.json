@@ -601,6 +601,9 @@
       },
       "ot_frost_protection": {
         "name": "Protezione antigelo"
+      },
+      "ot_read_only": {
+        "name": "Sola lettura (comanda il comando remoto)"
       }
     },
     "datetime": {
@@ -637,6 +640,11 @@
         "modbus": "Modbus (Magis Combo / Pro)",
         "opentherm": "OpenTherm (VICTRIX, sperimentale)"
       }
+    }
+  },
+  "exceptions": {
+    "read_only": {
+      "message": "La modalità sola lettura è attiva: Home Assistant non scrive nulla in caldaia. Disattiva «Sola lettura (comanda il comando remoto)» per modificare le impostazioni."
     }
   }
 }

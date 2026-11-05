@@ -601,6 +601,9 @@
       },
       "ot_frost_protection": {
         "name": "Fagyvédelem"
+      },
+      "ot_read_only": {
+        "name": "Csak olvasás (a távvezérlő irányít)"
       }
     },
     "datetime": {
@@ -637,6 +640,11 @@
         "modbus": "Modbus (Magis Combo / Pro)",
         "opentherm": "OpenTherm (VICTRIX, kísérleti)"
       }
+    }
+  },
+  "exceptions": {
+    "read_only": {
+      "message": "Csak olvasás mód aktív: a Home Assistant nem ír a kazánba. A beállítások módosításához kapcsolja ki a „Csak olvasás (a távvezérlő irányít)” kapcsolót."
     }
   }
 }

@@ -601,6 +601,9 @@
       },
       "ot_frost_protection": {
         "name": "Vorstbeveiliging"
+      },
+      "ot_read_only": {
+        "name": "Alleen lezen (afstandsbediening regelt)"
       }
     },
     "datetime": {
@@ -637,6 +640,11 @@
         "modbus": "Modbus (Magis Combo / Pro)",
         "opentherm": "OpenTherm (VICTRIX, experimenteel)"
       }
+    }
+  },
+  "exceptions": {
+    "read_only": {
+      "message": "De modus alleen lezen staat aan: Home Assistant schrijft niets naar de ketel. Zet „Alleen lezen (afstandsbediening regelt)” uit om instellingen te wijzigen."
     }
   }
 }

@@ -15,6 +15,7 @@ from typing import Any
 from homeassistant.components.button import ButtonEntity
 from homeassistant.components.select import SelectEntity
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
+from homeassistant.components.switch import SwitchEntity
 from homeassistant.const import EntityCategory
 from homeassistant.helpers.restore_state import RestoreEntity
 
@@ -74,6 +75,40 @@ class OtStatusOverlaySelect(_DiagEntity, SelectEntity, RestoreEntity):
 
     async def async_select_option(self, option: str) -> None:
         self.client.status_lb = STATUS_OVERLAYS[option]
+        self.async_write_ha_state()
+
+
+class OtReadOnlySwitch(_DiagEntity, SwitchEntity, RestoreEntity):
+    """On: Home Assistant only reads - every write (controls, programs, reset) is refused before it reaches the
+    Dominus. For a boiler controlled by its remote (CAR V2 / Super Amico): a value written once is kept by the module
+    and sent to the boiler over the remote's own until the module is power-cycled."""
+
+    _attr_entity_category = EntityCategory.CONFIG
+    _attr_icon = "mdi:lock-outline"
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_read_only")
+
+    @property
+    def available(self) -> bool:
+        return True
+
+    async def async_added_to_hass(self) -> None:
+        await super().async_added_to_hass()
+        last = await self.async_get_last_state()
+        if last is not None:
+            self.client.read_only = last.state == "on"
+
+    @property
+    def is_on(self) -> bool:
+        return self.client.read_only
+
+    async def async_turn_on(self, **kwargs: Any) -> None:
+        self.client.read_only = True
+        self.async_write_ha_state()
+
+    async def async_turn_off(self, **kwargs: Any) -> None:
+        self.client.read_only = False
         self.async_write_ha_state()
 
 

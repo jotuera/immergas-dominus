@@ -168,6 +168,18 @@
       },
       "pdu_scan_result": {
         "name": "PDU-Scan"
+      },
+      "ot_fan_speed": {
+        "name": "Gebläsedrehzahl"
+      },
+      "ot_fan_speed_setpoint": {
+        "name": "Gebläsedrehzahl Sollwert"
+      },
+      "ot_flame_current": {
+        "name": "Flammenionisationsstrom"
+      },
+      "ot_fault_history": {
+        "name": "Störungsverlauf"
       }
     },
     "binary_sensor": {

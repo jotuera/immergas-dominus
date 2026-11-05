@@ -168,6 +168,18 @@
       },
       "pdu_scan_result": {
         "name": "PDU szkennelés"
+      },
+      "ot_fan_speed": {
+        "name": "Ventilátor fordulatszám"
+      },
+      "ot_fan_speed_setpoint": {
+        "name": "Ventilátor fordulatszám alapjel"
+      },
+      "ot_flame_current": {
+        "name": "Láng ionizációs áram"
+      },
+      "ot_fault_history": {
+        "name": "Hibanapló"
       }
     },
     "binary_sensor": {

@@ -168,6 +168,18 @@
       },
       "pdu_scan_result": {
         "name": "Skan PDU"
+      },
+      "ot_fan_speed": {
+        "name": "Obroty wentylatora"
+      },
+      "ot_fan_speed_setpoint": {
+        "name": "Zadane obroty wentylatora"
+      },
+      "ot_flame_current": {
+        "name": "Prąd jonizacji płomienia"
+      },
+      "ot_fault_history": {
+        "name": "Historia błędów"
       }
     },
     "binary_sensor": {

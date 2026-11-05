@@ -16,6 +16,7 @@ from homeassistant.components.sensor import SensorDeviceClass, SensorEntityDescr
 from homeassistant.const import (
     PERCENTAGE,
     EntityCategory,
+    REVOLUTIONS_PER_MINUTE,
     UnitOfPower,
     UnitOfPressure,
     UnitOfTemperature,
@@ -595,7 +596,9 @@ class DominusOpenThermSensorDescription(SensorEntityDescription):
     """Read-only OpenTherm Data-ID sensor."""
 
     data_id: int
-    decode: str = "f88"  # "f88" | "u16" | "lb_u8" | "hb_u8"
+    # "f88" | "u16" | "lb_u8" | "hb_u8" | "lb_rpm" / "hb_rpm" (byte x 60: OpenTherm fan speed is in rpm / 60)
+    # | "f88_pos" (f8.8, a negative value = not available, e.g. 0xFF00 for the flame current)
+    decode: str = "f88"
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -672,6 +675,36 @@ OT_SENSOR_DESCRIPTIONS: tuple[DominusOpenThermSensorDescription, ...] = (
         native_unit_of_measurement=UnitOfVolumeFlowRate.LITERS_PER_MINUTE,
         suggested_display_precision=1,
         icon="mdi:water",
+    ),
+    # 1.6.6 (from a VICTRIX ZEUS 25 ErP scan): fan speed (Data-ID 35, HB setpoint / LB actual, rpm / 60) and the
+    # flame ionisation current (Data-ID 36, f8.8 uA). Not every boiler answers them, and a Data-ID without a reply
+    # costs a timeout every cycle - so they are disabled by default.
+    *(
+        DominusOpenThermSensorDescription(
+            key=key,
+            data_id=35,
+            decode=decode,
+            translation_key=key,
+            native_unit_of_measurement=REVOLUTIONS_PER_MINUTE,
+            state_class=SensorStateClass.MEASUREMENT,
+            suggested_display_precision=0,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            entity_registry_enabled_default=False,
+            icon="mdi:fan",
+        )
+        for key, decode in (("ot_fan_speed", "lb_rpm"), ("ot_fan_speed_setpoint", "hb_rpm"))
+    ),
+    DominusOpenThermSensorDescription(
+        key="ot_flame_current",
+        data_id=36,
+        decode="f88_pos",
+        translation_key="ot_flame_current",
+        native_unit_of_measurement="µA",
+        state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=1,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=False,
+        icon="mdi:fire-circle",
     ),
     DominusOpenThermSensorDescription(
         key="ot_fault_code",
@@ -815,6 +848,10 @@ OT_PARAM_SWITCH_DESCRIPTIONS: tuple[DominusOpenThermParamSwitchDescription, ...]
         ("ot_frost_protection", 14, "mdi:snowflake-alert"),
     )
 )
+# 1.6.6: fault history buffer - Data-ID 12 HB = number of entries, Data-ID 13 (HB = entry index) LB = fault code
+OT_FAULT_HISTORY_SIZE_ID = 12
+OT_FAULT_HISTORY_ENTRY_ID = 13
+OT_FAULT_HISTORY_MAX = 16
 # module parameter 11: the probe of the Dominus kit measures the room (0) or the outdoor temperature (1)
 OT_NTC_USE_INDEX = 11
 OT_NTC_USE_OPTIONS = ["room", "outdoor"]

@@ -168,6 +168,18 @@
       },
       "pdu_scan_result": {
         "name": "PDU scan"
+      },
+      "ot_fan_speed": {
+        "name": "Fan speed"
+      },
+      "ot_fan_speed_setpoint": {
+        "name": "Fan speed setpoint"
+      },
+      "ot_flame_current": {
+        "name": "Flame current"
+      },
+      "ot_fault_history": {
+        "name": "Fault history"
       }
     },
     "binary_sensor": {

@@ -168,6 +168,18 @@
       },
       "pdu_scan_result": {
         "name": "PDU-scan"
+      },
+      "ot_fan_speed": {
+        "name": "Ventilatortoerental"
+      },
+      "ot_fan_speed_setpoint": {
+        "name": "Gewenst ventilatortoerental"
+      },
+      "ot_flame_current": {
+        "name": "Ionisatiestroom vlam"
+      },
+      "ot_fault_history": {
+        "name": "Storingsgeschiedenis"
       }
     },
     "binary_sensor": {

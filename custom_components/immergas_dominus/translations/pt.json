@@ -168,6 +168,18 @@
       },
       "pdu_scan_result": {
         "name": "Análise PDU"
+      },
+      "ot_fan_speed": {
+        "name": "Velocidade do ventilador"
+      },
+      "ot_fan_speed_setpoint": {
+        "name": "Velocidade do ventilador pretendida"
+      },
+      "ot_flame_current": {
+        "name": "Corrente de ionização da chama"
+      },
+      "ot_fault_history": {
+        "name": "Histórico de avarias"
       }
     },
     "binary_sensor": {

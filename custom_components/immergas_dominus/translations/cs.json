@@ -168,6 +168,18 @@
       },
       "pdu_scan_result": {
         "name": "Sken PDU"
+      },
+      "ot_fan_speed": {
+        "name": "Otáčky ventilátoru"
+      },
+      "ot_fan_speed_setpoint": {
+        "name": "Požadované otáčky ventilátoru"
+      },
+      "ot_flame_current": {
+        "name": "Ionizační proud plamene"
+      },
+      "ot_fault_history": {
+        "name": "Historie poruch"
       }
     },
     "binary_sensor": {

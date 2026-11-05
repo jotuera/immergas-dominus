@@ -16,6 +16,9 @@ from .const import (
     DEVICE_ZONE_1,
     DOMAIN,
     FAULT_CODE_PDU,
+    OT_FAULT_HISTORY_ENTRY_ID,
+    OT_FAULT_HISTORY_MAX,
+    OT_FAULT_HISTORY_SIZE_ID,
     OT_SENSOR_DESCRIPTIONS,
     PROGRAM_PHASE_OPTIONS,
     PROTOCOL_OPENTHERM,
@@ -43,7 +46,8 @@ async def async_setup_entry(
     if entry.data.get(CONF_PROTOCOL) == PROTOCOL_OPENTHERM:
         from .ot_diagnostics import OtLastWriteSensor, OtScanSensor
         from .ot_programs import ot_sensors
-        async_add_entities([*ot_sensors(coordinator), OtScanSensor(coordinator), OtLastWriteSensor(coordinator)])
+        async_add_entities([*ot_sensors(coordinator), OtScanSensor(coordinator), OtLastWriteSensor(coordinator),
+                            ImmergasOpenThermFaultHistorySensor(coordinator)])
         async_add_entities(
             ImmergasOpenThermSensor(coordinator, description)
             for description in OT_SENSOR_DESCRIPTIONS
@@ -259,8 +263,70 @@ class ImmergasOpenThermSensor(ImmergasDominusEntity, SensorEntity):
         if decode == "f88":  # OpenTherm f8.8 signed fixed-point
             signed = raw - 0x10000 if raw & 0x8000 else raw
             return round(signed / 256, 1)
+        if decode == "f88_pos":  # f8.8, negative = not available
+            return None if raw & 0x8000 else round(raw / 256, 1)
         if decode == "lb_u8":
             return raw & 0xFF
         if decode == "hb_u8":
             return raw >> 8
+        if decode == "lb_rpm":
+            return (raw & 0xFF) * 60
+        if decode == "hb_rpm":
+            return (raw >> 8) * 60
         return raw  # u16
+
+
+class ImmergasOpenThermFaultHistorySensor(ImmergasDominusEntity, SensorEntity):
+    """Boiler fault history (Data-ID 12 = number of entries, Data-ID 13 indexed = the fault code of each entry).
+
+    The state is the number of entries; the attributes list the codes in the boiler's order (entry 1 = index 0)
+    with the integration's own description. The entries are polled only once the boiler reports how many it holds.
+    """
+
+    _attr_translation_key = "ot_fault_history"
+    _attr_entity_category = EntityCategory.DIAGNOSTIC
+    _attr_entity_registry_enabled_default = False  # not every boiler answers it (a timeout per cycle otherwise)
+    _attr_icon = "mdi:history"
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_fault_history", OT_FAULT_HISTORY_SIZE_ID, DEVICE_MAIN)
+        self._entries = 0  # entry keys currently registered for polling
+
+    def _entry_keys(self, count: int) -> tuple[int, ...]:
+        from .opentherm_client import ot_param_key
+        return tuple(ot_param_key(OT_FAULT_HISTORY_ENTRY_ID, i) for i in range(count))
+
+    def _poll_pdus(self) -> tuple[int, ...]:
+        return (OT_FAULT_HISTORY_SIZE_ID, *self._entry_keys(self._entries))
+
+    def _count(self) -> int | None:
+        raw = self.raw_value
+        return None if raw is None else min((int(raw) >> 8) & 0xFF, OT_FAULT_HISTORY_MAX)
+
+    def _handle_coordinator_update(self) -> None:
+        count = self._count()
+        if count is not None and count != self._entries:
+            # the buffer size became known (or changed): poll exactly that many entries
+            self.coordinator.unregister_pdus(self._entry_keys(self._entries))
+            self._entries = count
+            if self.coordinator.register_pdus(self._entry_keys(count)):
+                self.hass.async_create_task(self.coordinator.async_request_refresh())
+        super()._handle_coordinator_update()
+
+    @property
+    def native_value(self) -> int | None:
+        return self._count()
+
+    @property
+    def extra_state_attributes(self) -> dict[str, str]:
+        data = self.coordinator.data or {}
+        lang = self.coordinator.fault_language
+        lang = self.hass.config.language if lang == "auto" else lang
+        attrs: dict[str, str] = {}
+        for i, key in enumerate(self._entry_keys(self._entries), start=1):
+            code = data.get(key)
+            if code is None:
+                continue
+            code = int(code) & 0xFF
+            attrs[f"entry_{i}"] = anomalies.describe(code, lang) if code else "-"  # "E89: ..."
+        return attrs

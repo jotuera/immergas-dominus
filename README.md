@@ -277,6 +277,9 @@ the module accepts the session.
 - **PDU scanner** (Modbus mode): scan a PDU range through the Dominus TCP, the map in a sensor, and **Report PDU map**
   – a link to a pre-filled GitHub issue with the boiler model (nothing is sent automatically).
 - **OpenTherm: Report Data-ID map** – the same report for the Data-ID scan.
+- **OpenTherm: fan speed and setpoint** (Data-ID 35), **flame current** (Data-ID 36) and **fault history**
+  (Data-ID 12/13: the number of entries, each code with its description in the attributes) – found on a VICTRIX ZEUS
+  25 ErP. Disabled by default (not every boiler answers them): enable them in the device's *Diagnostic* entities.
 
 ### 1.6.5
 

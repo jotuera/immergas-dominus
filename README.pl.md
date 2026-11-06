@@ -277,6 +277,18 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.10
+
+- **OpenTherm: profile menu kotła** – *Profil menu kotła* (VICTRIX ZEUS 25 / VICTRIX ZEUS Superior / ogólny, albo
+  zgadywanie z modelu kotła) wybiera kody, zakresy i jednostki karty **Parametry pieca (offline)**. Superior: krzywa
+  pogodowa P66/A–D, P68–P71, moce jako obroty wentylatora (P57 / P62 / P64 / P65), pompa P55 / P67, P76 i liczniki M1
+  (godziny pracy, zapłony palnika) – zob. [profile menu](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.pl.md).
+- **OpenTherm: termostat emulowany** oceniany po odczycie zwrotnym Data-ID 24 (*działa* / *moduł nie przyjmuje*); wybór
+  i encja źródła przeniesione do Parametrów pieca (offline); kafel Termostat na czerwono, gdy brak temperatury pokoju,
+  a potrzebuje jej termostat emulowany albo regulacja wg pokoju (AMB).
+- Karty 0.56.1: nazwy trybu OpenTherm (Standby / Lato / Zima / Tylko CO) na wszystkich kartach; Łączność Dominusa
+  w dwóch kolumnach (kocioł + termostat, Dominus + panel strefy 1 / CAR V2); ikona w README.
+
 ### 1.6.9
 
 - **Dashboard OpenTherm** (karty 0.54.0): nowa karta **Kocioł OpenTherm** (moc, min. modulacja, zakresy CO / CWU, typ

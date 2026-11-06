@@ -281,6 +281,18 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.10
+
+- **OpenTherm: boiler menu profiles** – *Boiler menu profile* (VICTRIX ZEUS 25 / VICTRIX ZEUS Superior / generic, or a
+  guess from the boiler model) picks the codes, ranges and units of the **Boiler parameters (offline)** card. Superior:
+  climatic curve P66/A–D, P68–P71, outputs as fan speeds (P57 / P62 / P64 / P65), pump P55 / P67, P76 and the M1
+  counters (operating hours, burner ignitions) – see the [menu profiles](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.md#boiler-menu-declared-offline).
+- **OpenTherm: emulated thermostat** judged by reading Data-ID 24 back (*it works* / *the module does not take it*);
+  the choice and the source entity moved to the Boiler parameters (offline); the Thermostat tile turns red when there
+  is no room temperature but the emulated thermostat or room control (AMB) needs it.
+- Cards 0.56.1: the OpenTherm mode names (Standby / Summer / Winter / CH only) on every card; Dominus Connectivity in two
+  columns (boiler + thermostat, Dominus + zone 1 panel / CAR V2); README icon.
+
 ### 1.6.9
 
 - **OpenTherm dashboard** (cards 0.54.0): new **OpenTherm boiler** card (capacity, min. modulation, CH / DHW range,

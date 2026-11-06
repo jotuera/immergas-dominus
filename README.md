@@ -281,6 +281,14 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.12
+
+- **Emulated thermostat failsafe** (OpenTherm): with no fresh, valid temperature from the source entity for 60 minutes,
+  Data-ID 24 is no longer sent and the **Thermostat** tile turns red (*No room temperature source*); sending resumes
+  by itself. New attributes `source_lost` and `source_age_min` on *Room thermostat*.
+- Knowledge base: **Boilers and terminals** in [OpenTherm](docs/opentherm.md) – where an OpenTherm unit goes on the
+  VICTRIX EXA / ZEUS / TERA, and why every OpenTherm master rewrites the DHW setpoint. Frontend: hub cards 0.56.2.
+
 ### 1.6.11
 
 - **OpenTherm diagnostics from a VICTRIX ZEUS Superior scan** (disabled by default): remote boiler parameters

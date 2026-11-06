@@ -55,6 +55,29 @@ Data-ID.
 77, 85, 88 (ventilation IDs, both / ZEUS). A scan of your boiler →
 **Report Data-ID map** adds a column here.
 
+## Boilers and terminals
+
+Where an OpenTherm unit (CAR V2, a third-party OpenTherm room unit or an ESP OpenTherm master) goes on Immergas boilers, as reported
+by users. Check the wiring diagram of your boiler first – the terminal numbers differ between models.
+
+| Boiler | OpenTherm / remote terminals | Notes |
+|---|---|---|
+| VICTRIX EXA 24 / 28 1 ErP | 41 / 44 (+ on 44) | Works without changes; after connecting, a reset turned on the remote-control indicator. Not listed as OpenTherm in the manual. |
+| VICTRIX ZEUS 25 | 41 / 44, jumper X40 removed | X40 back on 40-41 when the remote is removed (see *Replacing the CAR V2*). |
+| VICTRIX ZEUS 26 2 ErP | 42 / 43 | *ERR>CM* on the CAR V2 = no communication; outdoor probe on the boiler. |
+| VICTRIX TERA | – | Service parameter **P7 = 1** reported to enable OpenTherm – not confirmed (one user: no effect). |
+| VICTRIX TERA V2 EU | – | OpenTherm built in (Immergas answer), works with any OpenTherm room unit. |
+
+Terminal **21** ("status signal") on the EXA is for the DIM pump groups switched by the CAR, not OpenTherm. Data that
+the boiler does not have (pressure, DHW flow, outdoor temperature without a probe, cooling) reads as 0 or unsupported –
+the dashboard hides those tiles.
+
+**Every OpenTherm master writes cyclically.** An OpenTherm master (the Dominus module, a CAR V2, an ESP OpenTherm master)
+sends the status / enables (Data-ID 0) and the CH setpoint (1) every cycle and the DHW setpoint (56) again and again from
+its own memory, not once. That is why a DHW value written by a second master does not stay. Room control with a fast PID
+overshoots on these boilers (full output, then the room stays too warm for hours). The Home Assistant programs here
+change the flow slowly (curve, self-learning ±1 °C a day).
+
 ## Immergas specifics
 
 - **The remote stays in charge.** With a **CAR V2** (on the Dominus terminals) or a **Super Amico** (on the boiler)
@@ -128,6 +151,11 @@ of 0.1 °C or every 5 minutes; *Read only* blocks it. **Experimental:** whether 
 its own probe has to be confirmed on a real boiler – the *Supported Data-IDs* / *Room temperature* readings show it.
 The choice and the entity are in the **Boiler parameters (offline)** card; the **Thermostat** tile of the Connectivity card shows the state. Data-ID 24 is judged by reading it back a minute later (*it works* / *the module does not take it*) – the acknowledgement alone is no proof (a Modbus test got the written value echoed).
 
+**Failsafe (1.6.12):** with no fresh, valid reading of the source entity for **60 minutes** (unavailable, not a number,
+not updated) Data-ID 24 is no longer sent – a stale room temperature would keep the regulator on a wrong value. The tile
+turns red (*No room temperature source*); sending starts again by itself when the entity reports. The boiler's own frost
+protection stays active.
+
 ## Boiler menu (declared, offline)
 
 The boiler's own menu (VICTRIX ZEUS 25 manual) cannot be read over OpenTherm yet: the boiler reports 42 transparent
@@ -184,4 +212,8 @@ issue (boiler model, integration version, the scan – no host, MAC or password)
   supported on Victrix.
 - [arduino.ru OpenTherm thermostat thread](https://arduino.ru/forum/programmirovanie/termostat-opentherm-na-esp8266?page=15#comment-649392)
   – the 0xCA low byte and the Immergas write sequence.
+- [Elektroda: Immergas with a non-CAR controller](https://www.elektroda.pl/rtvforum/topic3843909.html) – terminals
+  41 / 44 (EXA), TERA P7, TERA V2 with OpenTherm, Nest Heat Link.
+- [esp_domoticz_opentherm_handler](https://github.com/akamming/esp_domoticz_opentherm_handler) – an ESP OpenTherm
+  master: cyclic Data-ID 0 / 1 / 56 writes, a room-temperature failsafe.
 - [OTGW firmware](https://github.com/rvdbreemen/OTGW-firmware) – `TP=11:12` for Immergas.

@@ -60,6 +60,7 @@ DHW_BOUNDS_ID = 48  # HB = the boiler's max. DHW setpoint, LB = min. (s8 °C)
 DHW_TEMP_ID = 26
 OUTDOOR_ID = 27
 ROOM_TEMP_ID = 24
+ROOM_LOST_S = 3600  # emulated thermostat failsafe: no fresh source reading for 60 min
 CH_SETPOINT_KEY = ot_param_key(89, 17)  # module parameter 17 = CH (max flow) setpoint, as the official app
 CH_MIN_KEY = ot_param_key(89, 16)
 CH_OFFSET_KEY = ot_param_key(89, 5)
@@ -127,6 +128,7 @@ class OtPrograms:
         self.room_sent_at: datetime | None = None
         self.room_result: str | None = None  # pending / taken / not_taken (judged by reading Data-ID 24 back)
         self._room_mono = 0.0
+        self._room_ok_mono = time.monotonic()  # last fresh, valid reading of the source entity (failsafe timer)
         self._learn: list[float] = []         # room - setpoint in the Comfort phase today (self-learning)
         self._learn_day: str | None = None
         self.numbers = {k: v[0] for k, v in NUMBER_SPECS.items()}
@@ -394,6 +396,19 @@ class OtPrograms:
             return None
         return v if v is not None and -20 < v < 50 else None
 
+    def room_source_age(self) -> float | None:
+        """Seconds since the source entity last reported (last_reported, else last_updated); None = no entity."""
+        st = self.hass.states.get(self.room_source) if self.room_source else None
+        if st is None:
+            return None
+        seen = getattr(st, "last_reported", None) or st.last_updated
+        return max(0.0, (dt_util.utcnow() - seen).total_seconds())
+
+    @property
+    def room_source_lost(self) -> bool:
+        """Failsafe: the emulated thermostat has had no fresh, valid room temperature for ROOM_LOST_S."""
+        return self.thermostat == "emulated" and time.monotonic() - self._room_ok_mono > ROOM_LOST_S
+
     async def _emulated_thermostat(self) -> None:
         """Emulated thermostat (experimental): the room temperature of an HA entity goes to the module as Data-ID 24
         (WRITE-DATA "room temperature", as a room unit sends it) - on a change of 0.1 °C or every 5 minutes. Whether the
@@ -401,10 +416,23 @@ class OtPrograms:
         if self.thermostat != "emulated":
             return
         self._judge_room()
-        v = self.room_source_value()
-        if v is None:
+        v, age, mono = self.room_source_value(), self.room_source_age(), time.monotonic()
+        if v is not None and age is not None and age <= ROOM_LOST_S:
+            self._room_ok_mono = mono
+            if self.room_result == "source_lost":
+                _LOGGER.info("Emulated thermostat: the room temperature source is back (%.1f °C)", v)
+                self.room_result, self.room_sent = None, None
+        if self.room_source_lost:
+            # failsafe: no fresh room temperature for an hour - stop sending Data-ID 24 (a stale value would keep the
+            # regulator on a wrong room temperature) and show it; the boiler's own frost protection stays active
+            if self.room_result != "source_lost":
+                _LOGGER.warning("Emulated thermostat: no fresh temperature from %s for %d min - Data-ID 24 no longer "
+                                "sent", self.room_source or "(no entity)", ROOM_LOST_S // 60)
+                self.room_result = "source_lost"
+                self._notify()
             return
-        mono = time.monotonic()
+        if v is None or (age is not None and age > ROOM_LOST_S):
+            return
         if self.room_sent is not None and abs(v - self.room_sent) < 0.05 and mono - self._room_mono < 300:
             return
         try:
@@ -785,12 +813,14 @@ class OtThermostatSelect(_ProgramEntity, SelectEntity):
         p = self.programs
         return {"room_source": p.room_source or None, "room_source_value": p.room_source_value(),
                 "room_sent": p.room_sent, "room_sent_at": p.room_sent_at.isoformat() if p.room_sent_at else None,
-                "write_result": p.room_result}
+                "write_result": p.room_result, "source_lost": p.room_source_lost,
+                "source_age_min": round(a / 60) if (a := p.room_source_age()) is not None else None}
 
     async def async_select_option(self, option: str) -> None:
         self.programs.thermostat = option
         self.programs.room_sent = None
         self.programs.room_result = None
+        self.programs._room_ok_mono = time.monotonic()
         self.programs.changed()
 
 
@@ -814,6 +844,8 @@ class OtRoomSource(_ProgramEntity, TextEntity):
 
     async def async_set_value(self, value: str) -> None:
         self.programs.room_source = value.strip()
+        self.programs.room_result, self.programs.room_sent = None, None
+        self.programs._room_ok_mono = time.monotonic()
         self.programs.room_sent = None
         self.programs.changed()
 

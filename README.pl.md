@@ -277,6 +277,14 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.12
+
+- **Zabezpieczenie emulowanego termostatu** (OpenTherm): gdy encja źródłowa przez 60 minut nie poda świeżej, poprawnej
+  temperatury, Data-ID 24 przestaje być wysyłany, a kafel **Termostat** robi się czerwony (*Brak źródła temperatury*);
+  wysyłanie wraca samo. Nowe atrybuty `source_lost` i `source_age_min` w *Termostat pokojowy*.
+- Baza wiedzy: **Kotły i zaciski** w [OpenTherm](docs/opentherm.pl.md) – gdzie podłącza się urządzenie OpenTherm w
+  VICTRIX EXA / ZEUS / TERA i dlaczego każdy master OpenTherm nadpisuje nastawę CWU. Frontend: karty huba 0.56.2.
+
 ### 1.6.11
 
 - **Diagnostyka OpenTherm ze skanu VICTRIX ZEUS Superior** (domyślnie wyłączona): zdalne parametry kotła (Data-ID 6 –

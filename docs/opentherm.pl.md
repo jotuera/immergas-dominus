@@ -55,6 +55,29 @@ na dany Data-ID.
 77, 85, 88 (ID wentylacji, oba / ZEUS). Skan Twojego kotła → **Zgłoś mapę
 Data-ID** dodaje tu kolumnę.
 
+## Kotły i zaciski
+
+Gdzie podłącza się urządzenie OpenTherm (CAR V2, regulator OpenTherm innej firmy albo master ESP) w kotłach Immergas –
+według relacji użytkowników. Najpierw sprawdź schemat swojego kotła: numery zacisków różnią się między modelami.
+
+| Kocioł | Zaciski OpenTherm / regulatora | Uwagi |
+|---|---|---|
+| VICTRIX EXA 24 / 28 1 ErP | 41 / 44 (+ na 44) | Działa bez przeróbek; po podłączeniu reset zapalił kontrolkę zdalnego sterowania. W instrukcji brak wzmianki o OpenTherm. |
+| VICTRIX ZEUS 25 | 41 / 44, zdjęta zworka X40 | Po odłączeniu regulatora X40 z powrotem na 40-41 (patrz *Zastąpienie CAR V2*). |
+| VICTRIX ZEUS 26 2 ErP | 42 / 43 | *ERR>CM* na CAR V2 = brak komunikacji; sonda zewnętrzna do kotła. |
+| VICTRIX TERA | – | Parametr serwisowy **P7 = 1** ma włączać OpenTherm – niepotwierdzone (jeden użytkownik: bez efektu). |
+| VICTRIX TERA V2 EU | – | OpenTherm wbudowany (odpowiedź Immergas), działa z każdym regulatorem OpenTherm. |
+
+Zacisk **21** („sygnał stanu”) w EXA służy do grup pompowych DIM załączanych przez CAR, a nie do OpenTherm. Dane,
+których kocioł nie ma (ciśnienie, przepływ CWU, temp. zewnętrzna bez sondy, chłodzenie), czytają się jako 0 albo brak
+obsługi – tablica ukrywa te kafelki.
+
+**Każdy master OpenTherm zapisuje cyklicznie.** Master OpenTherm (moduł Dominusa, CAR V2, master ESP) wysyła status /
+zezwolenia (Data-ID 0) i nastawę CO (1) co cykl, a nastawę CWU (56) raz po raz z własnej pamięci, nie jednorazowo.
+Dlatego wartość CWU zapisana przez drugiego mastera się nie utrzymuje. Regulacja pokojowa szybkim PID-em daje na tych
+kotłach przeregulowanie (pełna moc, potem w pokoju za ciepło przez kilka godzin). Programy Home Assistant zmieniają tu
+zasilanie powoli (krzywa, samouczenie ±1 °C na dobę).
+
 ## Specyfika Immergas
 
 - **Steruje pilot.** Z podłączonym **CAR V2** (na zaciskach Dominusa) albo **Super Amico** (na kotle) ogrzewaniem
@@ -126,6 +149,11 @@ zamiast własnej sondy, trzeba potwierdzić na prawdziwym kotle. Wybór i encja 
 jest oceniany po odczycie zwrotnym minutę później (*działa* / *moduł nie przyjmuje*) – samo potwierdzenie niczego nie
 dowodzi (test Modbus dał echo zapisanej wartości).
 
+**Zabezpieczenie (1.6.12):** gdy encja źródłowa przez **60 minut** nie poda świeżej, poprawnej wartości (niedostępna,
+nie liczba, brak aktualizacji), Data-ID 24 przestaje być wysyłany – stara temperatura trzymałaby regulator na złej
+wartości. Kafel robi się czerwony (*Brak źródła temperatury*); wysyłanie wraca samo, gdy encja się odezwie. Własna
+ochrona przeciwzamrożeniowa kotła działa dalej.
+
 ## Menu kotła (deklarowane, offline)
 
 Własnego menu kotła (instrukcja VICTRIX ZEUS 25) nie da się jeszcze odczytać przez OpenTherm: kocioł podaje 42
@@ -182,4 +210,8 @@ automatycznie.
   w Victrix.
 - [Wątek arduino.ru o termostacie OpenTherm](https://arduino.ru/forum/programmirovanie/termostat-opentherm-na-esp8266?page=15#comment-649392)
   – młodszy bajt 0xCA i sekwencja zapisów Immergas.
+- [Elektroda: Immergas z innym sterownikiem niż CAR](https://www.elektroda.pl/rtvforum/topic3843909.html) – zaciski
+  41 / 44 (EXA), TERA P7, TERA V2 z OpenTherm, Nest Heat Link.
+- [esp_domoticz_opentherm_handler](https://github.com/akamming/esp_domoticz_opentherm_handler) – master OpenTherm na
+  ESP: cykliczne zapisy Data-ID 0 / 1 / 56, zabezpieczenie temperatury pokoju.
 - [Firmware OTGW](https://github.com/rvdbreemen/OTGW-firmware) – `TP=11:12` dla Immergas.

@@ -681,8 +681,11 @@
       "ot_menu_profile": {
         "name": "Profil menu kotła",
         "state": {
-          "zeus25": "VICTRIX ZEUS 25 (menu G / P / t / A)",
-          "superior": "VICTRIX ZEUS Superior (menu M1 / M3 / M5)",
+          "zeus25": "VICTRIX ZEUS 25 / EXA 28 / OMNIA (menu G / P / t / A)",
+          "tera": "VICTRIX TERA V2 / V3 (menu P / t / A / S)",
+          "classic": "VICTRIX EXA 24 X / NIKE 24 ECO (menu S / P / t)",
+          "superior": "VICTRIX ZEUS Superior 26 / 32 (menu M1 / M3 / M5)",
+          "hercules": "HERCULES Condensing / Solar 26 (menu M1 / M3 / M5)",
           "generic": "Inny / ogólny"
         }
       },
@@ -699,7 +702,29 @@
         "name": "Start CWU poniżej nastawy",
         "state": {
           "3": "3 °C poniżej",
+          "5": "5 °C poniżej (solar)",
           "10": "10 °C poniżej (solar)"
+        }
+      },
+      "ot_remote_protocol": {
+        "name": "Protokół zdalnego sterowania",
+        "state": {
+          "img_bus": "IMG BUS (CAR V2)",
+          "commercial": "Pilot innej firmy (OpenTherm)"
+        }
+      },
+      "ot_her_pump": {
+        "name": "Sterowanie pompą",
+        "state": {
+          "auto": "AUTO (ΔT)",
+          "fix": "FIX (stała prędkość)"
+        }
+      },
+      "ot_ch_no_remote": {
+        "name": "CO bez działającego pilota",
+        "state": {
+          "off": "Wyłączone",
+          "on": "Włączone"
         }
       }
     },

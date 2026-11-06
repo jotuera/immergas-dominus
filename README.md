@@ -287,7 +287,12 @@ the module accepts the session.
   Data-ID 24 is no longer sent and the **Thermostat** tile turns red (*No room temperature source*); sending resumes
   by itself. New attributes `source_lost` and `source_age_min` on *Room thermostat*.
 - Knowledge base: **Boilers and terminals** in [OpenTherm](docs/opentherm.md) – where an OpenTherm unit goes on the
-  VICTRIX EXA / ZEUS / TERA, and why every OpenTherm master rewrites the DHW setpoint. Frontend: hub cards 0.56.2.
+  VICTRIX EXA / ZEUS / TERA, and why every OpenTherm master rewrites the DHW setpoint.
+- **Boiler menu families** from the Immergas installer manuals: *Boiler menu profile* now has VICTRIX ZEUS 25 / EXA 28 /
+  OMNIA, **TERA V2 / V3**, **EXA 24 X / NIKE 24 ECO**, ZEUS Superior 26 / 32 and **HERCULES Condensing / Solar 26** – the
+  *Boiler parameters (offline)* card shows each family's codes. New declared values: TERA P7 remote protocol, HERCULES
+  P57 pump control and M3 P33 *CH without a working remote* (also on the *Running without the CAR V2* checklist). The
+  new platform (ZEUS Superior 25-35, HERCULES 25 / 35, EXTRA) is documented as a Modbus boiler. Frontend: hub cards 0.57.0.
 
 ### 1.6.11
 

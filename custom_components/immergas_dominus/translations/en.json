@@ -681,8 +681,11 @@
       "ot_menu_profile": {
         "name": "Boiler menu profile",
         "state": {
-          "zeus25": "VICTRIX ZEUS 25 (menu G / P / t / A)",
-          "superior": "VICTRIX ZEUS Superior (menu M1 / M3 / M5)",
+          "zeus25": "VICTRIX ZEUS 25 / EXA 28 / OMNIA (menu G / P / t / A)",
+          "tera": "VICTRIX TERA V2 / V3 (menu P / t / A / S)",
+          "classic": "VICTRIX EXA 24 X / NIKE 24 ECO (menu S / P / t)",
+          "superior": "VICTRIX ZEUS Superior 26 / 32 (menu M1 / M3 / M5)",
+          "hercules": "HERCULES Condensing / Solar 26 (menu M1 / M3 / M5)",
           "generic": "Other / generic"
         }
       },
@@ -699,7 +702,29 @@
         "name": "DHW restart below the setpoint",
         "state": {
           "3": "3 °C below",
+          "5": "5 °C below (solar)",
           "10": "10 °C below (solar)"
+        }
+      },
+      "ot_remote_protocol": {
+        "name": "Remote protocol",
+        "state": {
+          "img_bus": "IMG BUS (CAR V2)",
+          "commercial": "Third-party remote (OpenTherm)"
+        }
+      },
+      "ot_her_pump": {
+        "name": "Pump control",
+        "state": {
+          "auto": "AUTO (ΔT)",
+          "fix": "FIX (constant speed)"
+        }
+      },
+      "ot_ch_no_remote": {
+        "name": "CH without a working remote",
+        "state": {
+          "off": "Off",
+          "on": "On"
         }
       }
     },

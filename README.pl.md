@@ -283,7 +283,12 @@ przyjmie sesję.
   temperatury, Data-ID 24 przestaje być wysyłany, a kafel **Termostat** robi się czerwony (*Brak źródła temperatury*);
   wysyłanie wraca samo. Nowe atrybuty `source_lost` i `source_age_min` w *Termostat pokojowy*.
 - Baza wiedzy: **Kotły i zaciski** w [OpenTherm](docs/opentherm.pl.md) – gdzie podłącza się urządzenie OpenTherm w
-  VICTRIX EXA / ZEUS / TERA i dlaczego każdy master OpenTherm nadpisuje nastawę CWU. Frontend: karty huba 0.56.2.
+  VICTRIX EXA / ZEUS / TERA i dlaczego każdy master OpenTherm nadpisuje nastawę CWU.
+- **Rodziny menu kotłów** z instrukcji instalatora Immergas: *Profil menu kotła* ma teraz VICTRIX ZEUS 25 / EXA 28 /
+  OMNIA, **TERA V2 / V3**, **EXA 24 X / NIKE 24 ECO**, ZEUS Superior 26 / 32 i **HERCULES Condensing / Solar 26** – karta
+  *Parametry pieca (offline)* pokazuje kody danej rodziny. Nowe deklarowane wartości: TERA P7 protokół pilota, HERCULES
+  P57 sterowanie pompą i M3 P33 *CO bez działającego pilota* (także na liście *Praca bez CAR V2*). Nowa platforma
+  (ZEUS Superior 25-35, HERCULES 25 / 35, EXTRA) opisana jako kocioł Modbus. Frontend: karty huba 0.57.0.
 
 ### 1.6.11
 

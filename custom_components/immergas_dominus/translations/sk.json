@@ -460,6 +460,30 @@
       },
       "ot_a5": {
         "name": "A5 · Režim čerpadla (0 = proporcionálny, 5-25 = ΔT)"
+      },
+      "ot_sup_out_min": {
+        "name": "P66/C · Outdoor temperature at max. flow"
+      },
+      "ot_sup_out_max": {
+        "name": "P66/D · Outdoor temperature at min. flow"
+      },
+      "ot_sup_dhw_max_rpm": {
+        "name": "DHW max. output (fan speed)"
+      },
+      "ot_sup_dhw_min_rpm": {
+        "name": "DHW min. output (fan speed)"
+      },
+      "ot_sup_ch_max_rpm": {
+        "name": "CH max. output (fan speed)"
+      },
+      "ot_sup_ch_min_rpm": {
+        "name": "CH min. output (fan speed)"
+      },
+      "ot_sup_hours": {
+        "name": "Boiler operating hours (menu M1)"
+      },
+      "ot_sup_ignitions": {
+        "name": "Burner ignitions (menu M1)"
       }
     },
     "select": {
@@ -618,7 +642,8 @@
         "name": "P6 · Prevádzka čerpadla",
         "state": {
           "intermittent": "Prerušovaný",
-          "continuous": "Nepretržitý"
+          "continuous": "Nepretržitý",
+          "flow_probe": "By the thermostat and the flow probe"
         }
       },
       "ot_thermostat": {
@@ -627,6 +652,30 @@
           "none": "Žiadny",
           "physical": "Fyzický (svorky kotla 40-41)",
           "emulated": "Emulovaný (entita HA)"
+        }
+      },
+      "ot_menu_profile": {
+        "name": "Boiler menu profile",
+        "state": {
+          "zeus25": "VICTRIX ZEUS 25 (menu G / P / t / A)",
+          "superior": "VICTRIX ZEUS Superior (menu M1 / M3 / M5)",
+          "generic": "Other / generic"
+        }
+      },
+      "ot_sup_pump_speed": {
+        "name": "Pump speed",
+        "state": {
+          "1": "1",
+          "2": "2",
+          "3": "3",
+          "auto": "AUTO (ΔT)"
+        }
+      },
+      "ot_sup_dhw_restart": {
+        "name": "DHW restart below the setpoint",
+        "state": {
+          "3": "3 °C below",
+          "10": "10 °C below (solar)"
         }
       }
     },

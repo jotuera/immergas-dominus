@@ -282,17 +282,31 @@ def ot_declared_numbers(coordinator: ImmergasDominusCoordinator) -> list[Restore
         ImmergasDeclaredNumber(coordinator, "ot_p0", "mdi:water-boiler", 99, 0, 99, pct),          # DHW max. output
         ImmergasDeclaredNumber(coordinator, "ot_p1", "mdi:fire-circle", 0, 0, 99, pct),            # min. output
         ImmergasDeclaredNumber(coordinator, "ot_p2", "mdi:fire", 80, 0, 99, pct),                  # CH max. output
-        ImmergasDeclaredNumber(coordinator, "ot_p7", "mdi:thermometer-plus", 0, -9, 9, UnitOfTemperature.KELVIN),
+        ImmergasDeclaredNumber(coordinator, "ot_p7", "mdi:thermometer-plus", 0, -10, 10, UnitOfTemperature.KELVIN),
         ImmergasDeclaredNumber(coordinator, "ot_a3", "mdi:pump", 9, 1, 9, None),                   # pump max. speed
         ImmergasDeclaredNumber(coordinator, "ot_a4", "mdi:pump-off", 6, 1, 9, None),               # pump min. speed
         ImmergasDeclaredNumber(coordinator, "ot_a5", "mdi:delta", 15, 0, 25, UnitOfTemperature.KELVIN),  # pump mode / delta T
+        # VICTRIX ZEUS Superior (menu M5 / M1): the climatic curve P66/C-D, the outputs as fan speeds (P57 / P62 / P64 /
+        # P65) and the information menu counters (operating hours, burner ignitions) - no factory value is suggested
+        ImmergasDeclaredNumber(coordinator, "ot_sup_out_min", "mdi:snowflake-thermometer", None, -20, 0, c),
+        ImmergasDeclaredNumber(coordinator, "ot_sup_out_max", "mdi:sun-thermometer", None, 5, 25, c),
+        ImmergasDeclaredNumber(coordinator, "ot_sup_dhw_max_rpm", "mdi:fan-chevron-up", None, 1000, 7000, "rpm", 50),
+        ImmergasDeclaredNumber(coordinator, "ot_sup_dhw_min_rpm", "mdi:fan-chevron-down", None, 1000, 7000, "rpm", 50),
+        ImmergasDeclaredNumber(coordinator, "ot_sup_ch_max_rpm", "mdi:fan-plus", None, 1000, 7000, "rpm", 50),
+        ImmergasDeclaredNumber(coordinator, "ot_sup_ch_min_rpm", "mdi:fan-minus", None, 1000, 7000, "rpm", 50),
+        ImmergasDeclaredNumber(coordinator, "ot_sup_hours", "mdi:timer-outline", None, 0, 500000, UnitOfTime.HOURS),
+        ImmergasDeclaredNumber(coordinator, "ot_sup_ignitions", "mdi:fire-circle", None, 0, 5000000, None),
     ]
 
 
 def ot_declared_selects(coordinator: ImmergasDominusCoordinator) -> list[SelectEntity]:
     return [
         ImmergasDeclaredSelect(coordinator, "ot_t2", "mdi:water-thermometer", ["0", "1", "2", "3"], "1"),
-        ImmergasDeclaredSelect(coordinator, "ot_p6", "mdi:pump", ["intermittent", "continuous"], "intermittent"),
+        ImmergasDeclaredSelect(coordinator, "ot_p6", "mdi:pump", ["intermittent", "continuous", "flow_probe"], "intermittent"),
+        # which menu the boiler has: the dashboard shows the codes, ranges and units of that model
+        ImmergasDeclaredSelect(coordinator, "ot_menu_profile", "mdi:book-cog-outline", ["zeus25", "superior", "generic"], None),
+        ImmergasDeclaredSelect(coordinator, "ot_sup_pump_speed", "mdi:pump", ["1", "2", "3", "auto"], None),
+        ImmergasDeclaredSelect(coordinator, "ot_sup_dhw_restart", "mdi:water-thermometer", ["3", "10"], "3"),
     ]
 
 

@@ -141,6 +141,24 @@ fabryczne). Nic nie trafia do kotła; karta **Parametry pieca (offline)** używa
 | A3 / A4 / A5 | maks. / min. prędkość pompy, tryb pompy (9 / 6 / 15) | – |
 | P7 | korekta sondy zewnętrznej (0 K) | – |
 
+**Profile menu.** Kotły Immergas nie mają jednego menu: ta sama funkcja ma inny kod, zakres albo jednostkę. **Profil
+menu kotła** (albo zgadywanie z pola *Model kotła*) wybiera, co pokazuje karta:
+
+| Funkcja | VICTRIX ZEUS 25 (menu G / P / t / A) | VICTRIX ZEUS Superior 26 / 32 (menu M1 / M3 / M5) |
+|---|---|---|
+| Min. / maks. zasilanie CO | t0 / t1 | P66/A / P66/B |
+| Krzywa pogodowa (temp. zewn. przy maks. / min. zasilaniu) | – | P66/C (−20…0 °C) / P66/D (5…25 °C) |
+| Blokada ponownego zapłonu | t5, 0–600 s | P69, 0–255 s |
+| Rampa / opóźnienie zapłonu | t6 / t7 | P70 / P68 |
+| Moc CO / CWU | P2 / P1 / P0 w % | P64 / P65 / P57 / P62 jako obroty wentylatora (rpm) |
+| Termostat CWU | t2 (zasilanie przy grzaniu zasobnika) | P71 (start 3 °C / 10 °C poniżej nastawy) |
+| Pompa | P6, A3 / A4, A5 (ΔT) | P67, P55 (1–3 / AUTO z ΔT) |
+| Korekta sondy zewnętrznej | P7 | P76 |
+| Liczniki | – | M1: godziny pracy, zapłony palnika |
+
+Kody Superior P68–P76 są odczytane z jego instrukcji i czekają na potwierdzenie na prawdziwym kotle. VICTRIX ZEUS 26 2 ErP
+(bez zasobnika) prawie nie ma numerowanego menu – dla niego profil ogólny.
+
 Funkcje automatyczne kotła (ochrona pompy i zaworu 3-drogowego co 24 h, ochrona grzejników poniżej 4 °C, autotest
 płytki co 18 h, odpowietrzanie A7, kominiarz) nie wymagają ustawień i nie są zgłaszane przez OpenTherm. Skany razem
 z wartościami z menu (**Zgłoś mapę Data-ID**) pozwolą integracji czytać je bezpośrednio.

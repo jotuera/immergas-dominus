@@ -460,6 +460,30 @@
       },
       "ot_a5": {
         "name": "A5 · Tryb pompy (0 = proporcjonalny, 5-25 = ΔT)"
+      },
+      "ot_sup_out_min": {
+        "name": "P66/C · Temp. zewnętrzna przy maks. zasilaniu"
+      },
+      "ot_sup_out_max": {
+        "name": "P66/D · Temp. zewnętrzna przy min. zasilaniu"
+      },
+      "ot_sup_dhw_max_rpm": {
+        "name": "Maks. moc CWU (obroty wentylatora)"
+      },
+      "ot_sup_dhw_min_rpm": {
+        "name": "Min. moc CWU (obroty wentylatora)"
+      },
+      "ot_sup_ch_max_rpm": {
+        "name": "Maks. moc CO (obroty wentylatora)"
+      },
+      "ot_sup_ch_min_rpm": {
+        "name": "Min. moc CO (obroty wentylatora)"
+      },
+      "ot_sup_hours": {
+        "name": "Godziny pracy kotła (menu M1)"
+      },
+      "ot_sup_ignitions": {
+        "name": "Zapłony palnika (menu M1)"
       }
     },
     "select": {
@@ -618,7 +642,8 @@
         "name": "P6 · Praca pompy",
         "state": {
           "intermittent": "Przerywana (wg termostatu)",
-          "continuous": "Ciągła"
+          "continuous": "Ciągła",
+          "flow_probe": "Wg termostatu i sondy zasilania"
         }
       },
       "ot_thermostat": {
@@ -627,6 +652,30 @@
           "none": "Brak",
           "physical": "Fizyczny (zaciski kotła 40-41)",
           "emulated": "Emulowany (encja HA)"
+        }
+      },
+      "ot_menu_profile": {
+        "name": "Profil menu kotła",
+        "state": {
+          "zeus25": "VICTRIX ZEUS 25 (menu G / P / t / A)",
+          "superior": "VICTRIX ZEUS Superior (menu M1 / M3 / M5)",
+          "generic": "Inny / ogólny"
+        }
+      },
+      "ot_sup_pump_speed": {
+        "name": "Prędkość pompy",
+        "state": {
+          "1": "1",
+          "2": "2",
+          "3": "3",
+          "auto": "AUTO (ΔT)"
+        }
+      },
+      "ot_sup_dhw_restart": {
+        "name": "Start CWU poniżej nastawy",
+        "state": {
+          "3": "3 °C poniżej",
+          "10": "10 °C poniżej (solar)"
         }
       }
     },

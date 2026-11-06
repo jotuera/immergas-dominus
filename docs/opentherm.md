@@ -144,6 +144,24 @@ hints.
 | A3 / A4 / A5 | pump max. / min. speed, pump mode (9 / 6 / 15) | – |
 | P7 | outdoor probe correction (0 K) | – |
 
+**Menu profiles.** Immergas boilers do not share one menu: the same function has another code, range or unit.
+**Boiler menu profile** (or a guess from the *Boiler model* text) picks what the card shows:
+
+| Function | VICTRIX ZEUS 25 (menu G / P / t / A) | VICTRIX ZEUS Superior 26 / 32 (menu M1 / M3 / M5) |
+|---|---|---|
+| CH min. / max. flow | t0 / t1 | P66/A / P66/B |
+| Climatic curve (outdoor at max. / min. flow) | – | P66/C (−20…0 °C) / P66/D (5…25 °C) |
+| CH ignitions timer | t5, 0–600 s | P69, 0–255 s |
+| CH ramp / ignition delay | t6 / t7 | P70 / P68 |
+| CH / DHW output | P2 / P1 / P0 in % | P64 / P65 / P57 / P62 as fan speed (rpm) |
+| DHW thermostat | t2 (flow while heating the cylinder) | P71 (restart 3 °C / 10 °C below the setpoint) |
+| Pump | P6, A3 / A4, A5 (ΔT) | P67, P55 (1–3 / AUTO with ΔT) |
+| Outdoor probe correction | P7 | P76 |
+| Counters | – | M1: operating hours, burner ignitions |
+
+The Superior codes P68–P76 are read from its manual and still to be confirmed on a real boiler. The VICTRIX ZEUS 26 2 ErP
+(without a tank) has almost no numbered menu – use the generic profile.
+
 Built-in automatic functions (pump / 3-way valve anti-block every 24 h, radiator frost protection below 4 °C, P.C.B.
 self-check every 18 h, automatic venting A7, chimney sweep) need no settings and are not reported over OpenTherm.
 Scans together with the menu values (**Report Data-ID map**) will let the integration read them directly.

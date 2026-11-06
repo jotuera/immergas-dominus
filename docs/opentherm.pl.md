@@ -62,6 +62,14 @@ według instrukcji instalatora z immergas.pl i relacji użytkowników. Żadna in
 magistrala CAR V2 to IMG BUS, a regulator innej firmy to „zdalne sterowanie dostępne w handlu”. Najpierw sprawdź schemat
 swojego kotła.
 
+> ⚠️ **Najpierw sprawdź protokół – nie każda magistrala pilota Immergas to OpenTherm.** CAR V2 zna dwa protokoły i
+> pokazuje w menu informacji, którego używa: **VER PI** = **IMG-BUS** (OpenTherm z drobnymi zmianami – działa) albo
+> **VER PC** = **CAR-BUS** (starszy protokół Immergasa – **żaden master OpenTherm się z nim nie dogada**, niezależnie od
+> adaptera i bajtu 0xCA). Bez CAR V2 zmierz zaciski pilota bez niczego podłączonego: **do ok. 18 V DC = IMG-BUS**,
+> **ok. 24–35 V DC (np. 28 V) = CAR-BUS**. Zgłoszony kocioł z CAR-BUS: VICTRIX TT. W TERA kocioł może też czekać na CAR V2,
+> dopóki nie ustawisz **P7 = 2** (pilot innej firmy) i nie wyłączysz i włączysz zasilania – jeszcze niepotwierdzone.
+> Źródło: [OTGateway #284](https://github.com/Laxilef/OTGateway/issues/284), instrukcja CAR V2 1.038958 (dane techniczne).
+
 | Kocioł (rodzina menu) | Zaciski regulatora | Uwagi |
 |---|---|---|
 | VICTRIX ZEUS 25, EXA 28 1 ErP, OMNIA, OMNIA V2 (G / P / t / A) | 41 / 44, zdjęta zworka X40 | Bez regulatora X40 z powrotem na 40-41. EXA 28: regulator OpenTherm innej firmy działa bez przeróbek (użytkownicy). |

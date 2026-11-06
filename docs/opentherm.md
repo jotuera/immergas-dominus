@@ -61,6 +61,14 @@ Where an OpenTherm unit (CAR V2, a third-party OpenTherm room unit or an ESP Ope
 from the installer manuals on immergas.pl and user reports. None of the manuals says "OpenTherm": the CAR V2 bus is
 called IMG BUS, a third-party unit is a "commercially available remote". Check the wiring diagram of your boiler first.
 
+> ⚠️ **Check the protocol first – not every Immergas remote bus is OpenTherm.** The CAR V2 speaks two protocols and
+> shows which one in its information menu: **VER PI** = **IMG-BUS** (OpenTherm with minor changes – works) or **VER PC**
+> = **CAR-BUS** (an older Immergas protocol – **no OpenTherm master can talk to it**, whatever the adapter or the 0xCA
+> byte). Without a CAR V2 measure the remote terminals with nothing connected: **up to about 18 V DC = IMG-BUS**,
+> **about 24–35 V DC (e.g. 28 V) = CAR-BUS**. Reported CAR-BUS boiler: VICTRIX TT. On a TERA the boiler may also wait
+> for the CAR V2 until **P7 = 2** (third-party remote) is set and the boiler power-cycled – not confirmed yet.
+> Source: [OTGateway #284](https://github.com/Laxilef/OTGateway/issues/284), CAR V2 manual 1.038958 (technical data).
+
 | Boiler (menu family) | Remote terminals | Notes |
 |---|---|---|
 | VICTRIX ZEUS 25, EXA 28 1 ErP, OMNIA, OMNIA V2 (G / P / t / A) | 41 / 44, jumper X40 removed | X40 back on 40-41 without a remote. EXA 28: a third-party OpenTherm unit works without changes (users). |

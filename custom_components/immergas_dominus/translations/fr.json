@@ -732,6 +732,13 @@
           "off": "Off",
           "on": "On"
         }
+      },
+      "device_type": {
+        "name": "Type d'appareil",
+        "state": {
+          "heat_pump": "Pompe à chaleur (Magis Pro / Combo, hybride)",
+          "gas_boiler": "Chaudière gaz (ZEUS Superior 25-35, HERCULES, EXTRA)"
+        }
       }
     },
     "time": {

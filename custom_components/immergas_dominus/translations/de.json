@@ -732,6 +732,13 @@
           "off": "Off",
           "on": "On"
         }
+      },
+      "device_type": {
+        "name": "Gerätetyp",
+        "state": {
+          "heat_pump": "Wärmepumpe (Magis Pro / Combo, Hybrid)",
+          "gas_boiler": "Gaskessel (ZEUS Superior 25-35, HERCULES, EXTRA)"
+        }
       }
     },
     "time": {

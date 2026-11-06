@@ -281,6 +281,14 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.13
+
+- **Device type** (Modbus): *Heat pump* or *Gas boiler* (VICTRIX ZEUS Superior 25-35, HERCULES, EXTRA on the new
+  platform). A gas boiler drops *Cooling* from the operation mode and the climates, and the dashboard hides the heat
+  pump values (cooling Comfort / Eco and curve, humidity, night function U11, boiler integration I01–I10). The
+  [Modbus map](docs/pdu-map.md) has a *Gas boilers* section – the PDU scan report confirms the map for a gas boiler.
+  Frontend: hub cards 0.59.0.
+
 ### 1.6.12
 
 - **Emulated thermostat failsafe** (OpenTherm): with no fresh, valid temperature from the source entity for 60 minutes,

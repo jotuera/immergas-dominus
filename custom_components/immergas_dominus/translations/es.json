@@ -732,6 +732,13 @@
           "off": "Off",
           "on": "On"
         }
+      },
+      "device_type": {
+        "name": "Tipo de equipo",
+        "state": {
+          "heat_pump": "Bomba de calor (Magis Pro / Combo, híbrida)",
+          "gas_boiler": "Caldera de gas (ZEUS Superior 25-35, HERCULES, EXTRA)"
+        }
       }
     },
     "time": {

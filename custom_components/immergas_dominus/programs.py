@@ -228,6 +228,39 @@ class ImmergasRoomControlMode(_Declared, SelectEntity, RestoreEntity):
         self.async_write_ha_state()
 
 
+GAS_BOILER = "gas_boiler"
+
+
+def is_gas_boiler(coordinator: ImmergasDominusCoordinator) -> bool:
+    """Modbus mode: the user declared a gas boiler (new platform: ZEUS Superior 25-35, HERCULES, EXTRA) - no cooling,
+    no heat pump values (humidity, night function U11, boiler integration I01-I10, cooling curve R10-R13)."""
+    return getattr(coordinator, "device_type", "heat_pump") == GAS_BOILER
+
+
+class ImmergasDeviceType(_Declared, SelectEntity, RestoreEntity):
+    """What the Dominus is connected to (Modbus): a heat pump (Magis Pro / Combo, hybrid) or a gas boiler. The Dominus
+    does not report it over TCP; a gas boiler hides cooling and the heat pump values."""
+
+    _attr_options = ["heat_pump", GAS_BOILER]
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "device_type", "mdi:water-boiler", "heat_pump")
+        self._attr_current_option = None
+
+    async def async_added_to_hass(self) -> None:
+        await super().async_added_to_hass()
+        last = await self.async_get_last_state()
+        if last is not None and last.state in self.options:
+            self._attr_current_option = last.state
+            self.coordinator.device_type = last.state
+
+    async def async_select_option(self, option: str) -> None:
+        self._attr_current_option = option
+        self.coordinator.device_type = option
+        self.async_write_ha_state()
+        self.coordinator.async_update_listeners()  # the mode select and the climates drop / bring back cooling
+
+
 class ImmergasFloorType(_Declared, SelectEntity, RestoreEntity):
     """Underfloor screed type (same option order as the hub's select): how fast the floor takes and gives back heat -
     the dashboard uses it for the floor limit, setbacks, the CH schedule and I04."""

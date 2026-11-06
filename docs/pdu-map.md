@@ -92,6 +92,23 @@ PDU, the normal polling continues; press again to stop). **Report PDU map** crea
 **pre-filled GitHub issue** (model, integration version, the map – no host, MAC or password). Nothing is sent
 automatically. A PDU the boiler does not provide usually reads 0, so the zeros are listed separately.
 
+## Gas boilers (Modbus)
+
+The new Immergas platform – VICTRIX ZEUS Superior 25 / 30 / 35, HERCULES 25 / 35 / 35 ABT / Mini 35 / Solar 25 and
+VICTRIX EXTRA – connects the Dominus over the same Modbus bus (boiler menu *Modbus / Type* = **Dominus**; EXTRA:
+P.18 = 1). The map above comes from a MAGIS heat pump; which PDUs a gas boiler answers is **not confirmed yet** – the
+mode (2000), the zone and DHW setpoints (2015 / 2095), the fault code (2100) and the time programs are expected to be
+the same, because the Dominus app shows them for every boiler.
+
+Set **Device type** = *Gas boiler* (1.6.13): the operation mode and the climates drop *Cooling*, and the dashboard
+hides what only a heat pump has – Comfort / Eco cooling, the humidity setpoint, the cooling curve R10–R13, the night
+function U11 and the boiler integration I01–I10. Then run the **PDU scanner** and send the report, so the map can be
+confirmed for your boiler.
+
+Without a Dominus the same boilers can be run as a Modbus **BMS** slave (*Type* = BMS) by the ESPHome
+[hub](https://github.com/jotuera/immergas-modbus-bms-nasa-hub/blob/main/docs/gas-boiler-bms.md) – a different
+register map (0–1027); BMS and Dominus exclude each other.
+
 ## OpenTherm boilers
 
 Boilers without the Modbus configuration (VICTRIX ZEUS / AVIO, STAR …) use OpenTherm through the same module:

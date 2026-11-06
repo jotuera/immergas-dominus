@@ -11,7 +11,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.restore_state import RestoreEntity
 
 from . import anomalies
-from .programs import ImmergasFloorType, ImmergasLegionellaDay, ImmergasRoomControlMode
+from .programs import ImmergasDeviceType, ImmergasFloorType, ImmergasLegionellaDay, ImmergasRoomControlMode, is_gas_boiler
 
 from .const import (
     CHRONO_OPTION_TO_RAW,
@@ -61,6 +61,7 @@ async def async_setup_entry(
     entities.append(ImmergasDominusAllDaysProfileSelect(coordinator))
     entities.append(ImmergasZone1ProgramSelect(coordinator))
     entities.append(ImmergasFaultLanguageSelect(coordinator))
+    entities.append(ImmergasDeviceType(coordinator))
     if coordinator.stats is not None:
         entities.append(ImmergasLegionellaDay(coordinator))
         entities.append(ImmergasRoomControlMode(coordinator))
@@ -116,6 +117,13 @@ class ImmergasDominusSelect(ImmergasDominusEntity, SelectEntity):
         self.entity_description = description
         if description.translation_placeholders:
             self._attr_translation_placeholders = description.translation_placeholders
+
+    @property
+    def options(self) -> list[str]:
+        opts = list(self.entity_description.options or [])
+        if self.entity_description.key == "operation_mode" and is_gas_boiler(self.coordinator):
+            opts = [o for o in opts if o != "cooling"]  # a gas boiler does not cool
+        return opts
 
     @property
     def current_option(self) -> str | None:

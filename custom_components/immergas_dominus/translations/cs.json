@@ -732,6 +732,13 @@
           "off": "Off",
           "on": "On"
         }
+      },
+      "device_type": {
+        "name": "Typ zařízení",
+        "state": {
+          "heat_pump": "Tepelné čerpadlo (Magis Pro / Combo, hybrid)",
+          "gas_boiler": "Plynový kotel (ZEUS Superior 25-35, HERCULES, EXTRA)"
+        }
       }
     },
     "time": {

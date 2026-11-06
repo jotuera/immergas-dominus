@@ -732,6 +732,13 @@
           "off": "Wyłączone",
           "on": "Włączone"
         }
+      },
+      "device_type": {
+        "name": "Typ urządzenia",
+        "state": {
+          "heat_pump": "Pompa ciepła (Magis Pro / Combo, hybryda)",
+          "gas_boiler": "Kocioł gazowy (ZEUS Superior 25-35, HERCULES, EXTRA)"
+        }
       }
     },
     "time": {

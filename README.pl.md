@@ -277,6 +277,14 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.13
+
+- **Typ urządzenia** (Modbus): *Pompa ciepła* albo *Kocioł gazowy* (VICTRIX ZEUS Superior 25-35, HERCULES, EXTRA z nowej
+  platformy). Kocioł gazowy usuwa *Chłodzenie* z trybu pracy i termostatów, a tablica ukrywa wartości pompy ciepła
+  (Komfort / Eko i krzywa chłodzenia, wilgotność, funkcja nocna U11, integracja kotła I01–I10). [Mapa
+  Modbus](docs/pdu-map.pl.md) ma sekcję *Kotły gazowe* – raport skanu PDU potwierdza mapę dla kotła gazowego.
+  Frontend: karty huba 0.59.0.
+
 ### 1.6.12
 
 - **Zabezpieczenie emulowanego termostatu** (OpenTherm): gdy encja źródłowa przez 60 minut nie poda świeżej, poprawnej

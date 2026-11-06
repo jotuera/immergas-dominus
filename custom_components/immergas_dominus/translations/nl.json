@@ -732,6 +732,13 @@
           "off": "Off",
           "on": "On"
         }
+      },
+      "device_type": {
+        "name": "Toesteltype",
+        "state": {
+          "heat_pump": "Warmtepomp (Magis Pro / Combo, hybride)",
+          "gas_boiler": "Gasketel (ZEUS Superior 25-35, HERCULES, EXTRA)"
+        }
       }
     },
     "time": {

@@ -732,6 +732,13 @@
           "off": "Off",
           "on": "On"
         }
+      },
+      "device_type": {
+        "name": "Készülék típusa",
+        "state": {
+          "heat_pump": "Hőszivattyú (Magis Pro / Combo, hibrid)",
+          "gas_boiler": "Gázkazán (ZEUS Superior 25-35, HERCULES, EXTRA)"
+        }
       }
     },
     "time": {

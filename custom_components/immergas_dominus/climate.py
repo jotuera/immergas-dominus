@@ -137,6 +137,9 @@ class ImmergasDominusClimate(ImmergasDominusEntity, ClimateEntity):
         """Return supported HVAC modes."""
         if self.entity_description.climate_kind == "dhw":
             return [HVACMode.OFF, HVACMode.HEAT]
+        from .programs import is_gas_boiler
+        if is_gas_boiler(self.coordinator):
+            return [HVACMode.OFF, HVACMode.HEAT]
         return [HVACMode.OFF, HVACMode.HEAT, HVACMode.COOL]
 
     @property

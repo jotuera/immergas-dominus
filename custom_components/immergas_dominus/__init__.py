@@ -46,7 +46,7 @@ def _platforms_for(entry: ConfigEntry) -> list[str]:
 
 _LOGGER = logging.getLogger(__name__)
 
-# Dashboard cards (built from the IMMERGAS Modbus BMS NASA Hub cards) served by the integration itself, so the
+# Dashboard cards (built from the IMMERGAS Modbus BMS NASA OpenTherm HUB cards) served by the integration itself, so the
 # reduced dashboard `strategy: {type: custom:immergas-dominus}` works without installing anything else.
 CARDS_URL = f"/{DOMAIN}/immergas-hub-cards.js"
 CARDS_FILE = Path(__file__).parent / "frontend" / "immergas-hub-cards.js"

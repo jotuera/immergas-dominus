@@ -96,7 +96,7 @@ Assistant (pole *Oprogramowanie*, np. `0.3.3 — JoTu`).
 ## Dashboard
 
 Integracja ma własne karty dashboardu (te same co w
-[IMMERGAS Modbus BMS NASA Hub](https://github.com/jotuera/immergas-modbus-bms-nasa-hub), w okrojonym widoku). Nic więcej
+[IMMERGAS Modbus BMS NASA OpenTherm HUB](https://github.com/jotuera/immergas-modbus-bms-nasa-opentherm-hub), w okrojonym widoku). Nic więcej
 nie trzeba instalować: utwórz nowy dashboard (*Ustawienia → Dashboardy → Dodaj dashboard*), otwórz go, *⋮ → Edytuj
 dashboard → ⋮ → Edytor konfiguracji* i wpisz
 
@@ -270,7 +270,7 @@ przyjmie sesję.
 
 ## Uwagi
 
-- Opisy błędów to własne teksty projektu (11 języków), wspólne z IMMERGAS Modbus BMS NASA Hub;
+- Opisy błędów to własne teksty projektu (11 języków), wspólne z IMMERGAS Modbus BMS NASA OpenTherm HUB;
   kody błędów i ich znaczenie odpowiadają dokumentacji kotła.
 - Rejestry potwierdzone tylko na magistrali D+/D- (harmonogram, flagi błędów) są
   sprawdzone krzyżowo, ale na innych modelach mogą wymagać weryfikacji przez TCP AUTH.
@@ -466,7 +466,7 @@ przyjmie sesję.
 ### 1.5.2
 
 - Karty 0.47.0: wszystkie teksty dashboardu w 11 językach.
-- Karty ładują się tylko raz: gdy karty IMMERGAS Modbus BMS NASA Hub są zainstalowane jako zasób Lovelace,
+- Karty ładują się tylko raz: gdy karty IMMERGAS Modbus BMS NASA OpenTherm HUB są zainstalowane jako zasób Lovelace,
   integracja używa ich zamiast własnej (być może starszej) kopii.
 
 ### 1.5.1
@@ -512,7 +512,7 @@ przyjmie sesję.
 
 - **Nowa licencja**: PolyForm Noncommercial 1.0.0 (bezpłatnie do użytku osobistego i innego niekomercyjnego).
 - **Własne opisy błędów kotła** (`2100`), 113 kodów w 11 językach, napisane dla tego projektu, wspólne
-  z [IMMERGAS Modbus BMS NASA Hub](https://github.com/jotuera/immergas-modbus-bms-nasa-hub). Kod 0 pokazuje
+  z [IMMERGAS Modbus BMS NASA OpenTherm HUB](https://github.com/jotuera/immergas-modbus-bms-nasa-opentherm-hub). Kod 0 pokazuje
   „Brak błędów”.
 - **Zapis już nie odskakuje**: po potwierdzonym zapisie moduł potrafi jeszcze przez odczyt lub dwa podawać starą
   wartość; przez 30 s taki odczyt nie cofa zapisanej wartości.
@@ -524,7 +524,7 @@ przyjmie sesję.
 
 ## Projekt siostrzany
 
-**Chcesz pełny obraz pompy ciepła?** [**IMMERGAS Modbus BMS NASA Hub**](https://github.com/jotuera/immergas-modbus-bms-nasa-hub)
+**Chcesz pełny obraz pompy ciepła?** [**IMMERGAS Modbus BMS NASA OpenTherm HUB**](https://github.com/jotuera/immergas-modbus-bms-nasa-opentherm-hub)
 to jedno urządzenie ESPHome (M5Stack AtomS3) na wszystkich trzech magistralach Magis Pro / Magis Combo V2 –
 D+/D- Modbus, T-/T+ BMS i F1/F2 Samsung NASA. Dokłada to, czego moduł Dominus nie niesie: pompę ciepła i sprężarkę,
 COP, gaz, CWU z pompy i pełną kalibrację. Karty dashboardu tej integracji pochodzą z huba.

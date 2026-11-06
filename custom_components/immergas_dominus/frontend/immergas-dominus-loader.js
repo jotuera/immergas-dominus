@@ -1,4 +1,4 @@
-// Immergas Dominus: loads the dashboard cards only when the IMMERGAS Modbus BMS NASA Hub cards are not already
+// Immergas Dominus: loads the dashboard cards only when the IMMERGAS Modbus BMS NASA OpenTherm HUB cards are not already
 // installed as a Lovelace resource - otherwise the (possibly older) copy bundled with the integration could define
 // the elements first and shadow the newer hub cards. Served by the integration through frontend.add_extra_js_url.
 const version = new URL(import.meta.url).searchParams.get("v") || "0";

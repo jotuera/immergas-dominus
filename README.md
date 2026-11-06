@@ -96,7 +96,7 @@ Assistant (the *Firmware* field, e.g. `0.3.0 — JoTu`).
 ## Dashboard
 
 The integration brings its own dashboard cards (the same cards as the
-[IMMERGAS Modbus BMS NASA Hub](https://github.com/jotuera/immergas-modbus-bms-nasa-hub), in a reduced view). Nothing
+[IMMERGAS Modbus BMS NASA OpenTherm HUB](https://github.com/jotuera/immergas-modbus-bms-nasa-opentherm-hub), in a reduced view). Nothing
 else to install: create a new dashboard (*Settings → Dashboards → Add dashboard*), open it, *⋮ → Edit dashboard →
 ⋮ → Raw configuration editor* and enter
 
@@ -275,7 +275,7 @@ the module accepts the session.
 ## Notes
 
 - Fault descriptions are the project's own wording (11 languages), shared with the
-  IMMERGAS Modbus BMS NASA Hub; fault codes and their meaning follow the boiler documentation.
+  IMMERGAS Modbus BMS NASA OpenTherm HUB; fault codes and their meaning follow the boiler documentation.
 - Registers confirmed only on the D+/D- bus (schedule, fault flags) are cross-checked but
   may need verification over TCP AUTH on other models.
 
@@ -473,7 +473,7 @@ the module accepts the session.
 ### 1.5.2
 
 - Cards 0.47.0: all dashboard texts in all 11 languages.
-- The cards are loaded only once: when the IMMERGAS Modbus BMS NASA Hub cards are installed as a Lovelace resource,
+- The cards are loaded only once: when the IMMERGAS Modbus BMS NASA OpenTherm HUB cards are installed as a Lovelace resource,
   the integration uses them instead of its own (possibly older) copy.
 
 ### 1.5.1
@@ -519,7 +519,7 @@ the module accepts the session.
 
 - **New license**: PolyForm Noncommercial 1.0.0 (free for personal and other noncommercial use).
 - **Own boiler fault descriptions** (`2100`), 113 codes in 11 languages, written for this project and shared
-  with the [IMMERGAS Modbus BMS NASA Hub](https://github.com/jotuera/immergas-modbus-bms-nasa-hub).
+  with the [IMMERGAS Modbus BMS NASA OpenTherm HUB](https://github.com/jotuera/immergas-modbus-bms-nasa-opentherm-hub).
   Code 0 shows "No faults".
 - **Writes no longer jump back**: after a confirmed write the module can still report the old value for a
   poll or two; for 30 s such a read keeps the written value.
@@ -531,7 +531,7 @@ the module accepts the session.
 
 ## Related project
 
-**Want the full heat-pump picture?** The [**IMMERGAS Modbus BMS NASA Hub**](https://github.com/jotuera/immergas-modbus-bms-nasa-hub)
+**Want the full heat-pump picture?** The [**IMMERGAS Modbus BMS NASA OpenTherm HUB**](https://github.com/jotuera/immergas-modbus-bms-nasa-opentherm-hub)
 is one ESPHome device (M5Stack AtomS3) on all three buses of a Magis Pro / Magis Combo V2 – D+/D- Modbus, T-/T+ BMS
 and F1/F2 Samsung NASA. It adds what the Dominus module does not carry: the heat pump and compressor, COP, gas, DHW by
 the heat pump and the full calibration. The dashboard cards this integration uses come from the hub.

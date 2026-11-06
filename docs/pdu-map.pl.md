@@ -77,7 +77,7 @@ zapisuje też na magistrali D+/D- (570). Jeśli wiesz, co oznaczają, albo Twój
 Rejestry, które są na magistrali D+/D-, ale nie ma ich w konfiguracji apki Dominus: temperatury zasilania i powrotu
 pompy ciepła i kotła (3011–3015, 3003), zegar kotła (2300, 2302, 2303), funkcja nocna U11, przełącznik AUTO / MANUAL
 programu czasowego Strefy 1 oraz wszystko z magistral T-/T+ (BMS) i F1/F2 (Samsung NASA) – sprężarka, COP, obieg
-chłodniczy. Do tego służy [IMMERGAS Modbus BMS NASA Hub](https://github.com/jotuera/immergas-modbus-bms-nasa-hub).
+chłodniczy. Do tego służy [IMMERGAS Modbus BMS NASA OpenTherm HUB](https://github.com/jotuera/immergas-modbus-bms-nasa-opentherm-hub).
 
 To, czego kocioł nie ma w PDU, integracja trzyma **w Home Assistant**: statystyki, urlop, automatyczne Lato / Zima,
 alerty i deklarowane parametry kotła (krzywa R02–R13, T02, T05, I01–I10, A31, P07, antylegionella P13–P17) – zob.
@@ -104,7 +104,7 @@ co ma tylko pompa ciepła – Komfort / Eko chłodzenia, zadaną wilgotność, k
 integrację kotła I01–I10. Potem uruchom **skaner PDU** i wyślij raport, żeby potwierdzić mapę dla Twojego kotła.
 
 Bez Dominusa te same kotły może prowadzić jako slave Modbus **BMS** (*Typ* = BMS)
-[hub](https://github.com/jotuera/immergas-modbus-bms-nasa-hub/blob/main/docs/gas-boiler-bms.pl.md) ESPHome – inna mapa
+[hub](https://github.com/jotuera/immergas-modbus-bms-nasa-opentherm-hub/blob/main/docs/gas-boiler-bms.pl.md) ESPHome – inna mapa
 rejestrów (0–1027); BMS i Dominus się wykluczają.
 
 ## Kotły OpenTherm

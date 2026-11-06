@@ -1,7 +1,7 @@
 """Immergas boiler fault descriptions (PDU 2100) in 11 languages.
 
-The project's own wording, shared with the IMMERGAS Modbus BMS NASA Hub
-(jotuera/immergas-modbus-bms-nasa-hub, tools/fault_texts.json). Fault codes and their
+The project's own wording, shared with the IMMERGAS Modbus BMS NASA OpenTherm HUB
+(jotuera/immergas-modbus-bms-nasa-opentherm-hub, tools/fault_texts.json). Fault codes and their
 meaning are facts; the texts are written for this project. The reset-available flag is PDU 2101 bit 1.
 
 describe(code, language) falls back to English for unknown languages or codes.

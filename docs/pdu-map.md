@@ -78,7 +78,7 @@ Registers that exist on the D+/D- bus but are not in the Dominus app configurati
 return temperatures (3011–3015, 3003), the boiler clock (2300, 2302, 2303), the night function U11, the zone 1
 AUTO / MANUAL time-program switch, and everything on the T-/T+ (BMS) and F1/F2 (Samsung NASA) buses – compressor,
 COP, refrigerant circuit. For those see the
-[IMMERGAS Modbus BMS NASA Hub](https://github.com/jotuera/immergas-modbus-bms-nasa-hub).
+[IMMERGAS Modbus BMS NASA OpenTherm HUB](https://github.com/jotuera/immergas-modbus-bms-nasa-opentherm-hub).
 
 What the boiler has no PDU for, the integration keeps **in Home Assistant**: statistics, vacation, automatic Summer /
 Winter, alerts and the declared boiler parameters (heating curve R02–R13, T02, T05, I01–I10, A31, P07, anti-legionella
@@ -106,7 +106,7 @@ function U11 and the boiler integration I01–I10. Then run the **PDU scanner** 
 confirmed for your boiler.
 
 Without a Dominus the same boilers can be run as a Modbus **BMS** slave (*Type* = BMS) by the ESPHome
-[hub](https://github.com/jotuera/immergas-modbus-bms-nasa-hub/blob/main/docs/gas-boiler-bms.md) – a different
+[hub](https://github.com/jotuera/immergas-modbus-bms-nasa-opentherm-hub/blob/main/docs/gas-boiler-bms.md) – a different
 register map (0–1027); BMS and Dominus exclude each other.
 
 ## OpenTherm boilers

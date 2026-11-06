@@ -267,6 +267,13 @@ class ImmergasOpenThermSensor(ImmergasDominusEntity, SensorEntity):
             return round(signed / 256, 1)
         if decode == "f88_pos":  # f8.8, negative = not available
             return None if raw & 0x8000 else round(raw / 256, 1)
+        if decode == "f88_probe":  # f8.8, 0x7300 (115.0) = no probe connected
+            if raw == 0x7300:
+                return None
+            signed = raw - 0x10000 if raw & 0x8000 else raw
+            return round(signed / 256, 1)
+        if decode == "dow_time":  # HH:MM; the day of week in the attributes
+            return f"{(raw >> 8) & 0x1F:02d}:{raw & 0xFF:02d}"
         if decode == "lb_u8":
             return raw & 0xFF
         if decode == "hb_u8":
@@ -276,6 +283,13 @@ class ImmergasOpenThermSensor(ImmergasDominusEntity, SensorEntity):
         if decode == "hb_rpm":
             return (raw >> 8) * 60
         return raw  # u16
+
+    @property
+    def extra_state_attributes(self) -> dict[str, int | None] | None:
+        if self.entity_description.decode != "dow_time" or self.raw_value is None:
+            return None
+        day = (int(self.raw_value) >> 13) & 0x07
+        return {"weekday": day or None}  # 1 = Monday ... 7 = Sunday, 0 = not set
 
 
 class ImmergasOpenThermFaultDescriptionSensor(ImmergasDominusEntity, SensorEntity):

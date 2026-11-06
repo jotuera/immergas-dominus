@@ -189,6 +189,18 @@
       },
       "ot_burner_hours_today": {
         "name": "Brennerlaufzeit heute"
+      },
+      "ot_boiler_time": {
+        "name": "Kessel Tag / Uhrzeit"
+      },
+      "ot_solar_storage_temperature": {
+        "name": "Solarspeichertemperatur"
+      },
+      "ot_solar_collector_temperature": {
+        "name": "Solarkollektortemperatur"
+      },
+      "ot_dhw2_temperature": {
+        "name": "WW-2-Temperatur"
       }
     },
     "binary_sensor": {
@@ -239,6 +251,18 @@
       },
       "ot_maintenance_due": {
         "name": "Wartung fällig"
+      },
+      "ot_remote_dhw_enabled": {
+        "name": "Fern-WW-Sollwert freigegeben"
+      },
+      "ot_remote_dhw_writable": {
+        "name": "Fern-WW-Sollwert schreibbar"
+      },
+      "ot_remote_maxch_enabled": {
+        "name": "Fern-max.-HZ-Sollwert freigegeben"
+      },
+      "ot_remote_maxch_writable": {
+        "name": "Fern-max.-HZ-Sollwert schreibbar"
       }
     },
     "number": {

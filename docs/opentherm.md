@@ -28,6 +28,7 @@ Data-ID.
 | 3 | – (slave config: DHW present / storage tank, member ID 27 = Immergas) | scan | ✅ | ✅ |
 | 4 | Boiler reset (button) | W | – | – |
 | 5 | Fault code, Boiler fault description; Service request, Low water pressure, Gas / flame fault, Air pressure fault, Water over-temperature | R | ✅ | ✅ |
+| 6 | Remote DHW setpoint enabled / writable, Remote max CH setpoint enabled / writable (*off*) | R | ❌ | ✅ (0x0000) |
 | 10 / 11 | – (the boiler's own parameters, TSP: read by **Scan Data-IDs**, attribute *boiler_parameters*) | scan | ✅ (42) | ❌ |
 | 12 / 13 | Fault history (*off*) – number of entries, each code in the attributes; also read by the scan | R | ✅ (5) | ❌ / ✅ |
 | 15 | Boiler max. capacity, Boiler min. modulation | R | ✅ (0 / 0) | ✅ |
@@ -35,10 +36,13 @@ Data-ID.
 | 17 | Modulation level | R | ✅ | ✅ |
 | 18 | CH water pressure | R | ❌ | ❌ |
 | 19 | DHW flow rate | R | ❌ | ✅ (always 0) |
+| 20 | Boiler day / time (*off*), the weekday in the attributes | R | ❌ | ✅ |
 | 24 | Room temperature | R | ✅ | ❌ |
 | 25 / 28 | Flow / Return temperature | R | ✅ | ✅ |
 | 26 | DHW temperature | R | ✅ | ✅ |
 | 27 | Outside temperature | R | ✅ | ✅ |
+| 29 / 30 | Solar cylinder / collector temperature (*off*, empty at 115 °C = no probe) | R | ❌ | ✅ (no probe) |
+| 32 | DHW 2 temperature (*off*, empty at 115 °C = no probe) | R | ❌ | ✅ (no probe) |
 | 33 | Exhaust temperature | R | ✅ | ✅ |
 | 35 | Fan speed, Fan speed setpoint (*off*) | R | ✅ | ❌ |
 | 36 | Flame current (*off*) | R | ✅ (not available) | ❌ |
@@ -47,8 +51,8 @@ Data-ID.
 | 57 | Max CH setpoint | R | ✅ | ✅ |
 | 89 / n | Dominus module parameters: CH setpoint (17), Heating curve (4), CH temperature offset (5), Outdoor sensor (6), Modulation (7), Room hysteresis (8), Room sensor (9), Building inertia (10), Dominus probe use (11), Frost protection and its temperature (14 / 15), Minimum CH temperature (16) | R/W | ✅ | ✅ |
 
-¹ No reply in the scan (a one-off timeout), but the status entities work. Answered as well, not used yet: 6, 7,
-20 (boiler clock), 29, 30, 32 (Superior), 77, 85, 88 (ventilation IDs, both / ZEUS). A scan of your boiler →
+¹ No reply in the scan (a one-off timeout), but the status entities work. Answered as well, not used yet: 7,
+77, 85, 88 (ventilation IDs, both / ZEUS). A scan of your boiler →
 **Report Data-ID map** adds a column here.
 
 ## Immergas specifics

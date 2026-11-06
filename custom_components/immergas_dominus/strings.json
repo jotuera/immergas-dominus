@@ -189,6 +189,18 @@
       },
       "ot_burner_hours_today": {
         "name": "Burner hours today"
+      },
+      "ot_boiler_time": {
+        "name": "Boiler day / time"
+      },
+      "ot_solar_storage_temperature": {
+        "name": "Solar cylinder temperature"
+      },
+      "ot_solar_collector_temperature": {
+        "name": "Solar collector temperature"
+      },
+      "ot_dhw2_temperature": {
+        "name": "DHW 2 temperature"
       }
     },
     "binary_sensor": {
@@ -239,6 +251,18 @@
       },
       "ot_maintenance_due": {
         "name": "Maintenance due"
+      },
+      "ot_remote_dhw_enabled": {
+        "name": "Remote DHW setpoint enabled"
+      },
+      "ot_remote_dhw_writable": {
+        "name": "Remote DHW setpoint writable"
+      },
+      "ot_remote_maxch_enabled": {
+        "name": "Remote max CH setpoint enabled"
+      },
+      "ot_remote_maxch_writable": {
+        "name": "Remote max CH setpoint writable"
       }
     },
     "number": {

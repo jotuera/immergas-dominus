@@ -281,6 +281,12 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.11
+
+- **OpenTherm diagnostics from a VICTRIX ZEUS Superior scan** (disabled by default): remote boiler parameters
+  (Data-ID 6 – is the DHW / max CH setpoint offered for remote setting), the boiler day / time (Data-ID 20) and the solar
+  cylinder / collector and DHW 2 temperatures (Data-ID 29 / 30 / 32, empty without a probe).
+
 ### 1.6.10
 
 - **OpenTherm: boiler menu profiles** – *Boiler menu profile* (VICTRIX ZEUS 25 / VICTRIX ZEUS Superior / generic, or a

@@ -189,6 +189,18 @@
       },
       "ot_burner_hours_today": {
         "name": "Horas del quemador hoy"
+      },
+      "ot_boiler_time": {
+        "name": "Día / hora de la caldera"
+      },
+      "ot_solar_storage_temperature": {
+        "name": "Temperatura del acumulador solar"
+      },
+      "ot_solar_collector_temperature": {
+        "name": "Temperatura del colector solar"
+      },
+      "ot_dhw2_temperature": {
+        "name": "Temperatura ACS 2"
       }
     },
     "binary_sensor": {
@@ -239,6 +251,18 @@
       },
       "ot_maintenance_due": {
         "name": "Mantenimiento pendiente"
+      },
+      "ot_remote_dhw_enabled": {
+        "name": "Consigna ACS remota habilitada"
+      },
+      "ot_remote_dhw_writable": {
+        "name": "Consigna ACS remota escribible"
+      },
+      "ot_remote_maxch_enabled": {
+        "name": "Consigna máx. calefacción remota habilitada"
+      },
+      "ot_remote_maxch_writable": {
+        "name": "Consigna máx. calefacción remota escribible"
       }
     },
     "number": {

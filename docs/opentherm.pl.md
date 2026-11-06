@@ -28,6 +28,7 @@ na dany Data-ID.
 | 3 | – (konfiguracja kotła: CWU jest / zasobnik, member ID 27 = Immergas) | skan | ✅ | ✅ |
 | 4 | Reset kotła (przycisk) | W | – | – |
 | 5 | Kod błędu, Opis błędu kotła; Żądanie serwisu, Niskie ciśnienie wody, Błąd gazu / płomienia, Błąd ciśnienia powietrza, Przegrzanie wody | R | ✅ | ✅ |
+| 6 | Zdalna nastawa CWU dostępna / zapisywalna, Zdalna maks. nastawa CO dostępna / zapisywalna (*off*) | R | ❌ | ✅ (0x0000) |
 | 10 / 11 | – (własne parametry kotła, TSP: czyta je **Skanuj Data-ID**, atrybut *boiler_parameters*) | skan | ✅ (42) | ❌ |
 | 12 / 13 | Historia błędów (*off*) – liczba wpisów, każdy kod w atrybutach; czyta ją też skan | R | ✅ (5) | ❌ / ✅ |
 | 15 | Moc maks. kotła, Modulacja min. kotła | R | ✅ (0 / 0) | ✅ |
@@ -35,10 +36,13 @@ na dany Data-ID.
 | 17 | Poziom modulacji | R | ✅ | ✅ |
 | 18 | Ciśnienie wody CO | R | ❌ | ❌ |
 | 19 | Przepływ CWU | R | ❌ | ✅ (zawsze 0) |
+| 20 | Dzień / godzina kotła (*off*), dzień tygodnia w atrybutach | R | ❌ | ✅ |
 | 24 | Temperatura pokoju | R | ✅ | ❌ |
 | 25 / 28 | Temperatura zasilania / powrotu | R | ✅ | ✅ |
 | 26 | Temperatura CWU | R | ✅ | ✅ |
 | 27 | Temperatura zewnętrzna | R | ✅ | ✅ |
+| 29 / 30 | Temperatura zasobnika / kolektora solarnego (*off*, puste przy 115 °C = brak czujnika) | R | ❌ | ✅ (brak czujnika) |
+| 32 | Temperatura CWU 2 (*off*, puste przy 115 °C = brak czujnika) | R | ❌ | ✅ (brak czujnika) |
 | 33 | Temperatura spalin | R | ✅ | ✅ |
 | 35 | Obroty wentylatora, Zadane obroty wentylatora (*off*) | R | ✅ | ❌ |
 | 36 | Prąd jonizacji płomienia (*off*) | R | ✅ (niedostępny) | ❌ |
@@ -47,8 +51,8 @@ na dany Data-ID.
 | 57 | Maks. zadana CO | R | ✅ | ✅ |
 | 89 / n | Parametry modułu Dominus: Zadana CO (17), Krzywa grzewcza (4), Offset temperatury CO (5), Sonda zewnętrzna (6), Modulacja (7), Histereza pokojowa (8), Czujnik pokojowy (9), Bezwładność budynku (10), Sonda Dominusa mierzy (11), Ochrona przed zamarzaniem i jej temperatura (14 / 15), Minimalna temperatura CO (16) | R/W | ✅ | ✅ |
 
-¹ Brak odpowiedzi w skanie (jednorazowy timeout), ale encje statusu działają. Odpowiadają też, jeszcze nieużywane: 6,
-7, 20 (zegar kotła), 29, 30, 32 (Superior), 77, 85, 88 (ID wentylacji, oba / ZEUS). Skan Twojego kotła → **Zgłoś mapę
+¹ Brak odpowiedzi w skanie (jednorazowy timeout), ale encje statusu działają. Odpowiadają też, jeszcze nieużywane: 7,
+77, 85, 88 (ID wentylacji, oba / ZEUS). Skan Twojego kotła → **Zgłoś mapę
 Data-ID** dodaje tu kolumnę.
 
 ## Specyfika Immergas

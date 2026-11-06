@@ -277,6 +277,12 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.11
+
+- **Diagnostyka OpenTherm ze skanu VICTRIX ZEUS Superior** (domyślnie wyłączona): zdalne parametry kotła (Data-ID 6 –
+  czy kocioł udostępnia zdalnie nastawę CWU / maks. CO), dzień i godzina kotła (Data-ID 20) oraz temperatury zasobnika
+  i kolektora solarnego oraz CWU 2 (Data-ID 29 / 30 / 32, puste bez czujnika).
+
 ### 1.6.10
 
 - **OpenTherm: profile menu kotła** – *Profil menu kotła* (VICTRIX ZEUS 25 / VICTRIX ZEUS Superior / ogólny, albo

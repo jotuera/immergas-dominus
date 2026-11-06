@@ -189,6 +189,18 @@
       },
       "ot_burner_hours_today": {
         "name": "Ore bruciatore oggi"
+      },
+      "ot_boiler_time": {
+        "name": "Giorno / ora caldaia"
+      },
+      "ot_solar_storage_temperature": {
+        "name": "Temperatura bollitore solare"
+      },
+      "ot_solar_collector_temperature": {
+        "name": "Temperatura collettore solare"
+      },
+      "ot_dhw2_temperature": {
+        "name": "Temperatura ACS 2"
       }
     },
     "binary_sensor": {
@@ -239,6 +251,18 @@
       },
       "ot_maintenance_due": {
         "name": "Manutenzione necessaria"
+      },
+      "ot_remote_dhw_enabled": {
+        "name": "Setpoint ACS remoto abilitato"
+      },
+      "ot_remote_dhw_writable": {
+        "name": "Setpoint ACS remoto scrivibile"
+      },
+      "ot_remote_maxch_enabled": {
+        "name": "Setpoint max. riscaldamento remoto abilitato"
+      },
+      "ot_remote_maxch_writable": {
+        "name": "Setpoint max. riscaldamento remoto scrivibile"
       }
     },
     "number": {

@@ -189,6 +189,18 @@
       },
       "ot_burner_hours_today": {
         "name": "Czas pracy palnika dziś"
+      },
+      "ot_boiler_time": {
+        "name": "Dzień / godzina kotła"
+      },
+      "ot_solar_storage_temperature": {
+        "name": "Temperatura zasobnika solarnego"
+      },
+      "ot_solar_collector_temperature": {
+        "name": "Temperatura kolektora solarnego"
+      },
+      "ot_dhw2_temperature": {
+        "name": "Temperatura CWU 2"
       }
     },
     "binary_sensor": {
@@ -239,6 +251,18 @@
       },
       "ot_maintenance_due": {
         "name": "Przegląd wymagany"
+      },
+      "ot_remote_dhw_enabled": {
+        "name": "Zdalna nastawa CWU dostępna"
+      },
+      "ot_remote_dhw_writable": {
+        "name": "Zdalna nastawa CWU zapisywalna"
+      },
+      "ot_remote_maxch_enabled": {
+        "name": "Zdalna maks. nastawa CO dostępna"
+      },
+      "ot_remote_maxch_writable": {
+        "name": "Zdalna maks. nastawa CO zapisywalna"
       }
     },
     "number": {

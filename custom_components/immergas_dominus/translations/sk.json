@@ -189,6 +189,18 @@
       },
       "ot_burner_hours_today": {
         "name": "Doba chodu horáka dnes"
+      },
+      "ot_boiler_time": {
+        "name": "Deň / čas kotla"
+      },
+      "ot_solar_storage_temperature": {
+        "name": "Teplota solárneho zásobníka"
+      },
+      "ot_solar_collector_temperature": {
+        "name": "Teplota solárneho kolektora"
+      },
+      "ot_dhw2_temperature": {
+        "name": "Teplota TÚV 2"
       }
     },
     "binary_sensor": {
@@ -239,6 +251,18 @@
       },
       "ot_maintenance_due": {
         "name": "Servis je potrebný"
+      },
+      "ot_remote_dhw_enabled": {
+        "name": "Vzdialená požadovaná TÚV povolená"
+      },
+      "ot_remote_dhw_writable": {
+        "name": "Vzdialená požadovaná TÚV zapisovateľná"
+      },
+      "ot_remote_maxch_enabled": {
+        "name": "Vzdialená max. požadovaná ÚK povolená"
+      },
+      "ot_remote_maxch_writable": {
+        "name": "Vzdialená max. požadovaná ÚK zapisovateľná"
       }
     },
     "number": {

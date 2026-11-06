@@ -189,6 +189,18 @@
       },
       "ot_burner_hours_today": {
         "name": "Heures de brûleur aujourd’hui"
+      },
+      "ot_boiler_time": {
+        "name": "Jour / heure chaudière"
+      },
+      "ot_solar_storage_temperature": {
+        "name": "Température ballon solaire"
+      },
+      "ot_solar_collector_temperature": {
+        "name": "Température capteur solaire"
+      },
+      "ot_dhw2_temperature": {
+        "name": "Température ECS 2"
       }
     },
     "binary_sensor": {
@@ -239,6 +251,18 @@
       },
       "ot_maintenance_due": {
         "name": "Entretien à faire"
+      },
+      "ot_remote_dhw_enabled": {
+        "name": "Consigne ECS à distance activée"
+      },
+      "ot_remote_dhw_writable": {
+        "name": "Consigne ECS à distance modifiable"
+      },
+      "ot_remote_maxch_enabled": {
+        "name": "Consigne max. chauffage à distance activée"
+      },
+      "ot_remote_maxch_writable": {
+        "name": "Consigne max. chauffage à distance modifiable"
       }
     },
     "number": {

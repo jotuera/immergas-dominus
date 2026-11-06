@@ -189,6 +189,18 @@
       },
       "ot_burner_hours_today": {
         "name": "Égő üzemideje ma"
+      },
+      "ot_boiler_time": {
+        "name": "Kazán nap / idő"
+      },
+      "ot_solar_storage_temperature": {
+        "name": "Szolár tároló hőmérséklet"
+      },
+      "ot_solar_collector_temperature": {
+        "name": "Szolár kollektor hőmérséklet"
+      },
+      "ot_dhw2_temperature": {
+        "name": "HMV 2 hőmérséklet"
       }
     },
     "binary_sensor": {
@@ -239,6 +251,18 @@
       },
       "ot_maintenance_due": {
         "name": "Karbantartás esedékes"
+      },
+      "ot_remote_dhw_enabled": {
+        "name": "Távoli HMV alapjel engedélyezve"
+      },
+      "ot_remote_dhw_writable": {
+        "name": "Távoli HMV alapjel írható"
+      },
+      "ot_remote_maxch_enabled": {
+        "name": "Távoli max. fűtési alapjel engedélyezve"
+      },
+      "ot_remote_maxch_writable": {
+        "name": "Távoli max. fűtési alapjel írható"
       }
     },
     "number": {

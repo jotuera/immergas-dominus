@@ -598,6 +598,8 @@ class DominusOpenThermSensorDescription(SensorEntityDescription):
     data_id: int
     # "f88" | "u16" | "lb_u8" | "hb_u8" | "lb_rpm" / "hb_rpm" (byte x 60: OpenTherm fan speed is in rpm / 60)
     # | "f88_pos" (f8.8, a negative value = not available, e.g. 0xFF00 for the flame current)
+    # | "f88_probe" (f8.8, 0x7300 = 115.0 = no probe, as the Superior answers for an unconnected solar / DHW2 probe)
+    # | "dow_time" (Data-ID 20: HB bits 7-5 = day of week 1-7, bits 4-0 = hour, LB = minute -> "HH:MM", day in the attributes)
     decode: str = "f88"
 
 
@@ -706,6 +708,23 @@ OT_SENSOR_DESCRIPTIONS: tuple[DominusOpenThermSensorDescription, ...] = (
         entity_registry_enabled_default=False,
         icon="mdi:fire-circle",
     ),
+    # 1.6.11 (from a VICTRIX ZEUS Superior 26 2 ErP scan): the boiler's day / time (Data-ID 20), the solar cylinder /
+    # collector (29 / 30) and the second DHW (32) temperatures - disabled by default (the VICTRIX ZEUS 25 does not answer)
+    DominusOpenThermSensorDescription(
+        key="ot_boiler_time", data_id=20, decode="dow_time", translation_key="ot_boiler_time",
+        entity_category=EntityCategory.DIAGNOSTIC, entity_registry_enabled_default=False, icon="mdi:clock-outline",
+    ),
+    *(
+        DominusOpenThermSensorDescription(
+            key=key, data_id=did, decode="f88_probe", translation_key=key,
+            device_class=SensorDeviceClass.TEMPERATURE, native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+            state_class=SensorStateClass.MEASUREMENT, suggested_display_precision=1,
+            entity_category=EntityCategory.DIAGNOSTIC, entity_registry_enabled_default=False, icon=icon,
+        )
+        for key, did, icon in (("ot_solar_storage_temperature", 29, "mdi:solar-power"),
+                               ("ot_solar_collector_temperature", 30, "mdi:solar-panel"),
+                               ("ot_dhw2_temperature", 32, "mdi:water-thermometer-outline"))
+    ),
     DominusOpenThermSensorDescription(
         key="ot_fault_code",
         data_id=5,
@@ -749,6 +768,20 @@ OT_BINARY_DESCRIPTIONS: tuple[DominusOpenThermBinaryDescription, ...] = (
         ("ot_flame_fault", 0x08, "mdi:fire-alert"),
         ("ot_air_pressure_fault", 0x10, "mdi:fan-alert"),
         ("ot_water_overtemp", 0x20, "mdi:thermometer-alert"),
+    )
+) + tuple(
+    # 1.6.11: remote boiler parameters (Data-ID 6) - HB = transfer enabled, LB = read / write; bit 0 = DHW setpoint,
+    # bit 1 = max CH setpoint. Off = the boiler does not offer that setpoint for remote setting (diagnostic, disabled by
+    # default - the VICTRIX ZEUS 25 does not answer Data-ID 6)
+    DominusOpenThermBinaryDescription(
+        key=key, data_id=6, byte=byte, mask=mask, translation_key=key, entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=False, icon=icon,
+    )
+    for key, byte, mask, icon in (
+        ("ot_remote_dhw_enabled", "hb", 0x01, "mdi:water-boiler-auto"),
+        ("ot_remote_dhw_writable", "lb", 0x01, "mdi:pencil-lock-outline"),
+        ("ot_remote_maxch_enabled", "hb", 0x02, "mdi:radiator"),
+        ("ot_remote_maxch_writable", "lb", 0x02, "mdi:pencil-lock-outline"),
     )
 )
 

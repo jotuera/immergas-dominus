@@ -508,6 +508,12 @@
       },
       "ot_sup_ignitions": {
         "name": "Burner ignitions (menu M1)"
+      },
+      "ot_preheat_max": {
+        "name": "Optimalizovaný start: max. předstih"
+      },
+      "ot_window_temp": {
+        "name": "Teplota při otevřeném okně"
       }
     },
     "select": {
@@ -801,6 +807,9 @@
       },
       "ot_self_learning": {
         "name": "Samoučení (offset ÚT)"
+      },
+      "ot_preheat": {
+        "name": "Optimalizovaný start"
       }
     },
     "datetime": {
@@ -837,6 +846,9 @@
       },
       "ot_room_source": {
         "name": "Zdroj teploty místnosti (entita)"
+      },
+      "ot_window_sensors": {
+        "name": "Okenní čidla (entity)"
       }
     }
   },

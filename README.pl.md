@@ -288,7 +288,10 @@ przyjmie sesję.
   OMNIA, **TERA V2 / V3**, **EXA 24 X / NIKE 24 ECO**, ZEUS Superior 26 / 32 i **HERCULES Condensing / Solar 26** – karta
   *Parametry pieca (offline)* pokazuje kody danej rodziny. Nowe deklarowane wartości: TERA P7 protokół pilota, HERCULES
   P57 sterowanie pompą i M3 P33 *CO bez działającego pilota* (także na liście *Praca bez CAR V2*). Nowa platforma
-  (ZEUS Superior 25-35, HERCULES 25 / 35, EXTRA) opisana jako kocioł Modbus. Frontend: karty huba 0.57.0.
+  (ZEUS Superior 25-35, HERCULES 25 / 35, EXTRA) opisana jako kocioł Modbus.
+- **Start z wyprzedzeniem** (OpenTherm, program CO AUTO): Komfort zaczyna się wcześniej wg nauczonego tempa nagrzewania
+  (°C/h), domyślnie najwyżej 120 min. **Otwarte okno**: czujniki okien / drzwi obniżają nastawę pokoju do 7 °C, gdy
+  któryś jest otwarty – oba w karcie *Tryb pracy*. Frontend: karty huba 0.58.0.
 
 ### 1.6.11
 

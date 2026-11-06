@@ -508,6 +508,12 @@
       },
       "ot_sup_ignitions": {
         "name": "Zapłony palnika (menu M1)"
+      },
+      "ot_preheat_max": {
+        "name": "Start z wyprzedzeniem: maks. czas"
+      },
+      "ot_window_temp": {
+        "name": "Temperatura przy otwartym oknie"
       }
     },
     "select": {
@@ -801,6 +807,9 @@
       },
       "ot_self_learning": {
         "name": "Samouczenie (offset CO)"
+      },
+      "ot_preheat": {
+        "name": "Start z wyprzedzeniem"
       }
     },
     "datetime": {
@@ -837,6 +846,9 @@
       },
       "ot_room_source": {
         "name": "Źródło temperatury pokoju (encja)"
+      },
+      "ot_window_sensors": {
+        "name": "Czujniki okien (encje)"
       }
     }
   },

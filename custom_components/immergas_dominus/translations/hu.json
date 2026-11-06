@@ -508,6 +508,12 @@
       },
       "ot_sup_ignitions": {
         "name": "Burner ignitions (menu M1)"
+      },
+      "ot_preheat_max": {
+        "name": "Előfűtés: max. előre"
+      },
+      "ot_window_temp": {
+        "name": "Hőmérséklet nyitott ablaknál"
       }
     },
     "select": {
@@ -801,6 +807,9 @@
       },
       "ot_self_learning": {
         "name": "Öntanulás (fűtési offset)"
+      },
+      "ot_preheat": {
+        "name": "Előfűtés (optimális indítás)"
       }
     },
     "datetime": {
@@ -837,6 +846,9 @@
       },
       "ot_room_source": {
         "name": "Szobahőmérséklet forrása (entitás)"
+      },
+      "ot_window_sensors": {
+        "name": "Ablakérzékelők (entitások)"
       }
     }
   },

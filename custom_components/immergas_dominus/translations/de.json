@@ -508,6 +508,12 @@
       },
       "ot_sup_ignitions": {
         "name": "Burner ignitions (menu M1)"
+      },
+      "ot_preheat_max": {
+        "name": "Optimierter Start: max. Vorlaufzeit"
+      },
+      "ot_window_temp": {
+        "name": "Temperatur bei offenem Fenster"
       }
     },
     "select": {
@@ -801,6 +807,9 @@
       },
       "ot_self_learning": {
         "name": "Selbstlernend (HZ-Offset)"
+      },
+      "ot_preheat": {
+        "name": "Optimierter Start"
       }
     },
     "datetime": {
@@ -837,6 +846,9 @@
       },
       "ot_room_source": {
         "name": "Quelle der Raumtemperatur (Entität)"
+      },
+      "ot_window_sensors": {
+        "name": "Fenstersensoren (Entitäten)"
       }
     }
   },

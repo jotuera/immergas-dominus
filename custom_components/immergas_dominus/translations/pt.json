@@ -508,6 +508,12 @@
       },
       "ot_sup_ignitions": {
         "name": "Burner ignitions (menu M1)"
+      },
+      "ot_preheat_max": {
+        "name": "Arranque antecipado: antecedência máx."
+      },
+      "ot_window_temp": {
+        "name": "Temperatura com janela aberta"
       }
     },
     "select": {
@@ -801,6 +807,9 @@
       },
       "ot_self_learning": {
         "name": "Autoaprendizagem (offset aquecimento)"
+      },
+      "ot_preheat": {
+        "name": "Arranque antecipado"
       }
     },
     "datetime": {
@@ -837,6 +846,9 @@
       },
       "ot_room_source": {
         "name": "Fonte da temperatura ambiente (entidade)"
+      },
+      "ot_window_sensors": {
+        "name": "Sensores de janela (entidades)"
       }
     }
   },

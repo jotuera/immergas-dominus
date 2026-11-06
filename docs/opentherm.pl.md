@@ -141,6 +141,16 @@ Karta **Kocioł OpenTherm** pokazuje to jako listę kontrolną (*Praca bez CAR V
 | AMB CR (korekta sondy ±3 °C) | – (brak parametru modułu) |
 | REMOTO, LANGUAGE, chłodzenie, wilgotność | – (robi to sam Home Assistant; nie w tych kotłach) |
 
+Ponad CAR V2 (pomysły z Delta Dore TYBOX 137+, 1.6.12):
+
+- **Start z wyprzedzeniem** – w programie CO AUTO faza Komfort zaczyna się wcześniej: (Komfort − pokój) / nauczone tempo
+  nagrzewania, najwyżej *Start z wyprzedzeniem: maks. czas* (120 min). Każde nagrzewanie do Komfortu od co najmniej
+  0,5 °C poniżej mierzy tempo (°C/h, średnia 70 / 30), aż pokój będzie 0,2 °C od Komfortu; start od 1 °C/h, wartość
+  przetrwa restart (atrybut `heating_rate`). Wymaga temperatury pokoju (Data-ID 24).
+- **Otwarte okno** – *Czujniki okien* (binary_sensor, po przecinku): gdy któryś jest otwarty, nastawa pokoju spada do
+  *Temperatura przy otwartym oknie* (7 °C), a program nic nie zapisuje; po zamknięciu wszystkich wraca faza programu
+  (AUTO) albo poprzednia nastawa (MANUAL). Czujniki są obserwowane, więc otwarcie działa od razu.
+
 ## Termostat pokojowy
 
 Kocioł nie zgłasza termostatu pokojowego przez OpenTherm, więc **Termostat pokojowy** mówi, co jest podłączone:

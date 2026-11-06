@@ -508,6 +508,12 @@
       },
       "ot_sup_ignitions": {
         "name": "Burner ignitions (menu M1)"
+      },
+      "ot_preheat_max": {
+        "name": "Anticipation : avance max."
+      },
+      "ot_window_temp": {
+        "name": "Température fenêtre ouverte"
       }
     },
     "select": {
@@ -801,6 +807,9 @@
       },
       "ot_self_learning": {
         "name": "Auto-apprentissage (offset chauffage)"
+      },
+      "ot_preheat": {
+        "name": "Anticipation"
       }
     },
     "datetime": {
@@ -837,6 +846,9 @@
       },
       "ot_room_source": {
         "name": "Source de température ambiante (entité)"
+      },
+      "ot_window_sensors": {
+        "name": "Capteurs de fenêtre (entités)"
       }
     }
   },

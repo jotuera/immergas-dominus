@@ -292,7 +292,10 @@ the module accepts the session.
   OMNIA, **TERA V2 / V3**, **EXA 24 X / NIKE 24 ECO**, ZEUS Superior 26 / 32 and **HERCULES Condensing / Solar 26** – the
   *Boiler parameters (offline)* card shows each family's codes. New declared values: TERA P7 remote protocol, HERCULES
   P57 pump control and M3 P33 *CH without a working remote* (also on the *Running without the CAR V2* checklist). The
-  new platform (ZEUS Superior 25-35, HERCULES 25 / 35, EXTRA) is documented as a Modbus boiler. Frontend: hub cards 0.57.0.
+  new platform (ZEUS Superior 25-35, HERCULES 25 / 35, EXTRA) is documented as a Modbus boiler.
+- **Optimum start** (OpenTherm, CH program AUTO): Comfort starts early by the learned heat-up rate (°C/h), at most
+  120 min by default. **Open window**: window / door sensors put the room setpoint to 7 °C while one is open – both on
+  the *Operating mode* card. Frontend: hub cards 0.58.0.
 
 ### 1.6.11
 

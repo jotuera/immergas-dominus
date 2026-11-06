@@ -508,6 +508,12 @@
       },
       "ot_sup_ignitions": {
         "name": "Burner ignitions (menu M1)"
+      },
+      "ot_preheat_max": {
+        "name": "Optimale start: max. voorlooptijd"
+      },
+      "ot_window_temp": {
+        "name": "Temperatuur bij open raam"
       }
     },
     "select": {
@@ -801,6 +807,9 @@
       },
       "ot_self_learning": {
         "name": "Zelflerend (CV-offset)"
+      },
+      "ot_preheat": {
+        "name": "Optimale start"
       }
     },
     "datetime": {
@@ -837,6 +846,9 @@
       },
       "ot_room_source": {
         "name": "Bron kamertemperatuur (entiteit)"
+      },
+      "ot_window_sensors": {
+        "name": "Raamsensoren (entiteiten)"
       }
     }
   },

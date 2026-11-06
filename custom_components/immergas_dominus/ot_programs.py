@@ -40,10 +40,10 @@ from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
 from homeassistant.components.switch import SwitchEntity
 from homeassistant.components.text import TextEntity
 from homeassistant.components.time import TimeEntity
-from homeassistant.const import EntityCategory, UnitOfTemperature
+from homeassistant.const import EntityCategory, UnitOfTemperature, UnitOfTime
 from homeassistant.core import CALLBACK_TYPE, HomeAssistant, callback
 from homeassistant.exceptions import HomeAssistantError
-from homeassistant.helpers.event import async_track_time_interval
+from homeassistant.helpers.event import async_track_state_change_event, async_track_time_interval
 from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.util import dt as dt_util
 
@@ -96,7 +96,12 @@ NUMBER_SPECS: dict[str, tuple[float, float, float, float, str]] = {
     "season_summer_above": (18.0, 0, 30, 0.5, "mdi:white-balance-sunny"),
     "ot_legionella_temp": (60.0, 50, 65, 1, "mdi:bacteria-outline"),
     "ot_eco_flow_reduction": (10.0, 1, 40, 1, "mdi:thermometer-minus"),
+    "ot_preheat_max": (120.0, 15, 360, 15, "mdi:timer-play-outline"),   # minutes (not a temperature)
+    "ot_window_temp": (7.0, 5, 20, 0.5, "mdi:window-open-variant"),
 }
+_PREHEAT_RATE = 1.0          # °C per hour before anything is learned
+_PREHEAT_RATE_LIMITS = (0.2, 5.0)
+_WINDOW_OPEN = ("on", "open")
 
 
 class OtPrograms:
@@ -130,6 +135,17 @@ class OtPrograms:
         self._room_mono = 0.0
         self._room_ok_mono = time.monotonic()  # last fresh, valid reading of the source entity (failsafe timer)
         self._learn: list[float] = []         # room - setpoint in the Comfort phase today (self-learning)
+        # 1.6.12: optimum start - Comfort begins early by the learned heating rate (°C/h), at most ot_preheat_max min
+        self.preheat = False
+        self.preheat_rate = _PREHEAT_RATE
+        self.preheating = False
+        self.preheat_lead_min = 0
+        self._ph_start: tuple[float, float] | None = None  # (monotonic, room °C) when a Comfort heat-up began
+        # 1.6.12: open window - window / door sensors put the room setpoint to ot_window_temp while one is open
+        self.window_sensors = ""
+        self.window_open = False
+        self._win_prev_room: float | None = None
+        self._win_unsub: CALLBACK_TYPE | None = None
         self._learn_day: str | None = None
         self.numbers = {k: v[0] for k, v in NUMBER_SPECS.items()}
         self.phase: str | None = None        # comfort / economy / manual (shown by the phase sensor)
@@ -154,11 +170,15 @@ class OtPrograms:
         self.coordinator.register_pdus(self._polls)
         self._unsub.append(async_track_time_interval(self.hass, self._async_tick, timedelta(minutes=1)))
         self._unsub.append(self.coordinator.async_add_listener(self._on_data))
+        self.track_windows()
 
     def stop(self) -> None:
         for unsub in self._unsub:
             unsub()
         self._unsub.clear()
+        if self._win_unsub is not None:
+            self._win_unsub()
+            self._win_unsub = None
         self.coordinator.unregister_pdus(self._polls)
 
     def add_listener(self, update: Callable[[], None]) -> CALLBACK_TYPE:
@@ -254,6 +274,97 @@ class OtPrograms:
     def in_comfort(self, calendar: int, minute: int) -> bool:
         return any(a <= minute < b for a, b in self.calendars.get(calendar, []) if a < b)
 
+    def minutes_to_comfort(self, day: int, minute: int) -> int | None:
+        """Minutes to the next start of a Comfort period (today or tomorrow), None = none in the next 24 h."""
+        today = [a for a, b in self.calendars.get(self.ch_days[day], []) if a < b and a > minute]
+        if today:
+            return min(today) - minute
+        tomorrow = [a for a, b in self.calendars.get(self.ch_days[(day + 1) % 7], []) if a < b]
+        return min(tomorrow) + _DAY - minute if tomorrow else None
+
+    def room_temp(self) -> float | None:
+        v = self._f88(self._raw(ROOM_TEMP_ID))
+        return v if v is not None and 0 < v < 40 else None
+
+    def preheat_lead(self) -> int:
+        """How many minutes early the Comfort phase starts: (Comfort - room) / learned rate, capped."""
+        room, target = self.room_temp(), self.numbers["comfort_heat"]
+        if room is None or room >= target:
+            return 0
+        need = (target - room) / max(self.preheat_rate, _PREHEAT_RATE_LIMITS[0]) * 60
+        return int(min(need, self.numbers["ot_preheat_max"]))
+
+    def _learn_preheat(self, phase: str, entered: bool) -> None:
+        """Measure the heating rate of each Comfort heat-up: from the start until the room is 0.2 °C from Comfort."""
+        room, target = self.room_temp(), self.numbers["comfort_heat"]
+        if phase != "comfort" or room is None:
+            self._ph_start = None
+            return
+        mono = time.monotonic()
+        if entered and room < target - 0.5:
+            self._ph_start = (mono, room)
+            return
+        if self._ph_start is None:
+            return
+        t0, r0 = self._ph_start
+        hours = (mono - t0) / 3600
+        if hours > 8:
+            self._ph_start = None
+        elif room >= target - 0.2 and hours >= 1 / 6 and room - r0 >= 0.3:
+            rate = max(_PREHEAT_RATE_LIMITS[0], min(_PREHEAT_RATE_LIMITS[1], (room - r0) / hours))
+            old, self.preheat_rate = self.preheat_rate, round(0.7 * self.preheat_rate + 0.3 * rate, 2)
+            self._ph_start = None
+            _LOGGER.info("Optimum start: heat-up %.1f -> %.1f °C in %.0f min (%.2f °C/h), rate %.2f -> %.2f °C/h",
+                         r0, room, hours * 60, rate, old, self.preheat_rate)
+            self._notify()
+
+    # -- open window --------------------------------------------------------------
+
+    def window_ids(self) -> list[str]:
+        return [e.strip() for e in self.window_sensors.replace(";", ",").split(",") if e.strip()]
+
+    def track_windows(self) -> None:
+        """(Re)subscribe to the window sensors so an opened window is handled at once, not at the next tick."""
+        if self._win_unsub is not None:
+            self._win_unsub()
+            self._win_unsub = None
+        ids = self.window_ids()
+        if ids:
+            @callback
+            def _changed(_event: Any) -> None:
+                self.hass.async_create_task(self._window())
+            self._win_unsub = async_track_state_change_event(self.hass, ids, _changed)
+
+    def any_window_open(self) -> bool:
+        for eid in self.window_ids():
+            st = self.hass.states.get(eid)
+            if st is not None and st.state in _WINDOW_OPEN:
+                return True
+        return False
+
+    async def _window(self) -> None:
+        """Open window: the room setpoint goes to the window temperature; closed again: the program value returns."""
+        if self.blocked:
+            return
+        is_open = self.any_window_open()
+        if is_open == self.window_open:
+            return
+        if is_open:
+            self._win_prev_room = self._f88(self._raw(ROOM_SETPOINT_ID))
+            if await self._set_room(self.numbers["ot_window_temp"], "window open"):
+                self.window_open = True
+                _LOGGER.info("Open window: room setpoint %.1f °C", self.numbers["ot_window_temp"])
+        else:
+            self.window_open = False
+            prev, self._win_prev_room = self._win_prev_room, None
+            if self.ch_program == "auto":
+                self._ch_written = None  # the CH program writes its phase again
+                await self._ch_program(*self._now_minute(dt_util.now()))
+            elif prev is not None:
+                await self._set_room(prev, "window closed")
+            _LOGGER.info("Window closed: room setpoint back")
+        self._notify()
+
     def _now_minute(self, now: datetime) -> tuple[int, int]:
         local = dt_util.as_local(now)
         return local.weekday(), local.hour * 60 + local.minute
@@ -318,6 +429,7 @@ class OtPrograms:
             self.vacation_until = None
             await self.async_set_vacation(False)
             return
+        await self._window()
         await self._ch_program(day, minute)
         await self._dhw_program(day, minute)
         await self._season()
@@ -337,10 +449,17 @@ class OtPrograms:
             self._ch_written = None
             return
         phase = "comfort" if self.in_comfort(self.ch_days[day], minute) else "economy"
-        if phase != self.phase:
-            self.phase = phase
+        preheating, lead = False, 0
+        if phase == "economy" and self.preheat and not self.vacation:
+            lead, nxt = self.preheat_lead(), self.minutes_to_comfort(day, minute)
+            if lead > 0 and nxt is not None and nxt <= lead:
+                phase, preheating = "comfort", True  # optimum start: Comfort early
+        entered = phase != self.phase
+        if entered or preheating != self.preheating or lead != self.preheat_lead_min:
+            self.phase, self.preheating, self.preheat_lead_min = phase, preheating, lead
             self._notify()
-        if self.vacation or phase == self._ch_written:
+        self._learn_preheat(phase, entered)
+        if self.vacation or self.window_open or phase == self._ch_written:
             return
         ok = True
         if self.eco_action == "ch_off":
@@ -677,6 +796,9 @@ class OtProgramNumber(ImmergasDominusEntity, RestoreNumber):
         self._attr_translation_key = key
         self._attr_native_min_value, self._attr_native_max_value, self._attr_native_step = low, high, step
         self._attr_icon = icon
+        if key == "ot_preheat_max":
+            self._attr_native_unit_of_measurement = UnitOfTime.MINUTES
+            self._attr_device_class = None
 
     def _poll_pdus(self) -> tuple[int, ...]:
         return ()
@@ -718,6 +840,8 @@ class OtProgramNumber(ImmergasDominusEntity, RestoreNumber):
         # a new Comfort / Eco value is written at once when that phase is on
         if self._key in ("comfort_heat", "eco_heat"):
             self.programs._ch_written = None
+        if self._key == "ot_window_temp" and self.programs.window_open:  # a window is open: the new value at once
+            await self.programs._set_room(float(value), "window open")
         if self._key in ("dhw_comfort", "dhw_eco"):
             self.programs._dhw_written = None
         self.programs.changed()
@@ -748,7 +872,19 @@ class OtProgramSwitch(_ProgramEntity, SwitchEntity):
         if self._attr == "auto_season":
             mean, hours = self.programs.outdoor_24h()
             attrs.update(outdoor_mean_24h=mean, hours_of_data=hours)
+        if self._attr == "preheat":
+            p = self.programs
+            attrs.update(heating_rate=p.preheat_rate, preheating=p.preheating, lead_minutes=p.preheat_lead_min,
+                         room_temperature=p.room_temp())
         return attrs
+
+    async def async_added_to_hass(self) -> None:
+        await super().async_added_to_hass()
+        if self._attr == "preheat":
+            last = await self.async_get_last_state()
+            rate = last.attributes.get("heating_rate") if last is not None else None
+            if isinstance(rate, (int, float)) and _PREHEAT_RATE_LIMITS[0] <= rate <= _PREHEAT_RATE_LIMITS[1]:
+                self.programs.preheat_rate = float(rate)
 
     async def _async_set(self, on: bool) -> None:
         if self._attr == "vacation":
@@ -850,6 +986,37 @@ class OtRoomSource(_ProgramEntity, TextEntity):
         self.programs.changed()
 
 
+class OtWindowSensors(_ProgramEntity, TextEntity):
+    """Window / door sensors (entity ids, comma separated): one open = room setpoint to the window temperature."""
+
+    _attr_translation_key = "ot_window_sensors"
+    _attr_entity_category = EntityCategory.CONFIG
+    _attr_icon = "mdi:window-open-variant"
+    _attr_native_max = 255
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_window_sensors")
+
+    def _restore(self, state: str) -> None:
+        self.programs.window_sensors = state
+        self.programs.track_windows()
+
+    @property
+    def native_value(self) -> str:
+        return self.programs.window_sensors
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any]:
+        p = self.programs
+        return {"window_open": p.window_open, "sensors_open": [e for e in p.window_ids()
+                if (st := p.hass.states.get(e)) is not None and st.state in _WINDOW_OPEN]}
+
+    async def async_set_value(self, value: str) -> None:
+        self.programs.window_sensors = value.strip()
+        self.programs.track_windows()
+        self.programs.changed()
+
+
 class OtLastService(_ProgramEntity, DateTimeEntity):
     """Date of the last service (the maintenance reminder counts from it)."""
 
@@ -932,7 +1099,8 @@ class OtProgramPhase(_ProgramEntity, SensorEntity):
 
     @property
     def extra_state_attributes(self) -> dict[str, Any]:
-        return {"anti_legionella_running": self.programs._leg_active}
+        p = self.programs
+        return {"anti_legionella_running": p._leg_active, "preheating": p.preheating, "window_open": p.window_open}
 
 
 # -- per platform -------------------------------------------------------------------
@@ -955,7 +1123,7 @@ def ot_selects(coordinator: ImmergasDominusCoordinator) -> list:
 
 
 def ot_texts(coordinator: ImmergasDominusCoordinator) -> list:
-    return [OtRoomSource(coordinator)]
+    return [OtRoomSource(coordinator), OtWindowSensors(coordinator)]
 
 
 def ot_numbers(coordinator: ImmergasDominusCoordinator) -> list:
@@ -968,6 +1136,7 @@ def ot_switches(coordinator: ImmergasDominusCoordinator) -> list:
         OtProgramSwitch(coordinator, "vacation_mode", "vacation", "mdi:bag-suitcase"),
         OtProgramSwitch(coordinator, "auto_season", "auto_season", "mdi:sun-snowflake-variant"),
         OtProgramSwitch(coordinator, "ot_self_learning", "self_learning", "mdi:school-outline"),
+        OtProgramSwitch(coordinator, "ot_preheat", "preheat", "mdi:clock-fast"),
     ]
 
 

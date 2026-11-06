@@ -143,6 +143,16 @@ The **OpenTherm boiler** card lists these as a checklist (*Running without the C
 | AMB CR (probe correction ±3 °C) | – (no module parameter) |
 | REMOTO, LANGUAGE, cooling, humidity | – (Home Assistant itself; not on these boilers) |
 
+Beyond the CAR V2 (ideas from the Delta Dore TYBOX 137+, 1.6.12):
+
+- **Optimum start** – in the CH program AUTO the Comfort phase starts early: (Comfort − room) / the learned heat-up rate,
+  at most *Optimum start: max. lead time* (120 min). Each Comfort heat-up from at least 0.5 °C below measures the rate
+  (°C/h, average 70 / 30) until the room is 0.2 °C from Comfort; it starts at 1 °C/h and is kept over a restart
+  (attribute `heating_rate`). Needs the room temperature (Data-ID 24).
+- **Open window** – *Window sensors* (binary sensors, comma separated): while one is open the room setpoint goes to
+  *Open window temperature* (7 °C) and the program writes nothing; when all are closed the program phase (AUTO) or the
+  setpoint from before (MANUAL) returns. The sensors are watched, so an opened window acts at once.
+
 ## Room thermostat
 
 The boiler does not report a room thermostat over OpenTherm, so **Room thermostat** says what is connected:

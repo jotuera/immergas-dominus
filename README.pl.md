@@ -178,6 +178,15 @@ pokój `2011`, zadana `2015`, zewnętrzna `3002`, zasobnik CWU `3016`, tryb `200
   *Odchyłka pokoju od zadanej (1 h)* i *Czas dojścia do zadanej* (po podniesieniu zadanej albo Eko → Komfort),
   *Stopniodni dziś / w tym miesiącu* (baza 18 °C) i *Godziny grzania na stopniodzień* (w tym miesiącu). Liczniki dzienne
   i miesięczne przetrwają restart; okna 24 h i 60 min liczą się od nowa po restarcie.
+- **Więcej statystyk (1.6.14)** (sensory, karta *Dziś · analiza*): *Czas w komforcie dziś* (pokój ±0,5 °C od zadanej),
+  *Za zimno / Za ciepło dziś*, minimum / maksimum pokoju; *Tempo nagrzewania* i *Tempo stygnięcia pokoju* (°C/h z co
+  najmniej 30 min jednego stanu), *Współczynnik strat budynku* (tempo stygnięcia ÷ (pokój − zewnątrz), 1/h) i
+  *Sugerowana zmiana offsetu krzywej* (+1 / 0 / −1 °C ze średniej odchyłki w Komforcie z ostatnich 3-5 dni – tylko
+  podpowiedź, nic nie jest zapisywane); *Faza Komfort / Eko dziś* z odchyłką pokoju w każdej i *Zmiany faz*; *Ciepło
+  CWU* i *Ciepła woda zużyta dziś* (spadki zasobnika poza cyklami grzania × *Pojemność zasobnika CWU*, 200 L), *Straty
+  postojowe zasobnika* (°C/h, 01-05 bez grzania), minimum zasobnika, *Średni cykl CWU*; *Stan pracy* jako jeden tekst;
+  minimum / maksimum zewnętrznej dziś i *Średnia zewnętrzna 24 h*; *Dostępność modułu dziś* i *Przerwy w łączności*;
+  Strefy 2 / 3: czas grzania, starty i odchyłka pokoju (razem z ich urządzeniami).
 - **Tryb wyjazdowy** (domyślnie wyłączony): *Tryb wyjazdowy* ustawia zadaną Strefy 1 na *Temperaturę na wyjazd*
   (16 °C) i przywraca poprzednią po wyłączeniu albo o czasie *Wyjazd do*.
 - **Automatyczne Lato / Zima** (domyślnie wyłączone): Zima, gdy średnia zewnętrzna z 24 h spadnie poniżej *Zima

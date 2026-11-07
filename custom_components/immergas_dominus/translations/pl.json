@@ -306,6 +306,90 @@
       },
       "ot_h_per_dd": {
         "name": "Godziny grzania na stopniodzień"
+      },
+      "operating_state": {
+        "name": "Stan pracy"
+      },
+      "comfort_share_today": {
+        "name": "Czas w komforcie dziś"
+      },
+      "too_cold_minutes_today": {
+        "name": "Za zimno dziś"
+      },
+      "too_warm_minutes_today": {
+        "name": "Za ciepło dziś"
+      },
+      "room_min_today": {
+        "name": "Pokój – minimum dziś"
+      },
+      "room_max_today": {
+        "name": "Pokój – maksimum dziś"
+      },
+      "room_heating_rate": {
+        "name": "Tempo nagrzewania pokoju"
+      },
+      "room_cooling_rate": {
+        "name": "Tempo stygnięcia pokoju"
+      },
+      "building_loss_coefficient": {
+        "name": "Współczynnik strat budynku"
+      },
+      "curve_offset_hint": {
+        "name": "Sugerowana zmiana offsetu krzywej"
+      },
+      "comfort_hours_today": {
+        "name": "Faza Komfort dziś"
+      },
+      "eco_hours_today": {
+        "name": "Faza Eko dziś"
+      },
+      "comfort_deviation_today": {
+        "name": "Odchyłka pokoju w Komforcie dziś"
+      },
+      "eco_deviation_today": {
+        "name": "Odchyłka pokoju w Eko dziś"
+      },
+      "phase_changes_today": {
+        "name": "Zmiany faz dziś"
+      },
+      "dhw_heat_used_today": {
+        "name": "Ciepło CWU zużyte dziś (szac.)"
+      },
+      "dhw_litres_used_today": {
+        "name": "Ciepła woda zużyta dziś (szac.)"
+      },
+      "dhw_standing_loss": {
+        "name": "Straty postojowe zasobnika"
+      },
+      "tank_min_today": {
+        "name": "Zasobnik – minimum dziś"
+      },
+      "dhw_cycle_average_today": {
+        "name": "Średni cykl CWU dziś"
+      },
+      "outdoor_min_today": {
+        "name": "Zewnętrzna – minimum dziś"
+      },
+      "outdoor_max_today": {
+        "name": "Zewnętrzna – maksimum dziś"
+      },
+      "outdoor_mean_24h": {
+        "name": "Średnia zewnętrzna 24 h"
+      },
+      "module_availability_today": {
+        "name": "Dostępność modułu dziś"
+      },
+      "link_breaks_today": {
+        "name": "Przerwy w łączności dziś"
+      },
+      "ch_hours_today": {
+        "name": "Czas grzania dziś"
+      },
+      "ch_starts_today_zone": {
+        "name": "Starty grzania dziś"
+      },
+      "room_deviation_zone": {
+        "name": "Odchyłka pokoju"
       }
     },
     "binary_sensor": {
@@ -631,6 +715,9 @@
       },
       "ot_gas_price": {
         "name": "Cena gazu"
+      },
+      "dhw_tank_volume": {
+        "name": "Pojemność zasobnika CWU"
       }
     },
     "select": {

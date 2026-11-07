@@ -185,6 +185,15 @@ room `2011`, target `2015`, outdoor `3002`, DHW cylinder `3016`, mode `2000`); n
   target (1 h)* and *Time to reach target* (after the target goes up or Eco → Comfort), *Degree days today / this
   month* (base 18 °C) and *Heating hours per degree day* (this month). Daily and monthly counters survive a restart; the
   24 h and 60 min windows start again after a restart.
+- **More statistics (1.6.14)** (sensors, the *Today · analysis* card): *Time in comfort today* (room within ±0.5 °C of
+  the target), *Too cold / Too warm today*, room min / max; *Room heating rate* and *Room cooling rate* (°C/h over at
+  least 30 min of one state), *Building heat loss coefficient* (cooling rate ÷ (room − outdoor), 1/h) and *Suggested
+  curve offset change* (+1 / 0 / −1 °C from the mean Comfort deviation of the last 3-5 days – a hint, nothing is
+  written); *Comfort / Eco phase today* with the room deviation in each and *Phase changes*; *DHW heat used* and *Hot
+  water used today* (cylinder drops outside the heating cycles × *DHW cylinder volume*, 200 L), *Cylinder standing
+  loss* (°C/h, 01-05 without heating), cylinder minimum, *Average DHW cycle*; *Operating state* as one text; outdoor
+  min / max today and *Outdoor mean 24 h*; *Module availability today* and *Link breaks*; Zones 2 / 3: heating time,
+  starts and room deviation (with their devices).
 - **Vacation mode** (off by default): *Vacation mode* sets the zone 1 target to *Vacation temperature* (16 °C) and
   restores the previous target when switched off or at *Vacation until*.
 - **Automatic Summer / Winter** (off by default): Winter when the 24 h outdoor mean drops below *Winter below* (15 °C),

@@ -306,6 +306,90 @@
       },
       "ot_h_per_dd": {
         "name": "Heating hours per degree day"
+      },
+      "operating_state": {
+        "name": "Operating state"
+      },
+      "comfort_share_today": {
+        "name": "Time in comfort today"
+      },
+      "too_cold_minutes_today": {
+        "name": "Too cold today"
+      },
+      "too_warm_minutes_today": {
+        "name": "Too warm today"
+      },
+      "room_min_today": {
+        "name": "Room minimum today"
+      },
+      "room_max_today": {
+        "name": "Room maximum today"
+      },
+      "room_heating_rate": {
+        "name": "Room heating rate"
+      },
+      "room_cooling_rate": {
+        "name": "Room cooling rate"
+      },
+      "building_loss_coefficient": {
+        "name": "Building heat loss coefficient"
+      },
+      "curve_offset_hint": {
+        "name": "Suggested curve offset change"
+      },
+      "comfort_hours_today": {
+        "name": "Comfort phase today"
+      },
+      "eco_hours_today": {
+        "name": "Eco phase today"
+      },
+      "comfort_deviation_today": {
+        "name": "Room deviation in Comfort today"
+      },
+      "eco_deviation_today": {
+        "name": "Room deviation in Eco today"
+      },
+      "phase_changes_today": {
+        "name": "Phase changes today"
+      },
+      "dhw_heat_used_today": {
+        "name": "DHW heat used today (est.)"
+      },
+      "dhw_litres_used_today": {
+        "name": "Hot water used today (est.)"
+      },
+      "dhw_standing_loss": {
+        "name": "Cylinder standing loss"
+      },
+      "tank_min_today": {
+        "name": "Cylinder minimum today"
+      },
+      "dhw_cycle_average_today": {
+        "name": "Average DHW cycle today"
+      },
+      "outdoor_min_today": {
+        "name": "Outdoor minimum today"
+      },
+      "outdoor_max_today": {
+        "name": "Outdoor maximum today"
+      },
+      "outdoor_mean_24h": {
+        "name": "Outdoor mean 24 h"
+      },
+      "module_availability_today": {
+        "name": "Module availability today"
+      },
+      "link_breaks_today": {
+        "name": "Link breaks today"
+      },
+      "ch_hours_today": {
+        "name": "Heating time today"
+      },
+      "ch_starts_today_zone": {
+        "name": "Heating starts today"
+      },
+      "room_deviation_zone": {
+        "name": "Room deviation"
       }
     },
     "binary_sensor": {
@@ -631,6 +715,9 @@
       },
       "ot_gas_price": {
         "name": "Gas price"
+      },
+      "dhw_tank_volume": {
+        "name": "DHW cylinder volume"
       }
     },
     "select": {

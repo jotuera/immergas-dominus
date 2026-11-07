@@ -169,6 +169,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     if coordinator.stats is not None:
         coordinator.stats.start()
         entry.async_on_unload(coordinator.stats.stop)
+        # 1.6.14: room comfort, building, phases, DHW use, state, weather / link, zones 2-3 (entities in stats_extra.py)
+        from .stats_extra import DominusStatsExtra
+        coordinator.stats_extra = DominusStatsExtra(hass, coordinator)
+        await coordinator.stats_extra.async_start()
+        entry.async_on_unload(lambda: hass.async_create_task(coordinator.stats_extra.async_stop()))
     # Modbus mode: PDU scanner + map report (entities in number / button / sensor / text); the boiler model for the
     # map reports of both modes (text entity, restored)
     coordinator.boiler_model = ""

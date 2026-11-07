@@ -68,6 +68,9 @@ async def async_setup_entry(
     entities.append(ImmergasLastReadSensor(coordinator))
     entities.append(ImmergasFailedPollsSensor(coordinator))
     entities += [ImmergasStatSensor(coordinator, spec) for spec in STAT_SPECS]
+    if getattr(coordinator, "stats_extra", None) is not None:
+        from .stats_extra import stats_extra_sensors
+        entities += stats_extra_sensors(coordinator)
     if coordinator.dhw is not None:
         entities.append(ImmergasDhwPhaseSensor(coordinator))
     if getattr(coordinator, "pdu_scan", None) is not None:

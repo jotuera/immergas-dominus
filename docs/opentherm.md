@@ -225,6 +225,21 @@ Built-in automatic functions (pump / 3-way valve anti-block every 24 h, radiator
 self-check every 18 h, automatic venting A7, chimney sweep) need no settings and are not reported over OpenTherm.
 Scans together with the menu values (**Report Data-ID map**) will let the integration read them directly.
 
+## Computed in Home Assistant (1.6.14)
+
+From what the module reads, every poll (~45 s), no extra settings; the day / month counters and the gas counter survive
+a restart. The *Today · boiler analysis* card shows them (tiles without data stay hidden).
+
+| Group | Entities |
+|---|---|
+| Hydraulics | Delta T (flow − return), Mean loop temperature, **Control setpoint (Data-ID 1)** – what the module really sends, Flow deviation from the setpoint, Exhaust − return, *Condensing operation* (return below 55 °C while burning), Condensing today (share) |
+| Burner and gas | Burner power (est.: modulation between the min. and max. output of Data-ID 15), Heat today, Gas today / heating / DHW and the Gas counter (m³, 10.6 kWh of useful heat per m³), Gas price, Gas cost today |
+| Short cycling | Average burn today, Short burns (< 5 min), Last burn, Last pause, Average modulation, At min. modulation – from the flame flag of each poll, so a lower bound |
+| DHW | DHW draws, Last draw, Hot water (litres) and DHW heat today (combi boilers with Data-ID 19, cold water 10 °C); DHW cycles today, Last DHW cycle and its cylinder rise (boilers with a cylinder) |
+| State | *Operating state* – one text: "CH · flame 45 % · 52 °C", "DHW", "Fault E10", "Idle" |
+| Diagnostics | Pressure drop in 24 h with *Possible leak* (0.2 bar), Flame current (average while burning) with *Low flame current* (2 µA), Fan speed − setpoint (Data-ID 35/36 entities are disabled by default: enable them when the boiler answers) |
+| Room and building | Room deviation from the target (1 h mean), Time to reach the target, Degree days today / this month (base 18 °C), Heating hours per degree day |
+
 ## Diagnostics
 
 **Scan Data-IDs** (button, about a minute, polling pauses) → **Supported Data-IDs** lists what answered, what is

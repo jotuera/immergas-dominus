@@ -201,6 +201,111 @@
       },
       "ot_dhw2_temperature": {
         "name": "Temperatura CWU 2"
+      },
+      "ot_op_state": {
+        "name": "Stan pracy"
+      },
+      "ot_delta_t": {
+        "name": "Delta T (zasilanie − powrót)"
+      },
+      "ot_mean_loop": {
+        "name": "Średnia obiegu"
+      },
+      "ot_control_setpoint": {
+        "name": "Nastawa wysyłana (Data-ID 1)"
+      },
+      "ot_setpoint_dev": {
+        "name": "Odchyłka zasilania od nastawy"
+      },
+      "ot_exh_return": {
+        "name": "Spaliny − powrót"
+      },
+      "ot_power": {
+        "name": "Moc palnika (szac.)"
+      },
+      "ot_gas_today": {
+        "name": "Gaz dziś (szac.)"
+      },
+      "ot_gas_ch_today": {
+        "name": "Gaz CO dziś"
+      },
+      "ot_gas_dhw_today": {
+        "name": "Gaz CWU dziś"
+      },
+      "ot_gas_total": {
+        "name": "Licznik gazu (szac.)"
+      },
+      "ot_gas_cost_today": {
+        "name": "Koszt gazu dziś"
+      },
+      "ot_heat_today": {
+        "name": "Ciepło dziś (szac.)"
+      },
+      "ot_condensing_share": {
+        "name": "Kondensacja dziś (udział)"
+      },
+      "ot_minmod_share": {
+        "name": "Na min. modulacji dziś"
+      },
+      "ot_mod_avg": {
+        "name": "Średnia modulacja dziś"
+      },
+      "ot_burn_avg": {
+        "name": "Średnie palenie dziś"
+      },
+      "ot_short_burns": {
+        "name": "Krótkie palenia dziś"
+      },
+      "ot_burn_last": {
+        "name": "Ostatnie palenie"
+      },
+      "ot_pause_last": {
+        "name": "Ostatnia przerwa"
+      },
+      "ot_draws_today": {
+        "name": "Pobory CWU dziś"
+      },
+      "ot_draw_last": {
+        "name": "Ostatni pobór CWU"
+      },
+      "ot_dhw_litres": {
+        "name": "Ciepła woda dziś"
+      },
+      "ot_dhw_heat": {
+        "name": "Ciepło CWU dziś"
+      },
+      "ot_dhw_cycles": {
+        "name": "Cykle CWU dziś"
+      },
+      "ot_dhw_cycle_last": {
+        "name": "Ostatni cykl CWU"
+      },
+      "ot_dhw_cycle_rise": {
+        "name": "Przyrost w zasobniku (ostatni cykl)"
+      },
+      "ot_pressure_drop": {
+        "name": "Spadek ciśnienia w 24 h"
+      },
+      "ot_flame_i_avg": {
+        "name": "Prąd płomienia (średnia)"
+      },
+      "ot_fan_dev": {
+        "name": "Wentylator − zadane obroty"
+      },
+      "ot_room_dev": {
+        "name": "Odchyłka pokoju od zadanej (1 h)"
+      },
+      "ot_reach_last": {
+        "name": "Czas dojścia do zadanej"
+      },
+      "ot_dd_today": {
+        "name": "Stopniodni dziś"
+      },
+      "ot_dd_month": {
+        "name": "Stopniodni w miesiącu"
+      },
+      "ot_h_per_dd": {
+        "name": "Godziny grzania na stopniodzień"
       }
     },
     "binary_sensor": {
@@ -263,6 +368,15 @@
       },
       "ot_remote_maxch_writable": {
         "name": "Zdalna maks. nastawa CO zapisywalna"
+      },
+      "ot_condensing": {
+        "name": "Praca kondensacyjna"
+      },
+      "ot_leak_warning": {
+        "name": "Możliwy wyciek (spadek ciśnienia)"
+      },
+      "ot_flame_low": {
+        "name": "Niski prąd płomienia"
       }
     },
     "number": {
@@ -514,6 +628,9 @@
       },
       "ot_window_temp": {
         "name": "Temperatura przy otwartym oknie"
+      },
+      "ot_gas_price": {
+        "name": "Cena gazu"
       }
     },
     "select": {

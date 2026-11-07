@@ -161,6 +161,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         coordinator.ot_stats = OtBurnerStats(hass, coordinator)
         coordinator.ot_stats.start()
         entry.async_on_unload(coordinator.ot_stats.stop)
+        # 1.6.14: hydraulics, gas, short cycling, DHW, diagnostics, room / degree days (entities in ot_computed.py)
+        from .ot_computed import OtComputed
+        coordinator.ot_computed = OtComputed(hass, coordinator)
+        await coordinator.ot_computed.async_start()
+        entry.async_on_unload(lambda: hass.async_create_task(coordinator.ot_computed.async_stop()))
     if coordinator.stats is not None:
         coordinator.stats.start()
         entry.async_on_unload(coordinator.stats.stop)

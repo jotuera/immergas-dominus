@@ -50,6 +50,9 @@ async def async_setup_entry(
         async_add_entities([*ot_sensors(coordinator), OtScanSensor(coordinator), OtLastWriteSensor(coordinator),
                             ImmergasOpenThermFaultHistorySensor(coordinator), ImmergasOpenThermFaultDescriptionSensor(coordinator),
                             *ot_stat_sensors(coordinator)])
+        if getattr(coordinator, "ot_computed", None) is not None:
+            from .ot_computed import ot_computed_sensors
+            async_add_entities(ot_computed_sensors(coordinator))
         async_add_entities(
             ImmergasOpenThermSensor(coordinator, description)
             for description in OT_SENSOR_DESCRIPTIONS

@@ -46,6 +46,9 @@ async def async_setup_entry(
         if getattr(coordinator, "ot_programs", None) is not None:
             from .ot_programs import ot_binary_sensors
             async_add_entities(ot_binary_sensors(coordinator))
+        if getattr(coordinator, "ot_computed", None) is not None:
+            from .ot_computed import ot_computed_binary_sensors
+            async_add_entities(ot_computed_binary_sensors(coordinator))
         return
     async_add_entities(
         [

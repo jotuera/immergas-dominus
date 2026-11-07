@@ -201,6 +201,111 @@
       },
       "ot_dhw2_temperature": {
         "name": "DHW 2 temperature"
+      },
+      "ot_op_state": {
+        "name": "Operating state"
+      },
+      "ot_delta_t": {
+        "name": "Delta T (flow − return)"
+      },
+      "ot_mean_loop": {
+        "name": "Mean loop temperature"
+      },
+      "ot_control_setpoint": {
+        "name": "Control setpoint (Data-ID 1)"
+      },
+      "ot_setpoint_dev": {
+        "name": "Flow deviation from the setpoint"
+      },
+      "ot_exh_return": {
+        "name": "Exhaust − return"
+      },
+      "ot_power": {
+        "name": "Burner power (est.)"
+      },
+      "ot_gas_today": {
+        "name": "Gas today (est.)"
+      },
+      "ot_gas_ch_today": {
+        "name": "Gas heating today"
+      },
+      "ot_gas_dhw_today": {
+        "name": "Gas DHW today"
+      },
+      "ot_gas_total": {
+        "name": "Gas counter (est.)"
+      },
+      "ot_gas_cost_today": {
+        "name": "Gas cost today"
+      },
+      "ot_heat_today": {
+        "name": "Heat today (est.)"
+      },
+      "ot_condensing_share": {
+        "name": "Condensing today (share)"
+      },
+      "ot_minmod_share": {
+        "name": "At min. modulation today"
+      },
+      "ot_mod_avg": {
+        "name": "Average modulation today"
+      },
+      "ot_burn_avg": {
+        "name": "Average burn today"
+      },
+      "ot_short_burns": {
+        "name": "Short burns today"
+      },
+      "ot_burn_last": {
+        "name": "Last burn"
+      },
+      "ot_pause_last": {
+        "name": "Last pause"
+      },
+      "ot_draws_today": {
+        "name": "DHW draws today"
+      },
+      "ot_draw_last": {
+        "name": "Last DHW draw"
+      },
+      "ot_dhw_litres": {
+        "name": "Hot water today"
+      },
+      "ot_dhw_heat": {
+        "name": "DHW heat today"
+      },
+      "ot_dhw_cycles": {
+        "name": "DHW cycles today"
+      },
+      "ot_dhw_cycle_last": {
+        "name": "Last DHW cycle"
+      },
+      "ot_dhw_cycle_rise": {
+        "name": "Last DHW cycle cylinder rise"
+      },
+      "ot_pressure_drop": {
+        "name": "Pressure drop in 24 h"
+      },
+      "ot_flame_i_avg": {
+        "name": "Flame current (average)"
+      },
+      "ot_fan_dev": {
+        "name": "Fan speed − setpoint"
+      },
+      "ot_room_dev": {
+        "name": "Room deviation from the target (1 h)"
+      },
+      "ot_reach_last": {
+        "name": "Time to reach the target"
+      },
+      "ot_dd_today": {
+        "name": "Degree days today"
+      },
+      "ot_dd_month": {
+        "name": "Degree days this month"
+      },
+      "ot_h_per_dd": {
+        "name": "Heating hours per degree day"
       }
     },
     "binary_sensor": {
@@ -263,6 +368,15 @@
       },
       "ot_remote_maxch_writable": {
         "name": "Remote max CH setpoint writable"
+      },
+      "ot_condensing": {
+        "name": "Condensing operation"
+      },
+      "ot_leak_warning": {
+        "name": "Possible leak (pressure drop)"
+      },
+      "ot_flame_low": {
+        "name": "Low flame current"
       }
     },
     "number": {
@@ -514,6 +628,9 @@
       },
       "ot_window_temp": {
         "name": "Open window temperature"
+      },
+      "ot_gas_price": {
+        "name": "Gas price"
       }
     },
     "select": {

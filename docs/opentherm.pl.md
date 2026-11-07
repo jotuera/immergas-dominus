@@ -223,6 +223,21 @@ Funkcje automatyczne kotła (ochrona pompy i zaworu 3-drogowego co 24 h, ochrona
 płytki co 18 h, odpowietrzanie A7, kominiarz) nie wymagają ustawień i nie są zgłaszane przez OpenTherm. Skany razem
 z wartościami z menu (**Zgłoś mapę Data-ID**) pozwolą integracji czytać je bezpośrednio.
 
+## Liczone w Home Assistant (1.6.14)
+
+Z tego, co odczytuje moduł, przy każdym odczycie (~45 s), bez dodatkowych ustawień; liczniki dzienne / miesięczne i licznik
+gazu zostają po restarcie. Pokazuje je karta *Dziś · analiza kotła* (kafle bez danych są ukryte).
+
+| Grupa | Encje |
+|---|---|
+| Hydraulika | Delta T (zasilanie − powrót), Średnia obiegu, **Nastawa wysyłana (Data-ID 1)** – to, co moduł naprawdę wysyła, Odchyłka zasilania od nastawy, Spaliny − powrót, *Praca kondensacyjna* (powrót poniżej 55 °C przy płomieniu), Kondensacja dziś (udział) |
+| Palnik i gaz | Moc palnika (szac.: modulacja między min. a maks. mocą z Data-ID 15), Ciepło dziś, Gaz dziś / CO / CWU i Licznik gazu (m³, 10,6 kWh ciepła użytkowego z m³), Cena gazu, Koszt gazu dziś |
+| Taktowanie | Średnie palenie dziś, Krótkie palenia (< 5 min), Ostatnie palenie, Ostatnia przerwa, Średnia modulacja, Na min. modulacji – z flagi płomienia każdego odczytu, więc dolne oszacowanie |
+| CWU | Pobory CWU, Ostatni pobór, Ciepła woda (litry) i Ciepło CWU dziś (kotły dwufunkcyjne z Data-ID 19, woda zimna 10 °C); Cykle CWU dziś, Ostatni cykl CWU i przyrost w zasobniku (kotły z zasobnikiem) |
+| Stan | *Stan pracy* – jeden tekst: „CO · płomień 45 % · 52 °C”, „CWU”, „Usterka E10”, „Postój” |
+| Diagnostyka | Spadek ciśnienia w 24 h z *Możliwym wyciekiem* (0,2 bar), Prąd płomienia (średnia przy płomieniu) z *Niskim prądem płomienia* (2 µA), Wentylator − zadane obroty (encje Data-ID 35/36 są domyślnie wyłączone: włącz je, gdy kocioł odpowiada) |
+| Pokój i budynek | Odchyłka pokoju od zadanej (średnia 1 h), Czas dojścia do zadanej, Stopniodni dziś / w miesiącu (baza 18 °C), Godziny grzania na stopniodzień |
+
 ## Diagnostyka
 
 **Skanuj Data-ID** (przycisk, ok. minuty, odpytywanie pauzuje) → **Obsługiwane Data-ID** pokazuje, co odpowiedziało,

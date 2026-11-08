@@ -238,6 +238,7 @@ a restart. The *Today · boiler analysis* card shows them (tiles without data st
 | DHW | DHW draws, Last draw, Hot water (litres) and DHW heat today (combi boilers with Data-ID 19, cold water 10 °C); DHW cycles today, Last DHW cycle and its cylinder rise (boilers with a cylinder) |
 | State | *Operating state* – one text: "CH · flame 45 % · 52 °C", "DHW", "Fault E10", "Idle" |
 | Diagnostics | Pressure drop in 24 h with *Possible leak* (0.2 bar), Flame current (average while burning) with *Low flame current* (2 µA), Fan speed − setpoint (Data-ID 35/36 entities are disabled by default: enable them when the boiler answers) |
+| CH supervision | *CH supervision* – is a CH demand really taken up by the boiler: confirmed, DHW priority, flow near the setpoint, fault, no demand, waiting; *CH: boiler not responding* comes on after a set time (*CH supervision - time without response*, default 15 min, longer than the boiler's CH timer). The regulator is in the module, so the demand is inferred from the CH enable bit, the control setpoint (Data-ID 1) and the room temperature against its target; with a physical thermostat on the boiler contacts it cannot be seen and nothing is counted. Diagnosis only, nothing is written |
 | Room and building | Room deviation from the target (1 h mean), Time to reach the target, Degree days today / this month (base 18 °C), Heating hours per degree day |
 
 ## Diagnostics

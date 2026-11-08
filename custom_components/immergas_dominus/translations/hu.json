@@ -390,6 +390,19 @@
       },
       "room_deviation_zone": {
         "name": "Helyiség eltérése"
+      },
+      "ot_sup_state": {
+        "name": "Fűtés felügyelet",
+        "state": {
+          "fault": "Kazán hiba",
+          "no_demand": "Nincs fűtési igény",
+          "demand_unknown": "Az igény nem látható (fizikai termosztát)",
+          "confirmed": "A kazán visszaigazolta",
+          "dhw": "HMV elsőbbség",
+          "reached": "Előremenő közel az alapjelhez",
+          "waiting": "Várakozás a kazánra",
+          "no_response": "A kazán nem reagál a fűtési igényre"
+        }
       }
     },
     "binary_sensor": {
@@ -461,6 +474,9 @@
       },
       "ot_flame_low": {
         "name": "Alacsony láng ionizációs áram"
+      },
+      "ot_sup_alarm": {
+        "name": "Fűtés: a kazán nem reagál"
       }
     },
     "number": {
@@ -718,6 +734,9 @@
       },
       "dhw_tank_volume": {
         "name": "HMV tároló térfogata"
+      },
+      "ot_sup_limit": {
+        "name": "Fűtés felügyelet - reakció nélküli idő"
       }
     },
     "select": {

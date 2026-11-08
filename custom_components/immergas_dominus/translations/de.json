@@ -390,6 +390,19 @@
       },
       "room_deviation_zone": {
         "name": "Raumabweichung"
+      },
+      "ot_sup_state": {
+        "name": "Heizungsüberwachung",
+        "state": {
+          "fault": "Kesselstörung",
+          "no_demand": "Keine Heizanforderung",
+          "demand_unknown": "Anforderung nicht sichtbar (physischer Thermostat)",
+          "confirmed": "Vom Kessel bestätigt",
+          "dhw": "WW hat Vorrang",
+          "reached": "Vorlauf nahe Sollwert",
+          "waiting": "Warte auf den Kessel",
+          "no_response": "Kessel reagiert nicht auf die Heizanforderung"
+        }
       }
     },
     "binary_sensor": {
@@ -461,6 +474,9 @@
       },
       "ot_flame_low": {
         "name": "Niedriger Flammenionisationsstrom"
+      },
+      "ot_sup_alarm": {
+        "name": "Heizung: Kessel reagiert nicht"
       }
     },
     "number": {
@@ -718,6 +734,9 @@
       },
       "dhw_tank_volume": {
         "name": "WW-Speichervolumen"
+      },
+      "ot_sup_limit": {
+        "name": "Heizungsüberwachung - Zeit ohne Reaktion"
       }
     },
     "select": {

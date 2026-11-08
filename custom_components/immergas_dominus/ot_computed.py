@@ -12,6 +12,7 @@
 * **Operating state** - one text ("CH · flame 45 % · 52 °C", "DHW", "Fault E10", "Idle").
 * **Diagnostics** - the system pressure drop over 24 h with a possible leak warning, the average flame current while
   burning with a low flame current warning, the fan speed minus its setpoint.
+* **CH supervision** - is a CH demand really taken up by the boiler (see ot_supervision_state).
 * **Room and building** - the room deviation from the target (1 h mean), the time to reach a raised target, degree
   days (base 18 °C) today / this month and heating hours per degree day.
 
@@ -47,6 +48,8 @@ LEAK_BAR_DAY = 0.2       # pressure drop over 24 h that raises the leak warning
 FLAME_LOW_UA = 2.0       # average flame current below this raises the warning
 COLD_WATER = 10.0        # °C: cold water for the DHW heat from the flow
 DD_BASE = 18.0           # °C: degree day base
+SUP_NEAR_SETPOINT = 3.0  # K: with the flow this close to the control setpoint the boiler has a reason to wait
+SUP_STATES = ["fault", "no_demand", "demand_unknown", "confirmed", "dhw", "reached", "waiting", "no_response"]
 
 # Data-IDs the computations read (each entity polls what it needs, see OT_POLL)
 ST, CTRL, CAP, ROOM_SET, MOD, PRESS, DHW_FLOW, ROOM, FLOW, DHW, OUT, RET, EXH, FAN, FLAME_I = (
@@ -64,6 +67,31 @@ def _f88(raw: Any, positive: bool = False, probe: bool = False) -> float | None:
     return raw / 256
 
 
+def ot_supervision_state(status: int, ctrl: float | None, flow: float | None, room: float | None,
+                         room_set: float | None, demand_visible: bool) -> str:
+    """What the boiler is doing about central heating, from one poll. "waiting" = it should be heating and is not.
+
+    The regulator is in the Dominus module, so a demand is only inferred: the CH enable bit (the master status echoed in
+    the high byte of Data-ID 0) tells that the mode allows CH, the control setpoint (Data-ID 1) that the module asks
+    for water, and the room (Data-ID 24 / 16) that it still needs heat. With a physical thermostat on the boiler
+    contacts the demand cannot be seen at all, so nothing is counted. Diagnosis only - nothing is written."""
+    if status & 0x01:
+        return "fault"
+    if not status & 0x0100:
+        return "no_demand"
+    if status & 0x02:
+        return "confirmed"
+    if status & 0x04:
+        return "dhw"
+    if not demand_visible:
+        return "demand_unknown"
+    if ctrl is None or ctrl <= 10 or (room is not None and room_set is not None and room >= room_set):
+        return "no_demand"
+    if flow is not None and ctrl - flow < SUP_NEAR_SETPOINT:
+        return "reached"
+    return "waiting"
+
+
 class OtComputed:
     """Keeps the computed values; entities read them and listen for updates."""
 
@@ -76,6 +104,8 @@ class OtComputed:
         self._unsub: list[Callable[[], None]] = []
         self._at: float | None = None
         self.gas_price: float = 3.86
+        self.sup_limit: float = 15.0           # min without a response before the CH alarm
+        self._sup_idle = 0.0                   # s the boiler has ignored the CH demand
         self.v: dict[str, Any] = {}            # the published values
         self.d: dict[str, Any] = self._fresh_day()
         self.m: dict[str, Any] = {"month": dt_util.now().strftime("%Y-%m"), "dd": 0.0, "ch_h": 0.0}
@@ -113,6 +143,7 @@ class OtComputed:
             self.m.update(data["m"])
         self.gas_total = float(data.get("gas_total", 0.0))
         self.gas_price = float(data.get("gas_price", self.gas_price))
+        self.sup_limit = float(data.get("sup_limit", self.sup_limit))
         self._unsub.append(self.coordinator.async_add_listener(self._update))
         self._unsub.append(async_track_time_interval(self.hass, self._save, timedelta(minutes=5)))
         self._publish()
@@ -124,7 +155,8 @@ class OtComputed:
         await self._save()
 
     async def _save(self, *_: Any) -> None:
-        await self._store.async_save({"d": self.d, "m": self.m, "gas_total": self.gas_total, "gas_price": self.gas_price})
+        await self._store.async_save({"d": self.d, "m": self.m, "gas_total": self.gas_total, "gas_price": self.gas_price,
+                                      "sup_limit": self.sup_limit})
 
     def add_listener(self, cb: Callable[[], None]) -> Callable[[], None]:
         self._listeners.append(cb)
@@ -132,6 +164,11 @@ class OtComputed:
 
     def set_gas_price(self, value: float) -> None:
         self.gas_price = value
+        self._publish()
+        self.hass.async_create_task(self._save())
+
+    def set_sup_limit(self, value: float) -> None:
+        self.sup_limit = value
         self._publish()
         self.hass.async_create_task(self._save())
 
@@ -163,6 +200,15 @@ class OtComputed:
         if self.m["month"] != month:
             self.m = {"month": month, "dd": 0.0, "ch_h": 0.0}
         d, v = self.d, self.v
+
+        # ---- CH supervision: time counts only while the boiler has no reason of its own to stay idle
+        programs = getattr(self.coordinator, "ot_programs", None)
+        sup = ot_supervision_state(st, ctrl, flow, room, room_set, getattr(programs, "thermostat", "none") != "physical")
+        self._sup_idle = self._sup_idle + dt if sup == "waiting" else 0.0
+        alarm = self._sup_idle >= self.sup_limit * 60
+        v["sup_state"] = "no_response" if alarm else sup
+        v["sup_alarm"] = alarm
+        v["sup_idle_min"] = int(self._sup_idle // 60)
 
         # ---- burner power (kW) and the heat / gas split by DHW / heating
         power = None
@@ -358,6 +404,7 @@ BINARY: dict[str, tuple] = {   # key: (value key, device class, icon, Data-IDs, 
     "ot_condensing": ("condensing", None, "mdi:water-outline", (RET,), True),
     "ot_leak_warning": ("leak", BinarySensorDeviceClass.PROBLEM, None, (PRESS,), True),
     "ot_flame_low": ("flame_low", BinarySensorDeviceClass.PROBLEM, None, (FLAME_I,), False),
+    "ot_sup_alarm": ("sup_alarm", BinarySensorDeviceClass.PROBLEM, "mdi:shield-alert-outline", (CTRL, FLOW, ROOM, ROOM_SET), True),
 }
 
 
@@ -411,6 +458,24 @@ class OtStateSensor(_CalcEntity, SensorEntity):
         return self.calc.v.get("state")
 
 
+class OtSupervisionSensor(_CalcEntity, SensorEntity):
+    _attr_icon = "mdi:shield-search"
+    _attr_device_class = SensorDeviceClass.ENUM
+    _attr_options = SUP_STATES
+    _attr_entity_category = EntityCategory.DIAGNOSTIC
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_sup_state", (CTRL, FLOW, ROOM, ROOM_SET), True)
+
+    @property
+    def native_value(self) -> str | None:
+        return self.calc.v.get("sup_state")
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any]:
+        return {"minutes_without_response": self.calc.v.get("sup_idle_min", 0)}
+
+
 class OtCalcBinary(_CalcEntity, BinarySensorEntity):
     def __init__(self, coordinator: ImmergasDominusCoordinator, key: str, spec: tuple) -> None:
         vk, dc, icon, polls, enabled = spec
@@ -449,8 +514,32 @@ class OtGasPriceNumber(ImmergasDominusEntity, RestoreNumber):
         self.async_write_ha_state()
 
 
+class OtSupLimitNumber(ImmergasDominusEntity, RestoreNumber):
+    """Minutes without a response before the CH alarm (longer than the boiler's own CH timer)."""
+
+    _attr_translation_key = "ot_sup_limit"
+    _attr_icon = "mdi:timer-alert-outline"
+    _attr_entity_category = EntityCategory.CONFIG
+    _attr_native_min_value = 5
+    _attr_native_max_value = 120
+    _attr_native_step = 5
+    _attr_native_unit_of_measurement = UnitOfTime.MINUTES
+    _attr_mode = NumberMode.BOX
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_sup_limit", ST, DEVICE_MAIN)
+
+    @property
+    def native_value(self) -> float:
+        return self.coordinator.ot_computed.sup_limit
+
+    async def async_set_native_value(self, value: float) -> None:
+        self.coordinator.ot_computed.set_sup_limit(value)
+        self.async_write_ha_state()
+
+
 def ot_computed_sensors(coordinator: ImmergasDominusCoordinator) -> list:
-    return [OtStateSensor(coordinator), *(OtCalcSensor(coordinator, k, s) for k, s in SENSORS.items())]
+    return [OtStateSensor(coordinator), OtSupervisionSensor(coordinator), *(OtCalcSensor(coordinator, k, s) for k, s in SENSORS.items())]
 
 
 def ot_computed_binary_sensors(coordinator: ImmergasDominusCoordinator) -> list:

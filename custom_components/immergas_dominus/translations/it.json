@@ -390,6 +390,19 @@
       },
       "room_deviation_zone": {
         "name": "Scostamento ambiente"
+      },
+      "ot_sup_state": {
+        "name": "Supervisione riscaldamento",
+        "state": {
+          "fault": "Anomalia caldaia",
+          "no_demand": "Nessuna richiesta di riscaldamento",
+          "demand_unknown": "Richiesta non visibile (termostato fisico)",
+          "confirmed": "Confermato dalla caldaia",
+          "dhw": "Priorità ACS",
+          "reached": "Mandata vicina al setpoint",
+          "waiting": "In attesa della caldaia",
+          "no_response": "La caldaia non risponde alla richiesta di riscaldamento"
+        }
       }
     },
     "binary_sensor": {
@@ -461,6 +474,9 @@
       },
       "ot_flame_low": {
         "name": "Corrente di ionizzazione fiamma bassa"
+      },
+      "ot_sup_alarm": {
+        "name": "Riscaldamento: la caldaia non risponde"
       }
     },
     "number": {
@@ -718,6 +734,9 @@
       },
       "dhw_tank_volume": {
         "name": "Volume bollitore ACS"
+      },
+      "ot_sup_limit": {
+        "name": "Supervisione riscaldamento - tempo senza risposta"
       }
     },
     "select": {

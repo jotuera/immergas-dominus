@@ -390,6 +390,19 @@
       },
       "room_deviation_zone": {
         "name": "Odchyłka pokoju"
+      },
+      "ot_sup_state": {
+        "name": "Nadzór CO",
+        "state": {
+          "fault": "Awaria kotła",
+          "no_demand": "Brak żądania CO",
+          "demand_unknown": "Żądanie niewidoczne (termostat fizyczny)",
+          "confirmed": "Potwierdzone przez kocioł",
+          "dhw": "Priorytet CWU",
+          "reached": "Zasilanie blisko nastawy",
+          "waiting": "Czekam na kocioł",
+          "no_response": "Kocioł nie reaguje na żądanie CO"
+        }
       }
     },
     "binary_sensor": {
@@ -461,6 +474,9 @@
       },
       "ot_flame_low": {
         "name": "Niski prąd płomienia"
+      },
+      "ot_sup_alarm": {
+        "name": "CO: kocioł nie reaguje"
       }
     },
     "number": {
@@ -718,6 +734,9 @@
       },
       "dhw_tank_volume": {
         "name": "Pojemność zasobnika CWU"
+      },
+      "ot_sup_limit": {
+        "name": "Nadzór CO - czas bez reakcji"
       }
     },
     "select": {

@@ -42,8 +42,8 @@ async def async_setup_entry(
         from .programs import ot_declared_numbers
         async_add_entities(ot_declared_numbers(coordinator))
         if getattr(coordinator, "ot_computed", None) is not None:
-            from .ot_computed import OtGasPriceNumber
-            async_add_entities([OtGasPriceNumber(coordinator)])
+            from .ot_computed import OtGasPriceNumber, OtSupLimitNumber
+            async_add_entities([OtGasPriceNumber(coordinator), OtSupLimitNumber(coordinator)])
         return
     entities: list[NumberEntity] = [
         ImmergasDominusNumber(coordinator, description)

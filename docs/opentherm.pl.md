@@ -236,6 +236,7 @@ gazu zostają po restarcie. Pokazuje je karta *Dziś · analiza kotła* (kafle b
 | CWU | Pobory CWU, Ostatni pobór, Ciepła woda (litry) i Ciepło CWU dziś (kotły dwufunkcyjne z Data-ID 19, woda zimna 10 °C); Cykle CWU dziś, Ostatni cykl CWU i przyrost w zasobniku (kotły z zasobnikiem) |
 | Stan | *Stan pracy* – jeden tekst: „CO · płomień 45 % · 52 °C”, „CWU”, „Usterka E10”, „Postój” |
 | Diagnostyka | Spadek ciśnienia w 24 h z *Możliwym wyciekiem* (0,2 bar), Prąd płomienia (średnia przy płomieniu) z *Niskim prądem płomienia* (2 µA), Wentylator − zadane obroty (encje Data-ID 35/36 są domyślnie wyłączone: włącz je, gdy kocioł odpowiada) |
+| Nadzór CO | *Nadzór CO* – czy kocioł naprawdę podjął żądanie CO: potwierdzone, priorytet CWU, zasilanie blisko nastawy, awaria, brak żądania, oczekiwanie; *CO: kocioł nie reaguje* włącza się po ustawionym czasie (*Nadzór CO - czas bez reakcji*, domyślnie 15 min, dłużej niż minutnik CO kotła). Regulator jest w module, więc żądanie jest wnioskowane z bitu CO, nastawy wysyłanej (Data-ID 1) i temperatury pokoju względem zadanej; przy fizycznym termostacie na zaciskach kotła nie widać go i czas nie jest liczony. Tylko diagnostyka, nic nie jest zapisywane |
 | Pokój i budynek | Odchyłka pokoju od zadanej (średnia 1 h), Czas dojścia do zadanej, Stopniodni dziś / w miesiącu (baza 18 °C), Godziny grzania na stopniodzień |
 
 ## Diagnostyka

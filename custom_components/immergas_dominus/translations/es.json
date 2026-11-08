@@ -390,6 +390,19 @@
       },
       "room_deviation_zone": {
         "name": "Desviación de la estancia"
+      },
+      "ot_sup_state": {
+        "name": "Supervisión calefacción",
+        "state": {
+          "fault": "Avería de la caldera",
+          "no_demand": "Sin demanda de calefacción",
+          "demand_unknown": "Demanda no visible (termostato físico)",
+          "confirmed": "Confirmado por la caldera",
+          "dhw": "Prioridad ACS",
+          "reached": "Impulsión cerca de la consigna",
+          "waiting": "Esperando a la caldera",
+          "no_response": "La caldera no responde a la demanda de calefacción"
+        }
       }
     },
     "binary_sensor": {
@@ -461,6 +474,9 @@
       },
       "ot_flame_low": {
         "name": "Corriente de ionización de llama baja"
+      },
+      "ot_sup_alarm": {
+        "name": "Calefacción: la caldera no responde"
       }
     },
     "number": {
@@ -718,6 +734,9 @@
       },
       "dhw_tank_volume": {
         "name": "Volumen del acumulador ACS"
+      },
+      "ot_sup_limit": {
+        "name": "Supervisión calefacción - tiempo sin respuesta"
       }
     },
     "select": {

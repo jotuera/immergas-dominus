@@ -390,6 +390,19 @@
       },
       "room_deviation_zone": {
         "name": "Afwijking ruimte"
+      },
+      "ot_sup_state": {
+        "name": "CV-bewaking",
+        "state": {
+          "fault": "Ketelstoring",
+          "no_demand": "Geen CV-vraag",
+          "demand_unknown": "Vraag niet zichtbaar (fysieke thermostaat)",
+          "confirmed": "Bevestigd door de ketel",
+          "dhw": "Voorrang warm water",
+          "reached": "Aanvoer dicht bij de setpoint",
+          "waiting": "Wachten op de ketel",
+          "no_response": "Ketel reageert niet op de CV-vraag"
+        }
       }
     },
     "binary_sensor": {
@@ -461,6 +474,9 @@
       },
       "ot_flame_low": {
         "name": "Lage ionisatiestroom vlam"
+      },
+      "ot_sup_alarm": {
+        "name": "CV: ketel reageert niet"
       }
     },
     "number": {
@@ -718,6 +734,9 @@
       },
       "dhw_tank_volume": {
         "name": "Inhoud SWW-boiler"
+      },
+      "ot_sup_limit": {
+        "name": "CV-bewaking - tijd zonder reactie"
       }
     },
     "select": {

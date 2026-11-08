@@ -390,6 +390,19 @@
       },
       "room_deviation_zone": {
         "name": "Room deviation"
+      },
+      "ot_sup_state": {
+        "name": "CH supervision",
+        "state": {
+          "fault": "Boiler fault",
+          "no_demand": "No CH demand",
+          "demand_unknown": "Demand not visible (physical thermostat)",
+          "confirmed": "Confirmed by the boiler",
+          "dhw": "DHW has priority",
+          "reached": "Flow near the setpoint",
+          "waiting": "Waiting for the boiler",
+          "no_response": "Boiler not responding to the CH demand"
+        }
       }
     },
     "binary_sensor": {
@@ -461,6 +474,9 @@
       },
       "ot_flame_low": {
         "name": "Low flame current"
+      },
+      "ot_sup_alarm": {
+        "name": "CH: boiler not responding"
       }
     },
     "number": {
@@ -718,6 +734,9 @@
       },
       "dhw_tank_volume": {
         "name": "DHW cylinder volume"
+      },
+      "ot_sup_limit": {
+        "name": "CH supervision - time without response"
       }
     },
     "select": {

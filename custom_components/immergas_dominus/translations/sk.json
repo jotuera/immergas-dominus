@@ -390,6 +390,19 @@
       },
       "room_deviation_zone": {
         "name": "Odchýlka miestnosti"
+      },
+      "ot_sup_state": {
+        "name": "Dohľad ÚK",
+        "state": {
+          "fault": "Porucha kotla",
+          "no_demand": "Bez požiadavky ÚK",
+          "demand_unknown": "Požiadavka nie je viditeľná (fyzický termostat)",
+          "confirmed": "Potvrdené kotlom",
+          "dhw": "Prednosť TÚV",
+          "reached": "Výstup blízko nastavenia",
+          "waiting": "Čakám na kotol",
+          "no_response": "Kotol nereaguje na požiadavku ÚK"
+        }
       }
     },
     "binary_sensor": {
@@ -461,6 +474,9 @@
       },
       "ot_flame_low": {
         "name": "Nízky ionizačný prúd plameňa"
+      },
+      "ot_sup_alarm": {
+        "name": "ÚK: kotol nereaguje"
       }
     },
     "number": {
@@ -718,6 +734,9 @@
       },
       "dhw_tank_volume": {
         "name": "Objem zásobníka TÚV"
+      },
+      "ot_sup_limit": {
+        "name": "Dohľad ÚK - čas bez reakcie"
       }
     },
     "select": {

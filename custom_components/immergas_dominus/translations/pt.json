@@ -390,6 +390,19 @@
       },
       "room_deviation_zone": {
         "name": "Desvio da divisão"
+      },
+      "ot_sup_state": {
+        "name": "Supervisão do aquecimento",
+        "state": {
+          "fault": "Avaria da caldeira",
+          "no_demand": "Sem pedido de aquecimento",
+          "demand_unknown": "Pedido não visível (termóstato físico)",
+          "confirmed": "Confirmado pela caldeira",
+          "dhw": "Prioridade AQS",
+          "reached": "Ida perto do setpoint",
+          "waiting": "À espera da caldeira",
+          "no_response": "A caldeira não responde ao pedido de aquecimento"
+        }
       }
     },
     "binary_sensor": {
@@ -461,6 +474,9 @@
       },
       "ot_flame_low": {
         "name": "Corrente de ionização da chama baixa"
+      },
+      "ot_sup_alarm": {
+        "name": "Aquecimento: a caldeira não responde"
       }
     },
     "number": {
@@ -718,6 +734,9 @@
       },
       "dhw_tank_volume": {
         "name": "Volume do depósito AQS"
+      },
+      "ot_sup_limit": {
+        "name": "Supervisão do aquecimento - tempo sem resposta"
       }
     },
     "select": {

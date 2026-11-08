@@ -390,6 +390,19 @@
       },
       "room_deviation_zone": {
         "name": "Écart de la pièce"
+      },
+      "ot_sup_state": {
+        "name": "Surveillance chauffage",
+        "state": {
+          "fault": "Défaut chaudière",
+          "no_demand": "Pas de demande de chauffage",
+          "demand_unknown": "Demande non visible (thermostat physique)",
+          "confirmed": "Confirmé par la chaudière",
+          "dhw": "Priorité ECS",
+          "reached": "Départ proche de la consigne",
+          "waiting": "En attente de la chaudière",
+          "no_response": "La chaudière ne répond pas à la demande de chauffage"
+        }
       }
     },
     "binary_sensor": {
@@ -461,6 +474,9 @@
       },
       "ot_flame_low": {
         "name": "Courant d’ionisation de flamme faible"
+      },
+      "ot_sup_alarm": {
+        "name": "Chauffage : la chaudière ne répond pas"
       }
     },
     "number": {
@@ -718,6 +734,9 @@
       },
       "dhw_tank_volume": {
         "name": "Volume du ballon ECS"
+      },
+      "ot_sup_limit": {
+        "name": "Surveillance chauffage - durée sans réponse"
       }
     },
     "select": {

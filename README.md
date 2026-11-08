@@ -263,6 +263,26 @@ share the map with a serial/addressing tweak.)
 If your boiler uses the `MPROCOMBOV2` config but isn't listed, it will very likely work —
 please open an issue to confirm it.
 
+## Wiring
+
+The Dominus module talks to the boiler over its own terminals and to Home Assistant over Wi-Fi (local TCP 2000) –
+nothing else to connect for the integration. Three typical installations:
+
+**Modbus – MAGIS PRO / COMBO V2** (Dominus on D+ / D−, an ON / OFF room thermostat optional on the zone 1 input):
+
+![Dominus – Modbus wiring](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/en/wiring-modbus.png)
+
+**OpenTherm with the CAR V2** (the remote stays in charge – turn on *Read only (remote in charge)*):
+
+![Dominus – OpenTherm with the CAR V2](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/en/wiring-opentherm-car.png)
+
+**OpenTherm without the CAR V2** (Home Assistant in charge – see [Replacing the CAR V2](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.md#replacing-the-car-v2)):
+
+![Dominus – OpenTherm without the CAR V2](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/en/wiring-opentherm.png)
+
+Module terminals as in the Dominus installation manual (X1 NTC probe, X13 OTM boiler, X12 OTS remote, X14 A+ / B− /
+GND, 24 V supply) – check the label of your module. Boiler terminals per model: [OpenTherm – Boilers and terminals](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.md#boilers-and-terminals).
+
 ## Installation
 
 ### HACS (custom repository)

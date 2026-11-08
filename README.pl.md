@@ -259,6 +259,26 @@ tę samą mapę z drobną różnicą transmisji/adresowania.)
 Jeśli Twój kocioł używa configu `MPROCOMBOV2`, a nie ma go na liście, prawie na pewno
 zadziała — otwórz zgłoszenie, żeby potwierdzić.
 
+## Podłączenie
+
+Moduł Dominus rozmawia z kotłem przez własne zaciski, a z Home Assistant przez Wi-Fi (lokalnie TCP 2000) – dla
+integracji nic więcej nie podłączasz. Trzy typowe instalacje:
+
+**Modbus – MAGIS PRO / COMBO V2** (Dominus na D+ / D−, opcjonalny termostat pokojowy ON / OFF na wejściu strefy 1):
+
+![Dominus – podłączenie Modbus](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/wiring-modbus.png)
+
+**OpenTherm z CAR V2** (pilot rządzi – włącz *Tylko odczyt (pilot rządzi)*):
+
+![Dominus – OpenTherm z CAR V2](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/wiring-opentherm-car.png)
+
+**OpenTherm bez CAR V2** (rządzi Home Assistant – zobacz [Zastąpienie CAR V2](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.pl.md#zastąpienie-car-v2)):
+
+![Dominus – OpenTherm bez CAR V2](https://raw.githubusercontent.com/jotuera/immergas-dominus/main/docs/images/wiring-opentherm.png)
+
+Zaciski modułu jak w instrukcji montażu Dominusa (X1 sonda NTC, X13 OTM kocioł, X12 OTS pilot, X14 A+ / B− / GND,
+zasilanie 24 V) – sprawdź naklejkę na swoim module. Zaciski kotła dla modeli: [OpenTherm – kotły i zaciski](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.pl.md#kotły-i-zaciski).
+
 ## Instalacja
 
 ### HACS (niestandardowe repozytorium)

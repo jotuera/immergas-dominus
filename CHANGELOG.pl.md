@@ -7,6 +7,7 @@ Pełna historia jest w README, w sekcji [Historia zmian](README.pl.md#historia-z
 
 | Wersja | Najważniejsze |
 |---|---|
+| 1.6.17 | OpenTherm: nadzór CO z alarmem, gdy kocioł nie podejmuje żądania, karty huba 0.87.0 |
 | 1.6.16 | nazwy encji we wszystkich 11 językach, schematy podłączenia w README, karty huba 0.86.0 |
 | 1.6.15 | OpenTherm: *Praca bez CAR V2* pasuje do kotła pogodowego; zaciski IMG BUS 41 / 44 w podpowiedzi |
 | 1.6.14 | karta *Dziś · analiza*; więcej statystyk Modbus (komfort, budynek, fazy, CWU); wartości liczone OpenTherm |

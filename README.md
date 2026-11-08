@@ -310,6 +310,14 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.17
+
+- **OpenTherm – CH supervision:** is a CH demand really taken up by the boiler. *CH supervision* names the state
+  (confirmed, DHW priority, flow near the setpoint, fault, no demand, waiting), *CH: boiler not responding* comes on after
+  a set time (default 15 min). The demand is inferred from the CH enable bit, the control setpoint and the room
+  temperature; with a physical thermostat on the boiler contacts it cannot be seen. Diagnosis only, nothing is written.
+- Frontend: hub cards 0.87.0.
+
 ### 1.6.16
 
 - **Translations:** the 68 entity names added in 1.6.x (Today · analysis statistics, OpenTherm computed values, gas

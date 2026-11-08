@@ -306,6 +306,14 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.17
+
+- **OpenTherm – nadzór CO:** czy kocioł naprawdę podjął żądanie CO. *Nadzór CO* nazywa stan (potwierdzone, priorytet CWU,
+  zasilanie blisko nastawy, awaria, brak żądania, oczekiwanie), *CO: kocioł nie reaguje* włącza się po ustawionym czasie
+  (domyślnie 15 min). Żądanie jest wnioskowane z bitu CO, nastawy wysyłanej i temperatury pokoju; przy fizycznym
+  termostacie na zaciskach kotła nie jest widoczne. Tylko diagnostyka, nic nie jest zapisywane.
+- Frontend: karty huba 0.87.0.
+
 ### 1.6.16
 
 - **Tłumaczenia:** 68 nazw encji dodanych w 1.6.x (statystyki Dziś · analiza, wartości liczone OpenTherm, cena gazu,

@@ -306,6 +306,15 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.16
+
+- **Tłumaczenia:** 68 nazw encji dodanych w 1.6.x (statystyki Dziś · analiza, wartości liczone OpenTherm, cena gazu,
+  pojemność zasobnika CWU) jest teraz we wszystkich 11 językach – wcześniej poza angielskim i polskim były po angielsku.
+- **Schematy podłączenia** w README: Modbus (MAGIS PRO / COMBO V2, opcjonalny termostat pokojowy), OpenTherm z CAR V2
+  i bez CAR V2.
+- Frontend: karty huba 0.86.0 (huby ESP OpenTherm / kotłów gazowych / MAGIS M znajdowane w każdym języku, nazwy encji
+  bez „/”). CHANGELOG, SECURITY i CONTRIBUTING po polsku; zaktualizowany opis w HACS.
+
 ### 1.6.15
 
 - **OpenTherm – Praca bez CAR V2** (karta *Ustawienia online*) pasuje do kotła pogodowego: przy regulatorze Dominusa

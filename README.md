@@ -310,6 +310,15 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.16
+
+- **Translations:** the 68 entity names added in 1.6.x (Today · analysis statistics, OpenTherm computed values, gas
+  price, DHW cylinder volume) now in all 11 languages – before they showed in English outside English and Polish.
+- **Wiring diagrams** in the README: Modbus (MAGIS PRO / COMBO V2, optional room thermostat), OpenTherm with and without
+  the CAR V2.
+- Frontend: hub cards 0.86.0 (the ESP OpenTherm / gas boiler / MAGIS M hubs found in every language, entity names
+  without "/"). CHANGELOG, SECURITY and CONTRIBUTING in Polish; the HACS description updated.
+
 ### 1.6.15
 
 - **OpenTherm – Running without the CAR V2** (*Online settings* card) fits a weather-compensated boiler: with the

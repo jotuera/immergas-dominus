@@ -7,6 +7,7 @@ The full history is in the README, section [Changelog](README.md#changelog), and
 
 | Version | Highlights |
 |---|---|
+| 1.6.16 | entity names in all 11 languages, wiring diagrams in the README, hub cards 0.86.0 |
 | 1.6.15 | OpenTherm: *Running without the CAR V2* fits a weather-compensated boiler; IMG BUS terminals 41 / 44 in the hint |
 | 1.6.14 | *Today · analysis* card; more Modbus statistics (comfort, building, phases, DHW); OpenTherm computed values |
 | 1.6.13 | device type (heat pump / gas boiler) in the Modbus mode |

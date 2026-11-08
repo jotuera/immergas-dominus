@@ -306,6 +306,29 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.15
+
+- **OpenTherm – Praca bez CAR V2** (karta *Ustawienia online*) pasuje do kotła pogodowego: przy regulatorze Dominusa
+  na sondzie zewnętrznej, własnej krzywej kotła (ZEUS Superior / HERCULES P66 w *Parametrach kotła (offline)*) albo
+  temperaturze zewnętrznej bez temperatury pokoju wiersze pokojowe (*Sonda Dominusa w pokoju*, *Regulacja pokojowa
+  (AMB)*) są informacyjne – *niepotrzebne – regulacja pogodowa*.
+- Podpowiedź pracy bez pilota podaje zaciski IMG BUS **41 / 44** w ZEUS Superior 26 / 32 (42 / 43 to zaciski Super
+  CAR), potwierdzone na ZEUS Superior 26 2 ErP. Frontend: karty huba 0.84.2.
+
+### 1.6.14
+
+- Karta **Dziś · analiza** (oba tryby) – wartości liczone w Home Assistant, nic nie trafia do kotła.
+- **Modbus – więcej statystyk** (`stats_extra`): komfort dziś (czas w komforcie, za zimno / za ciepło, min / maks
+  pokoju), budynek (tempo nagrzewania / stygnięcia, współczynnik strat, podpowiedź zmiany przesunięcia krzywej – tylko
+  wskazówka), fazy Komfort / Eko, CWU (ciepło i woda zużyte dziś z nowej **pojemności zasobnika CWU**, straty postojowe,
+  minimum zasobnika, średni cykl), stan pracy, min / maks / średnia 24 h temperatury zewnętrznej, dostępność modułu
+  i przerwy łączności, strefy 2 / 3.
+- **OpenTherm – wartości liczone** (`ot_computed`): delta T, nastawa sterująca i odchyłka, kondensacja, moc palnika,
+  gaz / ciepło dziś i licznik gazu z **ceną gazu**, taktowanie, pobory i cykle CWU, stan pracy, spadek ciśnienia /
+  ostrzeżenie o wycieku, prąd płomienia, odchyłka wentylatora, odchyłka pokoju, stopniodni.
+- Frontend: karty huba 0.84.0 – *Kalibracja* i *Automatyki* także w tablicy OpenTherm, krzywa pogodowa OpenTherm
+  i mapa Data-ID.
+
 ### 1.6.13
 
 - **Typ urządzenia** (Modbus): *Pompa ciepła* albo *Kocioł gazowy* (VICTRIX ZEUS Superior 25-35, HERCULES, EXTRA z nowej

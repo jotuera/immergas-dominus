@@ -1,5 +1,7 @@
 # Contributing
 
+**English** · [Polski](CONTRIBUTING.pl.md)
+
 Thank you for helping! Reports from other boiler models are the most valuable contribution: open an issue with the
 model, the Dominus module version and what works or not.
 

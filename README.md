@@ -310,6 +310,28 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.15
+
+- **OpenTherm – Running without the CAR V2** (*Online settings* card) fits a weather-compensated boiler: with the
+  Dominus regulator on the outdoor probe, the boiler's own curve (ZEUS Superior / HERCULES P66 in *Boiler parameters
+  (offline)*) or an outdoor temperature without a room temperature, the room rows (*Dominus probe in the room*,
+  *Room control (AMB)*) are informational – *not needed – weather compensation*.
+- The hint for running without the remote names the IMG BUS terminals **41 / 44** on the ZEUS Superior 26 / 32
+  (42 / 43 are the Super CAR terminals), confirmed on a ZEUS Superior 26 2 ErP. Frontend: hub cards 0.84.2.
+
+### 1.6.14
+
+- **Today · analysis** card (both modes) – values computed in Home Assistant, nothing written to the boiler.
+- **Modbus – more statistics** (`stats_extra`): comfort today (time in comfort, too cold / too warm, room min / max),
+  building (room heating / cooling rate, heat loss coefficient, a suggested curve offset change – only a hint), Comfort /
+  Eco phases, DHW (heat and hot water used today from the new **DHW cylinder volume**, standing loss, cylinder minimum,
+  mean cycle), operating state, outdoor min / max / 24 h mean, module availability and link breaks, zones 2 / 3.
+- **OpenTherm – computed values** (`ot_computed`): delta T, control setpoint and deviation, condensing, burner power,
+  gas / heat today and a gas counter with the **gas price**, short cycling, DHW draws and cycles, operating state,
+  pressure drop / leak warning, flame current, fan deviation, room deviation, degree days.
+- Frontend: hub cards 0.84.0 – *Calibration* and *Automations* also in the OpenTherm dashboard, the OpenTherm weather
+  curve and the Data-ID map.
+
 ### 1.6.13
 
 - **Device type** (Modbus): *Heat pump* or *Gas boiler* (VICTRIX ZEUS Superior 25-35, HERCULES, EXTRA on the new

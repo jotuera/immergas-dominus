@@ -201,6 +201,195 @@
       },
       "ot_dhw2_temperature": {
         "name": "Temperatura ACS 2"
+      },
+      "ot_op_state": {
+        "name": "Stato di funzionamento"
+      },
+      "ot_delta_t": {
+        "name": "Delta T (mandata − ritorno)"
+      },
+      "ot_mean_loop": {
+        "name": "Temperatura media circuito"
+      },
+      "ot_control_setpoint": {
+        "name": "Setpoint inviato (Data-ID 1)"
+      },
+      "ot_setpoint_dev": {
+        "name": "Scostamento mandata dal setpoint"
+      },
+      "ot_exh_return": {
+        "name": "Fumi − ritorno"
+      },
+      "ot_power": {
+        "name": "Potenza bruciatore (stima)"
+      },
+      "ot_gas_today": {
+        "name": "Gas oggi (stima)"
+      },
+      "ot_gas_ch_today": {
+        "name": "Gas riscaldamento oggi"
+      },
+      "ot_gas_dhw_today": {
+        "name": "Gas ACS oggi"
+      },
+      "ot_gas_total": {
+        "name": "Contatore gas (stima)"
+      },
+      "ot_gas_cost_today": {
+        "name": "Costo gas oggi"
+      },
+      "ot_heat_today": {
+        "name": "Calore oggi (stima)"
+      },
+      "ot_condensing_share": {
+        "name": "Condensazione oggi (quota)"
+      },
+      "ot_minmod_share": {
+        "name": "Alla modulazione min. oggi"
+      },
+      "ot_mod_avg": {
+        "name": "Modulazione media oggi"
+      },
+      "ot_burn_avg": {
+        "name": "Durata media accensione oggi"
+      },
+      "ot_short_burns": {
+        "name": "Accensioni brevi oggi"
+      },
+      "ot_burn_last": {
+        "name": "Ultima accensione"
+      },
+      "ot_pause_last": {
+        "name": "Ultima pausa"
+      },
+      "ot_draws_today": {
+        "name": "Prelievi ACS oggi"
+      },
+      "ot_draw_last": {
+        "name": "Ultimo prelievo ACS"
+      },
+      "ot_dhw_litres": {
+        "name": "Acqua calda oggi"
+      },
+      "ot_dhw_heat": {
+        "name": "Calore ACS oggi"
+      },
+      "ot_dhw_cycles": {
+        "name": "Cicli ACS oggi"
+      },
+      "ot_dhw_cycle_last": {
+        "name": "Ultimo ciclo ACS"
+      },
+      "ot_dhw_cycle_rise": {
+        "name": "Aumento bollitore nell'ultimo ciclo ACS"
+      },
+      "ot_pressure_drop": {
+        "name": "Calo di pressione in 24 h"
+      },
+      "ot_flame_i_avg": {
+        "name": "Corrente di ionizzazione fiamma (media)"
+      },
+      "ot_fan_dev": {
+        "name": "Velocità ventilatore − richiesta"
+      },
+      "ot_room_dev": {
+        "name": "Scostamento ambiente dal setpoint (1 h)"
+      },
+      "ot_reach_last": {
+        "name": "Tempo per raggiungere il setpoint"
+      },
+      "ot_dd_today": {
+        "name": "Gradi giorno oggi"
+      },
+      "ot_dd_month": {
+        "name": "Gradi giorno questo mese"
+      },
+      "ot_h_per_dd": {
+        "name": "Ore di riscaldamento per grado giorno"
+      },
+      "operating_state": {
+        "name": "Stato di funzionamento"
+      },
+      "comfort_share_today": {
+        "name": "Tempo in comfort oggi"
+      },
+      "too_cold_minutes_today": {
+        "name": "Troppo freddo oggi"
+      },
+      "too_warm_minutes_today": {
+        "name": "Troppo caldo oggi"
+      },
+      "room_min_today": {
+        "name": "Temperatura ambiente minima oggi"
+      },
+      "room_max_today": {
+        "name": "Temperatura ambiente massima oggi"
+      },
+      "room_heating_rate": {
+        "name": "Velocità di riscaldamento ambiente"
+      },
+      "room_cooling_rate": {
+        "name": "Velocità di raffreddamento ambiente"
+      },
+      "building_loss_coefficient": {
+        "name": "Coefficiente di dispersione edificio"
+      },
+      "curve_offset_hint": {
+        "name": "Variazione consigliata offset curva"
+      },
+      "comfort_hours_today": {
+        "name": "Fase Comfort oggi"
+      },
+      "eco_hours_today": {
+        "name": "Fase Eco oggi"
+      },
+      "comfort_deviation_today": {
+        "name": "Scostamento ambiente in Comfort oggi"
+      },
+      "eco_deviation_today": {
+        "name": "Scostamento ambiente in Eco oggi"
+      },
+      "phase_changes_today": {
+        "name": "Cambi di fase oggi"
+      },
+      "dhw_heat_used_today": {
+        "name": "Calore ACS consumato oggi (stima)"
+      },
+      "dhw_litres_used_today": {
+        "name": "Acqua calda consumata oggi (stima)"
+      },
+      "dhw_standing_loss": {
+        "name": "Dispersione bollitore a riposo"
+      },
+      "tank_min_today": {
+        "name": "Temperatura minima bollitore oggi"
+      },
+      "dhw_cycle_average_today": {
+        "name": "Ciclo ACS medio oggi"
+      },
+      "outdoor_min_today": {
+        "name": "Temperatura esterna minima oggi"
+      },
+      "outdoor_max_today": {
+        "name": "Temperatura esterna massima oggi"
+      },
+      "outdoor_mean_24h": {
+        "name": "Temperatura esterna media 24 h"
+      },
+      "module_availability_today": {
+        "name": "Disponibilità modulo oggi"
+      },
+      "link_breaks_today": {
+        "name": "Interruzioni di collegamento oggi"
+      },
+      "ch_hours_today": {
+        "name": "Tempo di riscaldamento oggi"
+      },
+      "ch_starts_today_zone": {
+        "name": "Avvii riscaldamento oggi"
+      },
+      "room_deviation_zone": {
+        "name": "Scostamento ambiente"
       }
     },
     "binary_sensor": {
@@ -263,6 +452,15 @@
       },
       "ot_remote_maxch_writable": {
         "name": "Setpoint max. riscaldamento remoto scrivibile"
+      },
+      "ot_condensing": {
+        "name": "Funzionamento in condensazione"
+      },
+      "ot_leak_warning": {
+        "name": "Possibile perdita (calo di pressione)"
+      },
+      "ot_flame_low": {
+        "name": "Corrente di ionizzazione fiamma bassa"
       }
     },
     "number": {
@@ -514,6 +712,12 @@
       },
       "ot_window_temp": {
         "name": "Temperatura con finestra aperta"
+      },
+      "ot_gas_price": {
+        "name": "Prezzo gas"
+      },
+      "dhw_tank_volume": {
+        "name": "Volume bollitore ACS"
       }
     },
     "select": {

@@ -201,6 +201,195 @@
       },
       "ot_dhw2_temperature": {
         "name": "SWW-2-temperatuur"
+      },
+      "ot_op_state": {
+        "name": "Bedrijfstoestand"
+      },
+      "ot_delta_t": {
+        "name": "Delta T (aanvoer − retour)"
+      },
+      "ot_mean_loop": {
+        "name": "Gemiddelde circuittemperatuur"
+      },
+      "ot_control_setpoint": {
+        "name": "Regelinstelwaarde (Data-ID 1)"
+      },
+      "ot_setpoint_dev": {
+        "name": "Afwijking aanvoer van instelwaarde"
+      },
+      "ot_exh_return": {
+        "name": "Rookgas − retour"
+      },
+      "ot_power": {
+        "name": "Brandervermogen (schatting)"
+      },
+      "ot_gas_today": {
+        "name": "Gas vandaag (schatting)"
+      },
+      "ot_gas_ch_today": {
+        "name": "Gas verwarming vandaag"
+      },
+      "ot_gas_dhw_today": {
+        "name": "Gas SWW vandaag"
+      },
+      "ot_gas_total": {
+        "name": "Gasmeter (schatting)"
+      },
+      "ot_gas_cost_today": {
+        "name": "Gaskosten vandaag"
+      },
+      "ot_heat_today": {
+        "name": "Warmte vandaag (schatting)"
+      },
+      "ot_condensing_share": {
+        "name": "Condenserend vandaag (aandeel)"
+      },
+      "ot_minmod_share": {
+        "name": "Op min. modulatie vandaag"
+      },
+      "ot_mod_avg": {
+        "name": "Gemiddelde modulatie vandaag"
+      },
+      "ot_burn_avg": {
+        "name": "Gemiddelde branderbeurt vandaag"
+      },
+      "ot_short_burns": {
+        "name": "Korte branderbeurten vandaag"
+      },
+      "ot_burn_last": {
+        "name": "Laatste branderbeurt"
+      },
+      "ot_pause_last": {
+        "name": "Laatste pauze"
+      },
+      "ot_draws_today": {
+        "name": "SWW-tappingen vandaag"
+      },
+      "ot_draw_last": {
+        "name": "Laatste SWW-tapping"
+      },
+      "ot_dhw_litres": {
+        "name": "Warm water vandaag"
+      },
+      "ot_dhw_heat": {
+        "name": "SWW-warmte vandaag"
+      },
+      "ot_dhw_cycles": {
+        "name": "SWW-cycli vandaag"
+      },
+      "ot_dhw_cycle_last": {
+        "name": "Laatste SWW-cyclus"
+      },
+      "ot_dhw_cycle_rise": {
+        "name": "Stijging boiler in laatste SWW-cyclus"
+      },
+      "ot_pressure_drop": {
+        "name": "Drukdaling in 24 h"
+      },
+      "ot_flame_i_avg": {
+        "name": "Ionisatiestroom vlam (gemiddeld)"
+      },
+      "ot_fan_dev": {
+        "name": "Ventilatortoerental − gewenst"
+      },
+      "ot_room_dev": {
+        "name": "Afwijking ruimte van instelwaarde (1 h)"
+      },
+      "ot_reach_last": {
+        "name": "Tijd tot instelwaarde"
+      },
+      "ot_dd_today": {
+        "name": "Graaddagen vandaag"
+      },
+      "ot_dd_month": {
+        "name": "Graaddagen deze maand"
+      },
+      "ot_h_per_dd": {
+        "name": "Verwarmingsuren per graaddag"
+      },
+      "operating_state": {
+        "name": "Bedrijfstoestand"
+      },
+      "comfort_share_today": {
+        "name": "Tijd in comfort vandaag"
+      },
+      "too_cold_minutes_today": {
+        "name": "Te koud vandaag"
+      },
+      "too_warm_minutes_today": {
+        "name": "Te warm vandaag"
+      },
+      "room_min_today": {
+        "name": "Ruimte minimum vandaag"
+      },
+      "room_max_today": {
+        "name": "Ruimte maximum vandaag"
+      },
+      "room_heating_rate": {
+        "name": "Opwarmsnelheid ruimte"
+      },
+      "room_cooling_rate": {
+        "name": "Afkoelsnelheid ruimte"
+      },
+      "building_loss_coefficient": {
+        "name": "Warmteverliescoëfficiënt gebouw"
+      },
+      "curve_offset_hint": {
+        "name": "Voorgestelde wijziging stooklijn-offset"
+      },
+      "comfort_hours_today": {
+        "name": "Comfortfase vandaag"
+      },
+      "eco_hours_today": {
+        "name": "Ecofase vandaag"
+      },
+      "comfort_deviation_today": {
+        "name": "Afwijking ruimte in Comfort vandaag"
+      },
+      "eco_deviation_today": {
+        "name": "Afwijking ruimte in Eco vandaag"
+      },
+      "phase_changes_today": {
+        "name": "Fasewisselingen vandaag"
+      },
+      "dhw_heat_used_today": {
+        "name": "SWW-warmte verbruikt vandaag (schatting)"
+      },
+      "dhw_litres_used_today": {
+        "name": "Warm water verbruikt vandaag (schatting)"
+      },
+      "dhw_standing_loss": {
+        "name": "Stilstandsverlies boiler"
+      },
+      "tank_min_today": {
+        "name": "Boiler minimum vandaag"
+      },
+      "dhw_cycle_average_today": {
+        "name": "Gemiddelde SWW-cyclus vandaag"
+      },
+      "outdoor_min_today": {
+        "name": "Buiten minimum vandaag"
+      },
+      "outdoor_max_today": {
+        "name": "Buiten maximum vandaag"
+      },
+      "outdoor_mean_24h": {
+        "name": "Buitengemiddelde 24 h"
+      },
+      "module_availability_today": {
+        "name": "Beschikbaarheid module vandaag"
+      },
+      "link_breaks_today": {
+        "name": "Verbindingsonderbrekingen vandaag"
+      },
+      "ch_hours_today": {
+        "name": "Verwarmingstijd vandaag"
+      },
+      "ch_starts_today_zone": {
+        "name": "Verwarmingsstarts vandaag"
+      },
+      "room_deviation_zone": {
+        "name": "Afwijking ruimte"
       }
     },
     "binary_sensor": {
@@ -263,6 +452,15 @@
       },
       "ot_remote_maxch_writable": {
         "name": "Max. CV-instelwaarde op afstand schrijfbaar"
+      },
+      "ot_condensing": {
+        "name": "Condenserend bedrijf"
+      },
+      "ot_leak_warning": {
+        "name": "Mogelijk lek (drukdaling)"
+      },
+      "ot_flame_low": {
+        "name": "Lage ionisatiestroom vlam"
       }
     },
     "number": {
@@ -514,6 +712,12 @@
       },
       "ot_window_temp": {
         "name": "Temperatuur bij open raam"
+      },
+      "ot_gas_price": {
+        "name": "Gasprijs"
+      },
+      "dhw_tank_volume": {
+        "name": "Inhoud SWW-boiler"
       }
     },
     "select": {

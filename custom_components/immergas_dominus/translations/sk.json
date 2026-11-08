@@ -201,6 +201,195 @@
       },
       "ot_dhw2_temperature": {
         "name": "Teplota TÚV 2"
+      },
+      "ot_op_state": {
+        "name": "Prevádzkový stav"
+      },
+      "ot_delta_t": {
+        "name": "Delta T (výstup − spiatočka)"
+      },
+      "ot_mean_loop": {
+        "name": "Priemerná teplota okruhu"
+      },
+      "ot_control_setpoint": {
+        "name": "Riadiaca žiadaná teplota (Data-ID 1)"
+      },
+      "ot_setpoint_dev": {
+        "name": "Odchýlka výstupu od žiadanej"
+      },
+      "ot_exh_return": {
+        "name": "Spaliny − spiatočka"
+      },
+      "ot_power": {
+        "name": "Výkon horáka (odhad)"
+      },
+      "ot_gas_today": {
+        "name": "Plyn dnes (odhad)"
+      },
+      "ot_gas_ch_today": {
+        "name": "Plyn ÚK dnes"
+      },
+      "ot_gas_dhw_today": {
+        "name": "Plyn TÚV dnes"
+      },
+      "ot_gas_total": {
+        "name": "Počítadlo plynu (odhad)"
+      },
+      "ot_gas_cost_today": {
+        "name": "Náklady na plyn dnes"
+      },
+      "ot_heat_today": {
+        "name": "Teplo dnes (odhad)"
+      },
+      "ot_condensing_share": {
+        "name": "Kondenzácia dnes (podiel)"
+      },
+      "ot_minmod_share": {
+        "name": "Na min. modulácii dnes"
+      },
+      "ot_mod_avg": {
+        "name": "Priemerná modulácia dnes"
+      },
+      "ot_burn_avg": {
+        "name": "Priemerné horenie dnes"
+      },
+      "ot_short_burns": {
+        "name": "Krátke horenia dnes"
+      },
+      "ot_burn_last": {
+        "name": "Posledné horenie"
+      },
+      "ot_pause_last": {
+        "name": "Posledná prestávka"
+      },
+      "ot_draws_today": {
+        "name": "Odbery TÚV dnes"
+      },
+      "ot_draw_last": {
+        "name": "Posledný odber TÚV"
+      },
+      "ot_dhw_litres": {
+        "name": "Teplá voda dnes"
+      },
+      "ot_dhw_heat": {
+        "name": "Teplo TÚV dnes"
+      },
+      "ot_dhw_cycles": {
+        "name": "Cykly TÚV dnes"
+      },
+      "ot_dhw_cycle_last": {
+        "name": "Posledný cyklus TÚV"
+      },
+      "ot_dhw_cycle_rise": {
+        "name": "Nárast zásobníka v poslednom cykle TÚV"
+      },
+      "ot_pressure_drop": {
+        "name": "Pokles tlaku za 24 h"
+      },
+      "ot_flame_i_avg": {
+        "name": "Ionizačný prúd plameňa (priemer)"
+      },
+      "ot_fan_dev": {
+        "name": "Otáčky ventilátora − požadované"
+      },
+      "ot_room_dev": {
+        "name": "Odchýlka miestnosti od žiadanej (1 h)"
+      },
+      "ot_reach_last": {
+        "name": "Čas dosiahnutia žiadanej"
+      },
+      "ot_dd_today": {
+        "name": "Dennostupne dnes"
+      },
+      "ot_dd_month": {
+        "name": "Dennostupne tento mesiac"
+      },
+      "ot_h_per_dd": {
+        "name": "Hodiny vykurovania na dennostupeň"
+      },
+      "operating_state": {
+        "name": "Prevádzkový stav"
+      },
+      "comfort_share_today": {
+        "name": "Čas v komforte dnes"
+      },
+      "too_cold_minutes_today": {
+        "name": "Príliš chladno dnes"
+      },
+      "too_warm_minutes_today": {
+        "name": "Príliš teplo dnes"
+      },
+      "room_min_today": {
+        "name": "Minimum miestnosti dnes"
+      },
+      "room_max_today": {
+        "name": "Maximum miestnosti dnes"
+      },
+      "room_heating_rate": {
+        "name": "Rýchlosť ohrevu miestnosti"
+      },
+      "room_cooling_rate": {
+        "name": "Rýchlosť chladnutia miestnosti"
+      },
+      "building_loss_coefficient": {
+        "name": "Koeficient tepelných strát budovy"
+      },
+      "curve_offset_hint": {
+        "name": "Navrhovaná zmena posunu krivky"
+      },
+      "comfort_hours_today": {
+        "name": "Fáza Komfort dnes"
+      },
+      "eco_hours_today": {
+        "name": "Fáza Eko dnes"
+      },
+      "comfort_deviation_today": {
+        "name": "Odchýlka miestnosti v Komforte dnes"
+      },
+      "eco_deviation_today": {
+        "name": "Odchýlka miestnosti v Eko dnes"
+      },
+      "phase_changes_today": {
+        "name": "Zmeny fáz dnes"
+      },
+      "dhw_heat_used_today": {
+        "name": "Teplo TÚV spotrebované dnes (odhad)"
+      },
+      "dhw_litres_used_today": {
+        "name": "Teplá voda spotrebovaná dnes (odhad)"
+      },
+      "dhw_standing_loss": {
+        "name": "Pohotovostné straty zásobníka"
+      },
+      "tank_min_today": {
+        "name": "Minimum zásobníka dnes"
+      },
+      "dhw_cycle_average_today": {
+        "name": "Priemerný cyklus TÚV dnes"
+      },
+      "outdoor_min_today": {
+        "name": "Vonkajšie minimum dnes"
+      },
+      "outdoor_max_today": {
+        "name": "Vonkajšie maximum dnes"
+      },
+      "outdoor_mean_24h": {
+        "name": "Vonkajší priemer 24 h"
+      },
+      "module_availability_today": {
+        "name": "Dostupnosť modulu dnes"
+      },
+      "link_breaks_today": {
+        "name": "Výpadky spojenia dnes"
+      },
+      "ch_hours_today": {
+        "name": "Čas vykurovania dnes"
+      },
+      "ch_starts_today_zone": {
+        "name": "Štarty vykurovania dnes"
+      },
+      "room_deviation_zone": {
+        "name": "Odchýlka miestnosti"
       }
     },
     "binary_sensor": {
@@ -263,6 +452,15 @@
       },
       "ot_remote_maxch_writable": {
         "name": "Vzdialená max. požadovaná ÚK zapisovateľná"
+      },
+      "ot_condensing": {
+        "name": "Kondenzačná prevádzka"
+      },
+      "ot_leak_warning": {
+        "name": "Možný únik (pokles tlaku)"
+      },
+      "ot_flame_low": {
+        "name": "Nízky ionizačný prúd plameňa"
       }
     },
     "number": {
@@ -514,6 +712,12 @@
       },
       "ot_window_temp": {
         "name": "Teplota pri otvorenom okne"
+      },
+      "ot_gas_price": {
+        "name": "Cena plynu"
+      },
+      "dhw_tank_volume": {
+        "name": "Objem zásobníka TÚV"
       }
     },
     "select": {

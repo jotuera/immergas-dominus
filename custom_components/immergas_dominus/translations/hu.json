@@ -201,6 +201,195 @@
       },
       "ot_dhw2_temperature": {
         "name": "HMV 2 hőmérséklet"
+      },
+      "ot_op_state": {
+        "name": "Üzemállapot"
+      },
+      "ot_delta_t": {
+        "name": "Delta T (előremenő − visszatérő)"
+      },
+      "ot_mean_loop": {
+        "name": "Kör átlaghőmérséklete"
+      },
+      "ot_control_setpoint": {
+        "name": "Küldött alapjel (Data-ID 1)"
+      },
+      "ot_setpoint_dev": {
+        "name": "Előremenő eltérése az alapjeltől"
+      },
+      "ot_exh_return": {
+        "name": "Füstgáz − visszatérő"
+      },
+      "ot_power": {
+        "name": "Égő teljesítmény (becslés)"
+      },
+      "ot_gas_today": {
+        "name": "Gáz ma (becslés)"
+      },
+      "ot_gas_ch_today": {
+        "name": "Fűtési gáz ma"
+      },
+      "ot_gas_dhw_today": {
+        "name": "HMV gáz ma"
+      },
+      "ot_gas_total": {
+        "name": "Gázmérő (becslés)"
+      },
+      "ot_gas_cost_today": {
+        "name": "Gázköltség ma"
+      },
+      "ot_heat_today": {
+        "name": "Hő ma (becslés)"
+      },
+      "ot_condensing_share": {
+        "name": "Kondenzáció ma (arány)"
+      },
+      "ot_minmod_share": {
+        "name": "Min. modulációval ma"
+      },
+      "ot_mod_avg": {
+        "name": "Átlagos moduláció ma"
+      },
+      "ot_burn_avg": {
+        "name": "Átlagos égési idő ma"
+      },
+      "ot_short_burns": {
+        "name": "Rövid égések ma"
+      },
+      "ot_burn_last": {
+        "name": "Utolsó égés"
+      },
+      "ot_pause_last": {
+        "name": "Utolsó szünet"
+      },
+      "ot_draws_today": {
+        "name": "HMV vételezések ma"
+      },
+      "ot_draw_last": {
+        "name": "Utolsó HMV vételezés"
+      },
+      "ot_dhw_litres": {
+        "name": "Melegvíz ma"
+      },
+      "ot_dhw_heat": {
+        "name": "HMV hő ma"
+      },
+      "ot_dhw_cycles": {
+        "name": "HMV ciklusok ma"
+      },
+      "ot_dhw_cycle_last": {
+        "name": "Utolsó HMV ciklus"
+      },
+      "ot_dhw_cycle_rise": {
+        "name": "Tároló emelkedése az utolsó HMV ciklusban"
+      },
+      "ot_pressure_drop": {
+        "name": "Nyomásesés 24 h alatt"
+      },
+      "ot_flame_i_avg": {
+        "name": "Láng ionizációs áram (átlag)"
+      },
+      "ot_fan_dev": {
+        "name": "Ventilátor fordulatszám − alapjel"
+      },
+      "ot_room_dev": {
+        "name": "Helyiség eltérése az alapjeltől (1 h)"
+      },
+      "ot_reach_last": {
+        "name": "Alapjel elérési ideje"
+      },
+      "ot_dd_today": {
+        "name": "Hőfoknapok ma"
+      },
+      "ot_dd_month": {
+        "name": "Hőfoknapok ebben a hónapban"
+      },
+      "ot_h_per_dd": {
+        "name": "Fűtési órák hőfoknaponként"
+      },
+      "operating_state": {
+        "name": "Üzemállapot"
+      },
+      "comfort_share_today": {
+        "name": "Komfortban töltött idő ma"
+      },
+      "too_cold_minutes_today": {
+        "name": "Túl hideg ma"
+      },
+      "too_warm_minutes_today": {
+        "name": "Túl meleg ma"
+      },
+      "room_min_today": {
+        "name": "Szoba minimum ma"
+      },
+      "room_max_today": {
+        "name": "Szoba maximum ma"
+      },
+      "room_heating_rate": {
+        "name": "Szoba felfűtési sebessége"
+      },
+      "room_cooling_rate": {
+        "name": "Szoba hűlési sebessége"
+      },
+      "building_loss_coefficient": {
+        "name": "Épület hőveszteségi tényezője"
+      },
+      "curve_offset_hint": {
+        "name": "Javasolt görbeeltolás-módosítás"
+      },
+      "comfort_hours_today": {
+        "name": "Komfort fázis ma"
+      },
+      "eco_hours_today": {
+        "name": "Eco fázis ma"
+      },
+      "comfort_deviation_today": {
+        "name": "Helyiség eltérése Komfortban ma"
+      },
+      "eco_deviation_today": {
+        "name": "Helyiség eltérése Eco-ban ma"
+      },
+      "phase_changes_today": {
+        "name": "Fázisváltások ma"
+      },
+      "dhw_heat_used_today": {
+        "name": "Felhasznált HMV hő ma (becslés)"
+      },
+      "dhw_litres_used_today": {
+        "name": "Felhasznált melegvíz ma (becslés)"
+      },
+      "dhw_standing_loss": {
+        "name": "Tároló állási vesztesége"
+      },
+      "tank_min_today": {
+        "name": "Tároló minimum ma"
+      },
+      "dhw_cycle_average_today": {
+        "name": "Átlagos HMV ciklus ma"
+      },
+      "outdoor_min_today": {
+        "name": "Külső minimum ma"
+      },
+      "outdoor_max_today": {
+        "name": "Külső maximum ma"
+      },
+      "outdoor_mean_24h": {
+        "name": "Külső átlag 24 h"
+      },
+      "module_availability_today": {
+        "name": "Modul elérhetősége ma"
+      },
+      "link_breaks_today": {
+        "name": "Kapcsolatmegszakadások ma"
+      },
+      "ch_hours_today": {
+        "name": "Fűtési idő ma"
+      },
+      "ch_starts_today_zone": {
+        "name": "Fűtésindítások ma"
+      },
+      "room_deviation_zone": {
+        "name": "Helyiség eltérése"
       }
     },
     "binary_sensor": {
@@ -263,6 +452,15 @@
       },
       "ot_remote_maxch_writable": {
         "name": "Távoli max. fűtési alapjel írható"
+      },
+      "ot_condensing": {
+        "name": "Kondenzációs üzem"
+      },
+      "ot_leak_warning": {
+        "name": "Lehetséges szivárgás (nyomásesés)"
+      },
+      "ot_flame_low": {
+        "name": "Alacsony láng ionizációs áram"
       }
     },
     "number": {
@@ -514,6 +712,12 @@
       },
       "ot_window_temp": {
         "name": "Hőmérséklet nyitott ablaknál"
+      },
+      "ot_gas_price": {
+        "name": "Gázár"
+      },
+      "dhw_tank_volume": {
+        "name": "HMV tároló térfogata"
       }
     },
     "select": {

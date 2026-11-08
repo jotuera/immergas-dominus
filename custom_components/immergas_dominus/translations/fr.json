@@ -201,6 +201,195 @@
       },
       "ot_dhw2_temperature": {
         "name": "Température ECS 2"
+      },
+      "ot_op_state": {
+        "name": "État de fonctionnement"
+      },
+      "ot_delta_t": {
+        "name": "Delta T (départ − retour)"
+      },
+      "ot_mean_loop": {
+        "name": "Température moyenne du circuit"
+      },
+      "ot_control_setpoint": {
+        "name": "Consigne envoyée (Data-ID 1)"
+      },
+      "ot_setpoint_dev": {
+        "name": "Écart du départ par rapport à la consigne"
+      },
+      "ot_exh_return": {
+        "name": "Fumées − retour"
+      },
+      "ot_power": {
+        "name": "Puissance du brûleur (estim.)"
+      },
+      "ot_gas_today": {
+        "name": "Gaz aujourd'hui (estim.)"
+      },
+      "ot_gas_ch_today": {
+        "name": "Gaz chauffage aujourd'hui"
+      },
+      "ot_gas_dhw_today": {
+        "name": "Gaz ECS aujourd'hui"
+      },
+      "ot_gas_total": {
+        "name": "Compteur de gaz (estim.)"
+      },
+      "ot_gas_cost_today": {
+        "name": "Coût du gaz aujourd'hui"
+      },
+      "ot_heat_today": {
+        "name": "Chaleur aujourd'hui (estim.)"
+      },
+      "ot_condensing_share": {
+        "name": "Condensation aujourd'hui (part)"
+      },
+      "ot_minmod_share": {
+        "name": "À modulation min. aujourd'hui"
+      },
+      "ot_mod_avg": {
+        "name": "Modulation moyenne aujourd'hui"
+      },
+      "ot_burn_avg": {
+        "name": "Durée moyenne de combustion aujourd'hui"
+      },
+      "ot_short_burns": {
+        "name": "Combustions courtes aujourd'hui"
+      },
+      "ot_burn_last": {
+        "name": "Dernière combustion"
+      },
+      "ot_pause_last": {
+        "name": "Dernière pause"
+      },
+      "ot_draws_today": {
+        "name": "Puisages ECS aujourd'hui"
+      },
+      "ot_draw_last": {
+        "name": "Dernier puisage ECS"
+      },
+      "ot_dhw_litres": {
+        "name": "Eau chaude aujourd'hui"
+      },
+      "ot_dhw_heat": {
+        "name": "Chaleur ECS aujourd'hui"
+      },
+      "ot_dhw_cycles": {
+        "name": "Cycles ECS aujourd'hui"
+      },
+      "ot_dhw_cycle_last": {
+        "name": "Dernier cycle ECS"
+      },
+      "ot_dhw_cycle_rise": {
+        "name": "Hausse du ballon au dernier cycle ECS"
+      },
+      "ot_pressure_drop": {
+        "name": "Chute de pression en 24 h"
+      },
+      "ot_flame_i_avg": {
+        "name": "Courant d’ionisation de flamme (moyenne)"
+      },
+      "ot_fan_dev": {
+        "name": "Vitesse du ventilateur − consigne"
+      },
+      "ot_room_dev": {
+        "name": "Écart de la pièce par rapport à la consigne (1 h)"
+      },
+      "ot_reach_last": {
+        "name": "Temps pour atteindre la consigne"
+      },
+      "ot_dd_today": {
+        "name": "Degrés-jours aujourd'hui"
+      },
+      "ot_dd_month": {
+        "name": "Degrés-jours ce mois"
+      },
+      "ot_h_per_dd": {
+        "name": "Heures de chauffage par degré-jour"
+      },
+      "operating_state": {
+        "name": "État de fonctionnement"
+      },
+      "comfort_share_today": {
+        "name": "Temps en confort aujourd'hui"
+      },
+      "too_cold_minutes_today": {
+        "name": "Trop froid aujourd'hui"
+      },
+      "too_warm_minutes_today": {
+        "name": "Trop chaud aujourd'hui"
+      },
+      "room_min_today": {
+        "name": "Pièce minimum aujourd'hui"
+      },
+      "room_max_today": {
+        "name": "Pièce maximum aujourd'hui"
+      },
+      "room_heating_rate": {
+        "name": "Vitesse de chauffe de la pièce"
+      },
+      "room_cooling_rate": {
+        "name": "Vitesse de refroidissement de la pièce"
+      },
+      "building_loss_coefficient": {
+        "name": "Coefficient de déperdition du bâtiment"
+      },
+      "curve_offset_hint": {
+        "name": "Modification suggérée du décalage de courbe"
+      },
+      "comfort_hours_today": {
+        "name": "Phase Confort aujourd'hui"
+      },
+      "eco_hours_today": {
+        "name": "Phase Éco aujourd'hui"
+      },
+      "comfort_deviation_today": {
+        "name": "Écart de la pièce en Confort aujourd'hui"
+      },
+      "eco_deviation_today": {
+        "name": "Écart de la pièce en Éco aujourd'hui"
+      },
+      "phase_changes_today": {
+        "name": "Changements de phase aujourd'hui"
+      },
+      "dhw_heat_used_today": {
+        "name": "Chaleur ECS consommée aujourd'hui (estim.)"
+      },
+      "dhw_litres_used_today": {
+        "name": "Eau chaude consommée aujourd'hui (estim.)"
+      },
+      "dhw_standing_loss": {
+        "name": "Pertes statiques du ballon"
+      },
+      "tank_min_today": {
+        "name": "Ballon minimum aujourd'hui"
+      },
+      "dhw_cycle_average_today": {
+        "name": "Cycle ECS moyen aujourd'hui"
+      },
+      "outdoor_min_today": {
+        "name": "Extérieur minimum aujourd'hui"
+      },
+      "outdoor_max_today": {
+        "name": "Extérieur maximum aujourd'hui"
+      },
+      "outdoor_mean_24h": {
+        "name": "Moyenne extérieure 24 h"
+      },
+      "module_availability_today": {
+        "name": "Disponibilité du module aujourd'hui"
+      },
+      "link_breaks_today": {
+        "name": "Coupures de liaison aujourd'hui"
+      },
+      "ch_hours_today": {
+        "name": "Temps de chauffage aujourd'hui"
+      },
+      "ch_starts_today_zone": {
+        "name": "Démarrages chauffage aujourd'hui"
+      },
+      "room_deviation_zone": {
+        "name": "Écart de la pièce"
       }
     },
     "binary_sensor": {
@@ -263,6 +452,15 @@
       },
       "ot_remote_maxch_writable": {
         "name": "Consigne max. chauffage à distance modifiable"
+      },
+      "ot_condensing": {
+        "name": "Fonctionnement en condensation"
+      },
+      "ot_leak_warning": {
+        "name": "Fuite possible (chute de pression)"
+      },
+      "ot_flame_low": {
+        "name": "Courant d’ionisation de flamme faible"
       }
     },
     "number": {
@@ -514,6 +712,12 @@
       },
       "ot_window_temp": {
         "name": "Température fenêtre ouverte"
+      },
+      "ot_gas_price": {
+        "name": "Prix du gaz"
+      },
+      "dhw_tank_volume": {
+        "name": "Volume du ballon ECS"
       }
     },
     "select": {

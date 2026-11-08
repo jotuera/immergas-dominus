@@ -201,6 +201,195 @@
       },
       "ot_dhw2_temperature": {
         "name": "Temperatura AQS 2"
+      },
+      "ot_op_state": {
+        "name": "Estado de funcionamento"
+      },
+      "ot_delta_t": {
+        "name": "Delta T (ida − retorno)"
+      },
+      "ot_mean_loop": {
+        "name": "Temperatura média do circuito"
+      },
+      "ot_control_setpoint": {
+        "name": "Setpoint de controlo (Data-ID 1)"
+      },
+      "ot_setpoint_dev": {
+        "name": "Desvio da ida face ao setpoint"
+      },
+      "ot_exh_return": {
+        "name": "Fumos − retorno"
+      },
+      "ot_power": {
+        "name": "Potência do queimador (estim.)"
+      },
+      "ot_gas_today": {
+        "name": "Gás hoje (estim.)"
+      },
+      "ot_gas_ch_today": {
+        "name": "Gás aquecimento hoje"
+      },
+      "ot_gas_dhw_today": {
+        "name": "Gás AQS hoje"
+      },
+      "ot_gas_total": {
+        "name": "Contador de gás (estim.)"
+      },
+      "ot_gas_cost_today": {
+        "name": "Custo do gás hoje"
+      },
+      "ot_heat_today": {
+        "name": "Calor hoje (estim.)"
+      },
+      "ot_condensing_share": {
+        "name": "Condensação hoje (percentagem)"
+      },
+      "ot_minmod_share": {
+        "name": "Em modulação mín. hoje"
+      },
+      "ot_mod_avg": {
+        "name": "Modulação média hoje"
+      },
+      "ot_burn_avg": {
+        "name": "Queima média hoje"
+      },
+      "ot_short_burns": {
+        "name": "Queimas curtas hoje"
+      },
+      "ot_burn_last": {
+        "name": "Última queima"
+      },
+      "ot_pause_last": {
+        "name": "Última pausa"
+      },
+      "ot_draws_today": {
+        "name": "Consumos AQS hoje"
+      },
+      "ot_draw_last": {
+        "name": "Último consumo AQS"
+      },
+      "ot_dhw_litres": {
+        "name": "Água quente hoje"
+      },
+      "ot_dhw_heat": {
+        "name": "Calor AQS hoje"
+      },
+      "ot_dhw_cycles": {
+        "name": "Ciclos AQS hoje"
+      },
+      "ot_dhw_cycle_last": {
+        "name": "Último ciclo AQS"
+      },
+      "ot_dhw_cycle_rise": {
+        "name": "Subida do depósito no último ciclo AQS"
+      },
+      "ot_pressure_drop": {
+        "name": "Queda de pressão em 24 h"
+      },
+      "ot_flame_i_avg": {
+        "name": "Corrente de ionização da chama (média)"
+      },
+      "ot_fan_dev": {
+        "name": "Velocidade do ventilador − pretendida"
+      },
+      "ot_room_dev": {
+        "name": "Desvio da divisão face ao setpoint (1 h)"
+      },
+      "ot_reach_last": {
+        "name": "Tempo até atingir o setpoint"
+      },
+      "ot_dd_today": {
+        "name": "Graus-dia hoje"
+      },
+      "ot_dd_month": {
+        "name": "Graus-dia este mês"
+      },
+      "ot_h_per_dd": {
+        "name": "Horas de aquecimento por grau-dia"
+      },
+      "operating_state": {
+        "name": "Estado de funcionamento"
+      },
+      "comfort_share_today": {
+        "name": "Tempo em conforto hoje"
+      },
+      "too_cold_minutes_today": {
+        "name": "Demasiado frio hoje"
+      },
+      "too_warm_minutes_today": {
+        "name": "Demasiado quente hoje"
+      },
+      "room_min_today": {
+        "name": "Mínimo ambiente hoje"
+      },
+      "room_max_today": {
+        "name": "Máximo ambiente hoje"
+      },
+      "room_heating_rate": {
+        "name": "Taxa de aquecimento da divisão"
+      },
+      "room_cooling_rate": {
+        "name": "Taxa de arrefecimento da divisão"
+      },
+      "building_loss_coefficient": {
+        "name": "Coeficiente de perdas térmicas do edifício"
+      },
+      "curve_offset_hint": {
+        "name": "Alteração sugerida do desvio da curva"
+      },
+      "comfort_hours_today": {
+        "name": "Fase Conforto hoje"
+      },
+      "eco_hours_today": {
+        "name": "Fase Eco hoje"
+      },
+      "comfort_deviation_today": {
+        "name": "Desvio da divisão em Conforto hoje"
+      },
+      "eco_deviation_today": {
+        "name": "Desvio da divisão em Eco hoje"
+      },
+      "phase_changes_today": {
+        "name": "Mudanças de fase hoje"
+      },
+      "dhw_heat_used_today": {
+        "name": "Calor AQS consumido hoje (estim.)"
+      },
+      "dhw_litres_used_today": {
+        "name": "Água quente consumida hoje (estim.)"
+      },
+      "dhw_standing_loss": {
+        "name": "Perdas estáticas do depósito"
+      },
+      "tank_min_today": {
+        "name": "Mínimo do depósito hoje"
+      },
+      "dhw_cycle_average_today": {
+        "name": "Ciclo AQS médio hoje"
+      },
+      "outdoor_min_today": {
+        "name": "Mínimo exterior hoje"
+      },
+      "outdoor_max_today": {
+        "name": "Máximo exterior hoje"
+      },
+      "outdoor_mean_24h": {
+        "name": "Média exterior 24 h"
+      },
+      "module_availability_today": {
+        "name": "Disponibilidade do módulo hoje"
+      },
+      "link_breaks_today": {
+        "name": "Quebras de ligação hoje"
+      },
+      "ch_hours_today": {
+        "name": "Tempo de aquecimento hoje"
+      },
+      "ch_starts_today_zone": {
+        "name": "Arranques de aquecimento hoje"
+      },
+      "room_deviation_zone": {
+        "name": "Desvio da divisão"
       }
     },
     "binary_sensor": {
@@ -263,6 +452,15 @@
       },
       "ot_remote_maxch_writable": {
         "name": "Consigna máx. aquecimento remota gravável"
+      },
+      "ot_condensing": {
+        "name": "Funcionamento em condensação"
+      },
+      "ot_leak_warning": {
+        "name": "Possível fuga (queda de pressão)"
+      },
+      "ot_flame_low": {
+        "name": "Corrente de ionização da chama baixa"
       }
     },
     "number": {
@@ -514,6 +712,12 @@
       },
       "ot_window_temp": {
         "name": "Temperatura com janela aberta"
+      },
+      "ot_gas_price": {
+        "name": "Preço do gás"
+      },
+      "dhw_tank_volume": {
+        "name": "Volume do depósito AQS"
       }
     },
     "select": {

@@ -201,6 +201,195 @@
       },
       "ot_dhw2_temperature": {
         "name": "WW-2-Temperatur"
+      },
+      "ot_op_state": {
+        "name": "Betriebszustand"
+      },
+      "ot_delta_t": {
+        "name": "Delta T (Vorlauf − Rücklauf)"
+      },
+      "ot_mean_loop": {
+        "name": "Mittlere Kreistemperatur"
+      },
+      "ot_control_setpoint": {
+        "name": "Gesendeter Sollwert (Data-ID 1)"
+      },
+      "ot_setpoint_dev": {
+        "name": "Vorlaufabweichung vom Sollwert"
+      },
+      "ot_exh_return": {
+        "name": "Abgas − Rücklauf"
+      },
+      "ot_power": {
+        "name": "Brennerleistung (geschätzt)"
+      },
+      "ot_gas_today": {
+        "name": "Gas heute (geschätzt)"
+      },
+      "ot_gas_ch_today": {
+        "name": "Gas Heizung heute"
+      },
+      "ot_gas_dhw_today": {
+        "name": "Gas WW heute"
+      },
+      "ot_gas_total": {
+        "name": "Gaszähler (geschätzt)"
+      },
+      "ot_gas_cost_today": {
+        "name": "Gaskosten heute"
+      },
+      "ot_heat_today": {
+        "name": "Wärme heute (geschätzt)"
+      },
+      "ot_condensing_share": {
+        "name": "Brennwertbetrieb heute (Anteil)"
+      },
+      "ot_minmod_share": {
+        "name": "Auf min. Modulation heute"
+      },
+      "ot_mod_avg": {
+        "name": "Mittlere Modulation heute"
+      },
+      "ot_burn_avg": {
+        "name": "Mittlere Brenndauer heute"
+      },
+      "ot_short_burns": {
+        "name": "Kurze Brennzyklen heute"
+      },
+      "ot_burn_last": {
+        "name": "Letzter Brennzyklus"
+      },
+      "ot_pause_last": {
+        "name": "Letzte Pause"
+      },
+      "ot_draws_today": {
+        "name": "WW-Zapfungen heute"
+      },
+      "ot_draw_last": {
+        "name": "Letzte WW-Zapfung"
+      },
+      "ot_dhw_litres": {
+        "name": "Warmwasser heute"
+      },
+      "ot_dhw_heat": {
+        "name": "WW-Wärme heute"
+      },
+      "ot_dhw_cycles": {
+        "name": "WW-Zyklen heute"
+      },
+      "ot_dhw_cycle_last": {
+        "name": "Letzter WW-Zyklus"
+      },
+      "ot_dhw_cycle_rise": {
+        "name": "Speicheranstieg im letzten WW-Zyklus"
+      },
+      "ot_pressure_drop": {
+        "name": "Druckabfall in 24 h"
+      },
+      "ot_flame_i_avg": {
+        "name": "Flammenionisationsstrom (Mittel)"
+      },
+      "ot_fan_dev": {
+        "name": "Gebläsedrehzahl − Sollwert"
+      },
+      "ot_room_dev": {
+        "name": "Raumabweichung vom Sollwert (1 h)"
+      },
+      "ot_reach_last": {
+        "name": "Zeit bis zum Sollwert"
+      },
+      "ot_dd_today": {
+        "name": "Gradtage heute"
+      },
+      "ot_dd_month": {
+        "name": "Gradtage diesen Monat"
+      },
+      "ot_h_per_dd": {
+        "name": "Heizstunden pro Gradtag"
+      },
+      "operating_state": {
+        "name": "Betriebszustand"
+      },
+      "comfort_share_today": {
+        "name": "Zeit im Komfortbereich heute"
+      },
+      "too_cold_minutes_today": {
+        "name": "Zu kalt heute"
+      },
+      "too_warm_minutes_today": {
+        "name": "Zu warm heute"
+      },
+      "room_min_today": {
+        "name": "Raum Minimum heute"
+      },
+      "room_max_today": {
+        "name": "Raum Maximum heute"
+      },
+      "room_heating_rate": {
+        "name": "Aufheizrate Raum"
+      },
+      "room_cooling_rate": {
+        "name": "Abkühlrate Raum"
+      },
+      "building_loss_coefficient": {
+        "name": "Wärmeverlustkoeffizient des Gebäudes"
+      },
+      "curve_offset_hint": {
+        "name": "Empfohlene Änderung des Heizkurven-Offsets"
+      },
+      "comfort_hours_today": {
+        "name": "Komfort-Phase heute"
+      },
+      "eco_hours_today": {
+        "name": "Eco-Phase heute"
+      },
+      "comfort_deviation_today": {
+        "name": "Raumabweichung in Komfort heute"
+      },
+      "eco_deviation_today": {
+        "name": "Raumabweichung in Eco heute"
+      },
+      "phase_changes_today": {
+        "name": "Phasenwechsel heute"
+      },
+      "dhw_heat_used_today": {
+        "name": "WW-Wärmeverbrauch heute (geschätzt)"
+      },
+      "dhw_litres_used_today": {
+        "name": "Warmwasserverbrauch heute (geschätzt)"
+      },
+      "dhw_standing_loss": {
+        "name": "Speicher-Bereitschaftsverlust"
+      },
+      "tank_min_today": {
+        "name": "Speicher Minimum heute"
+      },
+      "dhw_cycle_average_today": {
+        "name": "Mittlerer WW-Zyklus heute"
+      },
+      "outdoor_min_today": {
+        "name": "Außen Minimum heute"
+      },
+      "outdoor_max_today": {
+        "name": "Außen Maximum heute"
+      },
+      "outdoor_mean_24h": {
+        "name": "Außen-Mittelwert 24 h"
+      },
+      "module_availability_today": {
+        "name": "Modulverfügbarkeit heute"
+      },
+      "link_breaks_today": {
+        "name": "Verbindungsabbrüche heute"
+      },
+      "ch_hours_today": {
+        "name": "Heizzeit heute"
+      },
+      "ch_starts_today_zone": {
+        "name": "Heizstarts heute"
+      },
+      "room_deviation_zone": {
+        "name": "Raumabweichung"
       }
     },
     "binary_sensor": {
@@ -263,6 +452,15 @@
       },
       "ot_remote_maxch_writable": {
         "name": "Fern-max.-HZ-Sollwert schreibbar"
+      },
+      "ot_condensing": {
+        "name": "Brennwertbetrieb"
+      },
+      "ot_leak_warning": {
+        "name": "Mögliches Leck (Druckabfall)"
+      },
+      "ot_flame_low": {
+        "name": "Niedriger Flammenionisationsstrom"
       }
     },
     "number": {
@@ -514,6 +712,12 @@
       },
       "ot_window_temp": {
         "name": "Temperatur bei offenem Fenster"
+      },
+      "ot_gas_price": {
+        "name": "Gaspreis"
+      },
+      "dhw_tank_volume": {
+        "name": "WW-Speichervolumen"
       }
     },
     "select": {

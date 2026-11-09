@@ -306,6 +306,14 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.22
+
+- **Motywy kart:** *Ustawienia online* → *Motyw kart* wybiera Automatycznie, Jasny, Ciemny albo Mocha Neon w tej przeglądarce;
+  opcja `theme: auto | light | dark | neon` ustawia go dla karty lub strategii dashboardu. Mocha Neon jest wbudowany w karty
+  i nie wymaga motywu w Home Assistant; górny pasek, boczne menu i okna nadal zależą od motywu Home Assistanta.
+- **Ciemny wygląd:** bez motywu Catppuccin karty mają teraz wyraziste kolory zamiast pasteli.
+- Frontend: karty huba 0.90.0.
+
 ### 1.6.21
 
 - **Dashboard OpenTherm:** *Ustawienia online* i *Parametry pieca (offline)* przeniesione pod *Automatyzacje*, obok siebie

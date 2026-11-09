@@ -7,6 +7,7 @@ Pełna historia jest w README, w sekcji [Historia zmian](README.pl.md#historia-z
 
 | Wersja | Najważniejsze |
 |---|---|
+| 1.6.22 | motywy kart: Automatycznie, Jasny, Ciemny i wbudowany Mocha Neon, domyślnie wyraziste kolory, karty huba 0.90.0 |
 | 1.6.21 | dashboard OpenTherm: Ustawienia online i Parametry pieca pod Automatyzacjami, obok siebie, karty huba 0.89.4 |
 | 1.6.20 | schemat OpenTherm: temperatura ogrzewania zachowana podczas CWU, limit CO opisany jako maks., karty huba 0.89.3 |
 | 1.6.19 | czytelne karty na jasnym motywie Home Assistanta, karty huba 0.89.2 |

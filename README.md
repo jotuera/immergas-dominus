@@ -310,6 +310,14 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.22
+
+- **Card themes:** *Online settings* → *Card theme* picks Automatic, Light, Dark or Mocha Neon for this browser; the option
+  `theme: auto | light | dark | neon` sets it for a card or the dashboard strategy. Mocha Neon is built into the cards and
+  needs no theme in Home Assistant; the top bar, side menu and pop-ups still follow your Home Assistant theme.
+- **Dark look:** without a Catppuccin theme the cards now use vivid colours instead of pastels.
+- Frontend: hub cards 0.90.0.
+
 ### 1.6.21
 
 - **OpenTherm dashboard:** *Online settings* and *Boiler parameters (offline)* moved under *Automations*, side by side

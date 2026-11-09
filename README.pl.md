@@ -306,6 +306,12 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.21
+
+- **Dashboard OpenTherm:** *Ustawienia online* i *Parametry pieca (offline)* przeniesione pod *Automatyzacje*, obok siebie
+  (na telefonie jedna pod drugą).
+- Frontend: karty huba 0.89.4.
+
 ### 1.6.20
 
 - **Schemat OpenTherm – temperatura ogrzewania:** OpenTherm ma jeden odczyt zasilania, czyli wodę w kotle (Data-ID 25).

@@ -310,6 +310,12 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.21
+
+- **OpenTherm dashboard:** *Online settings* and *Boiler parameters (offline)* moved under *Automations*, side by side
+  (one under the other on a phone).
+- Frontend: hub cards 0.89.4.
+
 ### 1.6.20
 
 - **OpenTherm diagram – heating temperature:** OpenTherm has one flow reading, the boiler water (Data-ID 25). While the

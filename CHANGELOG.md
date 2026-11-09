@@ -7,6 +7,7 @@ The full history is in the README, section [Changelog](README.md#changelog), and
 
 | Version | Highlights |
 |---|---|
+| 1.6.21 | OpenTherm dashboard: Online settings and Boiler parameters under Automations, side by side, hub cards 0.89.4 |
 | 1.6.20 | OpenTherm diagram: heating temperature held during DHW, CH limit shown as max., hub cards 0.89.3 |
 | 1.6.19 | readable cards on a light Home Assistant theme, hub cards 0.89.2 |
 | 1.6.18 | cards fully translated into 9 languages (998 missing texts), OpenTherm dashboard: Connectivity under Charts, hub cards 0.88.0 |

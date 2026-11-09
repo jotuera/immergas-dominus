@@ -310,6 +310,13 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.23
+
+- **OpenTherm – target from the boiler curve:** with the *ZEUS Superior* or *HERCULES* profile, P66/A-D entered in *Boiler
+  parameters (offline)*, a known outdoor temperature and the module's own weather regulation off, the diagram shows
+  *target ≈…* and the curve card the same value. It is calculated from those points, not reported by the boiler.
+- Frontend: hub cards 0.90.1.
+
 ### 1.6.22
 
 - **Card themes:** *Online settings* → *Card theme* picks Automatic, Light, Dark or Mocha Neon for this browser; the option

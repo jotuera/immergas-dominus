@@ -306,6 +306,13 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.23
+
+- **OpenTherm – cel z krzywej kotła:** przy profilu *ZEUS Superior* lub *HERCULES*, wpisanych P66/A-D w *Parametry pieca
+  (offline)*, znanej temperaturze zewnętrznej i wyłączonej regulacji pogodowej modułu schemat pokazuje *cel ≈…*, a karta
+  krzywej tę samą wartość. Jest wyliczona z tych punktów, a nie odczytana z kotła.
+- Frontend: karty huba 0.90.1.
+
 ### 1.6.22
 
 - **Motywy kart:** *Ustawienia online* → *Motyw kart* wybiera Automatycznie, Jasny, Ciemny albo Mocha Neon w tej przeglądarce;

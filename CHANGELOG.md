@@ -7,6 +7,7 @@ The full history is in the README, section [Changelog](README.md#changelog), and
 
 | Version | Highlights |
 |---|---|
+| 1.6.23 | OpenTherm: CH target calculated from the boiler curve P66 (ZEUS Superior, HERCULES), hub cards 0.90.1 |
 | 1.6.22 | card themes: Automatic, Light, Dark and the built-in Mocha Neon, vivid colours by default, hub cards 0.90.0 |
 | 1.6.21 | OpenTherm dashboard: Online settings and Boiler parameters under Automations, side by side, hub cards 0.89.4 |
 | 1.6.20 | OpenTherm diagram: heating temperature held during DHW, CH limit shown as max., hub cards 0.89.3 |

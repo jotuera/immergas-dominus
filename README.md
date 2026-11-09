@@ -310,6 +310,13 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.19
+
+- **Light theme:** on a light Home Assistant theme the cards now use a darkened version of their colours, paler highlights
+  and stronger helper texts, so everything stays readable on white. The dark look does not change.
+- The day of the anti-legionella program fits its tile.
+- Frontend: hub cards 0.89.2.
+
 ### 1.6.18
 
 - **Cards in 9 languages:** 998 card texts that were still shown in English are now translated (cs, de, es, fr, hu, it, nl,

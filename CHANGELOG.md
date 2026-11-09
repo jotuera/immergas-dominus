@@ -7,6 +7,7 @@ The full history is in the README, section [Changelog](README.md#changelog), and
 
 | Version | Highlights |
 |---|---|
+| 1.6.19 | readable cards on a light Home Assistant theme, hub cards 0.89.2 |
 | 1.6.18 | cards fully translated into 9 languages (998 missing texts), OpenTherm dashboard: Connectivity under Charts, hub cards 0.88.0 |
 | 1.6.17 | OpenTherm: CH supervision with an alarm when the boiler does not take up the demand, hub cards 0.87.0 |
 | 1.6.16 | entity names in all 11 languages, wiring diagrams in the README, hub cards 0.86.0 |

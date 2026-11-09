@@ -306,6 +306,13 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.19
+
+- **Jasny motyw:** na jasnym motywie Home Assistanta karty używają przyciemnionych kolorów, delikatniejszych podświetleń
+  i wyraźniejszych opisów, więc wszystko jest czytelne na białym tle. Wygląd ciemny się nie zmienia.
+- Dzień programu anty-legionelli mieści się w kafelku.
+- Frontend: karty huba 0.89.2.
+
 ### 1.6.18
 
 - **Karty w 9 językach:** przetłumaczone 998 tekstów kart, które wyświetlały się jeszcze po angielsku (cs, de, es, fr, hu, it,

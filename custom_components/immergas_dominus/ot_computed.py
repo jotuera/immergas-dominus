@@ -104,6 +104,8 @@ class OtComputed:
         self._unsub: list[Callable[[], None]] = []
         self._at: float | None = None
         self.gas_price: float = 3.86
+        self.elec_price: float = 1.0           # per kWh, for the gas / electricity comparison
+        self.tank_volume: float = 0.0          # L, 0 = no cylinder (combi boiler)
         self.sup_limit: float = 15.0           # min without a response before the CH alarm
         self._sup_idle = 0.0                   # s the boiler has ignored the CH demand
         self.v: dict[str, Any] = {}            # the published values
@@ -118,6 +120,7 @@ class OtComputed:
         self._dhw_start: float | None = None
         self._dhw_t0: float | None = None
         self._dhw_tmax: float | None = None
+        self._dhw_q = 0.0                      # kWh of the running DHW cycle
         self._draw: bool = False
         self._draw_start: float | None = None
         self._room_dev: deque[tuple[float, float]] = deque()
@@ -131,7 +134,7 @@ class OtComputed:
         return {"day": dt_util.now().date().isoformat(), "q_ch": 0.0, "q_dhw": 0.0, "burn_s": 0.0, "cond_s": 0.0,
                 "minmod_s": 0.0, "mod_sum": 0.0, "starts": 0, "short": 0, "burn_last": None, "pause_last": None,
                 "draws": 0, "draw_last": None, "litres": 0.0, "q_draw": 0.0, "cycles": 0, "cyc_last": None,
-                "cyc_rise": None, "dd": 0.0, "reach_last": None}
+                "cyc_rise": None, "cyc_gas": None, "dd": 0.0, "reach_last": None}
 
     # ------------------------------------------------------------------ lifecycle
     async def async_start(self) -> None:
@@ -143,6 +146,8 @@ class OtComputed:
             self.m.update(data["m"])
         self.gas_total = float(data.get("gas_total", 0.0))
         self.gas_price = float(data.get("gas_price", self.gas_price))
+        self.elec_price = float(data.get("elec_price", self.elec_price))
+        self.tank_volume = float(data.get("tank_volume", self.tank_volume))
         self.sup_limit = float(data.get("sup_limit", self.sup_limit))
         self._unsub.append(self.coordinator.async_add_listener(self._update))
         self._unsub.append(async_track_time_interval(self.hass, self._save, timedelta(minutes=5)))
@@ -156,7 +161,7 @@ class OtComputed:
 
     async def _save(self, *_: Any) -> None:
         await self._store.async_save({"d": self.d, "m": self.m, "gas_total": self.gas_total, "gas_price": self.gas_price,
-                                      "sup_limit": self.sup_limit})
+                                      "elec_price": self.elec_price, "tank_volume": self.tank_volume, "sup_limit": self.sup_limit})
 
     def add_listener(self, cb: Callable[[], None]) -> Callable[[], None]:
         self._listeners.append(cb)
@@ -164,6 +169,16 @@ class OtComputed:
 
     def set_gas_price(self, value: float) -> None:
         self.gas_price = value
+        self._publish()
+        self.hass.async_create_task(self._save())
+
+    def set_elec_price(self, value: float) -> None:
+        self.elec_price = value
+        self._publish()
+        self.hass.async_create_task(self._save())
+
+    def set_tank_volume(self, value: float) -> None:
+        self.tank_volume = value
         self._publish()
         self.hass.async_create_task(self._save())
 
@@ -221,6 +236,8 @@ class OtComputed:
         if flame and power and dt:
             q = power * dt / 3600
             d["q_dhw" if dhw else "q_ch"] += q
+            if dhw:
+                self._dhw_q += q
             self.gas_total += q / GAS_KWH_PER_M3
         # ---- burns and pauses (the flag of each poll)
         if self._flame is False and flame:
@@ -248,6 +265,7 @@ class OtComputed:
         # ---- DHW cylinder cycles (the DHW active flag)
         if dhw and not self._dhw:
             self._dhw_start, self._dhw_t0, self._dhw_tmax = now, tdhw, tdhw
+            self._dhw_q = 0.0
         if dhw and tdhw is not None and (self._dhw_tmax is None or tdhw > self._dhw_tmax):
             self._dhw_tmax = tdhw
         if self._dhw and not dhw and self._dhw_start is not None:
@@ -256,6 +274,7 @@ class OtComputed:
                 d["cycles"] += 1
                 d["cyc_last"] = mins
                 d["cyc_rise"] = (self._dhw_tmax - self._dhw_t0) if self._dhw_t0 is not None and self._dhw_tmax is not None else None
+                d["cyc_gas"] = self._dhw_q / GAS_KWH_PER_M3
         self._dhw = dhw
         # ---- DHW draws (combi: the DHW flow)
         draw = wflow is not None and wflow > 1
@@ -353,6 +372,7 @@ class OtComputed:
         v["dhw_cycles"] = d["cycles"]
         v["dhw_cycle_last"] = d["cyc_last"]
         v["dhw_cycle_rise"] = d["cyc_rise"]
+        v["dhw_cycle_gas"] = d.get("cyc_gas")
         v["dd_today"] = d["dd"]
         v["dd_month"] = self.m["dd"]
         v["h_per_dd"] = self.m["ch_h"] / self.m["dd"] if self.m["dd"] > 0.5 else None
@@ -391,6 +411,7 @@ SENSORS: dict[str, tuple] = {
     "ot_dhw_cycles": (None, None, "m", "mdi:water-boiler", 0, (DHW,), True),
     "ot_dhw_cycle_last": (UnitOfTime.MINUTES, None, None, "mdi:timer-outline", 0, (DHW,), True),
     "ot_dhw_cycle_rise": (_K, None, None, "mdi:thermometer-chevron-up", 1, (DHW,), True),
+    "ot_dhw_cycle_gas": (UnitOfVolume.CUBIC_METERS, None, None, "mdi:meter-gas", 3, (DHW, MOD, CAP), True),
     "ot_pressure_drop": ("bar", None, "m", "mdi:gauge-low", 2, (PRESS,), True),
     "ot_flame_i_avg": ("µA", None, "m", "mdi:fire-circle", 1, (FLAME_I,), False),
     "ot_fan_dev": ("rpm", None, "m", "mdi:fan-alert", 0, (FAN,), False),
@@ -511,6 +532,54 @@ class OtGasPriceNumber(ImmergasDominusEntity, RestoreNumber):
 
     async def async_set_native_value(self, value: float) -> None:
         self.coordinator.ot_computed.set_gas_price(value)
+        self.async_write_ha_state()
+
+
+class OtElecPriceNumber(ImmergasDominusEntity, RestoreNumber):
+    """Electricity price per kWh for the gas / electricity comparison (kept in the computed store)."""
+
+    _attr_translation_key = "ot_elec_price"
+    _attr_icon = "mdi:flash"
+    _attr_entity_category = EntityCategory.CONFIG
+    _attr_native_min_value = 0
+    _attr_native_max_value = 50
+    _attr_native_step = 0.001
+    _attr_mode = NumberMode.BOX
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_elec_price", ST, DEVICE_MAIN)
+        self._attr_native_unit_of_measurement = f"{coordinator.hass.config.currency}/kWh"
+
+    @property
+    def native_value(self) -> float:
+        return self.coordinator.ot_computed.elec_price
+
+    async def async_set_native_value(self, value: float) -> None:
+        self.coordinator.ot_computed.set_elec_price(value)
+        self.async_write_ha_state()
+
+
+class OtTankVolumeNumber(ImmergasDominusEntity, RestoreNumber):
+    """DHW cylinder volume in litres, 0 = no cylinder (OpenTherm does not report it)."""
+
+    _attr_translation_key = "ot_tank_volume"
+    _attr_icon = "mdi:water-boiler"
+    _attr_entity_category = EntityCategory.CONFIG
+    _attr_native_min_value = 0
+    _attr_native_max_value = 1000
+    _attr_native_step = 1
+    _attr_native_unit_of_measurement = "L"
+    _attr_mode = NumberMode.BOX
+
+    def __init__(self, coordinator: ImmergasDominusCoordinator) -> None:
+        super().__init__(coordinator, "ot_tank_volume", ST, DEVICE_MAIN)
+
+    @property
+    def native_value(self) -> float:
+        return self.coordinator.ot_computed.tank_volume
+
+    async def async_set_native_value(self, value: float) -> None:
+        self.coordinator.ot_computed.set_tank_volume(value)
         self.async_write_ha_state()
 
 

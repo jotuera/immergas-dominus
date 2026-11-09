@@ -233,7 +233,7 @@ a restart. The *Today · boiler analysis* card shows them (tiles without data st
 | Group | Entities |
 |---|---|
 | Hydraulics | Delta T (flow − return), Mean loop temperature, **Control setpoint (Data-ID 1)** – what the module really sends, Flow deviation from the setpoint, Exhaust − return, *Condensing operation* (return below 55 °C while burning), Condensing today (share) |
-| Burner and gas | Burner power (est.: modulation between the min. and max. output of Data-ID 15), Heat today, Gas today / heating / DHW and the Gas counter (m³, 10.6 kWh of useful heat per m³), Gas price, Gas cost today |
+| Burner and gas | Burner power (est.: modulation between the min. and max. output of Data-ID 15), Heat today, Gas today / heating / DHW and the Gas counter (m³, 10.6 kWh of useful heat per m³), Gas price, Gas cost today, Electricity price, Cylinder volume (0 = no cylinder), Last DHW cycle gas |
 | Short cycling | Average burn today, Short burns (< 5 min), Last burn, Last pause, Average modulation, At min. modulation – from the flame flag of each poll, so a lower bound |
 | DHW | DHW draws, Last draw, Hot water (litres) and DHW heat today (combi boilers with Data-ID 19, cold water 10 °C); DHW cycles today, Last DHW cycle and its cylinder rise (boilers with a cylinder) |
 | State | *Operating state* – one text: "CH · flame 45 % · 52 °C", "DHW", "Fault E10", "Idle" |

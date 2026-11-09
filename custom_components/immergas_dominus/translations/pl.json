@@ -283,6 +283,9 @@
       "ot_dhw_cycle_rise": {
         "name": "Przyrost w zasobniku (ostatni cykl)"
       },
+      "ot_dhw_cycle_gas": {
+        "name": "Gaz ostatniego cyklu CWU"
+      },
       "ot_pressure_drop": {
         "name": "Spadek ciśnienia w 24 h"
       },
@@ -731,6 +734,12 @@
       },
       "ot_gas_price": {
         "name": "Cena gazu"
+      },
+      "ot_elec_price": {
+        "name": "Cena prądu"
+      },
+      "ot_tank_volume": {
+        "name": "Pojemność zasobnika"
       },
       "dhw_tank_volume": {
         "name": "Pojemność zasobnika CWU"

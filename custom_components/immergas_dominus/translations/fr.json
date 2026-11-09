@@ -283,6 +283,9 @@
       "ot_dhw_cycle_rise": {
         "name": "Hausse du ballon au dernier cycle ECS"
       },
+      "ot_dhw_cycle_gas": {
+        "name": "Gaz du dernier cycle ECS"
+      },
       "ot_pressure_drop": {
         "name": "Chute de pression en 24 h"
       },
@@ -731,6 +734,12 @@
       },
       "ot_gas_price": {
         "name": "Prix du gaz"
+      },
+      "ot_elec_price": {
+        "name": "Prix de l'électricité"
+      },
+      "ot_tank_volume": {
+        "name": "Volume du ballon"
       },
       "dhw_tank_volume": {
         "name": "Volume du ballon ECS"

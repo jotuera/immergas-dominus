@@ -283,6 +283,9 @@
       "ot_dhw_cycle_rise": {
         "name": "Aumento bollitore nell'ultimo ciclo ACS"
       },
+      "ot_dhw_cycle_gas": {
+        "name": "Gas ultimo ciclo ACS"
+      },
       "ot_pressure_drop": {
         "name": "Calo di pressione in 24 h"
       },
@@ -731,6 +734,12 @@
       },
       "ot_gas_price": {
         "name": "Prezzo gas"
+      },
+      "ot_elec_price": {
+        "name": "Prezzo dell'elettricità"
+      },
+      "ot_tank_volume": {
+        "name": "Volume del bollitore"
       },
       "dhw_tank_volume": {
         "name": "Volume bollitore ACS"

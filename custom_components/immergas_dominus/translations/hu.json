@@ -283,6 +283,9 @@
       "ot_dhw_cycle_rise": {
         "name": "Tároló emelkedése az utolsó HMV ciklusban"
       },
+      "ot_dhw_cycle_gas": {
+        "name": "Utolsó HMV-ciklus gázfogyasztása"
+      },
       "ot_pressure_drop": {
         "name": "Nyomásesés 24 h alatt"
       },
@@ -731,6 +734,12 @@
       },
       "ot_gas_price": {
         "name": "Gázár"
+      },
+      "ot_elec_price": {
+        "name": "Villamos energia ára"
+      },
+      "ot_tank_volume": {
+        "name": "Tároló térfogata"
       },
       "dhw_tank_volume": {
         "name": "HMV tároló térfogata"

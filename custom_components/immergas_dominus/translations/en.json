@@ -283,6 +283,9 @@
       "ot_dhw_cycle_rise": {
         "name": "Last DHW cycle cylinder rise"
       },
+      "ot_dhw_cycle_gas": {
+        "name": "Last DHW cycle gas"
+      },
       "ot_pressure_drop": {
         "name": "Pressure drop in 24 h"
       },
@@ -731,6 +734,12 @@
       },
       "ot_gas_price": {
         "name": "Gas price"
+      },
+      "ot_elec_price": {
+        "name": "Electricity price"
+      },
+      "ot_tank_volume": {
+        "name": "Cylinder volume"
       },
       "dhw_tank_volume": {
         "name": "DHW cylinder volume"

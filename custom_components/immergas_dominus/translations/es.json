@@ -283,6 +283,9 @@
       "ot_dhw_cycle_rise": {
         "name": "Subida del acumulador en el último ciclo ACS"
       },
+      "ot_dhw_cycle_gas": {
+        "name": "Gas del último ciclo de ACS"
+      },
       "ot_pressure_drop": {
         "name": "Caída de presión en 24 h"
       },
@@ -731,6 +734,12 @@
       },
       "ot_gas_price": {
         "name": "Precio del gas"
+      },
+      "ot_elec_price": {
+        "name": "Precio de la electricidad"
+      },
+      "ot_tank_volume": {
+        "name": "Volumen del acumulador"
       },
       "dhw_tank_volume": {
         "name": "Volumen del acumulador ACS"

@@ -283,6 +283,9 @@
       "ot_dhw_cycle_rise": {
         "name": "Speicheranstieg im letzten WW-Zyklus"
       },
+      "ot_dhw_cycle_gas": {
+        "name": "Gas letzter WW-Zyklus"
+      },
       "ot_pressure_drop": {
         "name": "Druckabfall in 24 h"
       },
@@ -731,6 +734,12 @@
       },
       "ot_gas_price": {
         "name": "Gaspreis"
+      },
+      "ot_elec_price": {
+        "name": "Strompreis"
+      },
+      "ot_tank_volume": {
+        "name": "Speichervolumen"
       },
       "dhw_tank_volume": {
         "name": "WW-Speichervolumen"

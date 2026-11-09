@@ -283,6 +283,9 @@
       "ot_dhw_cycle_rise": {
         "name": "Nárůst zásobníku v posledním cyklu TUV"
       },
+      "ot_dhw_cycle_gas": {
+        "name": "Plyn posledního cyklu TUV"
+      },
       "ot_pressure_drop": {
         "name": "Pokles tlaku za 24 h"
       },
@@ -731,6 +734,12 @@
       },
       "ot_gas_price": {
         "name": "Cena plynu"
+      },
+      "ot_elec_price": {
+        "name": "Cena elektřiny"
+      },
+      "ot_tank_volume": {
+        "name": "Objem zásobníku"
       },
       "dhw_tank_volume": {
         "name": "Objem zásobníku TUV"

@@ -283,6 +283,9 @@
       "ot_dhw_cycle_rise": {
         "name": "Stijging boiler in laatste SWW-cyclus"
       },
+      "ot_dhw_cycle_gas": {
+        "name": "Gas laatste SWW-cyclus"
+      },
       "ot_pressure_drop": {
         "name": "Drukdaling in 24 h"
       },
@@ -731,6 +734,12 @@
       },
       "ot_gas_price": {
         "name": "Gasprijs"
+      },
+      "ot_elec_price": {
+        "name": "Elektriciteitsprijs"
+      },
+      "ot_tank_volume": {
+        "name": "Boilerinhoud"
       },
       "dhw_tank_volume": {
         "name": "Inhoud SWW-boiler"

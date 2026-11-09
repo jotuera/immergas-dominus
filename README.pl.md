@@ -306,6 +306,17 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.24
+
+- **OpenTherm – Gaz czy prąd?:** koszt 1 kWh ciepła z gazu i z grzałki elektrycznej, z nowym ustawieniem *Cena prądu*.
+- **OpenTherm – Ostatni cykl CWU:** przy ustawionej *Pojemności zasobnika*: czas, przyrost temperatury, ciepło, gaz i koszt ostatniego
+  cyklu wobec grzałki; bez zasobnika: litry, ciepło i gaz CWU z dnia. Nowy sensor *Gaz ostatniego cyklu CWU*. Gaz jest szacowany
+  z mocy palnika.
+- **Dashboard Modbus:** *Łączność* pod *Wykresami* (cztery w rzędzie); *Ustawienia online* i *Parametry pieca (offline)* pod
+  *Automatyzacjami*, obok siebie.
+- **Poprawka:** karta *Ostatni cykl CWU* nie pisze już, że pompa była tańsza, gdy cykl grzał kocioł albo koszt był równy.
+- Frontend: karty huba 0.91.2.
+
 ### 1.6.23
 
 - **OpenTherm – cel z krzywej kotła:** przy profilu *ZEUS Superior* lub *HERCULES*, wpisanych P66/A-D w *Parametry pieca

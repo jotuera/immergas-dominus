@@ -310,6 +310,18 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.24
+
+- **OpenTherm – Gas or electricity?:** the cost of 1 kWh of heat from gas against an electric heater, with new *Electricity price*
+  setting.
+- **OpenTherm – Last DHW cycle:** with *Cylinder volume* set: time, temperature rise, heat, gas and cost of the last cycle
+  against an electric heater; without a cylinder: litres, heat and the DHW gas of the day. New sensor *Last DHW cycle gas*.
+  Gas is an estimate from the burner power.
+- **Modbus dashboard:** *Connectivity* under *Charts* (four in a row); *Online settings* and *Boiler parameters (offline)* under
+  *Automations*, side by side.
+- **Fix:** the *Last DHW cycle* card no longer says the heat pump was cheaper for a cycle heated by the gas boiler or at equal cost.
+- Frontend: hub cards 0.91.2.
+
 ### 1.6.23
 
 - **OpenTherm – target from the boiler curve:** with the *ZEUS Superior* or *HERCULES* profile, P66/A-D entered in *Boiler

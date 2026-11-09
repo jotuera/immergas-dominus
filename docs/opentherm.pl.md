@@ -231,7 +231,7 @@ gazu zostają po restarcie. Pokazuje je karta *Dziś · analiza kotła* (kafle b
 | Grupa | Encje |
 |---|---|
 | Hydraulika | Delta T (zasilanie − powrót), Średnia obiegu, **Nastawa wysyłana (Data-ID 1)** – to, co moduł naprawdę wysyła, Odchyłka zasilania od nastawy, Spaliny − powrót, *Praca kondensacyjna* (powrót poniżej 55 °C przy płomieniu), Kondensacja dziś (udział) |
-| Palnik i gaz | Moc palnika (szac.: modulacja między min. a maks. mocą z Data-ID 15), Ciepło dziś, Gaz dziś / CO / CWU i Licznik gazu (m³, 10,6 kWh ciepła użytkowego z m³), Cena gazu, Koszt gazu dziś |
+| Palnik i gaz | Moc palnika (szac.: modulacja między min. a maks. mocą z Data-ID 15), Ciepło dziś, Gaz dziś / CO / CWU i Licznik gazu (m³, 10,6 kWh ciepła użytkowego z m³), Cena gazu, Koszt gazu dziś, Cena prądu, Pojemność zasobnika (0 = brak zasobnika), Gaz ostatniego cyklu CWU |
 | Taktowanie | Średnie palenie dziś, Krótkie palenia (< 5 min), Ostatnie palenie, Ostatnia przerwa, Średnia modulacja, Na min. modulacji – z flagi płomienia każdego odczytu, więc dolne oszacowanie |
 | CWU | Pobory CWU, Ostatni pobór, Ciepła woda (litry) i Ciepło CWU dziś (kotły dwufunkcyjne z Data-ID 19, woda zimna 10 °C); Cykle CWU dziś, Ostatni cykl CWU i przyrost w zasobniku (kotły z zasobnikiem) |
 | Stan | *Stan pracy* – jeden tekst: „CO · płomień 45 % · 52 °C”, „CWU”, „Usterka E10”, „Postój” |

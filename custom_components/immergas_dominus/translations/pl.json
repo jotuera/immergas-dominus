@@ -178,6 +178,9 @@
       "ot_flame_current": {
         "name": "Prąd jonizacji płomienia"
       },
+      "ot_control_timer": {
+        "name": "Licznik sterowania czasowego"
+      },
       "ot_fault_history": {
         "name": "Historia błędów"
       },
@@ -432,6 +435,12 @@
       },
       "ot_flame": {
         "name": "Płomień"
+      },
+      "ot_dominus_control": {
+        "name": "Dominus steruje"
+      },
+      "ot_thermostat_input": {
+        "name": "Wejście termostatu (moduł)"
       },
       "ot_service_request": {
         "name": "Żądanie serwisu"

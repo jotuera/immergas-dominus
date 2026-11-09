@@ -306,6 +306,12 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.25
+
+- **OpenTherm – kto steruje (tylko odczyt):** nowe encje diagnostyczne *Dominus steruje*, *Wejście termostatu (moduł)* i
+  *Licznik sterowania czasowego* (parametry modułu 0 i 1). Pokazują tylko stan; integracja nie przejmuje ani nie oddaje sterowania.
+  Jeszcze niesprawdzone na prawdziwym kotle, a jednostka licznika nie jest potwierdzona.
+
 ### 1.6.24
 
 - **OpenTherm – Gaz czy prąd?:** koszt 1 kWh ciepła z gazu i z grzałki elektrycznej, z nowym ustawieniem *Cena prądu*.

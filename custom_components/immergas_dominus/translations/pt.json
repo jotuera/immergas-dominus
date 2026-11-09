@@ -178,6 +178,9 @@
       "ot_flame_current": {
         "name": "Corrente de ionização da chama"
       },
+      "ot_control_timer": {
+        "name": "Temporizador de controlo"
+      },
       "ot_fault_history": {
         "name": "Histórico de avarias"
       },
@@ -432,6 +435,12 @@
       },
       "ot_flame": {
         "name": "Chama"
+      },
+      "ot_dominus_control": {
+        "name": "Dominus controla"
+      },
+      "ot_thermostat_input": {
+        "name": "Entrada do termostato (módulo)"
       },
       "ot_service_request": {
         "name": "Pedido de assistência"

@@ -599,8 +599,10 @@ class DominusOpenThermSensorDescription(SensorEntityDescription):
     # "f88" | "u16" | "lb_u8" | "hb_u8" | "lb_rpm" / "hb_rpm" (byte x 60: OpenTherm fan speed is in rpm / 60)
     # | "f88_pos" (f8.8, a negative value = not available, e.g. 0xFF00 for the flame current)
     # | "f88_probe" (f8.8, 0x7300 = 115.0 = no probe, as the Superior answers for an unconnected solar / DHW2 probe)
+    # | "lb_x30" (low byte x 30: the module's control timer, unit not confirmed)
     # | "dow_time" (Data-ID 20: HB bits 7-5 = day of week 1-7, bits 4-0 = hour, LB = minute -> "HH:MM", day in the attributes)
     decode: str = "f88"
+    param: int | None = None  # module parameter (Data-ID 89, HB = index): the reply is its low byte
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -610,6 +612,7 @@ class DominusOpenThermBinaryDescription(BinarySensorEntityDescription):
     data_id: int
     byte: str = "lb"  # "lb" | "hb"
     mask: int = 0x01
+    param: int | None = None  # module parameter (Data-ID 89, HB = index): the reply is its low byte
 
 
 def _ot_temp(key: str, data_id: int, **kw) -> DominusOpenThermSensorDescription:
@@ -697,6 +700,15 @@ OT_SENSOR_DESCRIPTIONS: tuple[DominusOpenThermSensorDescription, ...] = (
         for key, decode in (("ot_fan_speed", "lb_rpm"), ("ot_fan_speed_setpoint", "hb_rpm"))
     ),
     DominusOpenThermSensorDescription(
+        key="ot_control_timer",
+        data_id=89,
+        param=1,
+        decode="lb_x30",
+        translation_key="ot_control_timer",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:timer-cog-outline",
+    ),
+    DominusOpenThermSensorDescription(
         key="ot_flame_current",
         data_id=36,
         decode="f88_pos",
@@ -754,6 +766,15 @@ OT_BINARY_DESCRIPTIONS: tuple[DominusOpenThermBinaryDescription, ...] = (
     DominusOpenThermBinaryDescription(
         key="ot_flame", data_id=0, byte="lb", mask=0x08,
         translation_key="ot_flame", icon="mdi:fire",
+    ),
+    # module parameter 0, read only: is the Dominus module the one in control, and its thermostat input
+    DominusOpenThermBinaryDescription(
+        key="ot_dominus_control", data_id=89, param=0, mask=0x01,
+        translation_key="ot_dominus_control", icon="mdi:account-switch-outline", entity_category=EntityCategory.DIAGNOSTIC,
+    ),
+    DominusOpenThermBinaryDescription(
+        key="ot_thermostat_input", data_id=89, param=0, mask=0x40,
+        translation_key="ot_thermostat_input", icon="mdi:thermostat", entity_category=EntityCategory.DIAGNOSTIC,
     ),
 ) + tuple(
     # 1.6.4: application-specific fault flags (Data-ID 5 high byte) - e.g. an alert on low water pressure when the

@@ -96,6 +96,9 @@ zasilanie powoli (krzywa, samouczenie ±1 °C na dobę).
   do kotła ponad nastawą pilota, aż do odłączenia zasilania modułu (#2). Włącz **Tylko odczyt (steruje pilot)** (1.6.8):
   Home Assistant odrzuca wtedy każdy zapis, a odczyty zostają. Programy HA (program CO / CWU, antylegionella, urlop,
   automatyczne Lato / Zima) są wstrzymane i nie da się ich włączyć (1.6.9).
+- **Kto steruje (tylko odczyt).** *Dominus steruje* i *Wejście termostatu (moduł)* to bity parametru 0 modułu,
+  *Licznik sterowania czasowego* to parametr 1 (młodszy bajt × 30, jednostka niepotwierdzona). Pokazują tylko stan: integracja nie
+  przejmuje ani nie oddaje sterowania, a na kotle z CAR podłączonym do Dominusa nie zostało to sprawdzone.
 - **Kocioł nie ma trybu nocnego ani antylegionelli.** Instrukcja VICTRIX ZEUS nie zawiera żadnego z nich: obniżenie
   nocne daje pilot (program CAR V2, chronotermostat), a zakres CWU kończy się na 60 °C. Bez pilota integracja robi oba
   w Home Assistant (faza Eko programu CO, CWU Komfort / Eko, antylegionella ograniczona do maksimum CWU kotła z Data-ID 48).

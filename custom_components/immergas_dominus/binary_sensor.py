@@ -148,7 +148,9 @@ class ImmergasOpenThermBinarySensor(ImmergasDominusEntity, BinarySensorEntity):
         coordinator: ImmergasDominusCoordinator,
         description: DominusOpenThermBinaryDescription,
     ) -> None:
-        super().__init__(coordinator, description.key, description.data_id, DEVICE_MAIN)
+        from .opentherm_client import ot_param_key
+        poll = description.data_id if description.param is None else ot_param_key(description.data_id, description.param)
+        super().__init__(coordinator, description.key, poll, DEVICE_MAIN)
         self.entity_description = description
 
     @property

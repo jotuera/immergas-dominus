@@ -96,6 +96,9 @@ change the flow slowly (curve, self-learning ±1 °C a day).
   **Read only (remote in charge)** (1.6.8): Home Assistant then refuses every write, and the readings stay. The HA
   programs (CH / DHW program, anti-legionella, vacation, automatic Summer / Winter) are paused and cannot be switched
   on (1.6.9).
+- **Who is in control (read only).** *Dominus in control* and *Thermostat input (module)* are bits of module parameter 0,
+  *Control timer* is module parameter 1 (low byte × 30, the unit is not confirmed). They only show the state: the integration does
+  not take over or release control, and this has not been checked on a boiler with a CAR connected to the Dominus.
 - **No night mode and no anti-legionella in the boiler.** The VICTRIX ZEUS manual has neither: the night reduction
   comes from the remote (CAR V2 program, chrono-thermostat), and the DHW range ends at 60 °C. Without a remote the
   integration does both in Home Assistant (CH program Eco phase, DHW Comfort / Eco, anti-legionella capped at the

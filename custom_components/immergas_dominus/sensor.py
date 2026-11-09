@@ -258,7 +258,9 @@ class ImmergasOpenThermSensor(ImmergasDominusEntity, SensorEntity):
         coordinator: ImmergasDominusCoordinator,
         description: DominusOpenThermSensorDescription,
     ) -> None:
-        super().__init__(coordinator, description.key, description.data_id, DEVICE_MAIN)
+        from .opentherm_client import ot_param_key
+        poll = description.data_id if description.param is None else ot_param_key(description.data_id, description.param)
+        super().__init__(coordinator, description.key, poll, DEVICE_MAIN)
         self.entity_description = description
 
     @property
@@ -282,6 +284,8 @@ class ImmergasOpenThermSensor(ImmergasDominusEntity, SensorEntity):
             return f"{(raw >> 8) & 0x1F:02d}:{raw & 0xFF:02d}"
         if decode == "lb_u8":
             return raw & 0xFF
+        if decode == "lb_x30":  # the module's control timer, low byte in steps of 30
+            return (raw & 0xFF) * 30
         if decode == "hb_u8":
             return raw >> 8
         if decode == "lb_rpm":

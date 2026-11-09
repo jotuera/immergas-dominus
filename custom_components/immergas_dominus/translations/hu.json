@@ -178,6 +178,9 @@
       "ot_flame_current": {
         "name": "Láng ionizációs áram"
       },
+      "ot_control_timer": {
+        "name": "Vezérlési időzítő"
+      },
       "ot_fault_history": {
         "name": "Hibanapló"
       },
@@ -432,6 +435,12 @@
       },
       "ot_flame": {
         "name": "Láng"
+      },
+      "ot_dominus_control": {
+        "name": "Dominus vezérel"
+      },
+      "ot_thermostat_input": {
+        "name": "Termosztát bemenet (modul)"
       },
       "ot_service_request": {
         "name": "Szervizkérés"

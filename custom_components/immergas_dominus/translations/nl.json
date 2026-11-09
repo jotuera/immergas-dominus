@@ -178,6 +178,9 @@
       "ot_flame_current": {
         "name": "Ionisatiestroom vlam"
       },
+      "ot_control_timer": {
+        "name": "Besturingstimer"
+      },
       "ot_fault_history": {
         "name": "Storingsgeschiedenis"
       },
@@ -432,6 +435,12 @@
       },
       "ot_flame": {
         "name": "Vlam"
+      },
+      "ot_dominus_control": {
+        "name": "Dominus stuurt"
+      },
+      "ot_thermostat_input": {
+        "name": "Thermostaatingang (module)"
       },
       "ot_service_request": {
         "name": "Serviceverzoek"

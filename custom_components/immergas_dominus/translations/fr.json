@@ -178,6 +178,9 @@
       "ot_flame_current": {
         "name": "Courant d’ionisation de flamme"
       },
+      "ot_control_timer": {
+        "name": "Minuterie de pilotage"
+      },
       "ot_fault_history": {
         "name": "Historique des défauts"
       },
@@ -432,6 +435,12 @@
       },
       "ot_flame": {
         "name": "Flamme"
+      },
+      "ot_dominus_control": {
+        "name": "Dominus pilote"
+      },
+      "ot_thermostat_input": {
+        "name": "Entrée thermostat (module)"
       },
       "ot_service_request": {
         "name": "Demande d'entretien"

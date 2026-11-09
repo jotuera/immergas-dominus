@@ -7,6 +7,7 @@ The full history is in the README, section [Changelog](README.md#changelog), and
 
 | Version | Highlights |
 |---|---|
+| 1.6.25 | OpenTherm: read-only diagnostics of module parameters 0 and 1 (Dominus in control, thermostat input, control timer) |
 | 1.6.24 | OpenTherm: gas or electricity and last DHW cycle cards; Modbus dashboard: Connectivity under Charts, settings under Automations; hub cards 0.91.2 |
 | 1.6.23 | OpenTherm: CH target calculated from the boiler curve P66 (ZEUS Superior, HERCULES), hub cards 0.90.1 |
 | 1.6.22 | card themes: Automatic, Light, Dark and the built-in Mocha Neon, vivid colours by default, hub cards 0.90.0 |

@@ -178,6 +178,9 @@
       "ot_flame_current": {
         "name": "Flame current"
       },
+      "ot_control_timer": {
+        "name": "Control timer"
+      },
       "ot_fault_history": {
         "name": "Fault history"
       },
@@ -432,6 +435,12 @@
       },
       "ot_flame": {
         "name": "Flame"
+      },
+      "ot_dominus_control": {
+        "name": "Dominus in control"
+      },
+      "ot_thermostat_input": {
+        "name": "Thermostat input (module)"
       },
       "ot_service_request": {
         "name": "Service request"

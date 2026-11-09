@@ -178,6 +178,9 @@
       "ot_flame_current": {
         "name": "Ionizační proud plamene"
       },
+      "ot_control_timer": {
+        "name": "Časovač řízení"
+      },
       "ot_fault_history": {
         "name": "Historie poruch"
       },
@@ -432,6 +435,12 @@
       },
       "ot_flame": {
         "name": "Plamen"
+      },
+      "ot_dominus_control": {
+        "name": "Dominus řídí"
+      },
+      "ot_thermostat_input": {
+        "name": "Vstup termostatu (modul)"
       },
       "ot_service_request": {
         "name": "Požadavek servisu"

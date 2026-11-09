@@ -310,6 +310,12 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.25
+
+- **OpenTherm – who is in control (read only):** new diagnostic entities *Dominus in control*, *Thermostat input (module)* and
+  *Control timer* (module parameters 0 and 1). They only show the state; the integration does not take over or release control.
+  Not yet checked on a real boiler, and the unit of the timer is not confirmed.
+
 ### 1.6.24
 
 - **OpenTherm – Gas or electricity?:** the cost of 1 kWh of heat from gas against an electric heater, with new *Electricity price*

@@ -306,6 +306,14 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.20
+
+- **Schemat OpenTherm – temperatura ogrzewania:** OpenTherm ma jeden odczyt zasilania, czyli wodę w kotle (Data-ID 25).
+  Podczas grzania zasobnika i przez 3 minuty po nim domek pokazuje ostatnią wartość z pracy CO, z dopiskiem *przed CWU*.
+- **Schemat OpenTherm – limit CO:** przy sondzie zewnętrznej parametr 17 jest opisany jako *maks.*: to górny limit
+  zasilania, a nie faktyczny cel.
+- Frontend: karty huba 0.89.3.
+
 ### 1.6.19
 
 - **Jasny motyw:** na jasnym motywie Home Assistanta karty używają przyciemnionych kolorów, delikatniejszych podświetleń

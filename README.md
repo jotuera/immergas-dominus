@@ -310,6 +310,14 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.20
+
+- **OpenTherm diagram – heating temperature:** OpenTherm has one flow reading, the boiler water (Data-ID 25). While the
+  boiler heats the cylinder and for 3 minutes after, the house keeps the last heating value, marked *before DHW*.
+- **OpenTherm diagram – CH limit:** with an outdoor probe, parameter 17 is shown as *max.*: it is the upper limit of the
+  flow, not the actual target.
+- Frontend: hub cards 0.89.3.
+
 ### 1.6.19
 
 - **Light theme:** on a light Home Assistant theme the cards now use a darkened version of their colours, paler highlights

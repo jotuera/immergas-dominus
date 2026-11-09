@@ -7,6 +7,7 @@ Pełna historia jest w README, w sekcji [Historia zmian](README.pl.md#historia-z
 
 | Wersja | Najważniejsze |
 |---|---|
+| 1.6.20 | schemat OpenTherm: temperatura ogrzewania zachowana podczas CWU, limit CO opisany jako maks., karty huba 0.89.3 |
 | 1.6.19 | czytelne karty na jasnym motywie Home Assistanta, karty huba 0.89.2 |
 | 1.6.18 | karty w pełni przetłumaczone na 9 języków (998 brakujących tekstów), dashboard OpenTherm: Łączność pod Wykresami, karty huba 0.88.0 |
 | 1.6.17 | OpenTherm: nadzór CO z alarmem, gdy kocioł nie podejmuje żądania, karty huba 0.87.0 |

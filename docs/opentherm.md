@@ -48,7 +48,7 @@ Data-ID.
 | 36 | Flame current (*off*) | R | ✅ (not available) | ❌ |
 | 48 / 49 | – (DHW / CH setpoint limits: the sliders follow them) | R | ✅ | ✅ |
 | 56 | DHW setpoint | R/W | ✅ | ✅ |
-| 57 | Max CH setpoint | R | ✅ | ✅ |
+| 57 | Max CH setpoint (the Dominus app labels this reading *OTC set point*) | R | ✅ | ✅ |
 | 89 / n | Dominus module parameters: CH setpoint (17), Heating curve (4), CH temperature offset (5), Outdoor sensor (6), Modulation (7), Room hysteresis (8), Room sensor (9), Building inertia (10), Dominus probe use (11), Frost protection and its temperature (14 / 15), Minimum CH temperature (16) | R/W | ✅ | ✅ |
 
 ¹ No reply in the scan (a one-off timeout), but the status entities work. Answered as well, not used yet: 7,

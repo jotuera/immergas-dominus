@@ -307,6 +307,14 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.28
+
+- **Opisy błędów:** 23 kolejne kody w 11 językach: funkcja kominiarza (E7), brak modelu spalania (E30), termin przeglądu (E97),
+  przestarzała płyta stref (E141), przekaźniki stref (E150–152), koncentratory RF (E300–307) i sondy przewodowe (E310–317).
+- **OpenTherm – karta krzywej pogodowej:** przy włączonej regulacji pogodowej modułu karta pokazuje też *nastawę OTC modułu*
+  (Data-ID 57, w aplikacji Dominus *OTC set point*). Jej zachowania nie sprawdzono na prawdziwym kotle.
+- Frontend: karty huba 0.91.5.
+
 ### 1.6.27
 
 - **Profile menu kotłów:** VICTRIX TT i Maior TT dodane do profilu *ZEUS 25 / OMNIA*. VICTRIX TT zgłoszono jako CAR-BUS, z którym nie

@@ -7,6 +7,7 @@ Pełna historia jest w README, w sekcji [Historia zmian](README.pl.md#historia-z
 
 | Wersja | Najważniejsze |
 |---|---|
+| 1.6.28 | 23 kolejne opisy błędów kotła w 11 językach; OpenTherm: nastawa OTC modułu na karcie krzywej pogodowej; karty huba 0.91.5 |
 | 1.6.27 | OpenTherm: VICTRIX TT i Maior TT w profilu menu ZEUS 25 / OMNIA; dokumentacja: pozostałe konfiguracje Modbus aplikacji; karty huba 0.91.4 |
 | 1.6.26 | OpenTherm: profile menu kotłów sprawdzone z instrukcjami: EXA 28 / 32 przeniesione do rodziny S / P / t, nowy profil VICTRIX HYBRID, nazwany OMNIA V2, poprawiona podpowiedź taktowania TERA; karty huba 0.91.3 |
 | 1.6.25 | OpenTherm: diagnostyka tylko do odczytu parametrów modułu 0 i 1 (Dominus steruje, wejście termostatu, licznik sterowania czasowego) |

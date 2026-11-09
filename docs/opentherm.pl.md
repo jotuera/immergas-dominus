@@ -48,7 +48,7 @@ na dany Data-ID.
 | 36 | Prąd jonizacji płomienia (*off*) | R | ✅ (niedostępny) | ❌ |
 | 48 / 49 | – (limity nastaw CWU / CO: suwaki się do nich dostosowują) | R | ✅ | ✅ |
 | 56 | Zadana CWU | R/W | ✅ | ✅ |
-| 57 | Maks. zadana CO | R | ✅ | ✅ |
+| 57 | Maks. zadana CO (aplikacja Dominus nazywa ten odczyt *OTC set point*) | R | ✅ | ✅ |
 | 89 / n | Parametry modułu Dominus: Zadana CO (17), Krzywa grzewcza (4), Offset temperatury CO (5), Sonda zewnętrzna (6), Modulacja (7), Histereza pokojowa (8), Czujnik pokojowy (9), Bezwładność budynku (10), Sonda Dominusa mierzy (11), Ochrona przed zamarzaniem i jej temperatura (14 / 15), Minimalna temperatura CO (16) | R/W | ✅ | ✅ |
 
 ¹ Brak odpowiedzi w skanie (jednorazowy timeout), ale encje statusu działają. Odpowiadają też, jeszcze nieużywane: 7,

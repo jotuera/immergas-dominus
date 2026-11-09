@@ -311,6 +311,14 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.28
+
+- **Fault descriptions:** 23 more codes in 11 languages: chimney sweep mode (E7), combustion model not set (E30), service due (E97),
+  outdated zone board (E141), zone relays (E150–152), RF concentrators (E300–307) and wired probes (E310–317).
+- **OpenTherm – weather curve card:** with the module's weather regulation on, the card also shows the *module OTC setpoint*
+  (Data-ID 57, labelled *OTC set point* in the Dominus app). Its behaviour has not been checked on a real boiler.
+- Frontend: hub cards 0.91.5.
+
 ### 1.6.27
 
 - **Boiler menu profiles:** VICTRIX TT and Maior TT added to the *ZEUS 25 / OMNIA* profile. A VICTRIX TT has been reported as CAR-BUS,

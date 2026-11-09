@@ -253,12 +253,13 @@ share the same register map and behave the same way.
 (The `MPROCOMBOV2_8N2` = Magis Hercules and `MPROCOMBOV2_SYS` = system manager variants
 share the map with a serial/addressing tweak.)
 
-**Not covered — different Dominus configuration / register map:**
+**Not covered or not confirmed:**
 
 - **VICTRIX ZEUS / AVIO**, STAR — use the **OpenTherm** protocol (see the experimental
   OpenTherm mode above, [#2](https://github.com/jotuera/immergas-dominus/issues/2)).
-- **TRIO** (`MBUS`), **SUPERIOR** (`SCP01`), **MAIOR / EXTRA** (`HDBC65`) — other Modbus
-  configurations with their own register maps.
+- **TRIO** (`MBUS`), **SUPERIOR** (`SCP01`), **MAIOR / EXTRA** (`HDBC65`) — in the app's configuration the registers
+  they share with `MPROCOMBOV2` have the same definition, but none has been tested with this integration – see
+  [the map](https://github.com/jotuera/immergas-dominus/blob/main/docs/pdu-map.md#other-modbus-configurations-in-the-app).
 
 If your boiler uses the `MPROCOMBOV2` config but isn't listed, it will very likely work —
 please open an issue to confirm it.
@@ -309,6 +310,14 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 1.6.27
+
+- **Boiler menu profiles:** VICTRIX TT and Maior TT added to the *ZEUS 25 / OMNIA* profile. A VICTRIX TT has been reported as CAR-BUS,
+  where no OpenTherm master works, so measure the terminals first.
+- **Docs:** the other Modbus configurations of the Dominus app (TRIO, SUPERIOR, MAIOR / EXTRA, GESTORE DI SISTEMA) are described in
+  the register map. They come from the app's data and have not been tested with this integration.
+- Frontend: hub cards 0.91.4.
 
 ### 1.6.26
 

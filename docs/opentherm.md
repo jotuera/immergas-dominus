@@ -73,6 +73,7 @@ called IMG BUS, a third-party unit is a "commercially available remote". Check t
 |---|---|---|
 | VICTRIX ZEUS 25, OMNIA, OMNIA V2 (G / P / t / A) | 41 / 44, jumper X40 removed | X40 back on 40-41 without a remote. |
 | VICTRIX TERA V2 / V3 (P / t / A / S) | 41 / 44, X40 removed | **P7** = remote protocol: 0 IMG BUS (CAR V2), **2 = third-party remote** (the DHW setpoint and max. flow then stay on the boiler panel), 1 = not available. Users reported P7 = 1 – the Polish manual says 2. Immergas confirms OpenTherm on the TERA V2. |
+| VICTRIX TT, Maior TT (G / P / t / A) | 41 / 44, X40 removed | Codes as on the ZEUS 25; the Maior TT does not use t3 / t4. A VICTRIX TT has been reported as CAR-BUS, where no OpenTherm master works, so measure the terminals first. |
 | VICTRIX HYBRID, HYBRID PLUS (P / t / A / S) | 44-41 go to terminals 1-2 of the system control panel | The manual mentions neither OpenTherm nor the Dominus, so this connection is not confirmed. The menu profile only gives the codes. |
 | VICTRIX EXA 24 X 1 ErP, EXA 28 / 32 1 ErP, NIKE 24 ECO (S / P / t) | 41 / 44, X40 removed (NIKE: connector X15) | A user runs a Nest Heat Link here (OT1 on 44, OT2 on 41). EXA 28: a third-party OpenTherm unit works without changes (users). |
 | VICTRIX ZEUS Superior 26 / 32, HERCULES Condensing 26 / 32 / ABT 32, HERCULES Solar 26 (M1 / M3 / M5) | **41 / 44** (IMG BUS), X40 removed | OpenTherm on 41 / 44 confirmed on a ZEUS Superior 26 2 ErP (an ESP32 + OpenTherm adapter, Home Assistant community); 42 / 43 are the Super CAR terminals, not OpenTherm. HERCULES: 41 / 44 expected (same board family), not confirmed yet. **M3 P33 = ON** keeps CH working without a remote (E31). ABT 32: room thermostats on the zone board X9. *ERR>CM* on the CAR V2 = no communication. |
@@ -204,7 +205,7 @@ hints.
 installer manuals give five OpenTherm menu families; **Boiler menu profile** (or a guess from the *Boiler model* text)
 picks the codes the card shows. The values are the same entities in every profile.
 
-| Function | ZEUS 25 / OMNIA | TERA V2 / V3 | EXA 24 X / 28 / 32, NIKE | ZEUS Superior 26 / 32 | HERCULES Condensing / Solar 26 |
+| Function | ZEUS 25 / OMNIA / TT / Maior TT | TERA V2 / V3 | EXA 24 X / 28 / 32, NIKE | ZEUS Superior 26 / 32 | HERCULES Condensing / Solar 26 |
 |---|---|---|---|---|---|
 | CH min. / max. flow | t0 / t1 | t0 / t1 | S5 / S6 (EXA) | P66/A / P66/B | P66/A / P66/B |
 | Climatic curve (outdoor at max. / min. flow) | – | – | – | P66/C / P66/D | P66/C / P66/D |
@@ -223,7 +224,7 @@ picks the codes the card shows. The values are the same entities in every profil
 The Superior codes P68–P76 are read from its manual and still to be confirmed on a real boiler; the HERCULES manual
 suggests that P55 there is a reading and the pump is P57 / P67. The VICTRIX ZEUS 26 2 ErP has almost no numbered menu –
 use the generic profile. The **new platform** (ZEUS Superior 25 / 30 / 35, HERCULES 25 / 35, VICTRIX EXTRA / EXTRA PLUS) is a Modbus
-boiler for the Dominus – see [Modbus over TCP](pdu-map.md). VICTRIX HYBRID / HYBRID PLUS use the TERA codes, without P7, and P5 is −9…+9 K. The VICTRIX PRO V2 EU manual does not mention the Dominus: that boiler has a
+boiler for the Dominus – see [Modbus over TCP](pdu-map.md). AVIO 24 kW is programmed with LEDs and has no parameter codes, and the Nike Star 24 3 E is programmed with buttons: use the generic profile. No installer manual was found for the VICTRIX kW TT / kW 26, so they also stay on the generic profile. The old MAGIS PRO / COMBO heat pumps have no Modbus configuration in the app and are not supported. VICTRIX HYBRID / HYBRID PLUS use the TERA codes, without P7, and P5 is −9…+9 K. The VICTRIX PRO V2 EU manual does not mention the Dominus: that boiler has a
 BMS Modbus port on T+ / T− and an input for an OpenTherm thermostat. The manuals of the older VICTRIX PRO 2 ErP describe no OpenTherm, Modbus or IMG BUS,
 so it has no profile.
 

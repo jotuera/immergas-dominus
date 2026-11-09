@@ -74,6 +74,7 @@ swojego kotła.
 |---|---|---|
 | VICTRIX ZEUS 25, OMNIA, OMNIA V2 (G / P / t / A) | 41 / 44, zdjęta zworka X40 | Bez regulatora X40 z powrotem na 40-41. |
 | VICTRIX TERA V2 / V3 (P / t / A / S) | 41 / 44, zdjęta X40 | **P7** = protokół zdalnego sterowania: 0 IMG BUS (CAR V2), **2 = pilot innej firmy** (nastawa CWU i maks. zasilanie zostają wtedy na panelu kotła), 1 = niedostępne. Użytkownicy podawali P7 = 1 – polska instrukcja mówi 2. Immergas potwierdza OpenTherm w TERA V2. |
+| VICTRIX TT, Maior TT (G / P / t / A) | 41 / 44, zdjęta X40 | Kody jak w ZEUS 25; Maior TT nie używa t3 / t4. VICTRIX TT zgłoszono jako CAR-BUS, z którym nie działa żaden master OpenTherm, więc najpierw zmierz zaciski. |
 | VICTRIX HYBRID, HYBRID PLUS (P / t / A / S) | 44-41 idą do zacisków 1-2 panelu kontrolnego systemu | Instrukcja nie wspomina ani o OpenTherm, ani o Dominusie, więc to połączenie nie jest potwierdzone. Profil menu daje tylko kody. |
 | VICTRIX EXA 24 X 1 ErP, EXA 28 / 32 1 ErP, NIKE 24 ECO (S / P / t) | 41 / 44, zdjęta X40 (NIKE: złącze X15) | Użytkownik ma tu Nest Heat Link (OT1 na 44, OT2 na 41). EXA 28: regulator OpenTherm innej firmy działa bez przeróbek (użytkownicy). |
 | VICTRIX ZEUS Superior 26 / 32, HERCULES Condensing 26 / 32 / ABT 32, HERCULES Solar 26 (M1 / M3 / M5) | **41 / 44** (IMG BUS), zdjęta X40 | OpenTherm na 41 / 44 potwierdzony na ZEUS Superior 26 2 ErP (ESP32 z adapterem OpenTherm, społeczność Home Assistant); 42 / 43 to zaciski Super CAR, nie OpenTherm. HERCULES: 41 / 44 przewidywane (ta sama rodzina płyt), jeszcze niepotwierdzone. **M3 P33 = ON** pozwala grzać CO bez pilota (E31). ABT 32: termostaty pokojowe na karcie stref X9. *ERR>CM* na CAR V2 = brak komunikacji. |
@@ -202,7 +203,7 @@ fabryczne). Nic nie trafia do kotła; karta **Parametry pieca (offline)** używa
 instalatora dają pięć rodzin menu OpenTherm; **Profil menu kotła** (albo zgadywanie z pola *Model kotła*) wybiera kody,
 które pokazuje karta. Wartości to te same encje w każdym profilu.
 
-| Funkcja | ZEUS 25 / OMNIA | TERA V2 / V3 | EXA 24 X / 28 / 32, NIKE | ZEUS Superior 26 / 32 | HERCULES Condensing / Solar 26 |
+| Funkcja | ZEUS 25 / OMNIA / TT / Maior TT | TERA V2 / V3 | EXA 24 X / 28 / 32, NIKE | ZEUS Superior 26 / 32 | HERCULES Condensing / Solar 26 |
 |---|---|---|---|---|---|
 | Min. / maks. zasilanie CO | t0 / t1 | t0 / t1 | S5 / S6 (EXA) | P66/A / P66/B | P66/A / P66/B |
 | Krzywa (temp. zewn. przy maks. / min. zasilaniu) | – | – | – | P66/C / P66/D | P66/C / P66/D |
@@ -221,7 +222,7 @@ które pokazuje karta. Wartości to te same encje w każdym profilu.
 Kody Superior P68–P76 są odczytane z jego instrukcji i czekają na potwierdzenie na prawdziwym kotle; instrukcja
 HERCULES sugeruje, że P55 jest tam odczytem, a pompą sterują P57 / P67. VICTRIX ZEUS 26 2 ErP prawie nie ma
 numerowanego menu – dla niego profil ogólny. **Nowa platforma** (ZEUS Superior 25 / 30 / 35, HERCULES 25 / 35, VICTRIX
-EXTRA / EXTRA PLUS) to dla Dominusa kocioł Modbus – patrz [Modbus po TCP](pdu-map.pl.md). VICTRIX HYBRID / HYBRID PLUS mają kody TERA, bez P7, a P5 to −9…+9 K. Instrukcja VICTRIX PRO V2 EU nie wspomina o Dominusie:
+EXTRA / EXTRA PLUS) to dla Dominusa kocioł Modbus – patrz [Modbus po TCP](pdu-map.pl.md). AVIO 24 kW programuje się diodami i nie ma kodów parametrów, a Nike Star 24 3 E przyciskami: dla nich profil ogólny. Nie znalazłem instrukcji instalatora VICTRIX kW TT / kW 26, więc też zostają na profilu ogólnym. Stare pompy MAGIS PRO / COMBO nie mają w aplikacji konfiguracji Modbus i nie są obsługiwane. VICTRIX HYBRID / HYBRID PLUS mają kody TERA, bez P7, a P5 to −9…+9 K. Instrukcja VICTRIX PRO V2 EU nie wspomina o Dominusie:
 ten kocioł ma port BMS Modbus na T+ / T− i wejście termostatu OpenTherm. Instrukcje starszego VICTRIX PRO 2 ErP nie opisują OpenTherm, Modbusa ani IMG BUS,
 więc nie ma on profilu.
 

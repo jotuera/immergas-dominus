@@ -107,6 +107,30 @@ Bez Dominusa te same kotły może prowadzić jako slave Modbus **BMS** (*Typ* = 
 [hub](https://github.com/jotuera/immergas-modbus-bms-nasa-opentherm-hub/blob/main/docs/gas-boiler-bms.pl.md) ESPHome – inna mapa
 rejestrów (0–1027); BMS i Dominus się wykluczają.
 
+## Inne konfiguracje Modbus w aplikacji
+
+Aplikacja Dominus ma osobne konfiguracje dla tych kotłów. W jej danych (stan z 11.2025) każdy rejestr wspólny z `MPROCOMBOV2`
+ma tę samą definicję. Wynika to tylko z konfiguracji aplikacji: żaden z tych kotłów nie był testowany z tą integracją.
+
+| Konfiguracja | Modele | Rejestry | Różnice względem `MPROCOMBOV2` |
+|---|---|---|---|
+| `MBUS` | TRIO | 114 | brak 4199 |
+| `MPROCOMBOV2_8N2` | MAGIS HERCULES | 115 | brak |
+| `MPROCOMBOV2_SYS` | GESTORE DI SISTEMA | 98 | brak 2040–2045, 2240–2248, 2440–2446 |
+| `SCP01` | SUPERIOR | 113 | dodaje rejestry poniżej; brak 2214–2218 (i +10 / +20 / +30) |
+| `HDBC65_IM01` | MAIOR / EXTRA | 93 | dodaje rejestry poniżej; brak 2015 i 2210–2218 oprócz 2212 (i +10 / +20 / +30) |
+
+Rejestry tylko w `SCP01` / `HDBC65_IM01` (strefa 1, kolejne strefy +10 / +20 / +30, etykiety z aplikacji). Integracja nie
+tworzy jeszcze dla nich encji.
+
+| PDU | SUPERIOR | MAIOR / EXTRA |
+|---|---|---|
+| 2016 | Set Flow, 5–85 °C | Set Flow, 20–85 °C |
+| 2017 | Offset Flow, −15…15 °C | – |
+| 2212 | Set temperature in manual, 5–35 °C | Set K, 0–9 |
+| 2219 | Zone mode, 0–2 | – |
+| 2002, 2103 | odczyt na ekranie głównym, znaczenie nieznane | tak samo |
+
 ## Kotły OpenTherm
 
 Kotły bez konfiguracji Modbus (VICTRIX ZEUS / AVIO, STAR …) używają przez ten sam moduł OpenTherm: zob.

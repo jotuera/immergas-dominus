@@ -109,6 +109,31 @@ Without a Dominus the same boilers can be run as a Modbus **BMS** slave (*Type* 
 [hub](https://github.com/jotuera/immergas-modbus-bms-nasa-opentherm-hub/blob/main/docs/gas-boiler-bms.md) – a different
 register map (0–1027); BMS and Dominus exclude each other.
 
+## Other Modbus configurations in the app
+
+The Dominus app has separate configurations for these boilers. In the app's data (snapshot of 2025-11) every register they
+share with `MPROCOMBOV2` has the same definition. This comes only from the app's configuration: none of them has been tested
+with this integration.
+
+| App config | Models | Registers | Differences from `MPROCOMBOV2` |
+|---|---|---|---|
+| `MBUS` | TRIO | 114 | no 4199 |
+| `MPROCOMBOV2_8N2` | MAGIS HERCULES | 115 | none |
+| `MPROCOMBOV2_SYS` | GESTORE DI SISTEMA | 98 | no 2040–2045, 2240–2248, 2440–2446 |
+| `SCP01` | SUPERIOR | 113 | adds the registers below; no 2214–2218 (and +10 / +20 / +30) |
+| `HDBC65_IM01` | MAIOR / EXTRA | 93 | adds the registers below; no 2015 and 2210–2218 except 2212 (and +10 / +20 / +30) |
+
+Registers only in `SCP01` / `HDBC65_IM01` (zone 1, the other zones +10 / +20 / +30, app labels). The integration does not
+create entities for them yet.
+
+| PDU | SUPERIOR | MAIOR / EXTRA |
+|---|---|---|
+| 2016 | Set Flow, 5–85 °C | Set Flow, 20–85 °C |
+| 2017 | Offset Flow, −15…15 °C | – |
+| 2212 | Set temperature in manual, 5–35 °C | Set K, 0–9 |
+| 2219 | Zone mode, 0–2 | – |
+| 2002, 2103 | read on the home screen, meaning unknown | the same |
+
 ## OpenTherm boilers
 
 Boilers without the Modbus configuration (VICTRIX ZEUS / AVIO, STAR …) use OpenTherm through the same module:

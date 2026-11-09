@@ -249,12 +249,13 @@ mają tę samą mapę rejestrów i działają tak samo.
 (Warianty `MPROCOMBOV2_8N2` = Magis Hercules i `MPROCOMBOV2_SYS` = gestore di sistema mają
 tę samą mapę z drobną różnicą transmisji/adresowania.)
 
-**Nie pokryte — inna konfiguracja Dominus / mapa rejestrów:**
+**Nie pokryte albo niepotwierdzone:**
 
 - **VICTRIX ZEUS / AVIO**, STAR — protokół **OpenTherm** (zob. eksperymentalny tryb
   OpenTherm wyżej, [#2](https://github.com/jotuera/immergas-dominus/issues/2)).
-- **TRIO** (`MBUS`), **SUPERIOR** (`SCP01`), **MAIOR / EXTRA** (`HDBC65`) — inne
-  konfiguracje Modbus z własnymi mapami rejestrów.
+- **TRIO** (`MBUS`), **SUPERIOR** (`SCP01`), **MAIOR / EXTRA** (`HDBC65`) — w konfiguracji aplikacji rejestry
+  wspólne z `MPROCOMBOV2` mają tę samą definicję, ale żaden z tych kotłów nie był testowany z tą integracją – patrz
+  [mapa](https://github.com/jotuera/immergas-dominus/blob/main/docs/pdu-map.pl.md#inne-konfiguracje-modbus-w-aplikacji).
 
 Jeśli Twój kocioł używa configu `MPROCOMBOV2`, a nie ma go na liście, prawie na pewno
 zadziała — otwórz zgłoszenie, żeby potwierdzić.
@@ -305,6 +306,14 @@ przyjmie sesję.
   sprawdzone krzyżowo, ale na innych modelach mogą wymagać weryfikacji przez TCP AUTH.
 
 ## Historia zmian
+
+### 1.6.27
+
+- **Profile menu kotłów:** VICTRIX TT i Maior TT dodane do profilu *ZEUS 25 / OMNIA*. VICTRIX TT zgłoszono jako CAR-BUS, z którym nie
+  działa żaden master OpenTherm, więc najpierw zmierz zaciski.
+- **Dokumentacja:** pozostałe konfiguracje Modbus aplikacji Dominus (TRIO, SUPERIOR, MAIOR / EXTRA, GESTORE DI SISTEMA) są opisane
+  w mapie rejestrów. Pochodzą z danych aplikacji i nie były testowane z tą integracją.
+- Frontend: karty huba 0.91.4.
 
 ### 1.6.26
 

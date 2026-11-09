@@ -71,11 +71,12 @@ called IMG BUS, a third-party unit is a "commercially available remote". Check t
 
 | Boiler (menu family) | Remote terminals | Notes |
 |---|---|---|
-| VICTRIX ZEUS 25, EXA 28 1 ErP, OMNIA, OMNIA V2 (G / P / t / A) | 41 / 44, jumper X40 removed | X40 back on 40-41 without a remote. EXA 28: a third-party OpenTherm unit works without changes (users). |
+| VICTRIX ZEUS 25, OMNIA, OMNIA V2 (G / P / t / A) | 41 / 44, jumper X40 removed | X40 back on 40-41 without a remote. |
 | VICTRIX TERA V2 / V3 (P / t / A / S) | 41 / 44, X40 removed | **P7** = remote protocol: 0 IMG BUS (CAR V2), **2 = third-party remote** (the DHW setpoint and max. flow then stay on the boiler panel), 1 = not available. Users reported P7 = 1 – the Polish manual says 2. Immergas confirms OpenTherm on the TERA V2. |
-| VICTRIX EXA 24 X 1 ErP, NIKE 24 ECO (S / P / t) | 41 / 44, X40 removed (NIKE: connector X15) | A user runs a Nest Heat Link here (OT1 on 44, OT2 on 41). |
+| VICTRIX HYBRID, HYBRID PLUS (P / t / A / S) | 44-41 go to terminals 1-2 of the system control panel | The manual mentions neither OpenTherm nor the Dominus, so this connection is not confirmed. The menu profile only gives the codes. |
+| VICTRIX EXA 24 X 1 ErP, EXA 28 / 32 1 ErP, NIKE 24 ECO (S / P / t) | 41 / 44, X40 removed (NIKE: connector X15) | A user runs a Nest Heat Link here (OT1 on 44, OT2 on 41). EXA 28: a third-party OpenTherm unit works without changes (users). |
 | VICTRIX ZEUS Superior 26 / 32, HERCULES Condensing 26 / 32 / ABT 32, HERCULES Solar 26 (M1 / M3 / M5) | **41 / 44** (IMG BUS), X40 removed | OpenTherm on 41 / 44 confirmed on a ZEUS Superior 26 2 ErP (an ESP32 + OpenTherm adapter, Home Assistant community); 42 / 43 are the Super CAR terminals, not OpenTherm. HERCULES: 41 / 44 expected (same board family), not confirmed yet. **M3 P33 = ON** keeps CH working without a remote (E31). ABT 32: room thermostats on the zone board X9. *ERR>CM* on the CAR V2 = no communication. |
-| New platform: ZEUS Superior 25 / 30 / 35, HERCULES 25 / 35 / 35 ABT / Mini 35 / Solar 25, VICTRIX EXTRA | IMG BUS 44-41, **MODBUS D+ / D−** | The Dominus connects over **Modbus** (menu *Modbus / Type* = Dominus, EXTRA: P.18 = 1). A third-party OpenTherm unit may go on the IMG BUS (*Remote control* = commercial, EXTRA: P.17 = 1), but not together with the Dominus: E145 master conflict. E142 = Dominus unavailable. HERCULES 25 / 35 (manual ST.007903): on the IMG BUS 44-41 jumper X40 **stays**; 40-Z / 41 is the **DIM BUS** (room thermostat of zone 1 or the zone board, X40 removed), not for a remote. |
+| New platform: ZEUS Superior 25 / 30 / 35, HERCULES 25 / 35 / 35 ABT / Mini 35 / Solar 25, VICTRIX EXTRA / EXTRA PLUS | IMG BUS 44-41, **MODBUS D+ / D−** | The Dominus connects over **Modbus** (menu *Modbus / Type* = Dominus, EXTRA: P.18 = 1). A third-party OpenTherm unit may go on the IMG BUS (*Remote control* = commercial, EXTRA: P.17 = 1), but not together with the Dominus: E145 master conflict. E142 = Dominus unavailable. HERCULES 25 / 35 (manual ST.007903): on the IMG BUS 44-41 jumper X40 **stays**; 40-Z / 41 is the **DIM BUS** (room thermostat of zone 1 or the zone board, X40 removed), not for a remote. |
 
 On every older boiler **E31** (remote lost) puts the boiler in local mode and blocks the heating until it is
 power-cycled. The outdoor probe is on 38-39, an on/off thermostat on 40-41. Terminal **21** ("status signal") on the
@@ -203,7 +204,7 @@ hints.
 installer manuals give five OpenTherm menu families; **Boiler menu profile** (or a guess from the *Boiler model* text)
 picks the codes the card shows. The values are the same entities in every profile.
 
-| Function | ZEUS 25 / EXA 28 / OMNIA | TERA V2 / V3 | EXA 24 X / NIKE | ZEUS Superior 26 / 32 | HERCULES Condensing / Solar 26 |
+| Function | ZEUS 25 / OMNIA | TERA V2 / V3 | EXA 24 X / 28 / 32, NIKE | ZEUS Superior 26 / 32 | HERCULES Condensing / Solar 26 |
 |---|---|---|---|---|---|
 | CH min. / max. flow | t0 / t1 | t0 / t1 | S5 / S6 (EXA) | P66/A / P66/B | P66/A / P66/B |
 | Climatic curve (outdoor at max. / min. flow) | – | – | – | P66/C / P66/D | P66/C / P66/D |
@@ -212,7 +213,7 @@ picks the codes the card shows. The values are the same entities in every profil
 | Wait after DHW | t4 | t3 | – | – | – |
 | CH max. / min. output | P2 / P1 (%) | P2 / P1 (%) | S3 / S2 rpm (EXA), S1 / S0 % (NIKE) | P64 / P65 rpm | P64 / P65 rpm |
 | DHW max. / min. output | P0 (%) | P0 (%) | S1 / S0 rpm (EXA) | P57 / P62 rpm | P62 / P63 rpm |
-| DHW thermostat | t2 | – | – | P71 (−3 / −10 °C) | P71 (−3 / −5 °C solar) |
+| DHW thermostat | t2 | – | P0 (EXA: 1 by the setpoint, 0 / 2 fixed) | P71 (−3 / −10 °C) | P71 (−3 / −5 °C solar) |
 | Pump mode | P6 | P4 | P2 | P67 | P67 |
 | Pump speed / ΔT | A3 / A4, A5 | A1 / A2, A3 | – | P55 | P57 AUTO (ΔT) / FIX |
 | Outdoor probe correction | P7 | P5 | S7 (EXA) | P76 | P76 (−15…+14) |
@@ -221,8 +222,10 @@ picks the codes the card shows. The values are the same entities in every profil
 
 The Superior codes P68–P76 are read from its manual and still to be confirmed on a real boiler; the HERCULES manual
 suggests that P55 there is a reading and the pump is P57 / P67. The VICTRIX ZEUS 26 2 ErP has almost no numbered menu –
-use the generic profile. The **new platform** (ZEUS Superior 25 / 30 / 35, HERCULES 25 / 35, VICTRIX EXTRA) is a Modbus
-boiler for the Dominus – see [Modbus over TCP](pdu-map.md).
+use the generic profile. The **new platform** (ZEUS Superior 25 / 30 / 35, HERCULES 25 / 35, VICTRIX EXTRA / EXTRA PLUS) is a Modbus
+boiler for the Dominus – see [Modbus over TCP](pdu-map.md). VICTRIX HYBRID / HYBRID PLUS use the TERA codes, without P7, and P5 is −9…+9 K. The VICTRIX PRO V2 EU manual does not mention the Dominus: that boiler has a
+BMS Modbus port on T+ / T− and an input for an OpenTherm thermostat. The manuals of the older VICTRIX PRO 2 ErP describe no OpenTherm, Modbus or IMG BUS,
+so it has no profile.
 
 Built-in automatic functions (pump / 3-way valve anti-block every 24 h, radiator frost protection below 4 °C, P.C.B.
 self-check every 18 h, automatic venting A7, chimney sweep) need no settings and are not reported over OpenTherm.
@@ -254,7 +257,7 @@ issue (boiler model, integration version, the scan – no host, MAC or password)
 ## Sources
 
 - VICTRIX ZEUS 25 installer manual (fault codes, information menu, P / t / A / F parameters).
-- Installer manuals on immergas.pl (11.2026): VICTRIX EXA 24 X / 28, NIKE 24 ECO, TERA V2 / V3, OMNIA / OMNIA V2,
+- Installer manuals on immergas.pl (11.2026): VICTRIX EXA 24 X, EXA 28 / 32 (Czech edition), NIKE 24 ECO, TERA V2 / V3, OMNIA / OMNIA V2,
   HERCULES Condensing / ABT / Solar 26, and the new platform ZEUS Superior 25-35, HERCULES 25 / 35 / Mini / Solar 25, EXTRA.
 - [OTGateway compatibility](https://github.com/Laxilef/OTGateway/wiki/Compatibility) – the Immergas fix, DHW flow not
   supported on Victrix.

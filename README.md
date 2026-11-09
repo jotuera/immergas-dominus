@@ -310,6 +310,14 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.26
+
+- **Boiler menu profiles checked against the manuals.** VICTRIX EXA 28 / 32 1 ErP moved to the *EXA 24 X / 28 / 32, NIKE 24 ECO*
+  profile (menu S / P / t): if you chose *ZEUS 25* for an EXA 28, please change it. New *VICTRIX HYBRID / HYBRID PLUS* profile (its
+  connection over OpenTherm is not confirmed). OMNIA V2 is named in the *ZEUS 25 / OMNIA* profile.
+- **Fix:** the short-cycling hint for TERA points to t4, not t5.
+- Docs: VICTRIX EXTRA PLUS, PRO V2 EU and PRO 2 ErP. Frontend: hub cards 0.91.3.
+
 ### 1.6.25
 
 - **OpenTherm – who is in control (read only):** new diagnostic entities *Dominus in control*, *Thermostat input (module)* and
@@ -414,7 +422,7 @@ the module accepts the session.
 
 ### 1.6.13
 
-- **Device type** (Modbus): *Heat pump* or *Gas boiler* (VICTRIX ZEUS Superior 25-35, HERCULES, EXTRA on the new
+- **Device type** (Modbus): *Heat pump* or *Gas boiler* (VICTRIX ZEUS Superior 25-35, HERCULES, EXTRA / EXTRA PLUS on the new
   platform). A gas boiler drops *Cooling* from the operation mode and the climates, and the dashboard hides the heat
   pump values (cooling Comfort / Eco and curve, humidity, night function U11, boiler integration I01–I10). The
   [Modbus map](docs/pdu-map.md) has a *Gas boilers* section – the PDU scan report confirms the map for a gas boiler.

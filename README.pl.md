@@ -306,6 +306,14 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.26
+
+- **Profile menu kotłów sprawdzone z instrukcjami.** VICTRIX EXA 28 / 32 1 ErP przeniesiony do profilu *EXA 24 X / 28 / 32, NIKE 24 ECO*
+  (menu S / P / t): jeśli dla EXA 28 wybrano *ZEUS 25*, trzeba to zmienić. Nowy profil *VICTRIX HYBRID / HYBRID PLUS* (połączenie po
+  OpenTherm niepotwierdzone). OMNIA V2 jest nazwany w profilu *ZEUS 25 / OMNIA*.
+- **Poprawka:** podpowiedź o taktowaniu dla TERA wskazuje t4, nie t5.
+- Dokumentacja: VICTRIX EXTRA PLUS, PRO V2 EU i PRO 2 ErP. Frontend: karty huba 0.91.3.
+
 ### 1.6.25
 
 - **OpenTherm – kto steruje (tylko odczyt):** nowe encje diagnostyczne *Dominus steruje*, *Wejście termostatu (moduł)* i
@@ -410,7 +418,7 @@ przyjmie sesję.
 
 ### 1.6.13
 
-- **Typ urządzenia** (Modbus): *Pompa ciepła* albo *Kocioł gazowy* (VICTRIX ZEUS Superior 25-35, HERCULES, EXTRA z nowej
+- **Typ urządzenia** (Modbus): *Pompa ciepła* albo *Kocioł gazowy* (VICTRIX ZEUS Superior 25-35, HERCULES, EXTRA / EXTRA PLUS z nowej
   platformy). Kocioł gazowy usuwa *Chłodzenie* z trybu pracy i termostatów, a tablica ukrywa wartości pompy ciepła
   (Komfort / Eko i krzywa chłodzenia, wilgotność, funkcja nocna U11, integracja kotła I01–I10). [Mapa
   Modbus](docs/pdu-map.pl.md) ma sekcję *Kotły gazowe* – raport skanu PDU potwierdza mapę dla kotła gazowego.

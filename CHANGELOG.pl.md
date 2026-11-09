@@ -7,6 +7,7 @@ Pełna historia jest w README, w sekcji [Historia zmian](README.pl.md#historia-z
 
 | Wersja | Najważniejsze |
 |---|---|
+| 1.6.26 | OpenTherm: profile menu kotłów sprawdzone z instrukcjami: EXA 28 / 32 przeniesione do rodziny S / P / t, nowy profil VICTRIX HYBRID, nazwany OMNIA V2, poprawiona podpowiedź taktowania TERA; karty huba 0.91.3 |
 | 1.6.25 | OpenTherm: diagnostyka tylko do odczytu parametrów modułu 0 i 1 (Dominus steruje, wejście termostatu, licznik sterowania czasowego) |
 | 1.6.24 | OpenTherm: karty Gaz czy prąd i Ostatni cykl CWU; dashboard Modbus: Łączność pod Wykresami, ustawienia pod Automatyzacjami; karty huba 0.91.2 |
 | 1.6.23 | OpenTherm: cel CO wyliczany z krzywej kotła P66 (ZEUS Superior, HERCULES), karty huba 0.90.1 |

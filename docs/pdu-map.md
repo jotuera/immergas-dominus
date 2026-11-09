@@ -95,7 +95,7 @@ automatically. A PDU the boiler does not provide usually reads 0, so the zeros a
 ## Gas boilers (Modbus)
 
 The new Immergas platform – VICTRIX ZEUS Superior 25 / 30 / 35, HERCULES 25 / 35 / 35 ABT / Mini 35 / Solar 25 and
-VICTRIX EXTRA – connects the Dominus over the same Modbus bus (boiler menu *Modbus / Type* = **Dominus**; EXTRA:
+VICTRIX EXTRA / EXTRA PLUS – connects the Dominus over the same Modbus bus (boiler menu *Modbus / Type* = **Dominus**; EXTRA:
 P.18 = 1). The map above comes from a MAGIS heat pump; which PDUs a gas boiler answers is **not confirmed yet** – the
 mode (2000), the zone and DHW setpoints (2015 / 2095), the fault code (2100) and the time programs are expected to be
 the same, because the Dominus app shows them for every boiler.

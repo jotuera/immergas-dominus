@@ -94,7 +94,7 @@ automatycznie. PDU, którego kocioł nie udostępnia, zwykle daje 0, więc zera 
 ## Kotły gazowe (Modbus)
 
 Nowa platforma Immergas – VICTRIX ZEUS Superior 25 / 30 / 35, HERCULES 25 / 35 / 35 ABT / Mini 35 / Solar 25 i VICTRIX
-EXTRA – łączy Dominusa tą samą magistralą Modbus (menu kotła *Modbus / Typ* = **Dominus**; EXTRA: P.18 = 1). Mapa
+EXTRA / EXTRA PLUS – łączy Dominusa tą samą magistralą Modbus (menu kotła *Modbus / Typ* = **Dominus**; EXTRA: P.18 = 1). Mapa
 powyżej pochodzi z pompy ciepła MAGIS; które PDU odpowiadają w kotle gazowym, **nie jest jeszcze potwierdzone** –
 tryb (2000), nastawy strefy i CWU (2015 / 2095), kod błędu (2100) i programy czasowe powinny być te same, bo aplikacja
 Dominus pokazuje je dla każdego kotła.

@@ -928,9 +928,10 @@
       "ot_menu_profile": {
         "name": "Profil menu kotła",
         "state": {
-          "zeus25": "VICTRIX ZEUS 25 / EXA 28 / OMNIA (menu G / P / t / A)",
+          "zeus25": "VICTRIX ZEUS 25 / OMNIA / OMNIA V2 (menu G / P / t / A)",
           "tera": "VICTRIX TERA V2 / V3 (menu P / t / A / S)",
-          "classic": "VICTRIX EXA 24 X / NIKE 24 ECO (menu S / P / t)",
+          "hybrid": "VICTRIX HYBRID / HYBRID PLUS (menu P / t / A / S)",
+          "classic": "VICTRIX EXA 24 X / 28 / 32, NIKE 24 ECO (menu S / P / t)",
           "superior": "VICTRIX ZEUS Superior 26 / 32 (menu M1 / M3 / M5)",
           "hercules": "HERCULES Condensing / Solar 26 (menu M1 / M3 / M5)",
           "generic": "Inny / ogólny"

@@ -310,6 +310,15 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.18
+
+- **Cards in 9 languages:** 998 card texts that were still shown in English are now translated (cs, de, es, fr, hu, it, nl,
+  pt, sk). Machine translation, corrections are welcome.
+- **OpenTherm dashboard:** *Connectivity* moved under *Charts*, four tiles in one row.
+- **Optimisation effectiveness:** each period counts only the hours that have all the statistics, so a meter with a longer
+  history no longer distorts the "before" column.
+- Frontend: hub cards 0.88.0.
+
 ### 1.6.17
 
 - **OpenTherm – CH supervision:** is a CH demand really taken up by the boiler. *CH supervision* names the state

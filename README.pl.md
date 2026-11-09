@@ -306,6 +306,15 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.18
+
+- **Karty w 9 językach:** przetłumaczone 998 tekstów kart, które wyświetlały się jeszcze po angielsku (cs, de, es, fr, hu, it,
+  nl, pt, sk). Tłumaczenie maszynowe, poprawki mile widziane.
+- **Dashboard OpenTherm:** *Łączność* przeniesiona pod *Wykresy*, cztery kafelki w jednym rzędzie.
+- **Skuteczność optymalizacji:** każdy okres liczy tylko godziny z kompletem statystyk, więc licznik z dłuższą historią nie
+  zawyża już kolumny „przed”.
+- Frontend: karty huba 0.88.0.
+
 ### 1.6.17
 
 - **OpenTherm – nadzór CO:** czy kocioł naprawdę podjął żądanie CO. *Nadzór CO* nazywa stan (potwierdzone, priorytet CWU,

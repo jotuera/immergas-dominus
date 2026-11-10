@@ -311,6 +311,12 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.31
+
+- **ZEUS Superior / HERCULES:** the *target ≈* calculated from your P66 copy is rounded the way the boiler does it: the
+  outdoor temperature to a whole degree, the result cut to whole degrees (5.7 °C outdoor → 29 °C, as on the remote).
+- Frontend: hub cards 0.91.8.
+
 ### 1.6.30
 
 - Frontend: hub cards 0.91.7 (no Dominus changes).

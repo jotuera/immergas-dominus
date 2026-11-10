@@ -307,6 +307,12 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.31
+
+- **ZEUS Superior / HERCULES:** *cel ≈* wyliczany z kopii P66 jest zaokrąglany tak jak w kotle: temperatura zewnętrzna
+  do pełnego stopnia, wynik ucięty do pełnych stopni (5,7 °C na zewnątrz → 29 °C, jak na pilocie).
+- Frontend: karty huba 0.91.8.
+
 ### 1.6.30
 
 - Frontend: karty huba 0.91.7 (bez zmian w Dominusie).

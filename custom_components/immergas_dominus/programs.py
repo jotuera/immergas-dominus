@@ -337,7 +337,7 @@ def ot_declared_selects(coordinator: ImmergasDominusCoordinator) -> list[SelectE
         ImmergasDeclaredSelect(coordinator, "ot_t2", "mdi:water-thermometer", ["0", "1", "2", "3"], "1"),
         ImmergasDeclaredSelect(coordinator, "ot_p6", "mdi:pump", ["intermittent", "continuous", "flow_probe"], "intermittent"),
         # which menu the boiler has: the dashboard shows the codes, ranges and units of that model
-        ImmergasDeclaredSelect(coordinator, "ot_menu_profile", "mdi:book-cog-outline", ["zeus25", "tera", "hybrid", "classic", "superior", "hercules", "generic"], None),
+        ImmergasDeclaredSelect(coordinator, "ot_menu_profile", "mdi:book-cog-outline", ["zeus25", "maior", "tera", "hybrid", "classic", "superior", "hercules", "generic"], None),
         ImmergasDeclaredSelect(coordinator, "ot_sup_pump_speed", "mdi:pump", ["1", "2", "3", "auto"], None),
         ImmergasDeclaredSelect(coordinator, "ot_sup_dhw_restart", "mdi:water-thermometer", ["3", "5", "10"], "3"),
         # 1.6.12 (menu families from the Immergas manuals): TERA P7 remote protocol, Hercules P57 pump control and

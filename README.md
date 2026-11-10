@@ -165,7 +165,7 @@ boiler answers as unsupported three times in a row are skipped for an hour.
 **OpenTherm Data-IDs** – what the integration reads and writes and what the tested boilers answer, plus the Immergas
 specifics (the remote in charge, E31, the 0xCA fix): [docs/opentherm.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.md).
 
-**OpenTherm boilers (VICTRIX ZEUS / AVIO, STAR …).** In the OpenTherm mode the same `custom:immergas-dominus`
+**OpenTherm boilers (VICTRIX ZEUS / AVIO, MAIOR TT, STAR …).** In the OpenTherm mode the same `custom:immergas-dominus`
 strategy shows the **same cards** without those that have no OpenTherm data (schedules, heating curve, calibration /
 statistics, settings, automations, connectivity): **Diagram**, **Now** (flow / return, DHW, outdoor, modulation, pressure,
 DHW flow rate, flame, fault), **Setpoints** (CH flow setpoint and DHW with −/+), **Operating mode** (Standby / Summer /
@@ -224,7 +224,7 @@ The Dominus module speaks one of two protocols over its local TCP port 2000, dep
 | Protocol | Boilers | What is documented |
 |---|---|---|
 | **Modbus** (main) | Magis Combo / Pro-Combo V2, Magis Pro and other `*_MBUS_*` configurations | [docs/pdu-map.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/pdu-map.md) – frame, every PDU with its entity (main device, zones, time programs), PDUs found but not yet understood, what is not readable over TCP |
-| **OpenTherm** | VICTRIX ZEUS / AVIO, STAR … | [docs/opentherm.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.md) – frame, every Data-ID with its entity and what the tested boilers answer, Immergas specifics, sources |
+| **OpenTherm** | VICTRIX ZEUS / AVIO, MAIOR TT, STAR … | [docs/opentherm.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.md) – frame, every Data-ID with its entity and what the tested boilers answer, Immergas specifics, sources |
 
 **Help map your boiler (1.6.6).** **Scan PDUs** (Modbus) or **Scan Data-IDs** (OpenTherm), fill in the **Boiler model**
 and press **Report PDU map** / **Report Data-ID map**: a notification links to a **pre-filled GitHub issue** (model,
@@ -255,9 +255,10 @@ share the map with a serial/addressing tweak.)
 
 **Not covered or not confirmed:**
 
-- **VICTRIX ZEUS / AVIO**, STAR — use the **OpenTherm** protocol (see the experimental
-  OpenTherm mode above, [#2](https://github.com/jotuera/immergas-dominus/issues/2)).
-- **TRIO** (`MBUS`), **SUPERIOR** (`SCP01`), **MAIOR / EXTRA** (`HDBC65`) — in the app's configuration the registers
+- **VICTRIX ZEUS / AVIO**, **VICTRIX MAIOR TT** (e.g. 28 / 35 X TT, with the CAR V2 on terminals 41 / 44), STAR — use
+  the **OpenTherm** protocol (see the experimental OpenTherm mode above, [#2](https://github.com/jotuera/immergas-dominus/issues/2)).
+  The MAIOR TT has its own *Boiler menu profile*; it has not been tested on a real boiler yet.
+- **TRIO** (`MBUS`), **SUPERIOR** (`SCP01`), the new **VICTRIX MAIOR** and **EXTRA** (`HDBC65`, Modbus D+ / D−, not the older MAIOR TT) — in the app's configuration the registers
   they share with `MPROCOMBOV2` have the same definition, but none has been tested with this integration – see
   [the map](https://github.com/jotuera/immergas-dominus/blob/main/docs/pdu-map.md#other-modbus-configurations-in-the-app).
 
@@ -310,6 +311,13 @@ the module accepts the session.
   may need verification over TCP AUTH on other models.
 
 ## Changelog
+
+### 1.6.33
+
+- **VICTRIX MAIOR TT:** its own *Boiler menu profile* from the Victrix Maior 35 X TT 1 ErP manual – the ZEUS 25 codes
+  without t3 / t4, and t2 is the DHW thermostat (0–3). A boiler model with "Maior" is now guessed as this profile. The
+  README lists it with the OpenTherm boilers and tells it apart from the new VICTRIX MAIOR (Modbus, `HDBC65`).
+- Frontend: hub cards 0.92.0.
 
 ### 1.6.32
 

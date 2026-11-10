@@ -158,7 +158,7 @@ z powrotem – *Przyjęty* albo *Potwierdzony, nieprzyjęty*, gdy kocioł potwie
 według zgłoszeń odblokowuje zapis Data-ID 1 / 57 w kotłach Immergas (eksperymentalne, domyślnie standard 0x00).
 Data-ID, na które kocioł trzy razy z rzędu odpowie „nieobsługiwane”, są pomijane przez godzinę.
 
-**Kotły OpenTherm (VICTRIX ZEUS / AVIO, STAR …).** W trybie OpenTherm ta sama strategia `custom:immergas-dominus`
+**Kotły OpenTherm (VICTRIX ZEUS / AVIO, MAIOR TT, STAR …).** W trybie OpenTherm ta sama strategia `custom:immergas-dominus`
 pokazuje **te same karty** bez tych, dla których OpenTherm nie ma danych (harmonogramy, krzywa grzewcza, kalibracja /
 statystyki, ustawienia, automatyzacje, łączność): **Schemat**, **Teraz** (zasilanie / powrót, CWU, zewnętrzna, modulacja,
 ciśnienie, przepływ CWU, płomień, awaria), **Nastawy** (nastawa zasilania CO i CWU z −/+), **Tryb pracy** (Standby / Lato /
@@ -220,7 +220,7 @@ Moduł Dominus mówi po lokalnym porcie TCP 2000 jednym z dwóch protokołów, z
 | Protokół | Kotły | Co jest opisane |
 |---|---|---|
 | **Modbus** (główny) | Magis Combo / Pro-Combo V2, Magis Pro i inne konfiguracje `*_MBUS_*` | [docs/pdu-map.pl.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/pdu-map.pl.md) – ramka, każde PDU z encją (urządzenie główne, strefy, programy czasowe), PDU znalezione, ale jeszcze nierozpoznane, czego nie da się odczytać po TCP |
-| **OpenTherm** | VICTRIX ZEUS / AVIO, STAR … | [docs/opentherm.pl.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.pl.md) – ramka, każdy Data-ID z encją i odpowiedziami testowanych kotłów, specyfika Immergas, źródła |
+| **OpenTherm** | VICTRIX ZEUS / AVIO, MAIOR TT, STAR … | [docs/opentherm.pl.md](https://github.com/jotuera/immergas-dominus/blob/main/docs/opentherm.pl.md) – ramka, każdy Data-ID z encją i odpowiedziami testowanych kotłów, specyfika Immergas, źródła |
 
 **Pomóż zmapować swój kocioł (1.6.6).** **Skanuj PDU** (Modbus) albo **Skanuj Data-ID** (OpenTherm), wpisz **Model
 kotła** i naciśnij **Zgłoś mapę PDU** / **Zgłoś mapę Data-ID**: powiadomienie zawiera link do **gotowego zgłoszenia na
@@ -251,9 +251,10 @@ tę samą mapę z drobną różnicą transmisji/adresowania.)
 
 **Nie pokryte albo niepotwierdzone:**
 
-- **VICTRIX ZEUS / AVIO**, STAR — protokół **OpenTherm** (zob. eksperymentalny tryb
-  OpenTherm wyżej, [#2](https://github.com/jotuera/immergas-dominus/issues/2)).
-- **TRIO** (`MBUS`), **SUPERIOR** (`SCP01`), **MAIOR / EXTRA** (`HDBC65`) — w konfiguracji aplikacji rejestry
+- **VICTRIX ZEUS / AVIO**, **VICTRIX MAIOR TT** (np. 28 / 35 X TT, z CAR V2 na zaciskach 41 / 44), STAR — protokół
+  **OpenTherm** (zob. eksperymentalny tryb OpenTherm wyżej, [#2](https://github.com/jotuera/immergas-dominus/issues/2)).
+  MAIOR TT ma własny *Profil menu kotła*; nie był jeszcze testowany na prawdziwym kotle.
+- **TRIO** (`MBUS`), **SUPERIOR** (`SCP01`), nowy **VICTRIX MAIOR** i **EXTRA** (`HDBC65`, Modbus D+ / D−, nie starszy MAIOR TT) — w konfiguracji aplikacji rejestry
   wspólne z `MPROCOMBOV2` mają tę samą definicję, ale żaden z tych kotłów nie był testowany z tą integracją – patrz
   [mapa](https://github.com/jotuera/immergas-dominus/blob/main/docs/pdu-map.pl.md#inne-konfiguracje-modbus-w-aplikacji).
 
@@ -306,6 +307,13 @@ przyjmie sesję.
   sprawdzone krzyżowo, ale na innych modelach mogą wymagać weryfikacji przez TCP AUTH.
 
 ## Historia zmian
+
+### 1.6.33
+
+- **VICTRIX MAIOR TT:** własny *Profil menu kotła* z instrukcji Victrix Maior 35 X TT 1 ErP – kody ZEUS 25 bez t3 / t4,
+  a t2 to termostat CWU (0–3). Model kotła z „Maior” trafia teraz do tego profilu. README wymienia go wśród kotłów
+  OpenTherm i odróżnia od nowego VICTRIX MAIOR (Modbus, `HDBC65`).
+- Frontend: karty huba 0.92.0.
 
 ### 1.6.32
 

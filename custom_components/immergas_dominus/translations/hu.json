@@ -928,7 +928,8 @@
       "ot_menu_profile": {
         "name": "Boiler menu profile",
         "state": {
-          "zeus25": "VICTRIX ZEUS 25 / OMNIA / OMNIA V2 / TT / Maior TT (menu G / P / t / A)",
+          "zeus25": "VICTRIX ZEUS 25 / OMNIA / OMNIA V2 / TT (menu G / P / t / A)",
+          "maior": "VICTRIX MAIOR TT (menu G / P / t / A)",
           "tera": "VICTRIX TERA V2 / V3 (menu P / t / A / S)",
           "hybrid": "VICTRIX HYBRID / HYBRID PLUS (menu P / t / A / S)",
           "classic": "VICTRIX EXA 24 X / 28 / 32, NIKE 24 ECO (menu S / P / t)",

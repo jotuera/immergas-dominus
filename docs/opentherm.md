@@ -73,7 +73,7 @@ called IMG BUS, a third-party unit is a "commercially available remote". Check t
 |---|---|---|
 | VICTRIX ZEUS 25, OMNIA, OMNIA V2 (G / P / t / A) | 41 / 44, jumper X40 removed | X40 back on 40-41 without a remote. |
 | VICTRIX TERA V2 / V3 (P / t / A / S) | 41 / 44, X40 removed | **P7** = remote protocol: 0 IMG BUS (CAR V2), **2 = third-party remote** (the DHW setpoint and max. flow then stay on the boiler panel), 1 = not available. Users reported P7 = 1 – the Polish manual says 2. Immergas confirms OpenTherm on the TERA V2. |
-| VICTRIX TT, Maior TT (G / P / t / A) | 41 / 44, X40 removed | Codes as on the ZEUS 25; the Maior TT does not use t3 / t4. A VICTRIX TT has been reported as CAR-BUS, where no OpenTherm master works, so measure the terminals first. |
+| VICTRIX TT, Maior TT (G / P / t / A) | 41 / 44, X40 removed | Codes as on the ZEUS 25; the Maior TT has its own profile: no t3 / t4, t2 = DHW thermostat (0–3). A VICTRIX TT has been reported as CAR-BUS, where no OpenTherm master works, so measure the terminals first. |
 | VICTRIX HYBRID, HYBRID PLUS (P / t / A / S) | 44-41 go to terminals 1-2 of the system control panel | The manual mentions neither OpenTherm nor the Dominus, so this connection is not confirmed. The menu profile only gives the codes. |
 | VICTRIX EXA 24 X 1 ErP, EXA 28 / 32 1 ErP, NIKE 24 ECO (S / P / t) | 41 / 44, X40 removed (NIKE: connector X15) | A user runs a Nest Heat Link here (OT1 on 44, OT2 on 41). EXA 28: a third-party OpenTherm unit works without changes (users). |
 | VICTRIX ZEUS Superior 26 / 32, HERCULES Condensing 26 / 32 / ABT 32, HERCULES Solar 26 (M1 / M3 / M5) | **41 / 44** (IMG BUS), X40 removed | OpenTherm on 41 / 44 confirmed on a ZEUS Superior 26 2 ErP (an ESP32 + OpenTherm adapter, Home Assistant community); 42 / 43 are the Super CAR terminals, not OpenTherm. HERCULES: 41 / 44 expected (same board family), not confirmed yet. **M3 P33 = ON** keeps CH working without a remote (E31). ABT 32: room thermostats on the zone board X9. *ERR>CM* on the CAR V2 = no communication. |
@@ -205,21 +205,21 @@ hints.
 installer manuals give five OpenTherm menu families; **Boiler menu profile** (or a guess from the *Boiler model* text)
 picks the codes the card shows. The values are the same entities in every profile.
 
-| Function | ZEUS 25 / OMNIA / TT / Maior TT | TERA V2 / V3 | EXA 24 X / 28 / 32, NIKE | ZEUS Superior 26 / 32 | HERCULES Condensing / Solar 26 |
-|---|---|---|---|---|---|
-| CH min. / max. flow | t0 / t1 | t0 / t1 | S5 / S6 (EXA) | P66/A / P66/B | P66/A / P66/B |
-| Climatic curve (outdoor at max. / min. flow) | – | – | – | P66/C / P66/D | P66/C / P66/D |
-| CH ignitions timer | t5, 0–600 s | t4 | t0 | P69, 0–255 s | P69, 0–255 s |
-| CH ramp / ignition delay | t6 / t7 | t5 / t6 | t1 / t2 | P70 / P68 | P70 / P68 |
-| Wait after DHW | t4 | t3 | – | – | – |
-| CH max. / min. output | P2 / P1 (%) | P2 / P1 (%) | S3 / S2 rpm (EXA), S1 / S0 % (NIKE) | P64 / P65 rpm | P64 / P65 rpm |
-| DHW max. / min. output | P0 (%) | P0 (%) | S1 / S0 rpm (EXA) | P57 / P62 rpm | P62 / P63 rpm |
-| DHW thermostat | t2 | – | P0 (EXA: 1 by the setpoint, 0 / 2 fixed) | P71 (−3 / −10 °C) | P71 (−3 / −5 °C solar) |
-| Pump mode | P6 | P4 | P2 | P67 | P67 |
-| Pump speed / ΔT | A3 / A4, A5 | A1 / A2, A3 | – | P55 | P57 AUTO (ΔT) / FIX |
-| Outdoor probe correction | P7 | P5 | S7 (EXA) | P76 | P76 (−15…+14) |
-| Remote | – | P7 (0 CAR V2 / 2 third-party) | – | – | M3 P33 CH without a remote |
-| Counters | – | – | – | M1 | M1 P12 hours, P13 ignitions |
+| Function | ZEUS 25 / OMNIA / TT | MAIOR TT | TERA V2 / V3 | EXA 24 X / 28 / 32, NIKE | ZEUS Superior 26 / 32 | HERCULES Condensing / Solar 26 |
+|---|---|---|---|---|---|---|
+| CH min. / max. flow | t0 / t1 | t0 / t1 | t0 / t1 | S5 / S6 (EXA) | P66/A / P66/B | P66/A / P66/B |
+| Climatic curve (outdoor at max. / min. flow) | – | – | – | – | P66/C / P66/D | P66/C / P66/D |
+| CH ignitions timer | t5, 0–600 s | t5, 0–600 s | t4 | t0 | P69, 0–255 s | P69, 0–255 s |
+| CH ramp / ignition delay | t6 / t7 | t6 / t7 | t5 / t6 | t1 / t2 | P70 / P68 | P70 / P68 |
+| Wait after DHW | t4 | – | t3 | – | – | – |
+| CH max. / min. output | P2 / P1 (%) | P2 / P1 (%) | P2 / P1 (%) | S3 / S2 rpm (EXA), S1 / S0 % (NIKE) | P64 / P65 rpm | P64 / P65 rpm |
+| DHW max. / min. output | P0 (%) | P0 (%) | P0 (%) | S1 / S0 rpm (EXA) | P57 / P62 rpm | P62 / P63 rpm |
+| DHW thermostat | t2 | t2 (−3 / −2…+1 / −10 / −5 °C) | – | P0 (EXA: 1 by the setpoint, 0 / 2 fixed) | P71 (−3 / −10 °C) | P71 (−3 / −5 °C solar) |
+| Pump mode | P6 | P6 | P4 | P2 | P67 | P67 |
+| Pump speed / ΔT | A3 / A4, A5 | A3 / A4, A5 | A1 / A2, A3 | – | P55 | P57 AUTO (ΔT) / FIX |
+| Outdoor probe correction | P7 | P7 (−9…+9 K) | P5 | S7 (EXA) | P76 | P76 (−15…+14) |
+| Remote | – | – | P7 (0 CAR V2 / 2 third-party) | – | – | M3 P33 CH without a remote |
+| Counters | – | – | – | – | M1 | M1 P12 hours, P13 ignitions |
 
 The Superior codes P68–P76 are read from its manual and still to be confirmed on a real boiler; the HERCULES manual
 suggests that P55 there is a reading and the pump is P57 / P67. The VICTRIX ZEUS 26 2 ErP has almost no numbered menu –

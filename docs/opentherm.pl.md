@@ -74,7 +74,7 @@ swojego kotła.
 |---|---|---|
 | VICTRIX ZEUS 25, OMNIA, OMNIA V2 (G / P / t / A) | 41 / 44, zdjęta zworka X40 | Bez regulatora X40 z powrotem na 40-41. |
 | VICTRIX TERA V2 / V3 (P / t / A / S) | 41 / 44, zdjęta X40 | **P7** = protokół zdalnego sterowania: 0 IMG BUS (CAR V2), **2 = pilot innej firmy** (nastawa CWU i maks. zasilanie zostają wtedy na panelu kotła), 1 = niedostępne. Użytkownicy podawali P7 = 1 – polska instrukcja mówi 2. Immergas potwierdza OpenTherm w TERA V2. |
-| VICTRIX TT, Maior TT (G / P / t / A) | 41 / 44, zdjęta X40 | Kody jak w ZEUS 25; Maior TT nie używa t3 / t4. VICTRIX TT zgłoszono jako CAR-BUS, z którym nie działa żaden master OpenTherm, więc najpierw zmierz zaciski. |
+| VICTRIX TT, Maior TT (G / P / t / A) | 41 / 44, zdjęta X40 | Kody jak w ZEUS 25; Maior TT ma własny profil: bez t3 / t4, t2 = termostat CWU (0–3). VICTRIX TT zgłoszono jako CAR-BUS, z którym nie działa żaden master OpenTherm, więc najpierw zmierz zaciski. |
 | VICTRIX HYBRID, HYBRID PLUS (P / t / A / S) | 44-41 idą do zacisków 1-2 panelu kontrolnego systemu | Instrukcja nie wspomina ani o OpenTherm, ani o Dominusie, więc to połączenie nie jest potwierdzone. Profil menu daje tylko kody. |
 | VICTRIX EXA 24 X 1 ErP, EXA 28 / 32 1 ErP, NIKE 24 ECO (S / P / t) | 41 / 44, zdjęta X40 (NIKE: złącze X15) | Użytkownik ma tu Nest Heat Link (OT1 na 44, OT2 na 41). EXA 28: regulator OpenTherm innej firmy działa bez przeróbek (użytkownicy). |
 | VICTRIX ZEUS Superior 26 / 32, HERCULES Condensing 26 / 32 / ABT 32, HERCULES Solar 26 (M1 / M3 / M5) | **41 / 44** (IMG BUS), zdjęta X40 | OpenTherm na 41 / 44 potwierdzony na ZEUS Superior 26 2 ErP (ESP32 z adapterem OpenTherm, społeczność Home Assistant); 42 / 43 to zaciski Super CAR, nie OpenTherm. HERCULES: 41 / 44 przewidywane (ta sama rodzina płyt), jeszcze niepotwierdzone. **M3 P33 = ON** pozwala grzać CO bez pilota (E31). ABT 32: termostaty pokojowe na karcie stref X9. *ERR>CM* na CAR V2 = brak komunikacji. |
@@ -203,21 +203,21 @@ fabryczne). Nic nie trafia do kotła; karta **Parametry pieca (offline)** używa
 instalatora dają pięć rodzin menu OpenTherm; **Profil menu kotła** (albo zgadywanie z pola *Model kotła*) wybiera kody,
 które pokazuje karta. Wartości to te same encje w każdym profilu.
 
-| Funkcja | ZEUS 25 / OMNIA / TT / Maior TT | TERA V2 / V3 | EXA 24 X / 28 / 32, NIKE | ZEUS Superior 26 / 32 | HERCULES Condensing / Solar 26 |
-|---|---|---|---|---|---|
-| Min. / maks. zasilanie CO | t0 / t1 | t0 / t1 | S5 / S6 (EXA) | P66/A / P66/B | P66/A / P66/B |
-| Krzywa (temp. zewn. przy maks. / min. zasilaniu) | – | – | – | P66/C / P66/D | P66/C / P66/D |
-| Blokada ponownego zapłonu | t5, 0–600 s | t4 | t0 | P69, 0–255 s | P69, 0–255 s |
-| Rampa / opóźnienie zapłonu | t6 / t7 | t5 / t6 | t1 / t2 | P70 / P68 | P70 / P68 |
-| Czekanie po CWU | t4 | t3 | – | – | – |
-| Maks. / min. moc CO | P2 / P1 (%) | P2 / P1 (%) | S3 / S2 rpm (EXA), S1 / S0 % (NIKE) | P64 / P65 rpm | P64 / P65 rpm |
-| Maks. / min. moc CWU | P0 (%) | P0 (%) | S1 / S0 rpm (EXA) | P57 / P62 rpm | P62 / P63 rpm |
-| Termostat CWU | t2 | – | P0 (EXA: 1 wg nastawy, 0 / 2 stały) | P71 (−3 / −10 °C) | P71 (−3 / −5 °C solar) |
-| Praca pompy | P6 | P4 | P2 | P67 | P67 |
-| Prędkość pompy / ΔT | A3 / A4, A5 | A1 / A2, A3 | – | P55 | P57 AUTO (ΔT) / FIX |
-| Korekta sondy zewnętrznej | P7 | P5 | S7 (EXA) | P76 | P76 (−15…+14) |
-| Pilot | – | P7 (0 CAR V2 / 2 inna firma) | – | – | M3 P33 CO bez pilota |
-| Liczniki | – | – | – | M1 | M1 P12 godziny, P13 zapłony |
+| Funkcja | ZEUS 25 / OMNIA / TT | MAIOR TT | TERA V2 / V3 | EXA 24 X / 28 / 32, NIKE | ZEUS Superior 26 / 32 | HERCULES Condensing / Solar 26 |
+|---|---|---|---|---|---|---|
+| Min. / maks. zasilanie CO | t0 / t1 | t0 / t1 | t0 / t1 | S5 / S6 (EXA) | P66/A / P66/B | P66/A / P66/B |
+| Krzywa (temp. zewn. przy maks. / min. zasilaniu) | – | – | – | – | P66/C / P66/D | P66/C / P66/D |
+| Blokada ponownego zapłonu | t5, 0–600 s | t5, 0–600 s | t4 | t0 | P69, 0–255 s | P69, 0–255 s |
+| Rampa / opóźnienie zapłonu | t6 / t7 | t6 / t7 | t5 / t6 | t1 / t2 | P70 / P68 | P70 / P68 |
+| Czekanie po CWU | t4 | – | t3 | – | – | – |
+| Maks. / min. moc CO | P2 / P1 (%) | P2 / P1 (%) | P2 / P1 (%) | S3 / S2 rpm (EXA), S1 / S0 % (NIKE) | P64 / P65 rpm | P64 / P65 rpm |
+| Maks. / min. moc CWU | P0 (%) | P0 (%) | P0 (%) | S1 / S0 rpm (EXA) | P57 / P62 rpm | P62 / P63 rpm |
+| Termostat CWU | t2 | t2 (−3 / −2…+1 / −10 / −5 °C) | – | P0 (EXA: 1 wg nastawy, 0 / 2 stały) | P71 (−3 / −10 °C) | P71 (−3 / −5 °C solar) |
+| Praca pompy | P6 | P6 | P4 | P2 | P67 | P67 |
+| Prędkość pompy / ΔT | A3 / A4, A5 | A3 / A4, A5 | A1 / A2, A3 | – | P55 | P57 AUTO (ΔT) / FIX |
+| Korekta sondy zewnętrznej | P7 | P7 (−9…+9 K) | P5 | S7 (EXA) | P76 | P76 (−15…+14) |
+| Pilot | – | – | P7 (0 CAR V2 / 2 inna firma) | – | – | M3 P33 CO bez pilota |
+| Liczniki | – | – | – | – | M1 | M1 P12 godziny, P13 zapłony |
 
 Kody Superior P68–P76 są odczytane z jego instrukcji i czekają na potwierdzenie na prawdziwym kotle; instrukcja
 HERCULES sugeruje, że P55 jest tam odczytem, a pompą sterują P57 / P67. VICTRIX ZEUS 26 2 ErP prawie nie ma

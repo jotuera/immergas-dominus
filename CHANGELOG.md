@@ -7,6 +7,7 @@ The full history is in the README, section [Changelog](README.md#changelog), and
 
 | Version | Highlights |
 |---|---|
+| 1.6.30 | Frontend: hub cards 0.91.7 (no Dominus changes) |
 | 1.6.29 | Diagram: the note box wraps its text onto two lines and no longer covers the heating pipe; hub cards 0.91.6 |
 | 1.6.28 | 23 more boiler fault descriptions in 11 languages; OpenTherm: module OTC setpoint on the weather curve card; hub cards 0.91.5 |
 | 1.6.27 | OpenTherm: VICTRIX TT and Maior TT in the ZEUS 25 / OMNIA menu profile; docs: the other Modbus configurations of the app; hub cards 0.91.4 |

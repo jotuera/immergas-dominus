@@ -7,6 +7,7 @@ Pełna historia jest w README, w sekcji [Historia zmian](README.pl.md#historia-z
 
 | Wersja | Najważniejsze |
 |---|---|
+| 1.6.30 | Frontend: karty huba 0.91.7 (bez zmian w Dominusie) |
 | 1.6.29 | Schemat: kafel podpowiedzi zawija tekst do dwóch wierszy i nie zasłania już rury ogrzewania; karty huba 0.91.6 |
 | 1.6.28 | 23 kolejne opisy błędów kotła w 11 językach; OpenTherm: nastawa OTC modułu na karcie krzywej pogodowej; karty huba 0.91.5 |
 | 1.6.27 | OpenTherm: VICTRIX TT i Maior TT w profilu menu ZEUS 25 / OMNIA; dokumentacja: pozostałe konfiguracje Modbus aplikacji; karty huba 0.91.4 |

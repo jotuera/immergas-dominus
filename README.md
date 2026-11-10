@@ -311,6 +311,10 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.30
+
+- Frontend: hub cards 0.91.7 (no Dominus changes).
+
 ### 1.6.29
 
 - **Diagram:** the note box at the top wraps its text onto two lines instead of cutting it after one, and it no longer covers

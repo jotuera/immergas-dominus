@@ -307,6 +307,10 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.30
+
+- Frontend: karty huba 0.91.7 (bez zmian w Dominusie).
+
 ### 1.6.29
 
 - **Schemat:** kafel podpowiedzi u góry zawija tekst do dwóch wierszy zamiast ucinać go po jednym i nie zasłania już rury

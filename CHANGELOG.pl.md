@@ -7,6 +7,7 @@ Pełna historia jest w README, w sekcji [Historia zmian](README.pl.md#historia-z
 
 | Wersja | Najważniejsze |
 |---|---|
+| 1.6.32 | Karta Teraz: pasek ostatnich 6 h łączy pracę przerwaną odszranianiem, więc odszranianie nie liczy się jako nowe starty; karty huba 0.91.9 |
 | 1.6.31 | ZEUS Superior / HERCULES: cel wyliczany z P66 zaokrąglany jak w kotle (temp. zewnętrzna do pełnego stopnia, wynik w pełnych stopniach); karty huba 0.91.8 |
 | 1.6.30 | Frontend: karty huba 0.91.7 (bez zmian w Dominusie) |
 | 1.6.29 | Schemat: kafel podpowiedzi zawija tekst do dwóch wierszy i nie zasłania już rury ogrzewania; karty huba 0.91.6 |

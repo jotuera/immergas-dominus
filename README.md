@@ -311,6 +311,12 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.32
+
+- **Now card:** the *Last 6 h* strip joins compressor runs split by a defrost (a stop under 150 s), so a defrost is
+  no longer counted as new starts and the typical run is the real one.
+- Frontend: hub cards 0.91.9.
+
 ### 1.6.31
 
 - **ZEUS Superior / HERCULES:** the *target ≈* calculated from your P66 copy is rounded the way the boiler does it: the

@@ -307,6 +307,12 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.32
+
+- **Karta Teraz:** pasek *Ostatnie 6 h* łączy pracę sprężarki przerwaną odszranianiem (postój poniżej 150 s), więc
+  odszranianie nie liczy się już jako nowe starty, a typowa praca jest prawdziwa.
+- Frontend: karty huba 0.91.9.
+
 ### 1.6.31
 
 - **ZEUS Superior / HERCULES:** *cel ≈* wyliczany z kopii P66 jest zaokrąglany tak jak w kotle: temperatura zewnętrzna

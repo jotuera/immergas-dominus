@@ -311,6 +311,12 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.29
+
+- **Diagram:** the note box at the top wraps its text onto two lines instead of cutting it after one, and it no longer covers
+  the heating pipe on the Dominus diagram.
+- Frontend: hub cards 0.91.6.
+
 ### 1.6.28
 
 - **Fault descriptions:** 23 more codes in 11 languages: chimney sweep mode (E7), combustion model not set (E30), service due (E97),

@@ -307,6 +307,12 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.29
+
+- **Schemat:** kafel podpowiedzi u góry zawija tekst do dwóch wierszy zamiast ucinać go po jednym i nie zasłania już rury
+  ogrzewania na schemacie Dominusa.
+- Frontend: karty huba 0.91.6.
+
 ### 1.6.28
 
 - **Opisy błędów:** 23 kolejne kody w 11 językach: funkcja kominiarza (E7), brak modelu spalania (E30), termin przeglądu (E97),

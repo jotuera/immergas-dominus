@@ -7,6 +7,7 @@ The full history is in the README, section [Changelog](README.md#changelog), and
 
 | Version | Highlights |
 |---|---|
+| 1.6.35 | Hub cards 0.92.2: installations without T-/T+ – circulator follows the compressor, strategy option `variant: pro` |
 | 1.6.34 | Hub cards 0.92.1: the *No faults* texts are recognised in all 11 languages (no false fault banner) |
 | 1.6.33 | VICTRIX MAIOR TT: own *Boiler menu profile* (no t3 / t4, t2 = DHW thermostat), listed with the OpenTherm boilers; hub cards 0.92.0 |
 | 1.6.32 | Now card: the last 6 h strip joins runs split by a defrost, so a defrost is not counted as new starts; hub cards 0.91.9 |

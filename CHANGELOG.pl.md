@@ -7,6 +7,7 @@ Pełna historia jest w README, w sekcji [Historia zmian](README.pl.md#historia-z
 
 | Wersja | Najważniejsze |
 |---|---|
+| 1.6.35 | Karty huba 0.92.2: instalacje bez T-/T+ – pompa obiegowa za sprężarką, opcja strategii `variant: pro` |
 | 1.6.34 | Karty huba 0.92.1: teksty *Brak błędów* rozpoznawane we wszystkich 11 językach (bez fałszywego banera awarii) |
 | 1.6.33 | VICTRIX MAIOR TT: własny *Profil menu kotła* (bez t3 / t4, t2 = termostat CWU), wpisany do kotłów OpenTherm; karty huba 0.92.0 |
 | 1.6.32 | Karta Teraz: pasek ostatnich 6 h łączy pracę przerwaną odszranianiem, więc odszranianie nie liczy się jako nowe starty; karty huba 0.91.9 |

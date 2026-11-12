@@ -308,6 +308,11 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.35
+
+- Frontend: karty huba 0.92.2 (instalacje huba bez magistrali T-/T+: pompa obiegowa za sprężarką, opcja
+  strategii `variant: pro`).
+
 ### 1.6.34
 
 - Frontend: karty huba 0.92.1 – teksty „brak błędów” są rozpoznawane we wszystkich 11 językach, więc kocioł lub

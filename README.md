@@ -312,6 +312,11 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.35
+
+- Frontend: hub cards 0.92.2 (hub installations without the T-/T+ bus: the circulator follows the compressor,
+  strategy option `variant: pro`).
+
 ### 1.6.34
 
 - Frontend: hub cards 0.92.1 – the "no faults" texts are recognised in all 11 languages, so a boiler or unit

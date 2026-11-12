@@ -312,6 +312,10 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.38
+
+- Frontend: hub cards 0.93.2 (*Assumed flow (instead of D14)* in the hub's Boiler parameters (offline) card, for a MAGIS without T-/T+).
+
 ### 1.6.37
 
 - Frontend: hub cards 0.93.1 (the hub diagram shows the DHW setpoint D05 when the active setpoint is missing).

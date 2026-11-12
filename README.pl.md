@@ -308,6 +308,10 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.38
+
+- Frontend: karty huba 0.93.2 (*Przepływ przyjęty (zamiast D14)* w karcie Parametry pieca (offline) huba, dla MAGIS bez T-/T+).
+
 ### 1.6.37
 
 - Frontend: karty huba 0.93.1 (schemat huba pokazuje nastawę CWU D05, gdy brak aktywnej nastawy).

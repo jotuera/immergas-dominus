@@ -312,6 +312,10 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.39
+
+- Frontend: hub cards 0.93.3 (*Assumed flow DHW* in the hub's Boiler parameters (offline) card; the hub diagram animates the shared return pipe during DHW).
+
 ### 1.6.38
 
 - Frontend: hub cards 0.93.2 (*Assumed flow (instead of D14)* in the hub's Boiler parameters (offline) card, for a MAGIS without T-/T+).

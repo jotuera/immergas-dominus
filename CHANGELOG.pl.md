@@ -7,6 +7,7 @@ Pełna historia jest w README, w sekcji [Historia zmian](README.pl.md#historia-z
 
 | Wersja | Najważniejsze |
 |---|---|
+| 1.6.39 | Karty huba 0.93.3: przepływ przyjęty CWU; schemat huba animuje wspólny powrót przy CWU |
 | 1.6.38 | Karty huba 0.93.2: przepływ przyjęty w karcie Parametry pieca (offline) (MAGIS bez T-/T+) |
 | 1.6.37 | Karty huba 0.93.1: nastawa CWU na schemacie z D05, gdy brak aktywnej |
 | 1.6.36 | Karty huba 0.93.0: dashboard huba dla MAGIS bez T-/T+ (kopie wartości z menu pieca) |

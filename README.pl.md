@@ -308,6 +308,10 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.39
+
+- Frontend: karty huba 0.93.3 (*Przepływ przyjęty CWU* w karcie Parametry pieca (offline) huba; schemat huba animuje wspólny powrót przy CWU).
+
 ### 1.6.38
 
 - Frontend: karty huba 0.93.2 (*Przepływ przyjęty (zamiast D14)* w karcie Parametry pieca (offline) huba, dla MAGIS bez T-/T+).

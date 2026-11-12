@@ -7,6 +7,7 @@ The full history is in the README, section [Changelog](README.md#changelog), and
 
 | Version | Highlights |
 |---|---|
+| 1.6.39 | Hub cards 0.93.3: assumed DHW flow rate; the hub diagram animates the shared return during DHW |
 | 1.6.38 | Hub cards 0.93.2: assumed flow rate in the Boiler parameters (offline) card (MAGIS without T-/T+) |
 | 1.6.37 | Hub cards 0.93.1: the diagram's DHW setpoint falls back to D05 |
 | 1.6.36 | Hub cards 0.93.0: hub dashboard for a MAGIS without T-/T+ (copies of the boiler menu values) |

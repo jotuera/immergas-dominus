@@ -7,6 +7,7 @@ Pełna historia jest w README, w sekcji [Historia zmian](README.pl.md#historia-z
 
 | Wersja | Najważniejsze |
 |---|---|
+| 1.6.36 | Karty huba 0.93.0: dashboard huba dla MAGIS bez T-/T+ (kopie wartości z menu pieca) |
 | 1.6.35 | Karty huba 0.92.2: instalacje bez T-/T+ – pompa obiegowa za sprężarką, opcja strategii `variant: pro` |
 | 1.6.34 | Karty huba 0.92.1: teksty *Brak błędów* rozpoznawane we wszystkich 11 językach (bez fałszywego banera awarii) |
 | 1.6.33 | VICTRIX MAIOR TT: własny *Profil menu kotła* (bez t3 / t4, t2 = termostat CWU), wpisany do kotłów OpenTherm; karty huba 0.92.0 |

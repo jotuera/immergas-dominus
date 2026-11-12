@@ -308,6 +308,11 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.36
+
+- Frontend: karty huba 0.93.0 (dashboard huba dla MAGIS bez magistrali T-/T+, z kopiami wartości z menu
+  pieca). Dashboard Dominusa się nie zmienia.
+
 ### 1.6.35
 
 - Frontend: karty huba 0.92.2 (instalacje huba bez magistrali T-/T+: pompa obiegowa za sprężarką, opcja

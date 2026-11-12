@@ -312,6 +312,11 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.36
+
+- Frontend: hub cards 0.93.0 (hub dashboard for a MAGIS without the T-/T+ bus, with copies of the boiler menu
+  values). Nothing changes for the Dominus dashboard.
+
 ### 1.6.35
 
 - Frontend: hub cards 0.92.2 (hub installations without the T-/T+ bus: the circulator follows the compressor,

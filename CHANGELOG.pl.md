@@ -7,6 +7,7 @@ Pełna historia jest w README, w sekcji [Historia zmian](README.pl.md#historia-z
 
 | Wersja | Najważniejsze |
 |---|---|
+| 1.6.37 | Karty huba 0.93.1: nastawa CWU na schemacie z D05, gdy brak aktywnej |
 | 1.6.36 | Karty huba 0.93.0: dashboard huba dla MAGIS bez T-/T+ (kopie wartości z menu pieca) |
 | 1.6.35 | Karty huba 0.92.2: instalacje bez T-/T+ – pompa obiegowa za sprężarką, opcja strategii `variant: pro` |
 | 1.6.34 | Karty huba 0.92.1: teksty *Brak błędów* rozpoznawane we wszystkich 11 językach (bez fałszywego banera awarii) |

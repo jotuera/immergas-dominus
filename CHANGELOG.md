@@ -7,6 +7,7 @@ The full history is in the README, section [Changelog](README.md#changelog), and
 
 | Version | Highlights |
 |---|---|
+| 1.6.37 | Hub cards 0.93.1: the diagram's DHW setpoint falls back to D05 |
 | 1.6.36 | Hub cards 0.93.0: hub dashboard for a MAGIS without T-/T+ (copies of the boiler menu values) |
 | 1.6.35 | Hub cards 0.92.2: installations without T-/T+ – circulator follows the compressor, strategy option `variant: pro` |
 | 1.6.34 | Hub cards 0.92.1: the *No faults* texts are recognised in all 11 languages (no false fault banner) |

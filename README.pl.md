@@ -308,6 +308,10 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.37
+
+- Frontend: karty huba 0.93.1 (schemat huba pokazuje nastawę CWU D05, gdy brak aktywnej nastawy).
+
 ### 1.6.36
 
 - Frontend: karty huba 0.93.0 (dashboard huba dla MAGIS bez magistrali T-/T+, z kopiami wartości z menu

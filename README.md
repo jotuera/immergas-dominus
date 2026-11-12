@@ -312,6 +312,10 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.37
+
+- Frontend: hub cards 0.93.1 (the hub diagram shows the DHW setpoint D05 when the active setpoint is missing).
+
 ### 1.6.36
 
 - Frontend: hub cards 0.93.0 (hub dashboard for a MAGIS without the T-/T+ bus, with copies of the boiler menu

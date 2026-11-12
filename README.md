@@ -312,6 +312,11 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.34
+
+- Frontend: hub cards 0.92.1 – the "no faults" texts are recognised in all 11 languages, so a boiler or unit
+  without a fault no longer shows a fault banner in Italian, German, Czech and the other languages.
+
 ### 1.6.33
 
 - **VICTRIX MAIOR TT:** its own *Boiler menu profile* from the Victrix Maior 35 X TT 1 ErP manual – the ZEUS 25 codes

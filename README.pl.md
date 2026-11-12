@@ -308,6 +308,11 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.34
+
+- Frontend: karty huba 0.92.1 – teksty „brak błędów” są rozpoznawane we wszystkich 11 językach, więc kocioł lub
+  jednostka bez błędu nie pokazuje już banera awarii po włosku, niemiecku, czesku i w innych językach.
+
 ### 1.6.33
 
 - **VICTRIX MAIOR TT:** własny *Profil menu kotła* z instrukcji Victrix Maior 35 X TT 1 ErP – kody ZEUS 25 bez t3 / t4,

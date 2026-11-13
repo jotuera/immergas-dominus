@@ -308,6 +308,10 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.40
+
+- Frontend: karty huba 0.93.4 (stan i moc grzałki CWU, okno nocne HERCULES PRO w kafelku Tryb nocny, karta Krzywe dopasowuje oś temperatury do krzywej).
+
 ### 1.6.39
 
 - Frontend: karty huba 0.93.3 (*Przepływ przyjęty CWU* w karcie Parametry pieca (offline) huba; schemat huba animuje wspólny powrót przy CWU).

@@ -312,6 +312,10 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.40
+
+- Frontend: hub cards 0.93.4 (DHW electric heater state and power, the HERCULES PRO night window in the Night mode tile, the Curve card fits its temperature axis to the curve).
+
 ### 1.6.39
 
 - Frontend: hub cards 0.93.3 (*Assumed flow DHW* in the hub's Boiler parameters (offline) card; the hub diagram animates the shared return pipe during DHW).

@@ -308,6 +308,10 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.41
+
+- Frontend: karty huba 0.93.5 (kafelki Łączności i tabela Kalibracji mieszczą się na telefonie – także w dashboardzie Dominusa; ciaśniejsza oś krzywej; chipy odszraniania i grzałki CWU z huba; opcje strategii `diagram: advice / cop` i `calibration: false`).
+
 ### 1.6.40
 
 - Frontend: karty huba 0.93.4 (stan i moc grzałki CWU, okno nocne HERCULES PRO w kafelku Tryb nocny, karta Krzywe dopasowuje oś temperatury do krzywej).

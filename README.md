@@ -312,6 +312,10 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.41
+
+- Frontend: hub cards 0.93.5 (the Connectivity tiles and the Calibration table fit a phone – this also helps the Dominus dashboard; tighter Curve axis; hub defrost and DHW heater chips; strategy options `diagram: advice / cop` and `calibration: false`).
+
 ### 1.6.40
 
 - Frontend: hub cards 0.93.4 (DHW electric heater state and power, the HERCULES PRO night window in the Night mode tile, the Curve card fits its temperature axis to the curve).

@@ -7,6 +7,7 @@ Pełna historia jest w README, w sekcji [Historia zmian](README.pl.md#historia-z
 
 | Wersja | Najważniejsze |
 |---|---|
+| 1.6.41 | Karty huba 0.93.5: Łączność i Kalibracja mieszczą się na telefonie, ciaśniejsza oś krzywej, chipy odszraniania i grzałki CWU z huba, opcje diagram advice / cop i calibration: false |
 | 1.6.40 | Karty huba 0.93.4: stan grzałki CWU, okno nocne HERCULES PRO w kafelku Tryb nocny, oś karty Krzywe dopasowana do krzywej |
 | 1.6.39 | Karty huba 0.93.3: przepływ przyjęty CWU; schemat huba animuje wspólny powrót przy CWU |
 | 1.6.38 | Karty huba 0.93.2: przepływ przyjęty w karcie Parametry pieca (offline) (MAGIS bez T-/T+) |

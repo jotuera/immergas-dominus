@@ -7,6 +7,7 @@ The full history is in the README, section [Changelog](README.md#changelog), and
 
 | Version | Highlights |
 |---|---|
+| 1.6.41 | Hub cards 0.93.5: Connectivity and Calibration fit a phone, tighter Curve axis, hub defrost and DHW heater chips, options diagram advice / cop and calibration: false |
 | 1.6.40 | Hub cards 0.93.4: DHW electric heater state, HERCULES PRO night window in the Night mode tile, Curve card axis fits the curve |
 | 1.6.39 | Hub cards 0.93.3: assumed DHW flow rate; the hub diagram animates the shared return during DHW |
 | 1.6.38 | Hub cards 0.93.2: assumed flow rate in the Boiler parameters (offline) card (MAGIS without T-/T+) |

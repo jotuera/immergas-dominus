@@ -7,6 +7,7 @@ Pełna historia jest w README, w sekcji [Historia zmian](README.pl.md#historia-z
 
 | Wersja | Najważniejsze |
 |---|---|
+| 1.6.42 | Karty huba 0.93.6: układ Łączności i Kalibracji na telefonie naprawdę działa (element karty był inline), Ostatnie 6 h liczy starty przy taktowaniu |
 | 1.6.41 | Karty huba 0.93.5: Łączność i Kalibracja mieszczą się na telefonie, ciaśniejsza oś krzywej, chipy odszraniania i grzałki CWU z huba, opcje diagram advice / cop i calibration: false |
 | 1.6.40 | Karty huba 0.93.4: stan grzałki CWU, okno nocne HERCULES PRO w kafelku Tryb nocny, oś karty Krzywe dopasowana do krzywej |
 | 1.6.39 | Karty huba 0.93.3: przepływ przyjęty CWU; schemat huba animuje wspólny powrót przy CWU |

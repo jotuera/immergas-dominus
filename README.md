@@ -312,6 +312,10 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.42
+
+- Frontend: hub cards 0.93.6 (the phone layout of the Connectivity tiles and the Calibration table now really applies – the card element was `display: inline`, so the width rules never matched; *Last 6 h* counts every start when the compressor short-cycles).
+
 ### 1.6.41
 
 - Frontend: hub cards 0.93.5 (the Connectivity tiles and the Calibration table fit a phone – this also helps the Dominus dashboard; tighter Curve axis; hub defrost and DHW heater chips; strategy options `diagram: advice / cop` and `calibration: false`).

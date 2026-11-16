@@ -308,6 +308,10 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.42
+
+- Frontend: karty huba 0.93.6 (układ kafelków Łączności i tabeli Kalibracji na telefonie naprawdę działa – element karty miał `display: inline`, więc reguły szerokości nigdy nie pasowały; *Ostatnie 6 h* liczy każdy start przy taktowaniu sprężarki).
+
 ### 1.6.41
 
 - Frontend: karty huba 0.93.5 (kafelki Łączności i tabela Kalibracji mieszczą się na telefonie – także w dashboardzie Dominusa; ciaśniejsza oś krzywej; chipy odszraniania i grzałki CWU z huba; opcje strategii `diagram: advice / cop` i `calibration: false`).

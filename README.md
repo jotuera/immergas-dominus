@@ -312,6 +312,10 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.43
+
+- Frontend: hub cards 0.93.7 (a Recirculation tab in the Schedule card for the hub's `hub_recirc` package; nothing changes on the Dominus dashboard).
+
 ### 1.6.42
 
 - Frontend: hub cards 0.93.6 (the phone layout of the Connectivity tiles and the Calibration table now really applies – the card element was `display: inline`, so the width rules never matched; *Last 6 h* counts every start when the compressor short-cycles).

@@ -308,6 +308,10 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.43
+
+- Frontend: karty huba 0.93.7 (zakładka Recyrkulacja w karcie Harmonogram dla pakietu `hub_recirc` huba; w dashboardzie Dominusa bez zmian).
+
 ### 1.6.42
 
 - Frontend: karty huba 0.93.6 (układ kafelków Łączności i tabeli Kalibracji na telefonie naprawdę działa – element karty miał `display: inline`, więc reguły szerokości nigdy nie pasowały; *Ostatnie 6 h* liczy każdy start przy taktowaniu sprężarki).

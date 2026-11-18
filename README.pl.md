@@ -308,6 +308,10 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.44
+
+- Frontend: karty huba 0.93.8 (wiersze anty-legionelli według flagi kotła z huba, bit 3 rejestru 2090; w dashboardzie Dominusa bez zmian).
+
 ### 1.6.43
 
 - Frontend: karty huba 0.93.7 (zakładka Recyrkulacja w karcie Harmonogram dla pakietu `hub_recirc` huba; w dashboardzie Dominusa bez zmian).

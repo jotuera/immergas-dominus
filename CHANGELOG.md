@@ -7,6 +7,7 @@ The full history is in the README, section [Changelog](README.md#changelog), and
 
 | Version | Highlights |
 |---|---|
+| 1.6.44 | Hub cards 0.93.8 (anti-legionella rows follow the hub's boiler flag; no change for the Dominus dashboard) |
 | 1.6.43 | Hub cards 0.93.7 (Recirculation tab in the Schedule card for the hub's hub_recirc package; no change for the Dominus dashboard) |
 | 1.6.42 | Hub cards 0.93.6: the phone layout of Connectivity and Calibration really applies (the card element was inline), Last 6 h counts short-cycling starts |
 | 1.6.41 | Hub cards 0.93.5: Connectivity and Calibration fit a phone, tighter Curve axis, hub defrost and DHW heater chips, options diagram advice / cop and calibration: false |

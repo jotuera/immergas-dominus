@@ -312,6 +312,10 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.44
+
+- Frontend: hub cards 0.93.8 (the anti-legionella rows follow the hub's boiler flag, 2090 bit 3; nothing changes on the Dominus dashboard).
+
 ### 1.6.43
 
 - Frontend: hub cards 0.93.7 (a Recirculation tab in the Schedule card for the hub's `hub_recirc` package; nothing changes on the Dominus dashboard).

@@ -308,6 +308,10 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.45
+
+- Frontend: karty huba 0.93.9 (zakładka Anty-legionella w karcie Harmonogram dla pakietu `hub_legionella` huba; w dashboardzie Dominusa bez zmian).
+
 ### 1.6.44
 
 - Frontend: karty huba 0.93.8 (wiersze anty-legionelli według flagi kotła z huba, bit 3 rejestru 2090; w dashboardzie Dominusa bez zmian).

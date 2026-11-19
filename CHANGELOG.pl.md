@@ -7,6 +7,7 @@ Pełna historia jest w README, w sekcji [Historia zmian](README.pl.md#historia-z
 
 | Wersja | Najważniejsze |
 |---|---|
+| 1.6.45 | Karty huba 0.93.9 (zakładka Anty-legionella w karcie Harmonogram dla pakietu hub_legionella huba; bez zmian w dashboardzie Dominusa) |
 | 1.6.44 | Karty huba 0.93.8 (wiersze anty-legionelli według flagi kotła z huba; bez zmian w dashboardzie Dominusa) |
 | 1.6.43 | Karty huba 0.93.7 (zakładka Recyrkulacja w karcie Harmonogram dla pakietu hub_recirc huba; bez zmian w dashboardzie Dominusa) |
 | 1.6.42 | Karty huba 0.93.6: układ Łączności i Kalibracji na telefonie naprawdę działa (element karty był inline), Ostatnie 6 h liczy starty przy taktowaniu |

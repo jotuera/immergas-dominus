@@ -308,6 +308,10 @@ przyjmie sesję.
 
 ## Historia zmian
 
+### 1.6.46
+
+- Frontend: karty huba 0.93.10 (zakładki Harmonogramu zawijają się na telefonie; przełączniki nie są już blokowane przez niedostępną bramkę zapisu).
+
 ### 1.6.45
 
 - Frontend: karty huba 0.93.9 (zakładka Anty-legionella w karcie Harmonogram dla pakietu `hub_legionella` huba; w dashboardzie Dominusa bez zmian).

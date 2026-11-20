@@ -7,6 +7,7 @@ The full history is in the README, section [Changelog](README.md#changelog), and
 
 | Version | Highlights |
 |---|---|
+| 1.6.46 | Hub cards 0.93.10 (Schedule tabs wrap on a phone; switches not locked by an unavailable write gate) |
 | 1.6.45 | Hub cards 0.93.9 (Anti-legionella tab in the Schedule card for the hub's hub_legionella package; no change for the Dominus dashboard) |
 | 1.6.44 | Hub cards 0.93.8 (anti-legionella rows follow the hub's boiler flag; no change for the Dominus dashboard) |
 | 1.6.43 | Hub cards 0.93.7 (Recirculation tab in the Schedule card for the hub's hub_recirc package; no change for the Dominus dashboard) |

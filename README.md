@@ -312,6 +312,10 @@ the module accepts the session.
 
 ## Changelog
 
+### 1.6.46
+
+- Frontend: hub cards 0.93.10 (the Schedule tabs wrap on a phone; switches are no longer locked by an unavailable write gate).
+
 ### 1.6.45
 
 - Frontend: hub cards 0.93.9 (an Anti-legionella tab in the Schedule card for the hub's `hub_legionella` package; nothing changes on the Dominus dashboard).
